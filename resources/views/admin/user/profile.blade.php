@@ -1,4 +1,4 @@
-@extends('user.layouts.main',['title' => 'Profile'])
+@extends('admin.layouts.main',['title' => 'Profile'])
 
 @section('breadcrumb')
 <li class="breadcrumb-item pe-3"><a href="{{ route('user.user') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
@@ -205,7 +205,8 @@
                                 <!--begin::Edit-->
                                 <div id="kt_signin_password_edit" class="flex-row-fluid d-none">
                                     <!--begin::Form-->
-                                    <form id="kt_signin_change_password" method="post" class="form" novalidate="novalidate">
+                                    <form id="kt_signin_change_password" action="{{ route('admin.user.updatePassword') }}" method="post" class="form" novalidate="novalidate">
+                                        @csrf
                                         <div class="row mb-1">
                                             <div class="col-lg-4">
                                                 <div class="fv-row mb-0">
@@ -229,7 +230,7 @@
                                         <div class="form-text mb-5">Password must be at least 8 character and contain symbols</div>
                                         <div class="d-flex">
                                             <input type="hidden" name="user_id" class="form-control form-control-lg form-control-solid"  value="{{$user->id}}" />
-                                            <button id="kt_password_submit" type="button" class="btn btn-primary me-2 px-6">Update Password</button>
+                                            <button id="kt_password_submit" type="submit" class="btn btn-primary me-2 px-6">Update Password</button>
                                             <button id="kt_password_cancel" type="button" class="btn btn-color-gray-400 btn-active-light-primary px-6">Cancel</button>
                                         </div>
                                     </form>

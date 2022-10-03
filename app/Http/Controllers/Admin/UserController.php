@@ -146,4 +146,21 @@ class UserController extends Controller
        // return redirect()->back()->with('success','User Updated Successsfully`');
         return view('admin.user.profile',compact('user', 'editUser'));
     }
+
+    public function updatePassword(Request $request)
+    {
+
+        $request->validate([
+            'currentpassword' => 'required',
+            'newpassword' => 'required',
+            'confirmpassword' => 'required'
+        ]);
+
+        $user = User::find($request->user_id);
+
+        $user->password = Hash::make($request->newpassword);;
+        $user->save();
+
+        return redirect()->back()->with('success','Password Updated Successsfully 👍');
+    }
 }

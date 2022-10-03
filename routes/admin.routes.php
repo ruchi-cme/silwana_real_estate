@@ -14,9 +14,10 @@ Route::name('user.update.email')->post('/user/update/email', 'App\Http\Controlle
 Route::name('user.check.email')->get('/user/check/email', 'App\Http\Controllers\Admin\UserController@checkEmail');
 Route::name('user.delete')->get('/user/delete/{id}', 'App\Http\Controllers\Admin\UserController@destroy');
 
-Route::name('user.profile')->get('/user/viewProfile', 'App\Http\Controllers\Admin\UserController@viewProfile');
-Route::name('user.editProfile')->get('/user/editProfile', 'App\Http\Controllers\Admin\UserController@editProfile');
-Route::name('user.updateProfile')->post('/user/updateProfile', 'App\Http\Controllers\Admin\UserController@updateProfile');
+Route::name('user.profile')->get('/user/viewProfile', 'App\Http\Controllers\Admin\UserController@viewProfile')->middleware(['permission:user-profile']);;
+Route::name('user.editProfile')->get('/user/editProfile', 'App\Http\Controllers\Admin\UserController@editProfile')->middleware(['permission:user-editProfile']);;
+Route::name('user.updateProfile')->post('/user/updateProfile', 'App\Http\Controllers\Admin\UserController@updateProfile')->middleware(['permission:user-updateProfile']);;
+Route::name('user.updatePassword')->post('/user/updatePassword', 'App\Http\Controllers\Admin\UserController@updatePassword')->middleware(['permission:user-updatePassword']);;
 
 //Roles
 Route::name('role')->get('/role', 'App\Http\Controllers\Admin\RoleController@index');
