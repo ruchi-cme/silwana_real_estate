@@ -25,6 +25,8 @@ class AdminSeeder extends Seeder
          // /  'id' => $superId,
             'name' => 'super admin',
             'email' => 'superadmin@mail.com',
+            'firstname' => 'super',
+            'lastname' => 'admin',
             'is_admin' => '1',
             'password' => Hash::make('1234567890'),
             'created_at' => now(),
@@ -41,11 +43,15 @@ class AdminSeeder extends Seeder
           //  'id' => $id,
             'name' => 'admin',
             'email' => 'admin@mail.com',
+            'firstname' => 'admin',
+            'lastname' => '',
             'is_admin' => '1',
             'password' => Hash::make('1234567890'),
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+
         $id =  DB::getPdo()->lastInsertId();
         // Assign super-admin Role
         $admin = User::where('id',$id)->first();

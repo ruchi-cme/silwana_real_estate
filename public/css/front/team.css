@@ -1,0 +1,150 @@
+.our-team-wrap {
+    background: var(--primary-color)
+}
+
+.our-team-wrap h4 {
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #FFFFFF;
+    font-family: var(--bold);
+}
+
+.our-team-wrap h6 {
+    font-family: var(--semibold);
+    color: #FFFFFF;
+    font-size: 16px;
+    margin-top: 7px;
+}
+
+.our-team-wrap p {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-family: var(--regular);
+    margin-top: 20px;
+}
+
+.our-team-quotes img {
+    max-width: 70px;
+    margin-top: 20px;
+}
+
+.owner-message-inner > div {
+    text-align: right;
+    position: relative;
+    top: -20px;
+}
+
+.our-team-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.our-team-inner {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 50%;
+}
+
+.our-team-inner > div {
+    flex-basis: 50%;
+}
+
+.our-team-image-wrap {
+    height: 360px;
+}
+
+.our-team-image-wrap img {
+    object-fit: cover;
+}
+
+.our-team-content {
+    padding: 30px;
+}
+
+.our-amenities-plan.img7 {
+    max-width: 540px;
+    right: -228px;
+    top: -4px;
+    z-index: 2;
+}
+
+.our-amenities-plan.img8 {
+    max-width: 430px;
+    left: -281px;
+    top: 629px;
+    z-index: 2;
+}
+
+.our-team,
+.news-media {
+    overflow-y: visible;
+    overflow-x: clip;
+}
+
+.our-team-wrap {
+    position: relative;
+    z-index: 5;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+responsive css
+*/
+
+@media only screen and (max-width: 1400px) {
+    .owner-image-wrap {
+        max-width: 525px;
+    }
+
+    .our-team-image-wrap {
+        height: 420px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .owner-image-wrap {
+        max-width: 435px;
+        height: 615px;
+    }
+
+    .owner-message-wrap p {
+        line-height: 39px;
+    }
+
+    .our-team-inner {
+        flex-basis: 100%;
+    }
+
+    .our-team-inner:nth-child() {
+        flex-direction: row-reverse;
+    }
+
+    
+} 
+
+
+@media only screen and (max-width: 992px) {
+    .owner-image-wrap {
+        position: static;
+        margin-bottom: 35px;
+        max-width: 100%;
+    }
+}

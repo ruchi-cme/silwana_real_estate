@@ -53,6 +53,27 @@
                                   </div>
                                   <!--end::Row-->
 
+
+                                  <!--begin::Row-->
+                                  <div class="row mb-8">
+                                      <!--begin::Col-->
+                                      <div class="col-xl-3">
+                                          <div class="fs-6 fw-bold mt-2 mb-3 required">page Id</div>
+                                      </div>
+                                      <!--end::Col-->
+                                      <!--begin::Col-->
+                                      <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                          <select class="form-select form-select-solid form-select-lg" name="page_id" id="page_id" data-placeholder="Select Page" data-control="select2"  >
+                                              <option  ></option>
+                                              @foreach ($pageId as $key => $val)
+                                                  <option value="{{ $key }}" {{ !empty( $pageData->page_id)  && ($pageData->page_id == $key) ? 'selected' : '' }}>{{ $val }}</option>
+                                              @endforeach
+
+                                          </select>
+                                          <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                  </div>
+                                  <!--end::Row-->
+
                                   <!--begin::Row-->
                                   <div class="row mb-8">
                                       <!--begin::Col-->
@@ -161,6 +182,7 @@
                                               </div>
                                               <!--end::Row-->
 
+
                                               <!--begin::Row-->
                                               <div class="row mb-8">
                                                   <!--begin::Col-->
@@ -261,6 +283,8 @@
                                               <!--end::Col-->
                                               <!--begin::Col-->
                                               <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                                  <input type="hidden" name="silwana_dtl_mpg_id[]" value=" ">
+
                                                   <input type="text" placeholder="Enter Heading" class="form-control form-control-solid" name="heading[]" value="{{ !empty( $pageData->heading) ? $pageData->heading : '' }}" >
                                                   <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                           </div>
@@ -293,6 +317,7 @@
                                                   <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                           </div>
                                           <!--end::Row-->
+
 
                                           <!--begin::Row-->
                                           <div class="row">

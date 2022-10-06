@@ -1,0 +1,368 @@
+.blog {
+    margin-bottom: 30px;
+}
+
+.blog .news-media-wrap {
+    padding: 0;
+    box-shadow: none;
+    border: 1px solid rgba(180, 141, 78, 0.5);
+    border-radius: 25px;
+}
+
+.blog .news-media-img-wrap {
+    height: 530px;
+}
+
+.blog .news-media-text {
+    padding: 30px;
+}
+
+.blog .news-media-text h4 {
+    font-size: 36px;
+    font-family: var(--semibold);
+    color: var(--secondary-color);
+}
+
+.blog .news-media-text p {
+    margin: 20px 0 0;
+    font-size: 16px;
+    color: #000;
+    font-family: var(--regular);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+real-estate-wrap
+*/
+
+.real-estate-wrap {
+    padding: 30px;
+    background: #FFFFFF;
+    border: 1px solid rgba(180, 141, 78, 0.5);
+    border-radius: 25px;
+}
+
+.real-estate-wrap h2 {
+    font-family: var(--semibold);
+    font-size: 36px;
+    color: var(--secondary-color);
+}
+
+.real-estate-wrap p {
+    margin: 25px 0 30px;
+}
+
+.real-estate-wrap p:last-child {
+    margin-bottom: 0;
+}
+
+.quote-heading img {
+    max-width: 75px;
+}
+
+.quote-heading > div {
+    margin-right: 45px;
+    flex-basis: 15%;
+}
+
+.quote-heading {
+    background: #FDF7EE;
+    border: 1px solid rgba(180, 141, 78, 0.5);
+    border-radius: 25px;
+}
+
+.quote-heading h4 {
+    color: var(--primary-color);
+    font-size: 36px;
+}
+
+.quote-heading {
+    display: flex;
+    align-items: center;
+    padding: 60px 30px;
+    margin: 30px 0;
+}
+
+.news-media-main .news-media-wrap {
+    height: auto;
+}
+
+.image-media-wrap {
+    width: 100%;
+    max-width: 533px;
+    height: 532px;
+}
+
+.image-media-wrap img {
+    object-fit: cover;
+}
+
+.news-media-main-wrap {
+    display: flex;
+    background: #FFFFFF;
+    box-shadow: 0px 11px 22px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.news-media-main-wrap > div:nth-child(2) {
+    flex-basis: 55%;
+    padding: 35px;
+}
+
+.image-media-wrap {
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.news-media-main-wrap h4 {
+    font-size: 36px;
+    font-family: var(--semibold);
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.news-media-main {
+    margin-top: -100px;
+    position: relative;
+    z-index: 9;
+}
+
+.news-media-main-wrap {
+    margin-bottom: 30px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.top-categories ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.top-categories ul li:last-child {
+    margin-bottom: 0;
+}
+
+.top-categories {
+    padding: 30px;
+    background: #FFFFFF;
+    border: 1px solid rgba(180, 141, 78, 0.5);
+    border-radius: 25px;
+    margin-top: 30px;
+}
+
+.top-categories ul {
+    margin-bottom: 0;
+}
+
+.top-categories span {
+    font-size: 16px;
+    color: var(--primary-color);
+}
+
+.top-categories p {
+    color: #000;
+}
+
+.top-categories h4 {
+    font-size: 24px;
+    font-family: var(--medium);
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.news-media-main {
+    padding-bottom: 100px;
+}
+
+.real-estate-by > div {
+    width: 73px;
+    height: 73px;
+    background: #FFFFFF;
+    box-shadow: 0px 11px 14px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 30px;
+}
+
+.real-estate-by {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.real-estate-by > p {
+    color: var(--primary-color) !important;
+    font-size: 16px !important;
+    font-family: var(--medium) !important;
+    margin-top: 0 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+responsive css
+*/
+
+
+@media only screen and (max-width: 1400px) {
+    .news-media-main-wrap h4 {
+        font-size: 30px;
+    }
+
+    .news-media-img-wrap {
+        height: 275px;
+    }
+
+    .real-estate-wrap h2 {
+        font-size: 30px;
+    }
+
+    .quote-heading h4 {
+        font-size: 30px;
+    }
+
+    .blog .news-media-text h4 {
+        font-size: 32px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .news-media-main-wrap {
+        flex-direction: column;
+    }
+
+    .image-media-wrap {
+        max-width: 100%;
+    }
+
+    .looking-for-house-inner h2 {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .looking-for-house-inner {
+        margin-top: 50px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    footer ul li {
+        flex-basis: 100% !important;
+    }
+} 
+
+
+@media only screen and (max-width: 576px) {
+    .image-media-wrap {
+        height: 400px;
+    }
+
+    .blog .news-media-img-wrap {
+        height: 375px;
+    }
+
+    .quote-heading {
+        flex-direction: column;
+    }
+
+    .quote-heading img {
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .image-media-wrap {
+        height: 290px;
+    }
+
+    .looking-for-house-text {
+        padding: 20px 20px;
+    }
+
+    .news-media-main-wrap h4 {
+        font-size: 19px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .real-estate-wrap h2 {
+        font-size: 19px;
+    }
+
+    .quote-heading h4 {
+        font-size: 16px;
+    }
+
+    .quote-heading {
+        padding: 30px;
+    }
+}

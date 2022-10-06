@@ -4,7 +4,7 @@
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.admin') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
 <li class="breadcrumb-item px-3 text-primary">Project</li>
 <li class="breadcrumb-item px-3"><a class="text-hover-primary " href="{{ route('admin.amenities') }}">Amenities</a></li>
-<li class="breadcrumb-item px-3 text-primary">Create</li>
+<li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->amenity_name) ?   'Update' :  'Create' }}</li>
 @endsection
 
 @section('content')
@@ -174,13 +174,6 @@
 
         });
 
-        var i = 0;
-        $("#dynamic-ar").click(function () {
-            ++i;
-            var ele = $(this).closest('.example-2').clone(true);
-            console.log(ele);
-            $('.new_div').append(ele);
-        });
 
         var button = document.querySelector("#create_button");
 

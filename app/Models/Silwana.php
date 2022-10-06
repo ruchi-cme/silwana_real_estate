@@ -21,6 +21,7 @@ class Silwana extends Model
 
         'page',
         'detail',
+        'page_id',
         'page_image',
         'status',
         'created_by',

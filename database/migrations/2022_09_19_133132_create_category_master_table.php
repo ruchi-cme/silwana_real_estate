@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('category_master');
         Schema::create('category_master', function (Blueprint $table) {
             $table->increments('category_id');
             $table->string('category_name')->unique();
+            $table->string('category_image')->nullable();
             $table->tinyInteger('status')->default(1);
             /* Status :  1- Active,2-InActive */
             $table->integer('created_by')->nullable();

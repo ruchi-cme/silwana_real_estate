@@ -112,4 +112,14 @@ Route::name('unit.update')->post('/unit/update', 'App\Http\Controllers\Admin\Flo
 Route::name('unit.delete')->get('/unit/delete/{id}', 'App\Http\Controllers\Admin\FloorUnitMappingController@destroy')->middleware(['permission:unit-delete']);
 Route::name('unit.delete')->get('/unit/changeStatus/{id}', 'App\Http\Controllers\Admin\FloorUnitMappingController@changeStatus')->middleware(['permission:unit-changeStatus']);
 
+
+// Unit Details
+Route::name('contactus')->get('/contactus', 'App\Http\Controllers\Admin\ContactUsController@index')->middleware(['permission:contactus-view']);
+Route::name('contactus.create')->get('/contactus/create', 'App\Http\Controllers\Admin\ContactUsController@create')->middleware(['permission:contactus-create']);
+Route::name('contactus.edit/{id}')->get('/contactus/edit/{id}', 'App\Http\Controllers\Admin\ContactUsController@edit')->middleware(['permission:contactus-create']);
+Route::name('contactus.store')->post('/contactus/store', 'App\Http\Controllers\Admin\ContactUsController@store')->middleware(['permission:contactus-create']);
+Route::name('contactus.update')->post('/contactus/update', 'App\Http\Controllers\Admin\ContactUsController@update')->middleware(['permission:contactus-update']);
+Route::name('contactus.delete')->get('/contactus/delete/{id}', 'App\Http\Controllers\Admin\ContactUsController@destroy')->middleware(['permission:contactus-delete']);
+Route::name('contactus.delete')->get('/contactus/changeStatus/{id}', 'App\Http\Controllers\Admin\ContactUsController@changeStatus')->middleware(['permission:contactus-changeStatus']);
+
 ?>

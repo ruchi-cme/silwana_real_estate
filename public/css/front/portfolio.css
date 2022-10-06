@@ -1,0 +1,200 @@
+.portfolio-detail-main .property-detail-main-wrap-big {
+    height: 670px;
+}
+
+.portfolio-detail-main .property-detail-main-wrap-small {
+    height: 320px;
+}
+
+.upcoming-projects-wrap img {
+    max-width: 13px;
+    display: inline-block;
+}
+
+.portfolio-view-detail .news-media-text h4 {
+    font-family: var(--medium);
+    font-size: 24px;
+}
+
+.portfolio-view-detail .news-media-text .cmn-btn {
+    margin-top: 25px;
+}
+
+.news-media-wrap.portfolio-view {
+    box-shadow: 0px 11px 22px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio-list {
+    padding: 50px 0;
+}
+
+
+.portfolio-view-detail .portfolio-view {
+    margin: 30px 0 0;
+}
+
+.portfolio-view-detail {
+    margin-bottom: 70px;
+}
+
+.my-booking .project-feature-wrap {
+    border: 1px solid var(--primary-color);
+}
+
+.my-booking .upcoming-projects-wrap {
+    background: #fff;
+    padding-left: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+responsive css
+*/
+
+
+
+
+@media only screen and (max-width: 767px) {
+    .project-feature-wrap {
+        padding: 20px;
+    }
+
+    .project-feature-img {
+        height: 325px;
+    }
+
+    .upcoming-projects-wrap h2 {
+        font-size: 28px;
+    }
+
+    .portfolio-detail-main .property-detail-main-wrap-big {
+        height: 370px;
+    }
+}
+
+
+@media only screen and (max-width: 576px) {
+    .title h2 {
+        font-size: 34px;
+    }
+}
+
+@media only screen and (max-width: 476px) {
+    .upcoming-projects-wrap h2 {
+        font-size: 20px;
+    }
+
+    .upcoming-projects-wrap h3 {
+        font-size: 20px;
+        margin-top: 15px;
+    }
+
+    .upcoming-projects-wrap .cmn-btn {
+        margin-top: 16px;
+    }
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

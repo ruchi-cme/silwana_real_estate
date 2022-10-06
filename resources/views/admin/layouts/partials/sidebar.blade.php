@@ -141,8 +141,8 @@
                 </div>
 
 
-                <div data-kt-menu-trigger="click" class="menu-item {{ Route::is('admin.silwana*') || Route::is('admin.builder*')   ? 'show' : '' }} menu-accordion mb-1">
-                    <span class="menu-link {{ Route::is('admin.silwana*')   || Route::is('admin.builder*')  ? 'active' : '' }}">
+                <div data-kt-menu-trigger="click" class="menu-item {{ Route::is('admin.silwana*') ||  Route::is('admin.contactus*')  || Route::is('admin.builder*')   ? 'show' : '' }} menu-accordion mb-1">
+                    <span class="menu-link {{ Route::is('admin.silwana*') ||  Route::is('admin.contactus*')   ||  Route::is('admin.builder*')  ? 'active' : '' }}">
                         <span class="menu-icon">
                             <i class="fa fa-project-diagram"></i>
                         </span>
@@ -161,6 +161,18 @@
                             </div>
                         @endcan
                     </div>
+                    <div class="menu-sub menu-sub-accordion">
+                        @can('contactus-view')
+                            <div class="menu-item {{ Route::is('admin.contactus*') ? 'show' : '' }}">
+                                <a class="menu-link" href="{{ route('admin.contactus') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                    <span class="menu-title">contactus</span>
+                                </a>
+                            </div>
+                        @endcan
+                    </div>
                    <div class="menu-sub menu-sub-accordion">
                         @can('builder-view')
                             <div class="menu-item {{ Route::is('admin.builder*') ? 'show' : '' }}">
@@ -173,6 +185,8 @@
                             </div>
                         @endcan
                     </div>
+
+
                 </div>
             </div>
             <!--end::Menu-->

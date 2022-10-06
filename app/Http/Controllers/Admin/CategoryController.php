@@ -40,9 +40,8 @@ class CategoryController extends Controller
 
     public function create(Request $request)
     {
-        $categoryData = Category::find($request->id);
-
-        return view('admin.category.create' ,compact('categoryData'));
+        $editData = Category::find($request->id);
+        return view('admin.category.create' ,compact('editData'));
     }
 
     public function store(Request $request)
@@ -50,16 +49,21 @@ class CategoryController extends Controller
         $request->validate([
             'category_name' => 'required',
         ]);
+        $userID   = auth()->user()->id;
+        $Image  = null;
 
-        DB::transaction(function() use($request){
-            $userID   = auth()->user()->id;
-            $category = new Category();
-            $category->category_name = $request->category_name;
-            $category->status        = 1;
-            $category->created_by    = $userID;
-            $category->save();
-
-        });
+        if ($image = $request->file('category_image')) {
+            $destinationPath = 'images/category';
+            $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $Image);
+        }
+        $page  = [
+            'category_name'   => $request->category_name,
+            'category_image'  => $Image,
+            'status'         => 1,
+            'created_by'     => $userID
+        ];
+        $silwana_id = Category::create($page);
 
         return redirect()->route('admin.category')->with('inserted','Category Created👍');
     }
@@ -68,11 +72,31 @@ class CategoryController extends Controller
     {
         $category = Category::find( $request->category_id);
         $userID   = auth()->user()->id;
+
+        $image = $request->file('category_image');
+        $editImage = $request->edit_category_image;
+        if (!empty($image) ) {
+
+            $destinationPath = 'images/category';
+            $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $Image);
+            if (!empty($editImage)) {
+                unlink("images/category/" . $editImage);
+            }
+        }
+        elseif (!empty($editImage)) {
+            $Image = $editImage;
+        }
+        else
+        {
+            $Image = null;
+        }
+
         $category->update([
             'category_name' => $request->category_name,
+            'category_image' => $Image,
             'modified_by'   =>  $userID,
             'modified_date' => now()
-
         ]);
 
         return redirect()->route('admin.category')->with('updated','Category Details Updated 👍');

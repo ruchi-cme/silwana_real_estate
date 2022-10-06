@@ -1,0 +1,445 @@
+.about-banner {
+    background: var(--secondary-color);
+}
+
+.about-banner .container {
+    padding: 230px 0;
+}
+
+.about-banner .about-banner-text {
+    position: relative;
+    z-index: 3;
+}
+
+.about-banner-text h2 {
+    color: var(--primary-color);
+    font-size: 48px;
+    text-transform: uppercase;
+}
+
+.breadcrumb .breadcrumb-item a {
+    display: flex;
+    color: #EBEBEB;
+    font-size: 16px;
+    font-family: var(--regular);
+}
+
+.breadcrumb .breadcrumb-item a img {
+    max-width: 22px;
+    margin-right: 15px;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    content: '|';
+    color: var(--primary-color);
+}
+
+.breadcrumb-item.active {
+    color: var(--primary-color);
+    font-family: var(--bold);
+}
+
+.our-amenities-plan.img6 {
+    max-width: 535px;
+    left: -280px;
+    bottom: -158px;
+}
+
+.our-amenities-plan.img5 {
+    max-width: 700px;
+    right: -298px;
+    bottom: -91px;
+}
+
+.about-silwana {
+    margin-top: -100px;
+    position: relative;
+    z-index: 5;
+}
+
+.breadcrumb {
+    margin-top: 25px;
+}
+
+.main-dubai-img {
+    max-width: 1200px;
+    z-index: 3;
+}
+
+.about-silwana-detail .about-us-lists {
+    border: none;
+    padding: 0;
+}
+
+.about-silwana-detail .container {
+    position: relative;
+    z-index: 5;
+}
+
+.about-silwana-detail .about-us-main .about-us-detail {
+    background: #fff;
+    box-shadow: 0px 11px 22px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    transition: 0.5s;
+    transform: translateY(0);
+}
+
+.about-silwana-detail .about-us-main .about-us-detail:hover {
+    transform: translateY(-10px);
+}
+
+.about-us-detail > div {
+    border: 1px solid var(--primary-color);
+    padding: 16px;
+    border-radius: 15px;
+}
+
+.about-silwana-detail {
+    margin: 30px 0 0;
+    background: url('/images/front/about/dubai.svg') center center no-repeat;
+    background-size: cover;
+}
+
+.about-silwana-detail .about-us-lists-inner {
+    width: 83px;
+    height: 83px;
+    padding: 20px;
+}
+
+.about-silwana-detail .about-us-lists h6 {
+    font-size: 24px;
+}
+
+.news-media-wrap {
+    background: #FFFFFF;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    padding: 25px;
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+    z-index: 5;
+}
+
+.news-media .row .col-lg-8,
+.news-media .row .col-lg-4 {
+    margin-bottom: 25px;
+}
+
+.news-media-wrap .cmn-btn {
+    box-shadow: 0px 11px 22px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+}
+
+.news-media-wrap .cmn-btn img {
+    filter: brightness(0) invert(1);
+    transition: 0.5s;
+    max-width: 20px;
+    margin-left: 10px;
+    display: inline;
+}
+
+.news-media-wrap .cmn-btn:hover img {
+    filter: none;
+}
+
+.news-media-img-wrap {
+    width: 100%;
+    height: 362px;
+    border-radius: 25px;
+    overflow: hidden;
+    position: relative;
+}
+
+.news-media-img-wrap > img {
+    object-fit: cover;
+}
+
+.news-media-text p {
+    font-size: 20px;
+    font-family: var(--medium);
+    margin: 30px 0 30px;
+}
+
+.news-media-img-wrap > div > a {
+    position: absolute;
+    max-width: 50px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.news-media-img-wrap > div > a img {
+    max-width: 60px;
+}
+
+.quotes-img {
+    max-width: 110px;
+}
+
+.owner-message-wrap {
+    background-color: var(--primary-color);
+    box-shadow: 0px 11px 22px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    padding: 45px;
+}
+
+.owner-message-wrap p {
+    color: #fff;
+    font-size: 20px;
+    line-height: 45px;
+}
+
+.owner-image-wrap {
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
+    width: 100%;
+    max-width: 615px;
+    height: 813px;
+    box-shadow: 0px 11px 22px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.owner-image-wrap img {
+    object-fit: cover;
+}
+
+.owner-message .title h6 {
+    font-size: 20px;
+    color: var(--primary-color);
+    text-transform: capitalize;
+    font-family: var(--semibold);
+}
+
+.owner-message .title {
+    margin-bottom: 25px;
+}
+
+.owner-message .title h2 {
+    font-size: 36px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

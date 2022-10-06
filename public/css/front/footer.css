@@ -1,0 +1,195 @@
+.copy-wrapper p {
+  color: #FFFFFF;
+  font-size: 16px;
+  font-family: 'Montserrat-Bold';
+}
+
+.copyright {
+  background: var(--primary-color);
+  padding: 25px 0;
+}
+
+/* 
+footer
+*/
+
+.looking-for-house {
+  position: relative;
+  z-index: 9;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 5;
+  flex-wrap: wrap;
+}
+
+footer ul li {
+  flex-basis: 20%;
+}
+
+footer ul li a {
+  color: #FFFFFF;
+  font-size: 24px;
+  font-family: var(--medium);
+  transition: 0.5s;
+}
+
+footer ul li a:hover {
+  color: var(--primary-color);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+}
+
+.social-links a {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin-right: 20px;
+}
+
+footer {
+  background: var(--secondary-color);
+  padding: 300px 0 200px;
+  margin-top: -150px;
+}
+
+.footer-title {
+  margin-top: 60px;
+  position: relative;
+  z-index: 3;
+}
+
+.social-links a:last-child {
+  margin-right: 0;
+}
+
+.footer-title h4 {
+  color: #F9F6F1;
+  font-size: 24px;
+  position: relative;
+  font-family: var(--bold);
+  margin-bottom: 20px;
+}
+
+.footer-title h4::after {
+  content: '';
+  position: absolute;
+  width: 41px;
+  height: 8px;
+  display: block;
+  left: 50%;
+  top: -20px;
+  transform: translateX(-50%);
+  background: var(--primary-color);
+  border-radius: 50px;
+}
+
+.footer-building-img.img9 {
+  max-width: 500px;
+  left: 56px;
+  bottom: -210px;
+}
+
+.footer-building-img.img10 {
+  max-width: 781px;
+  right: -202px;
+  bottom: -132px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+responsive css
+*/
+
+
+@media only screen and (max-width: 1200px) {
+  footer ul li {
+    text-align: center;
+    flex-basis: 32%;
+    margin-bottom: 15px;
+  }
+
+  footer ul {
+    justify-content: center;
+  }
+
+  .footer-building-img.img9 {
+    left: -151px;
+    bottom: -259px;
+  }
+
+  .footer-building-img.img10 {
+    right: -359px;
+    bottom: -172px;
+  }
+}
+
+
+@media only screen and (max-width: 767px) {
+  .footer-building-img.img9 {
+    bottom: -340px;
+  }
+
+  footer {
+    padding: 200px 0;
+  }
+
+  .footer-building-img.img10 {
+    bottom: -260px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

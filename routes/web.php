@@ -7,9 +7,12 @@ use Spatie\Permission\Models\Permission;
 
 Auth::routes(); // Auth routes
 
-Route::get('/', function () {
-    return view('welcome');
-}); //  Landing page route
+Route::name('home')->get('/', 'App\Http\Controllers\Frontend\HomeController@index');
+Route::name('about')->get('/about', 'App\Http\Controllers\Frontend\AboutController@index');
+Route::name('ourProject')->get('/ourProject', 'App\Http\Controllers\Frontend\OurProjectController@index');
+Route::name('propertyList')->get('/propertyList', 'App\Http\Controllers\Frontend\HomeController@index');
+Route::name('myBooking')->get('/myBooking', 'App\Http\Controllers\Frontend\MyBookingController@index');
+Route::name('contactUs')->get('/contact', 'App\Http\Controllers\Frontend\ContactUsController@index');
 
 Route::get('/dashboard', function () {
     if(Auth::check()) {

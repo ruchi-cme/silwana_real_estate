@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\{Silwana,SilwanaDetailMapping};
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Config;
 
 class SilwanaController extends Controller
 {
@@ -49,6 +50,7 @@ class SilwanaController extends Controller
      */
     public function create(Request $request)
     {
+        $pageId = Config::get('constants.page_id');
         $pageData = Silwana::find($request->id);
         $pageDetail  = SilwanaDetailMapping::where('silwana_detail_id' , $request->id)->get()->toArray();
       /* $select =  [ 'silwana_detail_master.silwana_detail_id',
@@ -65,7 +67,7 @@ class SilwanaController extends Controller
                     ->where('silwana_detail_master.silwana_detail_id', $request->id)
                     ->first();*/
 
-        return view('admin.aboutSilwana.create' ,compact('pageData','pageDetail'));
+        return view('admin.aboutSilwana.create' ,compact('pageData','pageDetail','pageId'));
     }
 
     /**
@@ -92,6 +94,7 @@ class SilwanaController extends Controller
         $page  = [
             'page'       => $request->page,
             'detail'     => $request->detail,
+            'page_id'    => $request->page_id,
             'page_image' => $pageImage,
             'status'     => 1,
             'created_by' => $userID
@@ -136,6 +139,7 @@ class SilwanaController extends Controller
      */
     public function update(Request $request)
     {
+
         $silwana  = Silwana::find( $request->silwana_detail_id);
         $userID   = auth()->user()->id;
         /* Insert Page data */
@@ -165,6 +169,7 @@ class SilwanaController extends Controller
         $silwana->update([
             'page'       => $request->page,
             'detail'     => $request->detail,
+            'page_id'    => $request->page_id,
             'page_image' => $Image,
             'modified_by'   =>  $userID,
             'modified_date' => now()
@@ -172,67 +177,72 @@ class SilwanaController extends Controller
 
         /* Insert Page details data */
 
-        $pageDetail  = SilwanaDetailMapping::where('silwana_detail_id' ,  $request->silwana_detail_id)->get();
+        $pageDetail  = SilwanaDetailMapping::where('silwana_detail_id' , $request->silwana_detail_id)->get();
 
         if (!empty($pageDetail)) {
             foreach ($pageDetail as $row) {
 
-                if  (  !in_array($row['silwana_dtl_mpg_id'] , $request->silwana_dtl_mpg_id)) {
+                 if ( (!in_array($row['silwana_dtl_mpg_id'] , $request->silwana_dtl_mpg_id))) {
 
-                    if (!empty($row['heading_image']) && file_exists(public_path().'/images/heading/'.$row['heading_image'])) {
-                        unlink("images/heading/".$row['heading_image']);
-                        SilwanaDetailMapping::where('silwana_dtl_mpg_id', $row['silwana_dtl_mpg_id'] )->delete();
-                    }
-                }
+                     if (!empty($row['heading_image']) && file_exists(public_path().'/images/heading/'.$row['heading_image'])) {
+                         unlink("images/heading/".$row['heading_image']);
+                     }
+                     SilwanaDetailMapping::where('silwana_dtl_mpg_id', $row['silwana_dtl_mpg_id'] )->delete();
+                 }
             }
         }
 
-        for ($i = 0; $i < count($request->silwana_dtl_mpg_id); $i++) {
-            $SilwanaDetailMapping  = SilwanaDetailMapping::find( $request->silwana_dtl_mpg_id[$i]);
 
-            $editHeadingImage = $request->edit_heading_image[$i];
-            $headingImage = $request->file('heading_image')  ;
+        if(!empty($request->silwana_dtl_mpg_id)){
+            for ($i = 0; $i < count($request->silwana_dtl_mpg_id); $i++) {
+                $SilwanaDetailMapping = SilwanaDetailMapping::find($request->silwana_dtl_mpg_id[$i]);
 
-
-            if (isset($headingImage) ) {
-                if (array_key_exists($i, $headingImage)){
-                    $headingImage = $request->file('heading_image')[$i];
-                    $destinationPath = 'images/heading';
-                    $subHeadingImage = date('YmdHis') . "." . $headingImage->getClientOriginalName();
-                    $headingImage->move($destinationPath, $subHeadingImage);
-                    if (!empty($editHeadingImage) && file_exists(public_path().'/images/heading/'.$editHeadingImage)) {
-                        unlink("images/heading/".$editHeadingImage);
-                    }
-                }else{
-                    $subHeadingImage = $editHeadingImage;
+                if( $request->edit_heading_image ){
+                    $editHeadingImage = $request->edit_heading_image[$i];
+                }
+                else{
+                    $editHeadingImage =  '';
                 }
 
+                $headingImage = $request->file('heading_image');
 
-            }
-            elseif (!empty($editHeadingImage)) {
-                $subHeadingImage = $editHeadingImage;
-            }
-            else
-            {
-                $subHeadingImage = null;
+                if (isset($headingImage)) {
+                    if (array_key_exists($i, $headingImage)) {
+                        $headingImage = $request->file('heading_image')[$i];
+                        $destinationPath = 'images/heading';
+                        $subHeadingImage = date('YmdHis') . "." . $headingImage->getClientOriginalName();
+                        $headingImage->move($destinationPath, $subHeadingImage);
+                        if (!empty($editHeadingImage) && file_exists(public_path() . '/images/heading/' . $editHeadingImage)) {
+                             unlink("images/heading/" . $editHeadingImage);
+                        }
+                    } else {
+                        $subHeadingImage = $editHeadingImage;
+                    }
+
+
+                } elseif (!empty($editHeadingImage)) {
+                    $subHeadingImage = $editHeadingImage;
+                } else {
+                    $subHeadingImage = null;
+                }
+
+                $pageDetail = [
+                    'silwana_detail_id' => $request->silwana_detail_id,
+                    'silwana_dtl_mpg_id' => $request->silwana_dtl_mpg_id[$i],
+                    'modified_by' => $userID,
+                    'icon' => $request->icon[$i],
+                    'heading' => $request->heading[$i],
+                    'heading_detail' => $request->heading_detail[$i],
+                    'heading_image' => $subHeadingImage
+                ];
+
+                if (!empty($request->silwana_dtl_mpg_id[$i])) {
+                    $SilwanaDetailMapping->update($pageDetail);
+                } else {
+                    SilwanaDetailMapping::insert($pageDetail);
+                }
             }
 
-            $pageDetail     = [
-                'silwana_detail_id' => $request->silwana_detail_id,
-                'silwana_dtl_mpg_id'=> $request->silwana_dtl_mpg_id[$i],
-                'modified_by'         => $userID,
-                'icon'              => $request->icon[$i],
-                'heading'           => $request->heading[$i],
-                'heading_detail'    => $request->heading_detail[$i],
-                'heading_image'     =>  $subHeadingImage
-            ];
-
-            if(!empty( $request->silwana_dtl_mpg_id[$i] )) {
-                 $SilwanaDetailMapping->update($pageDetail);
-            }
-            else{
-              SilwanaDetailMapping::insert($pageDetail);
-            }
         }
 
         return redirect()->route('admin.silwana')->with('updated','Silwana Details Updated 👍');
