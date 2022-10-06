@@ -114,12 +114,54 @@
                             <div class="row mb-8">
                                 <!--begin::Col-->
                                 <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Name</div>
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Units on Floor</div>
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
                                     <input type="text" class="form-control form-control-solid" placeholder="Enter Unit Name" autofocus name="unit_name" id="floor_no" value="{{ !empty($editData->unit_name ) ? $editData->unit_name : ''}}" >
+                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                            </div>
+                            <!--end::Row-->
+
+                            <!--begin::Row-->
+                            <div class="row mb-8">
+                                <!--begin::Col-->
+                                <div class="col-xl-3">
+                                    <div class="fs-6 fw-bold mt-2 mb-3"> Facing</div>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Facing" autofocus name="facing" id="facing" value="{{ !empty($editData->facing ) ? $editData->facing : ''}}" >
+                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                            </div>
+                            <!--end::Row-->
+
+                            <!--begin::Row-->
+                            <div class="row mb-8">
+                                <!--begin::Col-->
+                                <div class="col-xl-3">
+                                    <div class="fs-6 fw-bold mt-2 mb-3"> Overlooking</div>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                    <input type="text" class="form-control form-control-solid" placeholder="Enter  Overlooking" autofocus name="overlooking" id="overlooking" value="{{ !empty($editData->overlooking ) ? $editData->overlooking : ''}}" >
+                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                            </div>
+                            <!--end::Row-->
+
+                            <!--begin::Row-->
+                            <div class="row mb-8">
+                                <!--begin::Col-->
+                                <div class="col-xl-3">
+                                    <div class="fs-6 fw-bold mt-2 mb-3"> Rooms</div>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Rooms" autofocus name="rooms" id="rooms" value="{{ !empty($editData->rooms ) ? $editData->rooms : ''}}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->

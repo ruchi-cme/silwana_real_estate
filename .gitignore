@@ -13,3 +13,4 @@ yarn-error.log
 /.idea
 /.vscode
 /public/images
+resources/views/front/about.blade (copy).php

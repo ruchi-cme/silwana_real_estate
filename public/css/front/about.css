@@ -69,7 +69,7 @@
 .about-silwana-detail .about-us-lists {
     border: none;
     padding: 0;
-}
+} 
 
 .about-silwana-detail .container {
     position: relative;
@@ -223,34 +223,123 @@
     font-size: 36px;
 }
 
+.about-us-wrapper .title {
+    margin-bottom: 17px;
+}
+
+.about-us-wrapper .title span {
+    font-family: var(--semibold);
+    font-size: 20px;
+}
+
+.management-wrap .investment-inner {
+    padding: 0;
+    border: none;
+    margin-bottom: 20px;
+}
 
+.management-wrap .investment-icon-wrap {
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+}
 
+.management-wrap p {
+    margin: 0;
+}
 
+.management-wrap .investment-inner div:nth-child(2) {
+    flex-basis: 92%;
+}
 
+.management-wrap .investment-inner:hover {
+    box-shadow: none;
+}
 
+.management .investment-image > div:nth-child(1) {
+    height: 534px;
+}
 
+.management-wrap h2 {
+    margin-bottom: 30px;
+}
 
+.rentals-sales {
+    background: #FAEEDC;
+    margin-top: 150px;
+}
 
+.rentals-sales .container .row:nth-child(3) {
+    flex-direction: row-reverse;
+    margin: 120px 0 320px;
+}
 
+.rentals-sales .container .row:nth-child(3) .owner-message-wrap .row {
+    flex-direction: row-reverse;
+}
 
+.rentals-sales .container .row:nth-child(3) .owner-message-wrap .row .owner-image-wrap {
+    right: 30px;
+    left: inherit;
+}
 
+.rentals-sales .owner-message-inner p {
+    line-height: 28px;
+    margin-bottom: 30px;
+}
 
 
+.rentals-sales.owner-message .title h2 {
+    font-size: 48px !important;
+}
 
+.rentals-sales .owner-message-inner p:last-child {
+    margin-bottom: 0;
+}
 
+.rentals-sales .owner-message-wrap {
+    background: #FFFFFF;
+    border: 1px solid #B48D4E;
+}
 
+.rentals-sales .owner-message-wrap p {
+    color: #0C1111;
+    font-size: 16px;
+    font-family: var(--regular);
+}
 
 
+.mission-vision .investment-inner p {
+    margin-bottom: 20px !important;
+}
 
 
+.mission-vision .row:nth-child(2n) {
+    flex-direction: row-reverse;
+    margin-top: 100px;
+}
 
 
+.mission-vision .investment-image::after {
+    right: 0;
+    left: inherit;
+}
 
+.mission-vision .investment-image > div:nth-child(1) {
+    margin: 0;
+}
 
+.investment.management.mission-vision {
+    padding-bottom: 0;
+}
 
 
 
 
+.investment-wrap .title {
+    margin-bottom: 0;
+}
 
 
 
@@ -312,36 +401,45 @@
 
 
 
+/* 
+responsive css
+*/
 
 
 
 
+@media only screen and (max-width:1200px) {
+    .investment.management {
+        padding-bottom: 0;
+    }
 
+    .rentals-sales {
+        margin-top: 250px;
+    }
 
+    .rentals-sales .container .row:nth-child(3) {
+        margin-top: 0;
+        margin-bottom: 100px;
+    }
 
+}
 
+@media only screen and (max-width: 992px) {
+    .rentals-sales {
+        margin-top: 100px;
+    }
+}
 
+@media only screen and (max-width: 500px) {
+    .owner-message-wrap {
+        padding: 20px;
+        height: 378px;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    .about-us-img {
+        height: 150px;
+    }
+} 
 
 
 

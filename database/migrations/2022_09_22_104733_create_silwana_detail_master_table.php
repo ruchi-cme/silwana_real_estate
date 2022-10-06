@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('silwana_detail_master', function (Blueprint $table) {
             $table->increments('silwana_detail_id');
-            $table->enum('page_id', ['home_banner', 'about_us', 'investment','our_project','owner_message']);
+            $table->enum('page_id', ['home_banner', 'about_us', 'investment','our_project','owner_message','aboutus_rental','aboutus_sales','aboutus_mission','aboutus_vision']);
             $table->string('page');
             $table->text('detail');
             $table->string('page_image')->nullable();

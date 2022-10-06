@@ -29,6 +29,7 @@ class FloorUnitMappingController extends Controller
                 'proj_floor_unit_mapping.area_in_sq_feet',
                 'proj_floor_unit_mapping.total_price',
                 'proj_floor_unit_mapping.booking_price',
+                'proj_floor_unit_mapping.total_price',
                 'proj_floor_unit_mapping.booking_type',
                 'proj_floor_unit_mapping.status',
                 'category_master.category_name',
@@ -36,6 +37,7 @@ class FloorUnitMappingController extends Controller
             ];
             $dbData = FloorUnitMapping::leftJoin('category_master', 'category_master.category_id', '=', 'proj_floor_unit_mapping.category_id')
                 ->leftJoin('proj_block_mappings', 'proj_block_mappings.proj_block_map_id', '=', 'proj_floor_unit_mapping.proj_block_floor_id')
+                ->leftJoin('project_master', 'project_master.project_id', '=', 'proj_block_mappings.project_id')
                 ->select($select)
                 ->orderBy('proj_floor_unit_mapping.proj_floor_unit_id', 'desc')
                 ->where('proj_floor_unit_mapping.deleted',0)
@@ -98,6 +100,9 @@ class FloorUnitMappingController extends Controller
             'proj_block_floor_id'   => $request->block_name,
             'category_id'   => $request->category_name,
             'unit_name'     => $request->unit_name,
+            'facing'        => $request->facing,
+            'overlooking'   => $request->overlooking,
+            'rooms'         => $request->rooms,
             'area_in_sq_feet' => $request->area_in_sq_feet,
             'total_price'   => $request->total_price,
             'booking_price' => $request->booking_price,
@@ -166,6 +171,9 @@ class FloorUnitMappingController extends Controller
             'proj_block_floor_id'   => $request->block_name,
             'category_id'   => $request->category_name,
             'unit_name'     => $request->unit_name,
+            'facing'        => $request->facing,
+            'overlooking'   => $request->overlooking,
+            'rooms'         => $request->rooms,
             'area_in_sq_feet' => $request->area_in_sq_feet,
             'total_price'   => $request->total_price,
             'booking_price' => $request->booking_price,

@@ -18,9 +18,9 @@ return new class extends Migration
             $table->integer('project_id')->comment('From project_master');
             $table->text('address');
             $table->string('landmark');
-            $table->string('country');
-            $table->string('state');
-            $table->string('city');
+            $table->string('country')->nullable();
+            $table->string('state')->nullable();
+            $table->string('city')->nullable();
             $table->string('zip')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();

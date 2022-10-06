@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\{Amenities, Category, Project, Block, Silwana,SilwanaDetailMapping,ContactUs};
-
+use App\Models\{FloorUnitMapping,ProjUnitImage };
 
 if(!function_exists("getCategory")){
 
@@ -80,7 +80,8 @@ if(!function_exists("getSilwanaPages")) {
         return $data;
     }
 }
-    if(!function_exists("getContactUsDetail")){
+
+if(!function_exists("getContactUsDetail")){
 
         function getContactUsDetail() {
 
@@ -92,3 +93,54 @@ if(!function_exists("getSilwanaPages")) {
             return $data;
         }
     }
+
+if(!function_exists("getBookingDetail")){
+
+    function getBookingDetail() {
+
+        $select =  [
+            'proj_floor_unit_mapping.proj_floor_unit_id',
+            'proj_floor_unit_mapping.unit_name',
+            'proj_floor_unit_mapping.area_in_sq_feet',
+            'proj_floor_unit_mapping.total_price',
+            'proj_floor_unit_mapping.booking_price',
+            'proj_floor_unit_mapping.booking_type',
+            'proj_floor_unit_mapping.rooms',
+            'category_master.category_name',
+            'proj_block_mappings.block_name',
+            'project_master.project_name',
+            'project_master.project_detail',
+            'project_address_details.address',
+            'project_address_details.landmark',
+            'project_address_details.country',
+            'project_address_details.state',
+            'project_address_details.city',
+            'project_address_details.zip',
+        ];
+        $data = FloorUnitMapping::leftJoin('category_master', 'category_master.category_id', '=', 'proj_floor_unit_mapping.category_id')
+            ->leftJoin('proj_block_mappings', 'proj_block_mappings.proj_block_map_id', '=', 'proj_floor_unit_mapping.proj_block_floor_id')
+            ->leftJoin('project_master', 'project_master.project_id', '=', 'proj_block_mappings.project_id')
+            ->leftJoin('project_address_details','project_address_details.project_id' , '=', 'project_master.project_id')
+            ->select($select)
+            ->orderBy('proj_floor_unit_mapping.proj_floor_unit_id', 'desc')
+            ->where('proj_floor_unit_mapping.deleted',0)
+            ->get();
+
+        return $data;
+    }
+
+}
+
+
+if(!function_exists("getBookingImage")) {
+
+    function getBookingImage($unit_id) {
+
+            $data  = ProjUnitImage::select(['title', 'path'])
+                ->where('proj_floor_unit_id', $unit_id)
+                ->get() ;
+
+            return $data;
+
+    }
+}

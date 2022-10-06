@@ -17,6 +17,11 @@ return [
         'investment'        => 'Investment',
         'our_project'       => 'Our Project',
         'owner_message'     => 'Owner Message',
-        'contactus_intrest' => 'Contactus Intrest'
+        'contactus_intrest' => 'Contactus Intrest',
+        'aboutus_rental'    => 'About Us Rental',
+        'aboutus_sales'     => 'About Us Sales',
+        'aboutus_mission'   => 'About Us Mission',
+        'aboutus_vision'    => 'About Us Vision',
+
     ],
 ];

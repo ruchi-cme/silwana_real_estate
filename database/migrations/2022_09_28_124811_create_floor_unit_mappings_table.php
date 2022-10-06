@@ -13,11 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('proj_floor_unit_mapping');
         Schema::create('proj_floor_unit_mapping', function (Blueprint $table) {
             $table->increments('proj_floor_unit_id');
             $table->integer('proj_block_floor_id')->comment('From proj_block_floor_dtl');
             $table->integer('category_id')->nullable();
             $table->string('unit_name');
+            $table->string('facing')->nullable();;
+            $table->string('overlooking')->nullable();
+            $table->string('rooms')->nullable();
             $table->string('area_in_sq_feet')->nullable();
             $table->string('total_price')->nullable();
             $table->string('booking_price')->nullable();
