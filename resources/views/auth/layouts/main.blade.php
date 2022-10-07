@@ -2,14 +2,14 @@
 
 <html lang="en">
 	<!--begin::Head-->
-	<head><title>Starter</title>
+	<head><title>Silwana</title>
 		<meta charset="utf-8" />
-		<meta name="description" content="Starter kit" />
-		<meta name="keywords" content="starter" />
+		<meta name="description" content="Silwana" />
+		<meta name="keywords" content="Silwana" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 		<link rel="canonical" href="" />
-		<link rel="shortcut icon" href="{{ asset('media/logos/favicon.ico') }}" />
+		<link rel="shortcut icon" href="{{ asset('images/front/logo.svg') }}" />
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
@@ -29,17 +29,6 @@
 				<!--begin::Content-->
 				@yield('content')
 				<!--end::Content-->
-				<!--begin::Footer-->
-				<div class="d-flex flex-center flex-column-auto p-10">
-					<!--begin::Links-->
-					<div class="d-flex align-items-center fw-bold fs-6">
-						<a href="https://keenthemes.com" class="text-muted text-hover-primary px-2">About</a>
-						<a href="mailto:support@keenthemes.com" class="text-muted text-hover-primary px-2">Contact</a>
-						<a href="https://1.envato.market/EA4JP" class="text-muted text-hover-primary px-2">Contact Us</a>
-					</div>
-					<!--end::Links-->
-				</div>
-				<!--end::Footer-->
 			</div>
 			<!--end::Authentication - Sign-in-->
 		</div>

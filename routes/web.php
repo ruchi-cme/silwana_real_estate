@@ -8,14 +8,20 @@ use Spatie\Permission\Models\Permission;
 Auth::routes(); // Auth routes
 
 Route::name('home')->get('/', 'App\Http\Controllers\Frontend\HomeController@index');
+Route::name('home/login')->post('/home/login', 'App\Http\Controllers\Frontend\HomeController@login');
+Route::name('home/logout')->post('/home/logout', 'App\Http\Controllers\Frontend\HomeController@logout');
+
 Route::name('about')->get('/about', 'App\Http\Controllers\Frontend\AboutController@index');
 Route::name('ourProject')->get('/ourProject', 'App\Http\Controllers\Frontend\OurProjectController@index');
 Route::name('propertyList')->get('/propertyList', 'App\Http\Controllers\Frontend\HomeController@index');
 Route::name('myBooking')->get('/myBooking', 'App\Http\Controllers\Frontend\MyBookingController@index');
 Route::name('contactUs')->get('/contact', 'App\Http\Controllers\Frontend\ContactUsController@index');
+Route::name('myProfile')->get('/myProfile', 'App\Http\Controllers\Frontend\MyProfileController@index');
+Route::name('myProfile/update')->post('/myProfile/update', 'App\Http\Controllers\Frontend\MyProfileController@update');
 
 Route::get('/dashboard', function () {
-    if(Auth::check()) {
+
+    if(Auth::guard('web')->check()) {
         if(auth()->user()->is_admin){
             return redirect('/admin/');
         }else{

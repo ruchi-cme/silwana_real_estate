@@ -1,4 +1,5 @@
 <x-base>
+
     <!-- banner -->
     <section class="banner">
         <div class="container">

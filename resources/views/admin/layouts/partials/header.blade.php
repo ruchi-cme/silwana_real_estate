@@ -3,7 +3,7 @@
     <div class="header-brand">
         <!--begin::Logo-->
         <a >
-            <img alt="Logo" src="{{ asset('media/logos/madara.png') }}" class="h-25px h-lg-25px" />
+            <img alt="Logo" src="{{ asset('images/front/logo.svg') }}" class="h-25px h-lg-25px" />
         </a>
         <!--end::Logo-->
         <!--begin::Aside minimize-->

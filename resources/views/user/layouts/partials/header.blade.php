@@ -3,7 +3,7 @@
     <div class="header-brand">
         <!--begin::Logo-->
         <a >
-            <img alt="Logo" src="{{ asset('media/logos/madara.png') }}" class="h-25px h-lg-25px" />
+            <img alt="Logo" src="{{ asset('images/front/logo.svg') }}" class="h-25px h-lg-25px" />
         </a>
         <!--end::Logo-->
         <!--begin::Aside minimize-->
@@ -61,7 +61,7 @@
             <!--end::Page title-->
             <!--begin::Action group-->
             <div class="d-flex justify-content-end overflow-auto pt-3">
-            
+
             <!--begin::Menu wrapper-->
             <div class="btn btn-icon btn-icon-dark btn-active-primary w-30px h-30px w-md-40px h-md-40px position-relative me-2" data-bs-toggle="tooltip" data-bs-delay-show="1000" data-bs-placement="left" title="New Order" id="kt_drawer_chat_toggle">
                 <!--begin::Svg Icon | path: assets/media/icons/duotune/ecommerce/ecm001.svg-->
@@ -136,7 +136,7 @@
         <div class="card-body" id="kt_drawer_chat_messenger_body">
             <!--begin::Messages-->
             <div class="scroll-y me-n5 pe-5" data-kt-element="messages" data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_drawer_chat_messenger_header, #kt_drawer_chat_messenger_footer" data-kt-scroll-wrappers="#kt_drawer_chat_messenger_body" data-kt-scroll-offset="0px">
-                
+
                 <!--begin::Message(in)-->
                 <div class="d-flex align-items-center bg-light-success rounded p-5 mb-7 ribbon ribbon-top ribbon-vertical">
                     <div class="ribbon ribbon-triangle ribbon-top-end border-success rounded">
@@ -175,7 +175,7 @@
                 </div>
                 <!--end::Actions-->
                 <!--begin::Send-->
-                
+
                 <!--end::Send-->
             </div>
             <!--end::Toolbar-->

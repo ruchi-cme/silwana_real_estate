@@ -8,5 +8,6 @@
 
     <x-bodyFooter/>
     <x-footer/>
+@yield('scripts')
 </body>
 </html>

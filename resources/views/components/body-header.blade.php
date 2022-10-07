@@ -1,4 +1,4 @@
-
+<meta name="csrf-token" content="{{ csrf_token() }}" />
     <header id="navigation_bar">
         <div class="container">
             <div class="row">
@@ -37,40 +37,57 @@
                                     </li>
                                 </ul>
                                 <div class="estimate-wrap">
-                                    <div class="dropdown">
+                                    @if (Auth::guard('front')->check())
+                                        @php $image = asset('images/front').'/noProfile.jpeg' ; @endphp
+                                        @if(Auth::guard('front')->user()->image)
+                                            @php $image = asset('images/user') . Auth::guard('front')->user()->image; @endphp
+                                        @endif
+                                        <div class="dropdown">
                                         <button class="cmn-btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                             <div class="profile-img-wrap-sml">
-                                                <img src="{{asset('images/front')}}/profile.png" alt="profile" />
+                                                <img src="{{$image}}" alt="profile" />
                                             </div>
-                                            <p>Hey Feras Mohammed Abed Abu-Hdaib</p>
+                                            <p>{{Auth::guard('front')->user()->name}}</p>
                                         </button>
+
                                         <ul class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton1">
                                             <div class="profile-detail-header">
                                                 <ul class="text-center">
                                                     <li>
                                                         <div class="profile-main-img mx-auto">
-                                                            <img src="{{asset('images/front')}}/profile.png" alt="">
+                                                            <img src="{{$image}} " alt="">
                                                         </div>
                                                     </li>
                                                     <li>
-                                                        <p>Feras Mohammed Abed Abu-Hdaib</p>
+                                                        <p>{{Auth::guard('front')->user()->name}}</p>
                                                     </li>
+                                                    @if(!empty(Auth::guard('front')->user()->phone))
+                                                        <li>
+                                                            <p> <img src="{{asset('images/front')}}/call.svg" alt="call" /> +{{ Auth::guard('front')->user()->phone  }}</p>
+                                                        </li>
+                                                    @endif
+
                                                     <li>
-                                                        <p> <img src="{{asset('images/front')}}/call.svg" alt="call" /> +97145563096</p>
-                                                    </li>
-                                                    <li>
-                                                        <p> <img src="{{asset('images/front')}}/email.svg" alt="email" /> support@silwanarealestate.com</p>
+                                                        <p> <img src="{{asset('images/front')}}/email.svg" alt="email" /> {{Auth::guard('front')->user()->email}}</p>
                                                     </li>
                                                 </ul>
                                                 <ul>
-                                                    <li><a class="dropdown-item" href="#">My Profile</a></li>
-                                                    <li><a class="dropdown-item" href="#">My Booking</a></li>
-                                                    <li><a class="dropdown-item" href="#">Edit Profile</a></li>
-                                                    <li><a class="dropdown-item" href="#">Sign Out</a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('myProfile') }}">My Profile</a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('myBooking') }}">My Booking</a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('myBooking') }}">Edit Profile</a></li>
+                                                    <li>
+                                                        <form method="POST" id="logout_form" action={{ route('home/logout') }}>
+                                                            @csrf
+                                                            <a href="javascript:{}" class="dropdown-item"  onclick="document.getElementById('logout_form').submit();"  >Sign Out</a>
+                                                        </form>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </ul>
                                     </div>
+                                    @else
+                                    <x-loginButton />
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -116,7 +133,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-left">
-                                        <button class="cmn-btn w-100">SIGN UP</button>
+                                        <button class="cmn-btn w-100 signup">SIGN UP</button>
                                     </div>
                                     <div class="col-lg-12 text-center already-acc">
                                         <p class="m-0">Have you already account? <button type="button"  data-bs-toggle="modal" data-bs-target="#login-modal">Login</button> </p>
@@ -143,19 +160,32 @@
                             </div>
                         </div>
                         <div class="col-lg-5">
-                            <form action="" class="sign-up-form">
-                                <div>
+                            <form method="post" class="sign-up-form" action="{{ route('home/login') }}">
+                              @csrf
+                               <div>
                                     <h2>login</h2>
-                                    <p>Please Sign up and explore your dream house from silwana real estate.</p>
+                                    <p>Please Sign In and explore your dream house from silwana real estate.</p>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Email" class="form-control">
+                                            <input type="text" name="email" id="email" placeholder="Email" class="form-control">
+                                            @error('email')
+                                            <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <input type="password" name="password" id="password" placeholder="Password" class="form-control">
+
+                                            @error('password')
+                                            <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-left">
-                                        <button class="cmn-btn w-100">Login</button>
+                                        <button type="submit" class="cmn-btn w-100 btn-login">Login</button>
                                     </div>
                                     <div class="col-lg-12 text-center already-acc">
                                         <p class="m-0">Have you already account? <button type="button" data-bs-toggle="modal" data-bs-target="#signup-modal">Signup</button> </p>
@@ -171,3 +201,5 @@
             </div>
         </div>
     </div>
+
+

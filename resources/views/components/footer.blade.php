@@ -7,4 +7,5 @@
     <script src="{{asset('js/front')}}/wow.min.js"></script>
     <script src="{{asset('js/front')}}/slick.js"></script>
     <script src="{{asset('js/front')}}/script.js"></script>
+    <script src="{{asset('js/front/custom/signIn_signUp')}}/signInUp.js"></script>
 </div>
