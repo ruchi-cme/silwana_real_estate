@@ -31,7 +31,7 @@ class HomeController extends Controller
             return back()->withInput();
         }
         else{
-            return redirect('jquery-validation','/');
+            return redirect('jquery-validation','home');
         }
 
     }
