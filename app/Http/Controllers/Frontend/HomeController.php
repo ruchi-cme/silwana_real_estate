@@ -28,10 +28,11 @@ class HomeController extends Controller
 
         if (Auth::guard('front')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
-            return back()->withInput();
+            return view('front.home' );
         }
         else{
             return redirect('jquery-validation','home');
+            return view('front.home' );
         }
 
     }
