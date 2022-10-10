@@ -8,12 +8,15 @@ use Spatie\Permission\Models\Permission;
 Auth::routes(); // Auth routes
 
 Route::name('home')->get('/', 'App\Http\Controllers\Frontend\HomeController@index');
+Route::name('home/signup')->post('/home/signup', 'App\Http\Controllers\Frontend\HomeController@signup');
 Route::name('home/login')->post('/home/login', 'App\Http\Controllers\Frontend\HomeController@login');
 Route::name('home/logout')->post('/home/logout', 'App\Http\Controllers\Frontend\HomeController@logout');
 
 Route::name('about')->get('/about', 'App\Http\Controllers\Frontend\AboutController@index');
 Route::name('ourProject')->get('/ourProject', 'App\Http\Controllers\Frontend\OurProjectController@index');
-Route::name('propertyList')->get('/propertyList', 'App\Http\Controllers\Frontend\HomeController@index');
+Route::name('propertyList')->get('/propertyList', 'App\Http\Controllers\Frontend\PropertyListController@index');
+Route::name('propertydetail')->get('/propertydetail', 'App\Http\Controllers\Frontend\PropertyListController@propertydetail');
+
 Route::name('myBooking')->get('/myBooking', 'App\Http\Controllers\Frontend\MyBookingController@index');
 Route::name('contactUs')->get('/contact', 'App\Http\Controllers\Frontend\ContactUsController@index');
 Route::name('myProfile')->get('/myProfile', 'App\Http\Controllers\Frontend\MyProfileController@index');

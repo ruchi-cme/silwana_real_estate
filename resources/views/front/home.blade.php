@@ -1,26 +1,46 @@
 <x-base>
 
-    <!-- banner -->
+    @if(!empty($homeBanner))
     <section class="banner">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="banner-content text-center">
-                        @if(!empty($homeBanner))
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="banner-content">
                             <h1>{{$homeBanner['page']}}</h1>
-                            <p>{{$homeBanner['detail']}}</p>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <a href="#" class="cmn-btn">MAKE IN INQUIRY</a>
-                                <div>
-                                    <a href="#"><img src="{{asset('images/front/home')}}/play-btn.svg" class="play-btn" alt=""></a>
-                                </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="banner-form">
+                        <h2>LEAVE YOUR INTEREST</h2>
+                        <form action="">
+                            <div class="form-group select-title">
+                                <select name="" id="" class="form-control">
+                                    <option value="">Title</option>
+                                </select>
                             </div>
-                        @endif
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="First Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Last Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Mobile Number">
+                            </div>
+                            <div class="form-group mb-0">
+                                <input type="submit" class="cmn-btn" value="INQUIRY NOW">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    @endif
+    <!-- banner -->
 
     <!-- about us -->
     @if (!empty($aboutus))

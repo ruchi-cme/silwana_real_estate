@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 143px;
-    padding: 250px 0;
+    padding: 100px 0;
     position: relative;
 }
 
@@ -13,7 +13,6 @@
     max-width: 65px;
     margin-left: 10px;
 }
-
 .banner::after {
     content: '';
     position: absolute;
@@ -29,9 +28,12 @@
 }
 
 .banner .banner-content {
-    padding: 0 230px;
     position: relative;
     z-index: 6;
+}
+
+.banner .banner-content h1 {
+    max-width: 500px;
 }
 
 .banner .banner-content .cmn-btn {
@@ -238,18 +240,21 @@
     height: 420px;
     position: relative;
     margin-bottom: 25px;
-}
+} 
 
 .property-by-categories-wrap img {
     object-fit: cover;
 }
 
 .property-by-categories-detail {
-    position: absolute;
-    padding: 40px 55px;
+    position: absolute; 
+    padding: 40px 55px;  
     top: 50%;
     left: 50%;
+    max-width: 325px;
+    width: 100%;
     transform: translate(-50%,-50%);
+    text-align: center;
 }
 
 .property-by-categories-detail h3 {
@@ -268,10 +273,17 @@
     top: 0;
     left: 0;
     display: block;
+    backdrop-filter: blur(4px);
+    z-index: 2;
 }
 
 .property-by-categories-detail .cmn-btn {
     font-family: var(--bold);
+}
+
+.property-by-categories-detail > div {
+    position: relative;
+    z-index: 5;
 }
 
 .property-wrap .nav-tabs .nav-link.active {
@@ -729,6 +741,48 @@
     margin-right: 60px;
 }
 
+.banner-form {
+    position: relative;
+    z-index: 5;
+    background: #fff;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.banner-form h2 {
+    background-color: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    padding: 30px 0;
+    font-family: var(--extrabold);
+    font-size: 24px;
+}
+
+.banner-form form {
+    padding: 45px 60px;
+}
+
+.banner-form form .cmn-btn {
+    width: 100%;
+    box-shadow: 0px 11px 14px rgba(0, 0, 0, 0.17);
+}
+
+.banner-form form .select-title {
+    position: relative;
+}
+
+.banner-form form .select-title::after {
+    content: '';
+    width: 15px;
+    height: 15px;
+    background: url('../images/down-arrow.svg') center center no-repeat;
+    background-size: contain;
+    display: block;
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
 
 
@@ -771,18 +825,249 @@
 
 
 
-/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
 responsive css
 */
 
 @media only screen and (max-width: 1400px) {
-
+    
     .navbar-collapse .navbar-nav .nav-link {
         font-size: 14px;
     }
 
-    .banner .banner-content {
-        padding: 0 120px;
+    .banner {
+        margin-top: 125px;
     }
 
     .investment-image > div:nth-child(1) {
@@ -809,15 +1094,24 @@ responsive css
     .our-projects-wrap-main {
         top: 0;
     }
+
+    .banner {
+        margin-top: 125px;
+    }
 }
 
 @media only screen and (max-width: 992px) {
+
     .about-us-wrapper {
         padding: 0 25px;
     }
 
     .banner .banner-content {
         padding: 0;
+    }
+
+    .banner-form {
+        margin-top: 50px;
     }
 
     .about-us-main .about-us-detail {
@@ -861,7 +1155,7 @@ responsive css
     .banner {
         padding: 200px 0;
     }
-}
+} 
 
 @media only screen and (max-width: 576px) {
     .banner {
@@ -870,7 +1164,11 @@ responsive css
     }
 }
 
-
+@media only screen and (max-width: 500px) {
+    .banner-form form {
+        padding: 25px;
+    }
+} 
 
 
 

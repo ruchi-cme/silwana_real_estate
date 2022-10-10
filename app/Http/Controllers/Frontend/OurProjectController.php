@@ -9,9 +9,8 @@ class OurProjectController extends Controller
 {
     public function index(Request $request)
     {
-        $aboutus    = getSilwanaPages('about_us');
-        $owner_message = getSilwanaPages('owner_message');
+        $projectList    = getProjectList();
 
-        return view('front.ourProject.blade',compact('aboutus','owner_message'));
+        return view('front.ourProject',compact('projectList' ));
     }
 }

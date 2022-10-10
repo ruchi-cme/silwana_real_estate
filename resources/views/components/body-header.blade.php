@@ -20,8 +20,36 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('home') }}">home</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('about') }}">About us</a>
+                                    <li class="nav-item estimate-wrap">
+                                        <div class="dropdown about-dropdown-menu">
+                                            <a class="dropdown-toggle nav-link" href="{{ route('about') }}" role="button">
+                                                About us
+                                            </a>
+
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <div class="profile-detail-header">
+                                                    <ul class="p-0 bg-transparent shadow-none">
+                                                        <div class="news-media-wrap p-0">
+                                                            <div class="news-media-img-wrap">
+                                                                <img src="{{ asset('images/front/about') }}/media1.png" alt="">
+                                                            </div>
+                                                            <div class="news-media-text">
+                                                                <p class="m-0">Lorem ipsum dolor sit amet, consectetur adipisicin</p>
+                                                                <a href="#" class="cmn-btn">Read More <img src="{{ asset('images/front/about') }}/arrow.svg" alt=""></a>
+                                                            </div>
+                                                        </div>
+                                                    </ul>
+
+                                                    <ul>
+                                                        <li><a class="dropdown-item" href="{{ route('about') }}">About Us</a></li>
+                                                        <li><a class="dropdown-item" href="team.php">Our Team</a></li>
+                                                        <li><a class="dropdown-item" href="faq.php">FAQ</a></li>
+                                                        <li><a class="dropdown-item" href="news-media.php">News & Media</a></li>
+                                                        <li><a class="dropdown-item" href="blog.php">Blogs</a></li>
+                                                    </ul>
+                                                </div>
+                                            </ul>
+                                        </div>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('ourProject') }}">Our Projects</a>
@@ -100,7 +128,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="signup-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade"  id="signup-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -112,25 +140,33 @@
                             </div>
                         </div>
                         <div class="col-lg-5">
-                            <form action="" class="sign-up-form">
+                            <form action="{{ route('home/signup') }}" class="sign-up-form" method="post">
+                                @csrf
                                 <div>
                                     <h2>Sign up</h2>
                                     <p>Please Sign up and explore your dream house from silwana real estate.</p>
+                                    @include('layouts.alerts.error')
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Mobile Number" class="form-control">
+                                            <input type="text" placeholder="Name" name="name" class="form-control">
+                                         </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Mobile Number" name="phone" class="form-control">
+
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Email" class="form-control">
-                                        </div>
+                                            <input type="text" placeholder="Email" name="email" class="form-control">
+                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <input type="password" placeholder="Password" class="form-control">
+                                            <input type="password" placeholder="Password" name="password" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-left">
@@ -166,23 +202,17 @@
                                <div>
                                     <h2>login</h2>
                                     <p>Please Sign In and explore your dream house from silwana real estate.</p>
+                                   @include('layouts.alerts.error')
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <input type="text" name="email" id="email" placeholder="Email" class="form-control">
-                                            @error('email')
-                                            <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                            @enderror
-                                        </div>
+                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <input type="password" name="password" id="password" placeholder="Password" class="form-control">
-
-                                            @error('password')
-                                            <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-left">
@@ -202,5 +232,4 @@
             </div>
         </div>
     </div>
-
 

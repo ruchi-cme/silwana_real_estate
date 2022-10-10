@@ -126,7 +126,7 @@ header.scrollUp {
     box-shadow: none;
 }
 
-/*
+/* 
 modal css
 */
 
@@ -210,8 +210,8 @@ modal css
 
 .estimate-wrap .cmn-btn p {
     text-overflow: ellipsis;
-    overflow: hidden;
-    width: 110px;
+    overflow: hidden; 
+    width: 110px; 
     white-space: nowrap;
     text-transform: capitalize;
 }
@@ -239,7 +239,7 @@ modal css
 }
 
 .dropdown-toggle::after {
-    background: url('/images/front/down-arrow-white.svg') center center no-repeat;
+    background: url('../images/down-arrow-white.svg') center center no-repeat;
     background-size: contain;
     border: none;
     width: 15px;
@@ -291,7 +291,7 @@ modal css
     background: #fff;
     flex-basis: 30%;
     padding: 30px 30px;
-}
+} 
 
 .estimate-wrap .dropdown .profile-detail-header ul:last-child li a {
     color: #000000;
@@ -306,7 +306,17 @@ modal css
     background-color: #FAF4EB;
     font-size: 16px;
     font-family: var(--medium);
-    color: ;
+    color: var(--primary-color);
+    margin-bottom: 0;
+    padding: 15px 0;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    transition: 0.5s;
+}
+
+.estimate-wrap .dropdown .profile-detail-header ul:last-child li:last-child a:hover {
+    border: 1px solid var(--primary-color);
 }
 
 .estimate-wrap .dropdown .profile-detail-header ul:last-child li a:hover {
@@ -331,19 +341,84 @@ modal css
     font-family: var(--regular);
 }
 
+.navbar-collapse.justify-content-end .nav-item .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
 
+.about-menu-wrap.estimate-wrap .dropdown .dropdown-menu {
+    left: 0;
+    margin-top: 20px;
+}
 
+.nav-item.estimate-wrap .dropdown-menu {
+    left: 0;
+    right: inherit;
+}
 
+.about-dropdown-menu .nav-link::after {
+    display: none !important;
+}
 
+#login-modal .modal-body,
+#signup-modal .modal-body {
+    padding: 30px;
+}
 
+.about-dropdown-menu.dropdown .dropdown-menu {
+    background: transparent;
+}
 
+.about-dropdown-menu .profile-detail-header {
+    flex-direction: row-reverse;
+}
 
+.about-dropdown-menu .profile-detail-header ul li:last-child a {
+    padding: 0 !important;
+    background-color: #fff !important;
+    border: none !important;
+    text-align: left !important;
+    color: #000000 !important;
+    font-size: 16px !important;
+    font-family: var(--regular) !important;
+}
 
+.about-dropdown-menu .profile-detail-header .news-media-img-wrap {
+    height: 170px;
+    border-radius: 10px 10px 0px 0px;
+    overflow: hidden;
+}
 
+.about-dropdown-menu .profile-detail-header .news-media-text {
+    display: flex;
+    padding: 20px;
+}
 
+.about-dropdown-menu .profile-detail-header .news-media-text p {
+    color: #000000;
+    font-size: 14px;
+    font-family: var(--medium);
+    flex-basis: 69%;
+}
 
+.about-dropdown-menu .profile-detail-header .news-media-text .cmn-btn {
+    padding: 0;
+    color: var(--primary-color);
+    background-color: transparent;
+    box-shadow: none;
+    text-transform: capitalize;
+    border: none;
+    font-size: 14px;
+    font-family: var(--medium);
+}
 
+.about-dropdown-menu .profile-detail-header .news-media-text .cmn-btn img {
+    filter: none;
+}
 
+.about-dropdown-menu .profile-detail-header .news-media-wrap {
+    border-radius: 15px !important;
+}
 
 
 
@@ -398,37 +473,7 @@ modal css
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
+/* 
 responsive css
 */
 
@@ -450,17 +495,48 @@ responsive css
     .login-btn {
         margin-left: 15px;
     }
+
+    .navbar-brand img {
+        max-width: 212px;
+    }
 }
 
-@media only screen and (max-width:1200px){
+@media only screen and (max-width:1200px) {
     .navbar-collapse .navbar-nav .nav-link {
         margin: 10px 0;
     }
 
     .estimate-wrap {
         margin: 0 0 20px;
+    } 
+}
+
+
+@media only screen and (max-width:992px) {
+    #login-modal .modal-dialog,
+    #signup-modal .modal-dialog  {
+        max-width: 580px;
+    }
+
+    .login-form-img-wrap {
+        height: 300px;
+    }
+
+    .login-form-img-wrap2 {
+        display: none;
+    }
+
+    #login-modal .sign-up-form,
+    #signup-modal .sign-up-form {
+        margin-top: 25px;
+    }
+
+    .btn-close {
+        right: 10px;
+        top: 10px;
     }
 }
+
 
 @media  only screen and (max-width: 767px) {
     .header-top {
@@ -484,5 +560,5 @@ responsive css
     .navbar-toggler {
         padding: 5px 13px;
     }
-
+    
 }

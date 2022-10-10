@@ -1,7 +1,9 @@
 <?php
 
 use App\Models\{Amenities, Category, Project, Block, Silwana,SilwanaDetailMapping,ContactUs};
-use App\Models\{FloorUnitMapping,ProjUnitImage };
+use App\Models\{FloorUnitMapping, ProjectImage, ProjUnitImage};
+use App\Models\{Project_address_detail};
+use Illuminate\Support\Facades\DB;
 
 if(!function_exists("getCategory")){
 
@@ -142,5 +144,130 @@ if(!function_exists("getBookingImage")) {
 
             return $data;
 
+    }
+}
+
+
+if(!function_exists("getProjectList")) {
+
+    function getProjectList() {
+
+        $select =  [ 'project_master.project_id',
+            'project_master.project_name',
+            'project_master.project_detail',
+            'project_master.work_status',
+            'project_master.status',
+            'project_master.created_date',
+            'category_master.category_name',
+            'project_master.created_date',
+            'project_address_details.address',
+            'project_address_details.landmark',
+            'project_address_details.country',
+            'project_address_details.state',
+            'project_address_details.city',
+            'project_address_details.zip',
+        ];
+        $data = Project::leftJoin('category_master', 'category_master.category_id', '=', 'project_master.category_id')
+                //->leftJoin('proj_ameni_mappings', 'proj_ameni_mappings.project_id', '=', 'project_master.project_id')
+                ->leftJoin('project_address_details','project_address_details.project_id' , '=', 'project_master.project_id')
+                ->select($select)
+                ->where('project_master.deleted',0)
+                ->orderBy('project_master.project_id', 'desc')
+                ->get();
+
+
+        return $data;
+    }
+
+}
+
+
+if(!function_exists("getProjectAddress")) {
+
+    function getProjectAddress($project_id) {
+
+        $select =  [
+            'project_address_details.address',
+            DB::raw("CONCAT(project_address_details.address, ' ', project_address_details.landmark, ' ',  countries.name , ' ', states.name , ' ', cities.name )  AS address"),
+            'project_address_details.zip',
+        ];
+        $data = Project_address_detail::leftJoin('countries', 'countries.id', '=', 'project_address_details.country')
+            ->leftJoin('states', 'states.id', '=', 'project_address_details.state')
+            ->leftJoin('cities','cities.id' , '=', 'project_address_details.city')
+            ->select($select)
+            ->where('project_address_details.project_id',$project_id)
+            ->get()->first();
+
+        return $data;
+    }
+
+}
+
+
+if(!function_exists("getProjectImage")) {
+
+    function getProjectImage($project_id) {
+
+        $data = ProjectImage::select([ 'title','path','type'])
+            ->where('project_id' ,  $project_id)
+            ->get()
+            ->first();
+
+
+
+        return $data;
+
+    }
+}
+
+if(!function_exists("getPropertyList")) {
+
+    function getPropertyList($property_id) {
+
+        $select =  [
+            'project_master.project_id',
+            'proj_floor_unit_mapping.proj_floor_unit_id',
+            'proj_floor_unit_mapping.unit_name',
+            'proj_floor_unit_mapping.rooms',
+            'proj_floor_unit_mapping.total_price',
+            'proj_floor_unit_mapping.booking_price',
+            'proj_floor_unit_mapping.facing',
+            'proj_floor_unit_mapping.overlooking',
+            'proj_floor_unit_mapping.status',
+            'category_master.category_name',
+            'proj_block_mappings.block_name',
+
+        ];
+        $where = '';
+        if(!empty($property_id ))
+            $where =  where('proj_floor_unit_mapping.proj_floor_unit_id',$property_id);
+
+             $data = FloorUnitMapping::leftJoin('category_master', 'category_master.category_id', '=', 'proj_floor_unit_mapping.category_id')
+            ->leftJoin('proj_block_mappings', 'proj_block_mappings.proj_block_map_id', '=', 'proj_floor_unit_mapping.proj_block_floor_id')
+            ->leftJoin('project_master', 'project_master.project_id', '=', 'proj_block_mappings.project_id')
+             ->select($select)
+            ->orderBy('proj_floor_unit_mapping.proj_floor_unit_id', 'desc')
+            ->where('proj_floor_unit_mapping.deleted',0)->$where
+            ->get();
+
+        return $data;
+    } 
+}
+
+if(!function_exists('getPropertyImage')) {
+
+    function getPropertyImage($unit_id,$single)
+    {
+
+        if(!empty($single)){
+            $data = ProjUnitImage::select([ 'title','path'])
+                ->where('proj_floor_unit_id' ,  $unit_id)
+                ->get()->first();
+        }else{
+            $data = ProjUnitImage::select([ 'title','path'])
+                ->where('proj_floor_unit_id' ,  $unit_id)
+                ->get()->toArray();
+        }
+        return $data;
     }
 }

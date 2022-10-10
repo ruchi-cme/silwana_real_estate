@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -26,14 +29,43 @@ class HomeController extends Controller
             'password' => 'required|min:6'
         ]);
 
-        if (Auth::guard('front')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+        //Error messages
+        $messages = [
+            "email.required" => "Email is required",
+            "email.email" => "Email is not valid",
+            "email.exists" => "Email doesn't exists",
+            "password.required" => "Password is required",
+            "password.min" => "Password must be at least 6 characters"
+        ];
+        // validate the form data
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|min:6'
+        ], $messages);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        } else {
+            // attempt to log
+            if (Auth::guard('front')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+                // if successful -> redirect forward
+                return redirect()->intended(route('home'));
+            }
+
+            // if unsuccessful -> redirect back
+            return redirect()->back()->withInput($request->only('email', 'remember'))->withErrors([
+                'approve' => 'These credentials do not match our records. ',
+            ]);
+        }
+
+      /*  if (Auth::guard('front')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
             return view('front.home' );
         }
         else{
-           
+
             return view('front.home' );
-        }
+        }*/
 
     }
 
@@ -44,5 +76,24 @@ class HomeController extends Controller
          Auth::guard('front')->logout();
 
         return redirect('/');
+    }
+
+    public function signup(Request $request){
+
+        $validatedData =  $request->validate([
+            'name'   => 'required',
+            'phone'   => 'required',
+            'email'   => 'required',
+            'password' => 'required|min:6'
+        ]);
+
+          User::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return view('front.home' );
     }
 }
