@@ -10,7 +10,7 @@
                         <div class="row align-items-center">
                             <div class="col-lg-2">
                                 <div class="profile-main-img">
-                                    <img src="{{ $userData['image'] }}" alt="">
+                                    <img src="{{ $userData['imageSrc'] }}" alt="">
                                 </div>
                             </div>
                             <div class="col-lg-10">
@@ -106,16 +106,16 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <form action="{{route('myProfile/update')}}" class="edit-profile-form">
+                    <form action="{{route('myProfile/update')}}" method="post" class="edit-profile-form" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="edit-profile-circle">
                                 <div class="circle">
-                                    <img class="profile-pic" src="{{ $userData['image'] }}">
+                                    <img class="profile-pic" src="{{ $userData['imageSrc'] }}">
                                 </div>
                                 <div class="p-image">
                                     <i class="fas fa-pen upload-button"></i>
-                                    <input class="file-upload" type="file" accept="image/*"/>
+                                    <input class="file-upload" type="file" name="image" accept="image/*"/>
                                     <input  type="hidden" name="edit_image" value="{{ $userData['image'] }}"/>
                                 </div>
                             </div>
@@ -130,11 +130,12 @@
                         </div>
                         <div class="form-group">
                             <label for="">Email</label>
-                            <input type="email" class="form-control"   name="email"   value="{{ $userData['email'] }}">
+                            <input type="email" class="form-control"   name="email"   value="{{ !empty($userData['email']) ? $userData['email'] :'' }}">
                         </div>
                         <div class="form-group mb-0 d-flex justify-content-between">
+                            <input type="hidden" name="user_id" value="{{!empty($userData['id']) ? $userData['id']  : ''}}">
                             <button type="button" class="cmn-btn" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="cmn-btn">Save changes</button>
+                            <button type="submit" class="cmn-btn">Save changes</button>
                         </div>
                     </form>
                 </div>

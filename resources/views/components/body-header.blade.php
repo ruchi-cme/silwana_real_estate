@@ -29,9 +29,11 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('propertyList') }}">Property on Sale</a>
                                     </li>
+                                    @if (Auth::guard('front')->check())
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('myBooking') }}">My Booking</a>
                                     </li>
+                                    @endif
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('contactUs') }}">Contact us</a>
                                     </li>
@@ -74,7 +76,6 @@
                                                 <ul>
                                                     <li><a class="dropdown-item" href="{{ route('myProfile') }}">My Profile</a></li>
                                                     <li><a class="dropdown-item" href="{{ route('myBooking') }}">My Booking</a></li>
-                                                    <li><a class="dropdown-item" href="{{ route('myBooking') }}">Edit Profile</a></li>
                                                     <li>
                                                         <form method="POST" id="logout_form" action={{ route('home/logout') }}>
                                                             @csrf

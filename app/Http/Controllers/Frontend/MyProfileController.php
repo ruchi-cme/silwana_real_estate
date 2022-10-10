@@ -12,20 +12,24 @@ class MyProfileController extends Controller
 
             $image = asset('images/front').'/noProfile.jpeg' ;
             if(Auth::guard('front')->user()->image)
-             $image = asset('images/user') . Auth::guard('front')->user()->image;
+             $image = asset('images/user').'/' . Auth::guard('front')->user()->image;
 
-        $userData = ['name' => Auth::guard('front')->user()->name,
-                'email' => Auth::guard('front')->user()->email,
-                'phone' => Auth::guard('front')->user()->phone,
-                'image' => $image];
+        $userData = ['id'   => Auth::guard('front')->user()->id,
+                'name'      => Auth::guard('front')->user()->name,
+                'email'     => Auth::guard('front')->user()->email,
+                'phone'     => Auth::guard('front')->user()->phone,
+                'imageSrc'  => $image,
+                'image'     => Auth::guard('front')->user()->image ];
         return view('front.myProfile',compact('userData') );
     }
 
-    public function update() {
+    public function update(Request $request) {
         $user = User::find($request->user_id);
 
         $image = $request->file('image');
-        $editImage = $request->edit_image;
+          $editImage = $request->edit_image;
+
+
         if (!empty($image) ) {
 
             $destinationPath = 'images/user';
@@ -43,14 +47,27 @@ class MyProfileController extends Controller
             $Image = null;
         }
 
-        $user->image = $Image;
+
         $user->firstname = $request->first_name;
-        $user->lastname = $request->last_name;
-        $user->name = $request->first_name. ' '.$request->last_name;
-        $user->phone = $request->phone;
+        $user->lastname  = $request->last_name;
+        $user->name      = $request->first_name. ' '.$request->last_name;
+        $user->email     = $request->email;
+        $user->phone     = $request->phone;
+        $user->image     = $Image;
         $user->save();
 
-        // return redirect()->back()->with('success','User Updated Successsfully`');
-        return view('admin.user.profile',compact('user', 'editUser'));
+        $imageSrc = asset('images/front').'/noProfile.jpeg' ;
+        if( !empty($Image))
+            $imageSrc = asset('images/user') .'/'.$Image;
+
+        $userData = ['name' =>  $user->name,
+            'email' => $user->email ,
+            'phone' =>   $user->phone,
+            'image' => $image ,
+            'imageSrc'  => $imageSrc
+        ];
+
+        return view('front.myProfile',compact('userData') );
+
     }
 }
