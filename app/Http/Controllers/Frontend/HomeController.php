@@ -31,7 +31,7 @@ class HomeController extends Controller
             return view('front.home' );
         }
         else{
-            return redirect('jquery-validation','home');
+           
             return view('front.home' );
         }
 
