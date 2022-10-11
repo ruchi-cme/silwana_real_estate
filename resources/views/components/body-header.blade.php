@@ -1,5 +1,4 @@
-<meta name="csrf-token" content="{{ csrf_token() }}" />
-    <header id="navigation_bar">
+     <header id="navigation_bar">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 header-top">

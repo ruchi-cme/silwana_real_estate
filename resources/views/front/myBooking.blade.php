@@ -3,9 +3,13 @@
 
 @if (!empty($myBooking))
     <section class="portfolio-list my-booking">
-    <div class="container">
+        @include('layouts.alerts.error')
+        @include('layouts.alerts.alert')
+
+        <div class="container">
         <div class="row">
             <div class="col-lg-12">
+
                 @foreach ($myBooking as $row)
 
                     <div class="project-feature-wrap">
@@ -19,7 +23,7 @@
                                                 $path = $img['path'].'/'.$img['title'];
                                             @endphp
                                         @endforeach
-                                    <img src="{{ asset($path) }}" alt="">
+                                    <img src="{{ !empty($path) ?  asset($path) : '' }}" alt="">
                                     @endif
                                 </div>
                             </div>
@@ -43,8 +47,13 @@
                                         </div>
                                     </div>
                                     <h3>{{ $row['total_price'] }}</h3>
-                                    <a href="#"  class="cmn-btn" onclick="cancel()">CANCEL BOOKING</a>
-                                    <a href="#" class="cmn-btn ms-xl-3">VIEW MORE</a>
+                                    <meta name="csrf-token" content="{{ csrf_token() }}">
+                                    @if($row['canceled'] == 1)
+                                        <a   class="cmn-btn btn-2" >CANCELLED  </a>
+                                    @else
+                                        <a href="javascript:void(0)" id="cncl_{{ encrypt($row['booking_id']) }}" booking_id="{{ encrypt($row['booking_id']) }}" class="cmn-btn cancelBooking" >CANCEL BOOKING</a>
+                                     @endif
+                                    <a href="{{ URL('/propertydetail/'.encrypt($row['proj_floor_unit_id'] )) }}" class="cmn-btn ms-xl-3">VIEW MORE</a>
                                 </div>
                             </div>
                         </div>
@@ -57,11 +66,7 @@
 </section>
 @endif
     @section('scripts')
-        <script type="text/javascript">
-            function cancel(){
-                alert(10);
-            }
-        </script>
+        <script   src="{{ asset('js/front/custom/myBooking') }}/myBooking.js"> </script>
     @endsection
 
 </x-base>

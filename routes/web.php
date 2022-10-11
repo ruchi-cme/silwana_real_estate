@@ -15,9 +15,15 @@ Route::name('home/logout')->post('/home/logout', 'App\Http\Controllers\Frontend\
 Route::name('about')->get('/about', 'App\Http\Controllers\Frontend\AboutController@index');
 Route::name('ourProject')->get('/ourProject', 'App\Http\Controllers\Frontend\OurProjectController@index');
 Route::name('propertyList')->get('/propertyList', 'App\Http\Controllers\Frontend\PropertyListController@index');
-Route::name('propertydetail')->get('/propertydetail', 'App\Http\Controllers\Frontend\PropertyListController@propertydetail');
+Route::name('propertydetail/{id}')->get('/propertydetail/{id}', 'App\Http\Controllers\Frontend\PropertyListController@propertydetail');
+
+Route::name('booking/{id}')->get('/booking/{id}', 'App\Http\Controllers\Frontend\BookingController@index');
+Route::name('booking/store')->post('/booking/store', 'App\Http\Controllers\Frontend\BookingController@store');
+
 
 Route::name('myBooking')->get('/myBooking', 'App\Http\Controllers\Frontend\MyBookingController@index');
+Route::name('booking/cancel')->post('/booking/cancel', 'App\Http\Controllers\Frontend\BookingController@cancelBooking');
+
 Route::name('contactUs')->get('/contact', 'App\Http\Controllers\Frontend\ContactUsController@index');
 Route::name('myProfile')->get('/myProfile', 'App\Http\Controllers\Frontend\MyProfileController@index');
 Route::name('myProfile/update')->post('/myProfile/update', 'App\Http\Controllers\Frontend\MyProfileController@update');

@@ -687,3 +687,99 @@ form label {
 .my-booking.my-profile-wrap  .our-amenities-plan.img4 {
     bottom: 340px;
 }
+
+
+.search-property {
+    margin: -70px 0 50px;
+    position: relative;
+    z-index: 5;
+}
+
+.search-property form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.search-property h2 {
+    font-family: var(--regular);
+    font-size: 24px;
+    color: #0C1111;
+    margin-bottom: 25px;
+}
+
+.search-property form select {
+    width: 100%;
+}
+
+.search-property form .form-group {
+    width: 30%;
+}
+
+.search-property form .form-group:last-child {
+    width: auto;
+}
+
+.search-property form .form-group:last-child::after {
+    display: none;
+}
+
+.search-property form .form-group select {
+    color: var(--primary-color);
+    font-family: var(--regular);
+}
+
+.search-property form .form-group .search-btn img {
+    filter:  brightness(0) invert(1);
+}
+
+.search-property form .form-group .search-btn:hover img {
+    filter: none;
+}
+
+.search-property form .form-group::after {
+    content: '';
+    width: 15px;
+    height: 15px;
+    background: url('../images/down-arrow.svg') center center no-repeat;
+    background-size: contain;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+responsive css
+*/
+
+
+@media only screen and (max-width: 992px) {
+    .search-property form .form-group {
+        width: 49%;
+        margin-bottom: 10px !important;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .search-property form .form-group {
+        width: 100%;
+    }
+}
+

@@ -12,7 +12,7 @@
                     <div class="property-sale-wrap">
                         <div class="property-sale-img-wrap">
                             @php    $img =   getPropertyImage($row['proj_floor_unit_id'],'single');  @endphp
-                            <a href="{{ route('propertydetail') }}">
+                            <a href="{{ URL('/propertydetail/'.encrypt($row['proj_floor_unit_id'] ))  }}">
                                 <img src=" {{  asset('images/unit/').'/'.$img['title']  }}" alt="decore">
                             </a>
                         </div>

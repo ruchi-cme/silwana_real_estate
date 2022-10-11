@@ -24,4 +24,13 @@ return [
         'aboutus_vision'    => 'About Us Vision',
 
     ],
+    'booking_type' => [
+        '1' => 'Cash',
+        '2' => 'Onsite'
+    ],
+    'payment_type' => [
+        '1' => 'Cash',
+        '2' => 'Card',
+        '3' => 'Online'
+    ],
 ];

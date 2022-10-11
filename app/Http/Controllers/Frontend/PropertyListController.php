@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+
 class PropertyListController extends Controller
 {
 
@@ -15,9 +16,13 @@ class PropertyListController extends Controller
     }
 
 
-    public function propertydetail(Request $request)
+    public function propertyDetail(Request $request)
     {
-        $projectList    = getProjectList();
-        return view('front.propertyDetail',compact('projectList' ));
+        $id            =  decrypt($request->route('id'));
+        $propertyDetail=  getPropertyList($id);
+        $propertyImage =  getPropertyImage($id);
+        return view('front.propertyDetail',compact('propertyDetail', 'propertyImage' ));
     }
+
+
 }

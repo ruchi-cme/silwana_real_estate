@@ -1,21 +1,45 @@
 <x-base>
     <x-banner title="Property Details" page="Property Details"></x-banner>
-
     <!-- property-detail-main -->
     <section class="property-detail-main mt-0">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="search-property">
+                        <h2>Search Property</h2>
+                        <form action="">
+                            <div class="form-group mb-0 position-relative">
+                                <select name="" id="" class="form-control">
+                                    <option value="">Select Block</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-0 position-relative">
+                                <select name="" id="" class="form-control">
+                                    <option value="">Select Floor</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-0 position-relative">
+                                <select name="" id="" class="form-control">
+                                    <option value="">Select Unit</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-0">
+                                <button type="" class="cmn-btn search-btn"><img src="./assets/images/search.svg" alt="search" /></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                @if(!empty($propertyImage))
+                    @foreach($propertyImage as $row)
+                        <div class="col-xl-4">
+                            <div class="property-detail-main-wrap">
+                                <img src="{{ asset('images/unit').'/'.$row['title'] }}" alt="">
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
 
-                    </div>
-                </div>
-                <div class="col-xl-4">
-                    <div class="property-detail-main-wrap">
-                        <img src="./assets/images/property-detail/image1.png" alt="">
-                    </div>
-                </div>
-                <div class="col-xl-4">
+              <!--  <div class="col-xl-4">
                     <div class="property-detail-main-wrap">
                         <img src="./assets/images/property-detail/image2.png" alt="">
                     </div>
@@ -42,7 +66,7 @@
                     <div class="property-detail-main-wrap-small">
                         <img src="./assets/images/property-detail/image1.png" alt="">
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -52,10 +76,11 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="title">
-                        <span class="btn btn-2">Apartment</span>
-                        <h2>Diamond Manor Apartment</h2>
-                        <h5><img src="./assets/images/location.svg" class="location-image" alt="location" /> 5137 Compton Ave, Los Angeles</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore Lorem ipsum dolor sit amet.</p>
+                        <span class="btn btn-2">{{ $propertyDetail['category_name'] }}</span>
+                        <h2>{{ $propertyDetail['project_name'] }}</h2>
+                        @php $address = getProjectAddress($propertyDetail['project_id'])  @endphp
+                        <h5><img src="./assets/images/location.svg" class="location-image" alt="location" />  {{ $address['address'] }}</h5>
+                        <p> {{ $propertyDetail['project_detail'] }} </p>
                     </div>
 
                     <div>
@@ -67,15 +92,15 @@
                                         <ul>
                                             <li>
                                                 <p>Property ID</p>
-                                                <span>SRED369</span>
+                                                <span>{{ $propertyDetail['unit_name'] }}</span>
                                             </li>
                                             <li>
                                                 <p>Home Area</p>
-                                                <span>120 sqft</span>
+                                                <span>{{ $propertyDetail['area_in_sq_feet'] }} sqft</span>
                                             </li>
                                             <li>
                                                 <p>Room</p>
-                                                <span>7 Rooms</span>
+                                                <span>  {{ $propertyDetail['rooms'] }}  Rooms</span>
                                             </li>
                                             <li>
                                                 <p>Baths</p>
@@ -105,11 +130,11 @@
                                             </li>
                                             <li>
                                                 <p>Price</p>
-                                                <span>AMD 12,500,000</span>
+                                                <span>AMD {{ $propertyDetail['total_price'] }}  </span>
                                             </li>
                                             <li>
                                                 <p>Property Type</p>
-                                                <span>Apartment</span>
+                                                <span>{{ $propertyDetail['category_name'] }}</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -385,15 +410,15 @@
                         <ul>
                             <h4>Property Price</h4>
                             <li>
-                                <h6>AED 12,500,000 <span>(AMD 2500 / sq.ft)</span> </h6>
+                                <h6>AED {{ $propertyDetail['total_price'] }} <span>(AMD 2500 / sq.ft)</span> </h6>
 
                             </li>
                             <li class="booking-price">
                                 <h6>Booking Price</h6>
-                                <span>AMD 35,00,000</span>
+                                <span>AMD {{ $propertyDetail['booking_price'] }}</span>
                             </li>
                             <li>
-                                <a href="#" class="cmn-btn">BOOK NOW</a>
+                                <a href="javascript:void(0)"  unit_id="{{ encrypt($propertyDetail['proj_floor_unit_id']) }}"  user_id="{{ Auth::guard('front')->check() ? Auth::guard('front')->user()->id : '' }}" class="cmn-btn book_now">BOOK NOW</a>
                             </li>
                         </ul>
                     </div>
@@ -503,5 +528,46 @@
             </div>
         </div>
     </section>
+    @section('scripts')
+        <script type="text/javascript">
 
+
+            $(".book_now").click(function(){
+              var user_id =  $(this).attr('user_id');
+              var unit_id =  $(this).attr('unit_id');
+
+              if(user_id != '')
+              {
+                  var route = "{{ URL('/booking/' )   }}";
+                  var url = route+'/'+ unit_id ;
+                  window.location.href = url;
+
+                  /*    $.ajaxSetup({
+                         headers: {
+                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                         }
+                     });
+              $.ajax({
+                       url: " ",
+                       type: "Post",
+                       data: {
+                           user_id : user_id, unit_id : unit_id
+                       },
+                       dataType: 'json',
+                       success: function (result) {
+
+                       }
+                   }); */
+
+              }else{
+                  //if not logged in
+                  $(this).attr('data-bs-toggle', 'modal');
+                  $(this).attr('data-bs-target', '#login-modal');
+              }
+
+            });
+
+        </script>
+    @endsection
 </x-base>
+
