@@ -186,7 +186,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="file" class="form-control form-control-solid" multiple name="project_image[]" id="project_image" >
+                                    <input type="file" name="project_image[]" id="project_image" >
 
                                     <div class="col-xl-9 fv-row fv-plugins-icon-container images-preview-div">
 
