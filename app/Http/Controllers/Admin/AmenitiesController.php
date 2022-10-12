@@ -116,7 +116,8 @@ class AmenitiesController extends Controller
         $editAmenityImage = $request->edit_amenity_image;
         if (!empty($image) ) {
 
-            $destinationPath = 'images/amenities';
+            $destinationPath = public_path('images/amenities');
+
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
             if (!empty($editAmenityImage)) {

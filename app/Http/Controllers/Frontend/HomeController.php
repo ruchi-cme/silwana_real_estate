@@ -47,7 +47,7 @@ class HomeController extends Controller
             return back()->withErrors($validator)->withInput();
         } else {
             // attempt to log
-            if (Auth::guard('front')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+            if (Auth::guard('front')->attempt(['email' => $request->email, 'password' =>  $request->password], $request->get('remember'))) {
                 // if successful -> redirect forward
                 return redirect()->intended(route('home'));
             }
@@ -87,26 +87,43 @@ class HomeController extends Controller
             'password' => 'required|min:6'
         ]);
 
-          User::create([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        //Error messages
+        $messages = [
+            "email.required" => "Email is required",
+            "email.email" => "Email is not valid",
+            "email.exists" => "Email doesn't exists",
+            "password.required" => "Password is required",
+            "password.min" => "Password must be at least 6 characters"
+        ];
+        // validate the form data
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|email|exists:users,email',
+            'phone' => 'required|min:9',
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|min:6'
+        ], $messages);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        } else{
+
+            User::create([
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+            return redirect()->intended(route('home'));
+        }
 
         return view('front.home' );
+
+
     }
 
     public function submitInquiry(Request $request)
     {
-        /*$validator = Validator::make($request->all(), [ // <---
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'phone_no' => 'required',
-            'email_id' => 'required',
-            'message' => 'required',
-        ]);
-        */
+
         $request->validate([
             'first_name'   => 'required',
             'last_name'    => 'required',
@@ -114,7 +131,6 @@ class HomeController extends Controller
             'phone_no'     => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'message'      => 'required',
         ]);
-
 
         $insertData = [
 

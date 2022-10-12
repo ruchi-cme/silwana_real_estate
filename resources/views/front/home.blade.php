@@ -34,7 +34,7 @@
                                 <span class="text-danger" id="phoneNoErrorMsg"></span>
                             </div>
                             <div class="form-group">
-                                <textarea name="message" id="message" cols="15" rows="3" class="form-control inquiryText">Message</textarea>
+                                <textarea name="message" id="message" cols="15" rows="3" class="form-control inquiryText"></textarea>
                                 <span class="text-danger" id="messageErrorMsg"></span>
                             </div>
                             <div class="form-group mb-0">

@@ -15,7 +15,9 @@ class MyProfileController extends Controller
              $image = asset('images/user').'/' . Auth::guard('front')->user()->image;
 
         $userData = ['id'   => Auth::guard('front')->user()->id,
-                'name'      => Auth::guard('front')->user()->name,
+                 'name'      => Auth::guard('front')->user()->name,
+                'firstname'      => Auth::guard('front')->user()->firstname,
+                'lastname'      => Auth::guard('front')->user()->lastname,
                 'email'     => Auth::guard('front')->user()->email,
                 'phone'     => Auth::guard('front')->user()->phone,
                 'imageSrc'  => $image,
@@ -48,9 +50,9 @@ class MyProfileController extends Controller
         }
 
 
-        $user->firstname = $request->first_name;
-        $user->lastname  = $request->last_name;
-        $user->name      = $request->first_name. ' '.$request->last_name;
+        $user->firstname = $request->firstname;
+        $user->lastname  = $request->lastname;
+        $user->name      = $request->firstname. ' '.$request->lastname;
         $user->email     = $request->email;
         $user->phone     = $request->phone;
         $user->image     = $Image;
@@ -66,8 +68,8 @@ class MyProfileController extends Controller
             'image' => $image ,
             'imageSrc'  => $imageSrc
         ];
+        return redirect('myProfile');
 
-        return view('front.myProfile',compact('userData') );
 
     }
 }

@@ -139,7 +139,7 @@
                             </div>
                         </div>
                         <div class="col-lg-5">
-                            <form action="{{ route('home/signup') }}" class="sign-up-form" method="post">
+                            <form   class="sign-up-form" method="post">
                                 @csrf
                                 <div>
                                     <h2>Sign up</h2>
@@ -149,27 +149,30 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Name" name="name" class="form-control">
+                                            <input type="text" placeholder="Name" name="name" id="name" class="form-control">
+                                            <span class="alert text-danger  mt-1 mb-1" id="signupname" ></span>
                                          </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Mobile Number" name="phone" class="form-control">
-
+                                            <input type="text" placeholder="Mobile Number"  id="phone" name="phone" class="form-control">
+                                            <span class="alert text-danger  mt-1 mb-1" id="signupphone" ></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <input type="text" placeholder="Email" name="email" class="form-control">
+                                            <input type="text" placeholder="Email" name="email" id="semail" class="form-control">
+                                            <span class="alert text-danger  mt-1 mb-1" id="signupemail" ></span>
                                          </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <input type="password" placeholder="Password" name="password" class="form-control">
+                                            <input type="password" placeholder="Password"  id="spassword"  name="password" class="form-control">
+                                            <span class="alert text-danger  mt-1 mb-1" id="signuppass" ></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-left">
-                                        <button class="cmn-btn w-100 signup">SIGN UP</button>
+                                        <button type="submit" class="cmn-btn w-100 signup btn-signup">SIGN UP</button>
                                     </div>
                                     <div class="col-lg-12 text-center already-acc">
                                         <p class="m-0">Have you already account? <button type="button"  data-bs-toggle="modal" data-bs-target="#login-modal">Login</button> </p>
@@ -196,22 +199,24 @@
                             </div>
                         </div>
                         <div class="col-lg-5">
-                            <form method="post" class="sign-up-form" action="{{ route('home/login') }}">
+                            <form method="post"  id="loginForm"  class="sign-up-form"  >
                               @csrf
                                <div>
                                     <h2>login</h2>
                                     <p>Please Sign In and explore your dream house from silwana real estate.</p>
-                                   @include('layouts.alerts.error')
+
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <input type="text" name="email" id="email" placeholder="Email" class="form-control">
-                                         </div>
+                                              <span class="alert text-danger  mt-1 mb-1" id="loginemail" ></span>
+                                        </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <input type="password" name="password" id="password" placeholder="Password" class="form-control">
+                                            <span class="alert text-danger  mt-1 mb-1" id="loginpassword" ></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-left">

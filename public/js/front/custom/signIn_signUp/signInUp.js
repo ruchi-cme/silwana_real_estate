@@ -6,7 +6,7 @@ $(document).ready(function() {
         }
     });*/
 
-    $(".btn-login1").click(function(e){
+    $(".btn-login").click(function(e){
 
         e.preventDefault();
 
@@ -18,29 +18,87 @@ $(document).ready(function() {
 
             type:'POST',
 
-            url:"  home/login ",
+            url:" /home/login ",
 
             data:{email:email, password:password},
 
             success:function(result){
-                console.log(result.errors);
-                if(result.errors)
-                {
+                  window.location.reload();
+            }  ,
+            error: function(response) {
+                $('#loginemail').hide();  $('#loginemail').hide();
+                if(response.responseJSON.errors.email != ''){
 
-
-                    jQuery.each(result.errors, function(key, value){ alert(value);
-                        jQuery('.alert-danger').show();
-                        jQuery('.alert-danger').append('<li>'+value+'</li>');
-                    });
+                    $('#loginemail').text(response.responseJSON.errors.email);
+                    $('#loginemail').show();
                 }
-                else
-                {
-                    jQuery('.alert-danger').hide();
-                    $('#open').hide();
-                    $('#login-modal').modal('hide');
+                if(response.responseJSON.errors.password != ''){
+
+                    $('#loginpassword').text(response.responseJSON.errors.password);
+                    $('#loginpassword').show();
                 }
 
-            }
+            },
+
+
+
+        });
+
+    });
+
+    $(".btn-signup").click(function(e){
+
+        e.preventDefault();
+
+        var email = $("#semail").val();
+        var password = $("#spassword").val();
+        var name = $("#name").val();
+        var phone = $("#phone").val();
+
+        $.ajax({
+
+            type:'POST',
+
+            url:"/home/signup",
+
+            data:{email:email, password:password, name:name, phone:phone},
+
+            success:function(result){
+                window.location.reload();
+            }  ,
+            error: function(response) {
+
+                $('#signupname').hide();  $('#signupphone').hide();
+                $('#signupemail').hide();  $('#signuppass').hide();
+
+                if(response.responseJSON.errors.name != ''){
+
+                    $('#signupname').text(response.responseJSON.errors.name);
+                    $('#signupname').show();
+                }
+
+                if(response.responseJSON.errors.phone != ''){
+
+                    $('#signupphone').text(response.responseJSON.errors.phone);
+                    $('#signupphone').show();
+                }
+
+
+                if(response.responseJSON.errors.email != ''){
+
+                    $('#signupemail').text(response.responseJSON.errors.email);
+                    $('#signupemail').show();
+                }
+                if(response.responseJSON.errors.password != ''){
+
+                    $('#signuppass').text(response.responseJSON.errors.password);
+                    $('#signuppass').show();
+                }
+
+            },
+
+
+
         });
 
     });

@@ -41,7 +41,7 @@
         </div>
     </section>
 
-    <section class="portfolio-list my-booking my-profile-wrap">
+  <!--  <section class="portfolio-list my-booking my-profile-wrap">
         <div class="container position-relative">
             <img src="./assets/images/home/plan3.svg" class="our-amenities-plan img3" alt="">
             <img src="./assets/images/home/plan4.svg" class="our-amenities-plan img4" alt="">
@@ -91,7 +91,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
 </x-base>
 <!-- Modal -->
@@ -106,7 +106,7 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <form action="{{route('myProfile/update')}}" method="post" class="edit-profile-form" enctype="multipart/form-data">
+                    <form onsubmit="validationForm()" action="{{route('myProfile/update')}}" method="post" class="edit-profile-form" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="edit-profile-circle">
@@ -120,13 +120,18 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label for="">Full Name</label>
-                            <input type="text" class="form-control" name="name" value="{{ $userData['name'] }}">
+                            <label for="">First Name</label>
+                            <input type="text" class="form-control" name="firstname" value="{{ !empty($userData['firstname'])? $userData['firstname'] : '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Last Name</label>
+                            <input type="text" class="form-control" name="lastname" value="{{ !empty($userData['lastname'])? $userData['lastname'] : '' }}">
                         </div>
                         <div class="form-group">
                             <label for="">Mobile Number</label>
-                            <input type="text" class="form-control"  name="phone"  value="{{ $userData['phone'] }}">
+                            <input type="text" class="form-control"  name="phone"  value="{{  !empty($userData['phone'])? $userData['phone'] :'' }}">
                         </div>
                         <div class="form-group">
                             <label for="">Email</label>
@@ -143,3 +148,4 @@
         </div>
     </div>
 </div>
+ 
