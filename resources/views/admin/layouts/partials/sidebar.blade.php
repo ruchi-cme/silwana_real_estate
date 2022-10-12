@@ -168,7 +168,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                    <span class="menu-title">contactus</span>
+                                    <span class="menu-title">Contact Us</span>
                                 </a>
                             </div>
                         @endcan

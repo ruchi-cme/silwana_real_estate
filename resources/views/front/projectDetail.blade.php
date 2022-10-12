@@ -1,28 +1,47 @@
 <x-base>
     <x-banner title="Project Details" page="Project Details"></x-banner>
-
+    @if ($projectList)
     <!-- property-detail-main -->
     <section class="property-detail-main portfolio-detail-main">
         <div class="container">
             <div class="row">
-                <div class="col-xl-8">
-                    <div class="property-detail-main-wrap-big video-wrapper">
-                        <button id="play-button" class="play-btn" type="button"><img src="./assets/images/home/play-btn.svg" alt="play-btn"></button>
-                        <button class="pause-btn" id="pause-button" type="button"><img src="./assets/images/home/pause-btn.svg" alt=""></button>
-                        <video id="videotest" loop>
-                            <source src="https://assets.mixkit.co/videos/preview/mixkit-flying-through-the-clouds-with-the-radiant-sun-14171-large.mp4" type="video/mp4">
-                            <source src="movie.ogg" type="video/ogg">
-                        </video>
-                    </div>
-                </div>
-                <div class="col-xl-4 d-flex flex-column">
-                    <div class="property-detail-main-wrap-small">
-                        <img src="./assets/images/property-detail/image1.png" alt="">
-                    </div>
-                    <div class="property-detail-main-wrap-small">
-                        <img src="./assets/images/property-detail/image1.png" alt="">
-                    </div>
-                </div>
+                @php $proImg =  getProjectImage($projectList['project_id']) ;  @endphp
+                @if(!empty($proImg))
+                    @for($i=0; count($proImg) > $i; $i++)
+                        @switch( $i)
+                            @case(0)
+                                <div class="col-xl-8">
+                                    <div class="property-detail-main-wrap-big video-wrapper">
+                                        <img src="./assets/images/property-detail/image1.png" alt="">
+                                    </div>
+                                </div>
+
+                                @break
+                        <div class="col-xl-4 d-flex flex-column">
+                            @case(1)
+                                <div class="property-detail-main-wrap-small">
+                                    <img src="./assets/images/property-detail/image1.png" alt="">
+                                </div>
+                                @break
+                            @case(2)
+                               <div class="property-detail-main-wrap-small">
+                                    <img src="./assets/images/property-detail/image1.png" alt="">
+                                </div>
+                                @break
+                        </div>
+                            @default
+                                <span>Something went wrong, please try again</span>
+                        @endswitch
+
+
+                    @endfor
+                @endif
+
+
+
+
+
+
             </div>
         </div>
     </section>
@@ -401,5 +420,5 @@
             </div>
         </div>
     </section>
-
+    @endif
 </x-base>

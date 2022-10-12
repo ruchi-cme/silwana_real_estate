@@ -16,7 +16,8 @@ class OurProjectController extends Controller
     public function projectDetail(Request $request)
     {
         $project_id  =  decrypt($request->route('id'));
-        $projectList    = getProjectList($project_id);
+        $projectList = getProjectList($project_id);
+
         return view('front.projectDetail',compact('projectList' ));
     }
 }
