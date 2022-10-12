@@ -43,7 +43,7 @@
                     @endforeach
                 @endif
 
-                <div class="col-lg-12">
+             <!--   <div class="col-lg-12">
                     <nav aria-label="...">
                         <ul class="pagination justify-content-center">
                           <li class="page-item disabled">
@@ -62,7 +62,7 @@
                           </li>
                         </ul>
                       </nav>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
