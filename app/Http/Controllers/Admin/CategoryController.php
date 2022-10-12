@@ -85,7 +85,13 @@ class CategoryController extends Controller
 
             $destinationPath = 'images/category';
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $Image);
+
+            try{
+                $image->move($destinationPath, $Image);
+            }
+            catch (Exception $e){
+                echo 'Message: ' .$e->getMessage();
+            } exit;
             if (!empty($editImage)) {
                 unlink("images/category/" . $editImage);
             }
