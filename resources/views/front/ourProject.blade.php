@@ -21,7 +21,7 @@
                                         <h2>{{  $firstIndex['project_name'] }}</h2>
                                         <h6> <img src="./assets/images/location.svg" alt="" /> 5137 Compton Ave, Los Angeles</h6>
                                         <p>  {{ $firstIndex['project_detail'] }}</p>
-                                        <a href="" class="cmn-btn">DOWNLOAD BROCHURE</a>
+                                        <a href="{{ route('projectDetail/'.encrypt($firstIndex['project_id'])) }}" class="cmn-btn">View Details</a>
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                     <div class="news-media-text">
                                         <h4>{{ $projectList[$i]['project_name'] }}</h4>
                                         <p> {{ $projectList[$i]['project_detail'] }} </p>
-                                        <a href="#" class="cmn-btn">VIEW DETAILS</a>
+                                        <a href="{{ route('projectDetail'.encrypt($firstIndex['project_id'])) }}" class="cmn-btn">VIEW DETAILS</a>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                                     <div class="news-media-text">
                                         <h4>{{ $projectList[$i]['project_name'] }}</h4>
                                         <p> {{ $projectList[$i]['project_detail'] }} </p>
-                                        <a href="{{ route('home') }}" class="cmn-btn">VIEW DETAILS</a>
+                                        <a href="{{ route('projectDetail'.encrypt($firstIndex['project_id'])) }}" class="cmn-btn">VIEW DETAILS</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,52 +1,28 @@
 <x-base>
-    <x-banner title="Property Details" page="Property Details"></x-banner>
+    <x-banner title="Project Details" page="Project Details"></x-banner>
+
     <!-- property-detail-main -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <section class="property-detail-main mt-0">
+    <section class="property-detail-main portfolio-detail-main">
         <div class="container">
             <div class="row">
-                <div class="col-xl-12">
-                    <div class="search-property">
-                        <h2>Search Property</h2>
-                        <form action="">
-                            @csrf
-                            <div class="form-group mb-0 position-relative">
-                                <select name="block_name" id="block_name" class="form-control">
-                                    <option value="">Select Block</option>
-                                    @if(!empty($blockData))
-
-                                        @foreach($blockData as $row)
-                                            <option value="{{ $row['proj_block_map_id'] }}" >{{ $row['block_name'] }} </option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                            <div class="form-group mb-0 position-relative">
-                                <select name="floor" id="floor" class="form-control">
-                                    <option value="">Select Floor</option>
-
-                                </select>
-                            </div>
-                            <div class="form-group mb-0 position-relative">
-                                <select name="unit" id="unit" class="form-control">
-                                    <option value="">Select Unit</option>
-                                </select>
-                            </div>
-                            <div class="form-group mb-0">
-                                <button type="" class="cmn-btn search-btn"><img src="./assets/images/search.svg" alt="search" /></button>
-                            </div>
-                        </form>
+                <div class="col-xl-8">
+                    <div class="property-detail-main-wrap-big video-wrapper">
+                        <button id="play-button" class="play-btn" type="button"><img src="./assets/images/home/play-btn.svg" alt="play-btn"></button>
+                        <button class="pause-btn" id="pause-button" type="button"><img src="./assets/images/home/pause-btn.svg" alt=""></button>
+                        <video id="videotest" loop>
+                            <source src="https://assets.mixkit.co/videos/preview/mixkit-flying-through-the-clouds-with-the-radiant-sun-14171-large.mp4" type="video/mp4">
+                            <source src="movie.ogg" type="video/ogg">
+                        </video>
                     </div>
                 </div>
-                @if(!empty($propertyImage))
-                    @foreach($propertyImage as $row)
-                        <div class="col-xl-4">
-                            <div class="property-detail-main-wrap">
-                                <img src="{{ asset('images/unit').'/'.$row['title'] }}" alt="">
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
+                <div class="col-xl-4 d-flex flex-column">
+                    <div class="property-detail-main-wrap-small">
+                        <img src="./assets/images/property-detail/image1.png" alt="">
+                    </div>
+                    <div class="property-detail-main-wrap-small">
+                        <img src="./assets/images/property-detail/image1.png" alt="">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -54,79 +30,22 @@
     <section class="apartment-details">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-xl-8">
                     <div class="title">
-                        <span class="btn btn-2">{{ $propertyDetail['category_name'] }}</span>
-                        <h2>{{ $propertyDetail['project_name'] }}</h2>
-                        @php $address = getProjectAddress($propertyDetail['project_id'])  @endphp
-                        <h5><img src="./assets/images/location.svg" class="location-image" alt="location" />  {{ $address['address'] }}</h5>
-                        <p> {{ $propertyDetail['project_detail'] }} </p>
+                        <span class="btn btn-2">Apartment</span>
+                        <h2>Diamond Manor Apartment</h2>
+                        <h5><img src="./assets/images/location.svg" class="location-image" alt="location" />5137 Compton Ave, Los Angeles</h5>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                            Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                            Lorem ipsum dolor sit amet.
+                        </p>
                     </div>
-
-                    <div>
-                        <h4>Property Detail</h4>
-                        <div class="property-detail-list-wrap">
-                            <div class="row">
-                                <div class="col-lg-5">
-                                    <div class="property-detail-list-inner">
-                                        <ul>
-                                            <li>
-                                                <p>Property ID</p>
-                                                <span>{{ $propertyDetail['unit_name'] }}</span>
-                                            </li>
-                                            <li>
-                                                <p>Home Area</p>
-                                                <span>{{ $propertyDetail['area_in_sq_feet'] }} sqft</span>
-                                            </li>
-                                            <li>
-                                                <p>Room</p>
-                                                <span>  {{ $propertyDetail['rooms'] }}  Rooms</span>
-                                            </li>
-                                            <li>
-                                                <p>Baths</p>
-                                                <span>2 Baths</span>
-                                            </li>
-                                            <li>
-                                                <p>Year Built</p>
-                                                <span>2022</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-lg-5">
-                                    <div class="property-detail-list-inner">
-                                        <ul>
-                                            <li>
-                                                <p>Lot Area</p>
-                                                <span>SRED369</span>
-                                            </li>
-                                            <li>
-                                                <p>Lot Dimensions</p>
-                                                <span>120 sqft</span>
-                                            </li>
-                                            <li>
-                                                <p>Beds</p>
-                                                <span>5 Beds</span>
-                                            </li>
-                                            <li>
-                                                <p>Price</p>
-                                                <span>AMD {{ $propertyDetail['total_price'] }}  </span>
-                                            </li>
-                                            <li>
-                                                <p>Property Type</p>
-                                                <span>{{ $propertyDetail['category_name'] }}</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="fact-features">
                         <div class="row">
                             <h4>Facts and Features</h4>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-md-6">
                                 <div class="fact-features-wrap">
                                     <div class="fact-features-wrap-img">
                                         <img src="./assets/images/home/ome.svg" alt="">
@@ -137,7 +56,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-md-6">
                                 <div class="fact-features-wrap">
                                     <div class="fact-features-wrap-img">
                                         <img src="./assets/images/home/ome.svg" alt="">
@@ -148,7 +67,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-md-6">
                                 <div class="fact-features-wrap">
                                     <div class="fact-features-wrap-img">
                                         <img src="./assets/images/home/ome.svg" alt="">
@@ -159,7 +78,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-md-6">
                                 <div class="fact-features-wrap">
                                     <div class="fact-features-wrap-img">
                                         <img src="./assets/images/home/ome.svg" alt="">
@@ -170,7 +89,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-md-6">
                                 <div class="fact-features-wrap">
                                     <div class="fact-features-wrap-img">
                                         <img src="./assets/images/home/ome.svg" alt="">
@@ -181,7 +100,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-md-6">
                                 <div class="fact-features-wrap">
                                     <div class="fact-features-wrap-img">
                                         <img src="./assets/images/home/ome.svg" alt="">
@@ -385,22 +304,56 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="top-categories property-price">
-                        <ul>
-                            <h4>Property Price</h4>
-                            <li>
-                                <h6>AED {{ $propertyDetail['total_price'] }} <span>(AMD 2500 / sq.ft)</span> </h6>
-
-                            </li>
-                            <li class="booking-price">
-                                <h6>Booking Price</h6>
-                                <span>AMD {{ $propertyDetail['booking_price'] }}</span>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"  unit_id="{{ encrypt($propertyDetail['proj_floor_unit_id']) }}"  user_id="{{ Auth::guard('front')->check() ? Auth::guard('front')->user()->id : '' }}" class="cmn-btn bookNow">BOOK NOW</a>
-                            </li>
-                        </ul>
+                <div class="col-xl-4">
+                    <div class="top-categories top-property p-0 read-blog-main">
+                        <h4>Read Blogs</h4>
+                        <div class="owl-carousel owl-theme read-blogs-slider">
+                            <div class="item">
+                                <div class="property-sale-wrap">
+                                    <div class="property-sale-img-wrap video-wrapper">
+                                        <button id="play-button" class="play-btn" type="button"><img src="./assets/images/home/play-btn.svg" alt="play-btn"></button>
+                                        <button class="pause-btn" id="pause-button" type="button"><img src="./assets/images/home/pause-btn.svg" alt=""></button>
+                                        <video id="videotest" loop="">
+                                            <source src="https://assets.mixkit.co/videos/preview/mixkit-flying-through-the-clouds-with-the-radiant-sun-14171-large.mp4" type="video/mp4">
+                                            <source src="movie.ogg" type="video/ogg">
+                                        </video>
+                                    </div>
+                                    <div class="property-detail-wrap p-0 position-relative">
+                                        <h3>Lorem ipsum dolor sit amet, consectetur adipisicin</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="property-sale-wrap">
+                                    <div class="property-sale-img-wrap video-wrapper">
+                                        <button id="play-button" class="play-btn" type="button"><img src="./assets/images/home/play-btn.svg" alt="play-btn"></button>
+                                        <button class="pause-btn" id="pause-button" type="button"><img src="./assets/images/home/pause-btn.svg" alt=""></button>
+                                        <video id="videotest" loop="">
+                                            <source src="https://assets.mixkit.co/videos/preview/mixkit-flying-through-the-clouds-with-the-radiant-sun-14171-large.mp4" type="video/mp4">
+                                            <source src="movie.ogg" type="video/ogg">
+                                        </video>
+                                    </div>
+                                    <div class="property-detail-wrap p-0 position-relative">
+                                        <h3>Lorem ipsum dolor sit amet, consectetur adipisicin</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="property-sale-wrap">
+                                    <div class="property-sale-img-wrap video-wrapper">
+                                        <button id="play-button" class="play-btn" type="button"><img src="./assets/images/home/play-btn.svg" alt="play-btn"></button>
+                                        <button class="pause-btn" id="pause-button" type="button"><img src="./assets/images/home/pause-btn.svg" alt=""></button>
+                                        <video id="videotest" loop="">
+                                            <source src="https://assets.mixkit.co/videos/preview/mixkit-flying-through-the-clouds-with-the-radiant-sun-14171-large.mp4" type="video/mp4">
+                                            <source src="movie.ogg" type="video/ogg">
+                                        </video>
+                                    </div>
+                                    <div class="property-detail-wrap p-0 position-relative">
+                                        <h3>Lorem ipsum dolor sit amet, consectetur adipisicin</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="top-categories top-projects">
@@ -444,73 +397,9 @@
                             </li>
                         </ul>
                     </div>
-
-                    <div class="top-categories top-property p-0">
-                        <h4>Top Properties</h4>
-                        <div class="owl-carousel owl-theme top-properties-slider">
-                            <div class="item">
-                                <div class="property-sale-wrap">
-                                    <div class="property-sale-img-wrap">
-                                        <img src="./assets/images/home/decore.png" alt="decore" />
-                                    </div>
-                                    <div class="property-detail-wrap position-relative">
-                                        <h4>AED 12,500,000</h4>
-                                        <h6>Furnished | 4 BR + Maids| Sea View</h6>
-                                        <p>5137 Compton Ave, Los Angeles</p>
-                                        <div class="top-property-details-wrap">
-                                            <div>
-                                                <img src="./assets/images/property-detail/bed.svg" alt="bed" />
-                                            </div>
-                                            <h6>3 Bedroom</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="property-sale-wrap">
-                                    <div class="property-sale-img-wrap">
-                                        <img src="./assets/images/home/decore.png" alt="decore" />
-                                    </div>
-                                    <div class="property-detail-wrap position-relative">
-                                        <h4>AED 12,500,000</h4>
-                                        <h6>Furnished | 4 BR + Maids| Sea View</h6>
-                                        <p>5137 Compton Ave, Los Angeles</p>
-                                        <div class="top-property-details-wrap">
-                                            <div>
-                                                <img src="./assets/images/property-detail/bed.svg" alt="bed" />
-                                            </div>
-                                            <h6>3 Bedroom</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="property-sale-wrap">
-                                    <div class="property-sale-img-wrap">
-                                        <img src="./assets/images/home/decore.png" alt="decore" />
-                                    </div>
-                                    <div class="property-detail-wrap position-relative">
-                                        <h4>AED 12,500,000</h4>
-                                        <h6>Furnished | 4 BR + Maids| Sea View</h6>
-                                        <p>5137 Compton Ave, Los Angeles</p>
-                                        <div class="top-property-details-wrap">
-                                            <div>
-                                                <img src="./assets/images/property-detail/bed.svg" alt="bed" />
-                                            </div>
-                                            <h6>3 Bedroom</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
-    @section('scripts')
 
-        <script   src="{{ asset('js/front/custom/myBooking') }}/myBooking.js"> </script>
-    @endsection
 </x-base>
-

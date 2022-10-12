@@ -75,7 +75,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <select class="form-select form-select-solid form-select-lg" name="block_name" id="proj_block_mapg_id" data-placeholder="Select Block" data-control="select2" >
+                                    <select required class="form-select form-select-solid form-select-lg" name="block_name" id="proj_block_mapg_id" data-placeholder="Select Block" data-control="select2" >
                                         <option ></option>
                                         {{ $BlockData = getBlock() }}
                                         @if (!empty($BlockData))
@@ -98,7 +98,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <select class="form-select form-select-solid form-select-lg" name="category_name" id="category_id" data-placeholder="Select Category" data-control="select2" >
+                                    <select required class="form-select form-select-solid form-select-lg" name="category_name" id="category_id" data-placeholder="Select Category" data-control="select2" >
                                         <option ></option>
                                         {{ $categoryData = getCategory() }}
                                         @if (!empty($categoryData))
@@ -120,7 +120,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Floor Number" autofocus name="floor_no" id="floor_no" value="{{ !empty($editData->floor_no ) ? $editData->floor_no : ''}}" >
+                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Floor Number" autofocus name="floor_no" id="floor_no" value="{{ !empty($editData->floor_no ) ? $editData->floor_no : ''}}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -134,7 +134,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Unit" autofocus name="unit_count" id="unit_count" value="{{ !empty($editData->unit_count ) ? $editData->unit_count : ''}}" >
+                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Unit" autofocus name="unit_count" id="unit_count" value="{{ !empty($editData->unit_count ) ? $editData->unit_count : ''}}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->

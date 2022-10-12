@@ -2,7 +2,7 @@
 
 use App\Models\{Amenities, Category, Project, Block, Silwana,SilwanaDetailMapping,ContactUs};
 use App\Models\{FloorUnitMapping, ProjectImage, ProjUnitImage};
-use App\Models\{Booking, Project_address_detail};
+use App\Models\{Booking, Project_address_detail,BlockFloorMapping};
 use Illuminate\Support\Facades\DB;
 
 if(!function_exists("getCategory")){
@@ -147,7 +147,7 @@ if(!function_exists("getBookingImage")) {
 
 if(!function_exists("getProjectList")) {
 
-    function getProjectList() {
+    function getProjectList($project_id='') {
 
         $select =  [ 'project_master.project_id',
             'project_master.project_name',
@@ -316,6 +316,64 @@ if(!function_exists("getTopCategories")) {
                 ->get();
         }
 
+        return $data;
+    }
+
+}
+
+if(!function_exists('getBlockFloorByUnit')) {
+
+    function getBlockFloorByUnit($unit_id)
+    {
+        $select =  [
+            'proj_block_mappings.proj_block_map_id',
+            'project_master.project_id',
+            'project_master.project_name',
+            'proj_floor_unit_mapping.unit_name',
+            'proj_block_floor_dtl.floor_no',
+            'proj_block_mappings.proj_block_map_id',
+            'proj_block_mappings.block_name'
+        ];
+
+        $data = FloorUnitMapping::leftJoin('proj_block_floor_dtl', 'proj_block_floor_dtl.proj_block_floor_id', '=', 'proj_floor_unit_mapping.proj_block_floor_id')
+            ->leftJoin('proj_block_mappings', 'proj_block_mappings.proj_block_map_id', '=', 'proj_block_floor_dtl.proj_block_mapg_id')
+            ->leftJoin('project_master', 'project_master.project_id', '=', 'proj_block_mappings.project_id')
+            ->select($select)
+            //    ->orderBy('proj_floor_unit_mapping.proj_floor_unit_id', 'ASCs')
+            ->where('proj_floor_unit_mapping.deleted',0)
+            ->where('proj_floor_unit_mapping.proj_floor_unit_id',$unit_id)
+            ->get()->first();
+
+
+        return $data;
+    }
+}
+
+
+if(!function_exists("getBlockData")) {
+
+    function getBlockData($project_id) {
+
+        $data = Block::select([ 'block_name','proj_block_map_id'])
+            ->where('project_id' ,  $project_id)
+            ->get();
+        return $data;
+    }
+}
+if(!function_exists("getFloor")) {
+
+    function getFloor($block_id)
+    {
+        $data  = BlockFloorMapping::where("proj_block_mapg_id", $block_id)->get(["proj_block_floor_id", "floor_no"]);
+dd($data);
+        return $data;
+    }
+}
+if(!function_exists("getUnit")) {
+
+    function getUnit($floor_id)
+    {
+        $data = FloorUnitMapping::where("proj_block_floor_id", $floor_id)->get(["proj_floor_unit_id", "unit_name"]);
         return $data;
     }
 }

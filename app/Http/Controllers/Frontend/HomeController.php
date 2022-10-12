@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\{User,Inquiry};
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Hash;
@@ -95,5 +95,42 @@ class HomeController extends Controller
         ]);
 
         return view('front.home' );
+    }
+
+    public function submitInquiry(Request $request)
+    {
+        /*$validator = Validator::make($request->all(), [ // <---
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'phone_no' => 'required',
+            'email_id' => 'required',
+            'message' => 'required',
+        ]);
+        */
+        $request->validate([
+            'first_name'   => 'required',
+            'last_name'    => 'required',
+            'email_id'     => 'required|email',
+            'phone_no'     => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'message'      => 'required',
+        ]);
+
+
+        $insertData = [
+
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'phone'     => $request->phone_no,
+                'email'     => $request->email_id,
+                'message'   => $request->message,
+                'status'    => 1, //Booking Price Paid
+
+            ];
+
+            $bookingId = Inquiry::create($insertData);
+
+        return response()->json(['success'=>'Successfully']);
+
+
     }
 }

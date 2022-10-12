@@ -55,7 +55,13 @@ class CategoryController extends Controller
         if ($image = $request->file('category_image')) {
             $destinationPath = 'images/category';
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $Image);
+            try{
+                $image->move($destinationPath, $Image);
+            }
+            catch (Exception $e){
+                echo 'Message: ' .$e->getMessage();
+            }
+
         }
         $page  = [
             'category_name'   => $request->category_name,

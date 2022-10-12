@@ -75,7 +75,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <select class="form-select form-select-solid form-select-lg" name="project_name" id="project_id" data-placeholder="Select Project" data-control="select2" >
+                                    <select required class="form-select form-select-solid form-select-lg" name="project_name" id="project_id" data-placeholder="Select Project" data-control="select2" >
                                         <option ></option>
                                         {{ $projectData = getProject() }}
                                         @if (!empty($projectData))
@@ -96,7 +96,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Name" autofocus name="block_name" id="block_name" value="{{ !empty($editData->block_name ) ? $editData->block_name : ''}}" >
+                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Name" autofocus name="block_name" id="block_name" value="{{ !empty($editData->block_name ) ? $editData->block_name : ''}}" >
                                 <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -110,7 +110,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Floor" autofocus name="floor" id="floor" value="{{ !empty($editData->floor ) ? $editData->floor : ''}}" >
+                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Floor" autofocus name="floor" id="floor" value="{{ !empty($editData->floor ) ? $editData->floor : ''}}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -124,7 +124,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <select class="form-select form-select-solid form-select-lg" name="category_name" id="category_id" data-placeholder="Select Category" data-control="select2" >
+                                    <select required class="form-select form-select-solid form-select-lg" name="category_name" id="category_id" data-placeholder="Select Category" data-control="select2" >
                                         <option ></option>
                                         {{ $categoryData = getCategory() }}
                                         @if (!empty($categoryData))
@@ -146,7 +146,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Facing"   name="facing_text" id="facing_text" value="{{ !empty($editData->facing_text ) ? $editData->facing_text : ''}}" >
+                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Facing"   name="facing_text" id="facing_text" value="{{ !empty($editData->facing_text ) ? $editData->facing_text : ''}}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->

@@ -48,7 +48,7 @@
                                       <!--end::Col-->
                                       <!--begin::Col-->
                                       <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                          <input type="text" placeholder="Enter Name" class="form-control form-control-solid" name="page" value="{{ !empty( $pageData->page) ? $pageData->page : '' }}" >
+                                          <input type="text" required placeholder="Enter Name" class="form-control form-control-solid" name="page" value="{{ !empty( $pageData->page) ? $pageData->page : '' }}" >
                                           <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                   </div>
                                   <!--end::Row-->
@@ -63,7 +63,7 @@
                                       <!--end::Col-->
                                       <!--begin::Col-->
                                       <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                          <select class="form-select form-select-solid form-select-lg" name="page_id" id="page_id" data-placeholder="Select Page" data-control="select2"  >
+                                          <select required class="form-select form-select-solid form-select-lg" name="page_id" id="page_id" data-placeholder="Select Page" data-control="select2"  >
                                               <option  ></option>
                                               @foreach ($pageId as $key => $val)
                                                   <option value="{{ $key }}" {{ !empty( $pageData->page_id)  && ($pageData->page_id == $key) ? 'selected' : '' }}>{{ $val }}</option>
@@ -83,7 +83,7 @@
                                       <!--end::Col-->
                                       <!--begin::Col-->
                                       <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                          <textarea name="detail" placeholder="Enter Detail" class="form-control form-control-solid h-100px" >{{ !empty( $pageData->detail) ? $pageData->detail : '' }}</textarea>
+                                          <textarea name="detail" required placeholder="Enter Detail" class="form-control form-control-solid h-100px" >{{ !empty( $pageData->detail) ? $pageData->detail : '' }}</textarea>
                                           <div class="fv-plugins-message-container invalid-feedback"></div></div>
 
                                   </div>

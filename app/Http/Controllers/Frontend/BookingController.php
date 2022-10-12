@@ -51,14 +51,6 @@ class BookingController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-
-
-        if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
         else {

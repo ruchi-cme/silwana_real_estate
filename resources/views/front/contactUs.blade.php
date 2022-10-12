@@ -25,8 +25,12 @@
                             @endif
 
                             <div class="col-lg-12">
-                                <form action="" class="register-form" >
-                                    @csrf
+                                <div class="alert alert-success" role="alert" id="successMsg" style="display: none" >
+                                    Thank you for getting in touch! We will connect you soon!
+                                </div>
+                                <form id="inquiryForm" >
+                                    <meta name="csrf-token" content="{{ csrf_token() }}">
+
                                     <div class="text-center">
                                         @if(!empty($page))
                                         <h2>{{ $page['page'] }}</h2>
@@ -36,31 +40,36 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input type="text" name="first_name" placeholder="First Name" class="form-control">
+                                                <input type="text" class="form-control inquiryText" name="first_name" id="first_name" placeholder="First Name">
+                                                <span class="text-danger" id="fnameErrorMsg"></span>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input type="text" name="last_name" placeholder="Last Name" class="form-control">
+                                                <input type="text" class="form-control inquiryText" name="last_name" id="last_name" placeholder="Last Name">
+                                                <span class="text-danger" id="lnameErrorMsg"></span>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input type="text" name="mobile_number" placeholder="Mobile Number" class="form-control">
+                                                <input type="email" class="form-control inquiryText" name="email_id" id="email_id" placeholder="Email">
+                                                <span class="text-danger" id="emailIdErrorMsg"></span>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <input type="email" name="email" placeholder="Email" class="form-control">
+                                                <input type="text" class="form-control inquiryText " name="phone_no" id="phone_no" placeholder="Mobile Number">
+                                                <span class="text-danger" id="phoneNoErrorMsg"></span>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group">
-                                                <textarea name="message" id="" cols="30" rows="6" class="form-control">Message</textarea>
+                                                <textarea name="message" id="message" cols="30" rows="6" class="form-control inquiryText">Message</textarea>
+                                                <span class="text-danger" id="messageErrorMsg"></span>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 text-left">
-                                            <button class="cmn-btn">Send Message</button>
+                                            <button type="submit"  class="cmn-btn submitInquiry">Send Message</button>
                                         </div>
                                     </div>
                                 </form>
@@ -71,5 +80,7 @@
             </div>
         </div>
     </section>
-
+    @section('scripts')
+        <script   src="{{ asset('js/front/custom/inquiry') }}/inquiry.js"> </script>
+    @endsection
 </x-base>

@@ -48,7 +48,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" placeholder="Enter Amenity Name" class="form-control form-control-solid" name="amenity_name" value="{{ !empty( $editData->amenity_name) ? $editData->amenity_name : '' }}" >
+                                    <input type="text" required placeholder="Enter Amenity Name" class="form-control form-control-solid" name="amenity_name" value="{{ !empty( $editData->amenity_name) ? $editData->amenity_name : '' }}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -62,7 +62,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <textarea placeholder="Enter Amenity Detail" name="amenity_detail" class="form-control form-control-solid h-100px" >{{ !empty( $editData->amenity_detail) ? $editData->amenity_detail : '' }}</textarea>
+                                    <textarea placeholder="Enter Amenity Detail" required name="amenity_detail" class="form-control form-control-solid h-100px" >{{ !empty( $editData->amenity_detail) ? $editData->amenity_detail : '' }}</textarea>
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->

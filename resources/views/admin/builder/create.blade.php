@@ -49,7 +49,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Company Name" autofocus name="company_name" id="company_name" value="{{ !empty($editData->company_name ) ? $editData->company_name : ''}}" >
+                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Company Name" autofocus name="company_name" id="company_name" value="{{ !empty($editData->company_name ) ? $editData->company_name : ''}}" >
                                 <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -63,7 +63,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Owner Name" autofocus name="owner_name" id="owner_name" value="{{ !empty($editData->owner_name ) ? $editData->owner_name : ''}}" >
+                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Owner Name" autofocus name="owner_name" id="owner_name" value="{{ !empty($editData->owner_name ) ? $editData->owner_name : ''}}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -77,7 +77,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="email" class="form-control form-control-solid" placeholder="Enter Email"   name="builder_email" id="builder_email" value="{{ !empty($editData->builder_email ) ? $editData->builder_email : ''}}" >
+                                    <input required type="email" class="form-control form-control-solid" placeholder="Enter Email"   name="builder_email" id="builder_email" value="{{ !empty($editData->builder_email ) ? $editData->builder_email : ''}}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -91,7 +91,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" class="form-control form-control-solid" name="phone_number" id="phone_number" placeholder="Enter Phone Number" value=" {{ !empty($editData->phone_number ) ? $editData->phone_number : ''}} ">
+                                    <input required type="text" class="form-control form-control-solid" name="phone_number" id="phone_number" placeholder="Enter Phone Number" value=" {{ !empty($editData->phone_number ) ? $editData->phone_number : ''}} ">
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -105,7 +105,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <textarea name="details" class="form-control form-control-solid" id="details" placeholder="Enter Details">{{ !empty($editData->details ) ? $editData->details : ''}}</textarea>
+                                    <textarea  required name="details" class="form-control form-control-solid" id="details" placeholder="Enter Details">{{ !empty($editData->details ) ? $editData->details : ''}}</textarea>
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->

@@ -48,7 +48,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Category Name" autofocus name="category_name" id="category_name" value="{{ !empty($editData->category_name ) ? $editData->category_name : ''}}" >
+                                    <input type="text" required class="form-control form-control-solid" placeholder="Enter Category Name" autofocus name="category_name" id="category_name" value="{{ !empty($editData->category_name ) ? $editData->category_name : ''}}" >
                                 <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->

@@ -94,29 +94,8 @@
             </div>
         </div>
     </section>
-
     @section('scripts')
-        <script type="text/javascript">
-
-            $(".bookNow").click(function(){
-                var user_id =  $(this).attr('user_id');
-                var unit_id =  $(this).attr('unit_id');
-
-                if(user_id != '')
-                {
-                    var route = "{{ URL('/booking/' )   }}";
-                    var url = route+'/'+ unit_id ;
-                    window.location.href = url;
-
-                }else{
-                    //if not logged in
-                    $(this).attr('data-bs-toggle', 'modal');
-                    $(this).attr('data-bs-target', '#login-modal');
-                }
-
-            });
-
-        </script>
+        <script   src="{{ asset('js/front/custom/myBooking') }}/myBooking.js"> </script>
     @endsection
 
 </x-base>

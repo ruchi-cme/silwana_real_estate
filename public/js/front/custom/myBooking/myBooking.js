@@ -4,10 +4,32 @@ $(document).ready(function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    $('#block_name').change(function ()  {
+        var block = this.value;
+        $("#floor").html('');
+        $.ajax({
+            url:   'getFloor' ,
+            type: "GET",
+            data: {
+                block: block,
+            },
+            dataType: 'json',
+            success: function (result) {
+                $('#floor').html('<option value="">Select Floor</option>');
+                $.each(result.floors, function (key, value) {
+                    $("#floor").append('<option value="' + value
+                        .id + '">' + value.name + '</option>');
+                });
+                $('#floor').select2('open');
+            }
+        });
+    })
+
+
     $(".cancelBooking").click(function(){
         if (confirm('Are you sure?')) {
             var booking_id =  $(this).attr('booking_id');
-       
+
             $.ajax({
                 url:   'booking/cancel' ,
                 type: "Post",
@@ -23,7 +45,8 @@ $(document).ready(function() {
         }
     });
 
-    $(".book_now").click(function(){
+
+    $(".bookNow").click(function(){
         var user_id =  $(this).attr('user_id');
         var unit_id =  $(this).attr('unit_id');
 
@@ -33,23 +56,6 @@ $(document).ready(function() {
             var url = route+'/'+ unit_id ;
             window.location.href = url;
 
-            /*    $.ajaxSetup({
-                   headers: {
-                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                   }
-               });
-        $.ajax({
-                 url: " ",
-                 type: "Post",
-                 data: {
-                     user_id : user_id, unit_id : unit_id
-                 },
-                 dataType: 'json',
-                 success: function (result) {
-
-                 }
-             }); */
-
         }else{
             //if not logged in
             $(this).attr('data-bs-toggle', 'modal');
@@ -57,5 +63,8 @@ $(document).ready(function() {
         }
 
     });
+
+
+
 
 });

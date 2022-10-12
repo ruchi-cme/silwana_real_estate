@@ -75,7 +75,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <select class="form-select form-select-solid form-select-lg" name="block_name" id="proj_block_mapg_id" data-placeholder="Select Block" data-control="select2" >
+                                    <select required class="form-select form-select-solid form-select-lg" name="block_name" id="proj_block_mapg_id" data-placeholder="Select Block" data-control="select2" >
                                         <option ></option>
                                         {{ $BlockData = getBlock() }}
                                         @if (!empty($BlockData))
@@ -97,7 +97,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <select class="form-select form-select-solid form-select-lg" name="category_name" id="category_id" data-placeholder="Select Category" data-control="select2" >
+                                    <select required class="form-select form-select-solid form-select-lg" name="category_name" id="category_id" data-placeholder="Select Category" data-control="select2" >
                                         <option ></option>
                                         {{ $categoryData = getCategory() }}
                                         @if (!empty($categoryData))
@@ -119,7 +119,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Unit Name" autofocus name="unit_name" id="floor_no" value="{{ !empty($editData->unit_name ) ? $editData->unit_name : ''}}" >
+                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Unit Name" autofocus name="unit_name" id="floor_no" value="{{ !empty($editData->unit_name ) ? $editData->unit_name : ''}}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -175,7 +175,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Area" autofocus name="area_in_sq_feet" id="area_in_sq_feet" value="{{ !empty($editData->area_in_sq_feet ) ? $editData->area_in_sq_feet : ''}}" >
+                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Area" autofocus name="area_in_sq_feet" id="area_in_sq_feet" value="{{ !empty($editData->area_in_sq_feet ) ? $editData->area_in_sq_feet : ''}}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -203,7 +203,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Booking Price" autofocus name="booking_price" id="booking_price" value="{{ !empty($editData->booking_price ) ? $editData->booking_price : ''}}" >
+                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Booking Price" autofocus name="booking_price" id="booking_price" value="{{ !empty($editData->booking_price ) ? $editData->booking_price : ''}}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->

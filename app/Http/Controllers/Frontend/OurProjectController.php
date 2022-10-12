@@ -10,7 +10,13 @@ class OurProjectController extends Controller
     public function index(Request $request)
     {
         $projectList    = getProjectList();
-
         return view('front.ourProject',compact('projectList' ));
+    }
+
+    public function projectDetail(Request $request)
+    {
+        $project_id  =  decrypt($request->route('id'));
+        $projectList    = getProjectList($project_id);
+        return view('front.projectDetail',compact('projectList' ));
     }
 }

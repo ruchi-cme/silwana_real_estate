@@ -12,26 +12,33 @@
                 <div class="col-lg-6">
                     <div class="banner-form">
                         <h2>LEAVE YOUR INTEREST</h2>
-                        <form action="">
-                            <div class="form-group select-title">
-                                <select name="" id="" class="form-control">
-                                    <option value="">Title</option>
-                                </select>
+                        <div class="alert alert-success" role="alert" id="successMsg" style="display: none" >
+                            Thank you for getting in touch! We will connect you soon!
+                        </div>
+                        <form id="inquiryForm" >
+                            <meta name="csrf-token" content="{{ csrf_token() }}">
+                            <div class="form-group">
+                                <input type="text" class="form-control inquiryText" name="first_name" id="first_name" placeholder="First Name">
+                                <span class="text-danger" id="fnameErrorMsg"></span>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="First Name">
+                                <input type="text" class="form-control inquiryText" name="last_name" id="last_name" placeholder="Last Name">
+                                <span class="text-danger" id="lnameErrorMsg"></span>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Last Name">
+                                <input type="email" class="form-control inquiryText" name="email_id" id="email_id" placeholder="Email">
+                                <span class="text-danger" id="emailIdErrorMsg"></span>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email">
+                                <input type="text" class="form-control inquiryText " name="phone_no" id="phone_no" placeholder="Mobile Number">
+                                <span class="text-danger" id="phoneNoErrorMsg"></span>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Mobile Number">
+                                <textarea name="message" id="message" cols="15" rows="3" class="form-control inquiryText">Message</textarea>
+                                <span class="text-danger" id="messageErrorMsg"></span>
                             </div>
                             <div class="form-group mb-0">
-                                <input type="submit" class="cmn-btn" value="INQUIRY NOW">
+                                <input type="submit" class="cmn-btn submitInquiry" value="INQUIRY NOW">
                             </div>
                         </form>
                     </div>
@@ -945,5 +952,8 @@
             </div>
         </div>
     </section>
+@section('scripts')
+    <script   src="{{ asset('js/front/custom/inquiry') }}/inquiry.js"> </script>
+@endsection
 
 </x-base>

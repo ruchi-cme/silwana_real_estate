@@ -48,7 +48,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" placeholder="Enter Title" class="form-control form-control-solid" name="title" value="{{ !empty( $editData->title) ? $editData->title : '' }}" >
+                                    <input required type="text" placeholder="Enter Title" class="form-control form-control-solid" name="title" value="{{ !empty( $editData->title) ? $editData->title : '' }}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -62,7 +62,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <textarea placeholder="Enter Amenity Detail" name="desc" class="form-control form-control-solid h-100px" >{{ !empty( $editData->desc) ? $editData->desc : '' }}</textarea>
+                                    <textarea required placeholder="Enter Amenity Detail" name="desc" class="form-control form-control-solid h-100px" >{{ !empty( $editData->desc) ? $editData->desc : '' }}</textarea>
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
