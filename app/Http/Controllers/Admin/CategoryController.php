@@ -55,13 +55,7 @@ class CategoryController extends Controller
         if ($image = $request->file('category_image')) {
             $destinationPath = 'images/category';
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            try{
-                $image->move($destinationPath, $Image);
-            }
-            catch (Exception $e){
-                echo 'Message: ' .$e->getMessage();
-            }
-
+            $image->move($destinationPath, $Image);
         }
         $page  = [
             'category_name'   => $request->category_name,
@@ -85,13 +79,7 @@ class CategoryController extends Controller
 
             $destinationPath = 'images/category';
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
-
-            try{
-                $image->move($destinationPath, $Image);
-            }
-            catch (Exception $e){
-                echo 'Message: ' .$e->getMessage();
-            } exit;
+            $image->move($destinationPath, $Image);
             if (!empty($editImage)) {
                 unlink("images/category/" . $editImage);
             }
