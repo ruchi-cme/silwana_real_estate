@@ -147,7 +147,7 @@ if(!function_exists("getBookingImage")) {
 
 if(!function_exists("getProjectList")) {
 
-    function getProjectList($project_id='') {
+    function getProjectList($project_id='' ) {
 
         $select =  [ 'project_master.project_id',
             'project_master.project_name',
@@ -164,14 +164,25 @@ if(!function_exists("getProjectList")) {
             'project_address_details.city',
             'project_address_details.zip',
         ];
-        $data = Project::leftJoin('category_master', 'category_master.category_id', '=', 'project_master.category_id')
-                //->leftJoin('proj_ameni_mappings', 'proj_ameni_mappings.project_id', '=', 'project_master.project_id')
-                ->leftJoin('project_address_details','project_address_details.project_id' , '=', 'project_master.project_id')
-                ->select($select)
-                ->where('project_master.deleted',0)
-                ->orderBy('project_master.project_id', 'desc')
-                ->get();
 
+       if (!empty($project_id)) {
+           $data = Project::leftJoin('category_master', 'category_master.category_id', '=', 'project_master.category_id')
+               //->leftJoin('proj_ameni_mappings', 'proj_ameni_mappings.project_id', '=', 'project_master.project_id')
+               ->leftJoin('project_address_details','project_address_details.project_id' , '=', 'project_master.project_id')
+               ->select($select)
+               ->where('project_master.deleted',0)
+               ->where('project_master.project_id', $project_id)
+               ->orderBy('project_master.project_id', 'desc')
+               ->get()->first();
+       } else {
+           $data = Project::leftJoin('category_master', 'category_master.category_id', '=', 'project_master.category_id')
+               //->leftJoin('proj_ameni_mappings', 'proj_ameni_mappings.project_id', '=', 'project_master.project_id')
+               ->leftJoin('project_address_details','project_address_details.project_id' , '=', 'project_master.project_id')
+               ->select($select)
+               ->where('project_master.deleted',0)
+               ->orderBy('project_master.project_id', 'desc')
+               ->get();
+       }
 
         return $data;
     }
@@ -201,12 +212,19 @@ if(!function_exists("getProjectAddress")) {
 
 if(!function_exists("getProjectImage")) {
 
-    function getProjectImage($project_id) {
+    function getProjectImage($project_id,$obj = '') {
 
-        $data = ProjectImage::select([ 'title','path','type'])
-            ->where('project_id' ,  $project_id)
-            ->get()
-            ->first();
+        if(!empty($obj)){
+            $data = ProjectImage::select([ 'title','path','type'])
+                ->where('project_id' ,  $project_id)
+                ->get()
+                ->first();
+        } else {
+            $data = ProjectImage::select([ 'title','path','type'])
+                ->where('project_id' ,  $project_id)
+                ->get();
+
+        }
         return $data;
     }
 }

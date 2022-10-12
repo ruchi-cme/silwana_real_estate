@@ -48,7 +48,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" placeholder="Enter Project Name" class="form-control form-control-solid" name="project_name" value="{{ !empty( $editData->project_name) ? $editData->project_name : '' }}" >
+                                    <input required type="text" placeholder="Enter Project Name" class="form-control form-control-solid" name="project_name" value="{{ !empty( $editData->project_name) ? $editData->project_name : '' }}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -76,7 +76,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <select class="form-select form-select-solid form-select-lg" name="category_id" id="category_id" data-placeholder="Select Category" data-control="select2" >
+                                    <select required class="form-select form-select-solid form-select-lg" name="category_id" id="category_id" data-placeholder="Select Category" data-control="select2" >
                                         <option ></option>
                                         {{ $categoryData = getCategory() }}
                                         @if (!empty($categoryData))
@@ -99,7 +99,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                <select class="form-select form-select-solid form-select-lg" name="work_status" id="work_status" data-placeholder="Select Work Status" data-control="select2"  >
+                                <select required class="form-select form-select-solid form-select-lg" name="work_status" id="work_status" data-placeholder="Select Work Status" data-control="select2"  >
                                     <option  ></option>
                                     @foreach ($workStatus as $key => $val)
                                         <option value="{{ $key }}" {{ !empty( $editData->category_id)  && ($editData->work_status == $key) ? 'selected' : '' }}>{{ $val }}</option>
@@ -119,7 +119,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <select class="form-select form-select-solid form-select-lg" multiple="multiple" name="amenities_id[]" id="work_status" data-placeholder="Select Amenities" data-control="select2"  >
+                                    <select required class="form-select form-select-solid form-select-lg" multiple="multiple" name="amenities_id[]" id="work_status" data-placeholder="Select Amenities" data-control="select2"  >
                                         <option  ></option>
                                         {{ $amenitiesData = getAmenities() }}
                                         @if (!empty($amenitiesData))
@@ -235,7 +235,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" placeholder="Enter Address" class="form-control form-control-solid" name="address" value="{{ !empty( $editData->address) ? $editData->address : '' }}" >
+                                    <input type="text" required placeholder="Enter Address" class="form-control form-control-solid" name="address" value="{{ !empty( $editData->address) ? $editData->address : '' }}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -249,7 +249,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" placeholder="Enter Landmark" class="form-control form-control-solid" name="landmark" value="{{ !empty( $editData->landmark) ? $editData->landmark : '' }}" >
+                                    <input required type="text" placeholder="Enter Landmark" class="form-control form-control-solid" name="landmark" value="{{ !empty( $editData->landmark) ? $editData->landmark : '' }}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->

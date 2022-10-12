@@ -4,7 +4,7 @@
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.admin') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
 <li class="breadcrumb-item px-3 text-primary">About Silwana</li>
 <li class="breadcrumb-item px-3"><a class="text-hover-primary " href="{{ route('admin.contactus') }}">Contact Us</a></li>
-<li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->contactus_id) ?   'Update' :  'Create' }}</li>
+<li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->contactus_id) ?   'Edit' :  'Create' }}</li>
 @endsection
 
 @section('content')
