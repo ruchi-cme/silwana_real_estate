@@ -1,20 +1,19 @@
 <x-base>
     <x-banner title="Property Details" page="Property Details"></x-banner>
     <!-- property-detail-main -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <section class="property-detail-main mt-0">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="search-property">
                         <h2>Search Property</h2>
-                        <form action="">
-                            @csrf
+                        <form action="{{ route('searchProperty') }}" method="post">
+                             @csrf
                             <div class="form-group mb-0 position-relative">
                                 <select name="block_name" id="block_name" class="form-control">
                                     <option value="">Select Block</option>
                                     @if(!empty($blockData))
-
                                         @foreach($blockData as $row)
                                             <option value="{{ $row['proj_block_map_id'] }}" >{{ $row['block_name'] }} </option>
                                         @endforeach
@@ -24,7 +23,6 @@
                             <div class="form-group mb-0 position-relative">
                                 <select name="floor" id="floor" class="form-control">
                                     <option value="">Select Floor</option>
-
                                 </select>
                             </div>
                             <div class="form-group mb-0 position-relative">
@@ -33,7 +31,7 @@
                                 </select>
                             </div>
                             <div class="form-group mb-0">
-                                <button type="" class="cmn-btn search-btn"><img src="./assets/images/search.svg" alt="search" /></button>
+                                <button type="" class="cmn-btn search-btn"><img src="{{ asset('images/front')}}/search.svg" alt="search" /></button>
                             </div>
                         </form>
                     </div>
@@ -59,7 +57,7 @@
                         <span class="btn btn-2">{{ $propertyDetail['category_name'] }}</span>
                         <h2>{{ $propertyDetail['project_name'] }}</h2>
                         @php $address = getProjectAddress($propertyDetail['project_id'])  @endphp
-                        <h5><img src="./assets/images/location.svg" class="location-image" alt="location" />  {{ $address['address'] }}</h5>
+                        <h5><img src="{{ asset('images/front')}}/location.svg" class="location-image" alt="location" />  {{ $address['address'] }}</h5>
                         <p> {{ $propertyDetail['project_detail'] }} </p>
                     </div>
 
@@ -84,11 +82,11 @@
                                             </li>
                                             <li>
                                                 <p>Baths</p>
-                                                <span>2 Baths</span>
+                                                <span>-</span>
                                             </li>
                                             <li>
                                                 <p>Year Built</p>
-                                                <span>2022</span>
+                                                <span>-</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -96,7 +94,7 @@
                                 <div class="col-lg-5">
                                     <div class="property-detail-list-inner">
                                         <ul>
-                                            <li>
+                                           <!--  <li>
                                                 <p>Lot Area</p>
                                                 <span>SRED369</span>
                                             </li>
@@ -107,7 +105,7 @@
                                             <li>
                                                 <p>Beds</p>
                                                 <span>5 Beds</span>
-                                            </li>
+                                            </li> -->
                                             <li>
                                                 <p>Price</p>
                                                 <span>AMD {{ $propertyDetail['total_price'] }}  </span>
@@ -123,267 +121,6 @@
                         </div>
                     </div>
 
-                    <div class="fact-features">
-                        <div class="row">
-                            <h4>Facts and Features</h4>
-                            <div class="col-lg-4">
-                                <div class="fact-features-wrap">
-                                    <div class="fact-features-wrap-img">
-                                        <img src="./assets/images/home/ome.svg" alt="">
-                                    </div>
-                                    <div>
-                                        <h6>Living Room</h6>
-                                        <p>20 X 16 sq feet</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="fact-features-wrap">
-                                    <div class="fact-features-wrap-img">
-                                        <img src="./assets/images/home/ome.svg" alt="">
-                                    </div>
-                                    <div>
-                                        <h6>Living Room</h6>
-                                        <p>20 X 16 sq feet</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="fact-features-wrap">
-                                    <div class="fact-features-wrap-img">
-                                        <img src="./assets/images/home/ome.svg" alt="">
-                                    </div>
-                                    <div>
-                                        <h6>Living Room</h6>
-                                        <p>20 X 16 sq feet</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="fact-features-wrap">
-                                    <div class="fact-features-wrap-img">
-                                        <img src="./assets/images/home/ome.svg" alt="">
-                                    </div>
-                                    <div>
-                                        <h6>Living Room</h6>
-                                        <p>20 X 16 sq feet</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="fact-features-wrap">
-                                    <div class="fact-features-wrap-img">
-                                        <img src="./assets/images/home/ome.svg" alt="">
-                                    </div>
-                                    <div>
-                                        <h6>Living Room</h6>
-                                        <p>20 X 16 sq feet</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="fact-features-wrap">
-                                    <div class="fact-features-wrap-img">
-                                        <img src="./assets/images/home/ome.svg" alt="">
-                                    </div>
-                                    <div>
-                                        <h6>Living Room</h6>
-                                        <p>20 X 16 sq feet</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="floor-plan">
-                        <h4>Facts and Features</h4>
-                        <div class="property-wrap">
-                            <ul class="nav nav-tabs justify-content-between border-0" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" data-bs-toggle="tab" href="#penthouse">First Floor</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#top-garden">Second Floor</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#apartment">Third Floor</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#offices">Fourth Floor</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content">
-                                <div id="penthouse" class="container tab-pane active"><br>
-                                    <div class="row align-items-center">
-                                        <div class="col-lg-7">
-                                            <div class="property-inner-wrap property-img-wrap">
-                                                <img src="./assets/images/home/tab1.png" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <div class="property-inner-wrap">
-                                                <h4>Penthouse</h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur elita dipiscing elit, sed do eiusmod </p>
-                                                <div>
-                                                    <ul>
-                                                        <li>
-                                                            <p>TOTAL AREA</p>
-                                                            <p>2800 Sq. Ft</p>
-                                                        </li>
-                                                        <li>
-                                                            <p>BEDROOM</p>
-                                                            <p>150 Sq. Ft</p>
-                                                        </li>
-                                                        <li>
-                                                            <p>BATHROOM</p>
-                                                            <p>45 Sq. Ft</p>
-                                                        </li>
-                                                        <li>
-                                                            <p>BELCONY/PETS</p>
-                                                            <p>Allowed</p>
-                                                        </li>
-                                                        <li>
-                                                            <p>LOUNGE</p>
-                                                            <p>650 Sq. Ft</p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div>
-                                                    <a href="" class="cmn-btn">DOWNLOAD PDF</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="top-garden" class="container tab-pane fade"><br>
-                                    <div class="row align-items-center">
-                                        <div class="col-lg-7">
-                                            <div class="property-inner-wrap property-img-wrap">
-                                                <img src="./assets/images/home/tab1.png" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <div class="property-inner-wrap">
-                                                <h4>Penthouse</h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur elita dipiscing elit, sed do eiusmod </p>
-                                                <div>
-                                                    <ul>
-                                                        <li>
-                                                            <p>TOTAL AREA</p>
-                                                            <p>2800 Sq. Ft</p>
-                                                        </li>
-                                                        <li>
-                                                            <p>BEDROOM</p>
-                                                            <p>150 Sq. Ft</p>
-                                                        </li>
-                                                        <li>
-                                                            <p>BATHROOM</p>
-                                                            <p>45 Sq. Ft</p>
-                                                        </li>
-                                                        <li>
-                                                            <p>BELCONY/PETS</p>
-                                                            <p>Allowed</p>
-                                                        </li>
-                                                        <li>
-                                                            <p>LOUNGE</p>
-                                                            <p>650 Sq. Ft</p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div>
-                                                    <a href="" class="cmn-btn">DOWNLOAD PDF</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="apartment" class="container tab-pane fade"><br>
-                                    <div class="row align-items-center">
-                                        <div class="col-lg-7">
-                                            <div class="property-inner-wrap property-img-wrap">
-                                                <img src="./assets/images/home/tab1.png" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <div class="property-inner-wrap">
-                                                <h4>Penthouse</h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur elita dipiscing elit, sed do eiusmod </p>
-                                                <div>
-                                                    <ul>
-                                                        <li>
-                                                            <p>TOTAL AREA</p>
-                                                            <p>2800 Sq. Ft</p>
-                                                        </li>
-                                                        <li>
-                                                            <p>BEDROOM</p>
-                                                            <p>150 Sq. Ft</p>
-                                                        </li>
-                                                        <li>
-                                                            <p>BATHROOM</p>
-                                                            <p>45 Sq. Ft</p>
-                                                        </li>
-                                                        <li>
-                                                            <p>BELCONY/PETS</p>
-                                                            <p>Allowed</p>
-                                                        </li>
-                                                        <li>
-                                                            <p>LOUNGE</p>
-                                                            <p>650 Sq. Ft</p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div>
-                                                    <a href="" class="cmn-btn">DOWNLOAD PDF</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="offices" class="container tab-pane fade"><br>
-                                    <div class="row align-items-center">
-                                        <div class="col-lg-7">
-                                            <div class="property-inner-wrap property-img-wrap">
-                                                <img src="./assets/images/home/tab1.png" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <div class="property-inner-wrap">
-                                                <h4>Penthouse</h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur elita dipiscing elit, sed do eiusmod </p>
-                                                <div>
-                                                    <ul>
-                                                        <li>
-                                                            <p>TOTAL AREA</p>
-                                                            <p>2800 Sq. Ft</p>
-                                                        </li>
-                                                        <li>
-                                                            <p>BEDROOM</p>
-                                                            <p>150 Sq. Ft</p>
-                                                        </li>
-                                                        <li>
-                                                            <p>BATHROOM</p>
-                                                            <p>45 Sq. Ft</p>
-                                                        </li>
-                                                        <li>
-                                                            <p>BELCONY/PETS</p>
-                                                            <p>Allowed</p>
-                                                        </li>
-                                                        <li>
-                                                            <p>LOUNGE</p>
-                                                            <p>650 Sq. Ft</p>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div>
-                                                    <a href="" class="cmn-btn">DOWNLOAD PDF</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="top-categories property-price">
@@ -398,26 +135,17 @@
                                 <span>AMD {{ $propertyDetail['booking_price'] }}</span>
                             </li>
                             <li>
-                                <a href="javascript:void(0)"  unit_id="{{ encrypt($propertyDetail['proj_floor_unit_id']) }}"  user_id="{{ Auth::guard('front')->check() ? Auth::guard('front')->user()->id : '' }}" class="cmn-btn bookNow">BOOK NOW</a>
+                                @if( $propertyDetail['booking_type'] == 1)
+                                    <a href="javascript:void(0)"  unit_id="{{ encrypt($propertyDetail['proj_floor_unit_id']) }}"  user_id="{{ Auth::guard('front')->check() ? Auth::guard('front')->user()->id : '' }}" class="cmn-btn bookNow">BOOK NOW</a>
+
+                                @else
+                                    <button class="cmn-btn">BOOKED</button>
+
+                                @endif
                             </li>
                         </ul>
                     </div>
 
-                    <div class="top-categories top-projects">
-                        <h4>Top Projects</h4>
-                        <div class="top-projects-inner">
-                            <div>
-                                <img src="./assets/images/property-detail/project1.png" alt="">
-                            </div>
-                            <h5>The perfect silwana residency</h5>
-                        </div>
-                        <div class="top-projects-inner">
-                            <div>
-                                <img src="./assets/images/property-detail/project1.png" alt="">
-                            </div>
-                            <h5>The perfect silwana residency</h5>
-                        </div>
-                    </div>
 
                     <div class="top-categories">
                         <ul>
@@ -451,7 +179,7 @@
                             <div class="item">
                                 <div class="property-sale-wrap">
                                     <div class="property-sale-img-wrap">
-                                        <img src="./assets/images/home/decore.png" alt="decore" />
+                                        <img src="{{ asset('images/front/home')}}/decore.png" alt="decore" />
                                     </div>
                                     <div class="property-detail-wrap position-relative">
                                         <h4>AED 12,500,000</h4>
@@ -459,7 +187,7 @@
                                         <p>5137 Compton Ave, Los Angeles</p>
                                         <div class="top-property-details-wrap">
                                             <div>
-                                                <img src="./assets/images/property-detail/bed.svg" alt="bed" />
+                                                <img src="{{ asset('images/front')}}/property-detail/bed.svg" alt="bed" />
                                             </div>
                                             <h6>3 Bedroom</h6>
                                         </div>
@@ -469,7 +197,7 @@
                             <div class="item">
                                 <div class="property-sale-wrap">
                                     <div class="property-sale-img-wrap">
-                                        <img src="./assets/images/home/decore.png" alt="decore" />
+                                        <img src="{{ asset('images/front/home')}}/decore.png" alt="decore" />
                                     </div>
                                     <div class="property-detail-wrap position-relative">
                                         <h4>AED 12,500,000</h4>
@@ -477,7 +205,7 @@
                                         <p>5137 Compton Ave, Los Angeles</p>
                                         <div class="top-property-details-wrap">
                                             <div>
-                                                <img src="./assets/images/property-detail/bed.svg" alt="bed" />
+                                                <img src="{{ asset('images/front/property-detail')}}/bed.svg" alt="bed" />
                                             </div>
                                             <h6>3 Bedroom</h6>
                                         </div>
@@ -487,7 +215,7 @@
                             <div class="item">
                                 <div class="property-sale-wrap">
                                     <div class="property-sale-img-wrap">
-                                        <img src="./assets/images/home/decore.png" alt="decore" />
+                                        <img src="{{ asset('images/front/home')}}/decore.png" alt="decore" />
                                     </div>
                                     <div class="property-detail-wrap position-relative">
                                         <h4>AED 12,500,000</h4>
@@ -495,7 +223,7 @@
                                         <p>5137 Compton Ave, Los Angeles</p>
                                         <div class="top-property-details-wrap">
                                             <div>
-                                                <img src="./assets/images/property-detail/bed.svg" alt="bed" />
+                                                <img src="{{ asset('images/front/property-detail')}}/bed.svg" alt="bed" />
                                             </div>
                                             <h6>3 Bedroom</h6>
                                         </div>
@@ -510,7 +238,7 @@
     </section>
     @section('scripts')
 
-        <script   src="{{ asset('js/front/custom/myBooking') }}/myBooking.js"> </script>
+        <script   src="{{ asset('js/front/custom/propertyDetail') }}/propertyDetail.js"> </script>
     @endsection
 </x-base>
 

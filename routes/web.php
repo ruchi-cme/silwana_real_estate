@@ -13,18 +13,15 @@ Route::name('home/login')->post('/home/login', 'App\Http\Controllers\Frontend\Ho
 Route::name('home/logout')->post('/home/logout', 'App\Http\Controllers\Frontend\HomeController@logout');
 Route::name('home/submitInquiry')->post('/home/submitInquiry', 'App\Http\Controllers\Frontend\HomeController@submitInquiry');
 
-
 Route::name('about')->get('/about', 'App\Http\Controllers\Frontend\AboutController@index');
 Route::name('ourProject')->get('/ourProject', 'App\Http\Controllers\Frontend\OurProjectController@index');
 Route::name('projectDetail/{id}')->get('/projectDetail/{id}', 'App\Http\Controllers\Frontend\OurProjectController@projectDetail');
-
-
 
 Route::name('propertyList')->get('/propertyList', 'App\Http\Controllers\Frontend\PropertyListController@index');
 Route::name('propertydetail/{id}')->get('/propertydetail/{id}', 'App\Http\Controllers\Frontend\PropertyListController@propertydetail');
 Route::name('getFloor')->get('/getFloor', 'App\Http\Controllers\Frontend\PropertyListController@getFloor');
 Route::name('getUnit')->get('/getUnit', 'App\Http\Controllers\Frontend\PropertyListController@getUnit');
-
+Route::name('searchProperty')->post('/searchProperty', 'App\Http\Controllers\Frontend\PropertyListController@searchProperty');
 
 Route::name('booking/{id}')->get('/booking/{id}', 'App\Http\Controllers\Frontend\BookingController@index');
 Route::name('booking/store')->post('/booking/store', 'App\Http\Controllers\Frontend\BookingController@store');

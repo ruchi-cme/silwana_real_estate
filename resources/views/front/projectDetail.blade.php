@@ -5,43 +5,29 @@
     <section class="property-detail-main portfolio-detail-main">
         <div class="container">
             <div class="row">
-                @php $proImg =  getProjectImage($projectList['project_id']) ;  @endphp
-                @if(!empty($proImg))
-                    @for($i=0; count($proImg) > $i; $i++)
-                        @switch( $i)
-                            @case(0)
+                @if(!empty($selectedImage))
+
+                    @for($i=0; count($selectedImage) > $i; $i++)
+                            @if($i == 0 )
                                 <div class="col-xl-8">
                                     <div class="property-detail-main-wrap-big video-wrapper">
-                                        <img src="./assets/images/property-detail/image1.png" alt="">
+                                        <img src="{{ asset('images/project/images/').'/'.$selectedImage[$i]['title'] }}" alt="">
                                     </div>
                                 </div>
+                        @elseif($i==1)
 
-                                @break
-                        <div class="col-xl-4 d-flex flex-column">
-                            @case(1)
-                                <div class="property-detail-main-wrap-small">
-                                    <img src="./assets/images/property-detail/image1.png" alt="">
+                                <div class="col-xl-4 d-flex flex-column">
+                                    <div class="property-detail-main-wrap-small">
+                                        <img src="{{ asset('images/project/images/').'/'.$selectedImage[$i]['title'] }}" alt="">
+                                    </div>
+                        @elseif($i==2)
+                                   <div class="property-detail-main-wrap-small">
+                                        <img src="{{ asset('images/project/images/').'/'.$selectedImage[$i]['title'] }}" alt="">
+                                    </div>
                                 </div>
-                                @break
-                            @case(2)
-                               <div class="property-detail-main-wrap-small">
-                                    <img src="./assets/images/property-detail/image1.png" alt="">
-                                </div>
-                                @break
-                        </div>
-                            @default
-                                <span>Something went wrong, please try again</span>
-                        @endswitch
-
-
+                        @endif
                     @endfor
                 @endif
-
-
-
-
-
-
             </div>
         </div>
     </section>
@@ -51,14 +37,12 @@
             <div class="row">
                 <div class="col-xl-8">
                     <div class="title">
-                        <span class="btn btn-2">Apartment</span>
-                        <h2>Diamond Manor Apartment</h2>
-                        <h5><img src="./assets/images/location.svg" class="location-image" alt="location" />5137 Compton Ave, Los Angeles</h5>
+                        <span class="btn btn-2">{{ $projectList['category_name'] }}</span>
+                        <h2>{{ $projectList['project_name'] }}</h2>
+                        <h5><img src=" {{ asset('/images/front/location.svg') }} " class="location-image" alt="location" />
+                            {{ $address['address'] }}</h5>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                            Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                            Lorem ipsum dolor sit amet.
+                            {{ $projectList['project_detail'] }}
                         </p>
                     </div>
                     <div class="fact-features">
@@ -375,21 +359,6 @@
                         </div>
                     </div>
 
-                    <div class="top-categories top-projects">
-                        <h4>Top Projects</h4>
-                        <div class="top-projects-inner">
-                            <div>
-                                <img src="./assets/images/property-detail/project1.png" alt="">
-                            </div>
-                            <h5>The perfect silwana residency</h5>
-                        </div>
-                        <div class="top-projects-inner">
-                            <div>
-                                <img src="./assets/images/property-detail/project1.png" alt="">
-                            </div>
-                            <h5>The perfect silwana residency</h5>
-                        </div>
-                    </div>
 
                     <div class="top-categories">
                         <ul>

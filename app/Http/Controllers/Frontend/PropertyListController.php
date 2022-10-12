@@ -29,15 +29,31 @@ class PropertyListController extends Controller
 
     public  function getFloor(Request $request)
     {
-        dd($request);
-      //  $data['floors'] = getFloor($request->block);
-       // return response()->json($data);
+       $data['floors'] = getFloor($request->block);
+        return response()->json($data);
     }
 
 public function getUnit(Request $request)
     {
         $data['units'] = getUnit($request->floor_id);
         return response()->json($data);
+    }
+
+    public function searchProperty(Request $request)
+    {
+        $unit_id  =    $request->unit ;
+        $propertyDetail =  getPropertyList($unit_id);
+        $propertyImage  =  getPropertyImage($unit_id);
+        $blockData = '';
+        if(!empty($propertyDetail['project_id']))
+            $blockData = getBlockData($propertyDetail['project_id']);
+
+        $unit_id  = encrypt($request->unit );
+
+        return redirect('propertydetail/'.$unit_id);
+        //return redirect()->route('propertydetail/', ['id' => $unit_id]);
+
+
     }
 
 }

@@ -19,7 +19,7 @@
                                     <div class="upcoming-projects-wrap">
                                         <h4>Top project</h4>
                                         <h2>{{  $firstIndex['project_name'] }}</h2>
-                                        <h6> <img src="./assets/images/location.svg" alt="" /> 5137 Compton Ave, Los Angeles</h6>
+                                        <h6> <img src="{{ asset('/images/front/location.svg') }} " alt="" /> 5137 Compton Ave, Los Angeles</h6>
                                         <p>  {{ $firstIndex['project_detail'] }}</p>
                                         <a href="{{ URL('projectDetail/'. encrypt($firstIndex['project_id'])) }}" class="cmn-btn">View Details</a>
                                     </div>
@@ -39,7 +39,7 @@
             <div class="container">
                 <div class="row">
                     @for($i=0;   count($projectList) > $i ; $i++)
-                        @php  $proImg =  getProjectImage($projectList[$i]['project_id']) @endphp
+                        @php  $proImg =  getProjectImage($projectList[$i]['project_id'],'single') ;   @endphp
                         @if($i == 0 )
                            @continue
                         @elseif ($i == 1)
@@ -51,7 +51,7 @@
                                     <div class="news-media-text">
                                         <h4>{{ $projectList[$i]['project_name'] }}</h4>
                                         <p> {{ $projectList[$i]['project_detail'] }} </p>
-                                        <a href="{{ URL('projectDetail'.encrypt($firstIndex['project_id'])) }}" class="cmn-btn">VIEW DETAILS</a>
+                                        <a href="{{ URL('projectDetail/'.encrypt($projectList[$i]['project_id'])) }}" class="cmn-btn">VIEW DETAILS</a>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                                     <div class="news-media-text">
                                         <h4>{{ $projectList[$i]['project_name'] }}</h4>
                                         <p> {{ $projectList[$i]['project_detail'] }} </p>
-                                        <a href="{{ URL('projectDetail'.encrypt($firstIndex['project_id'])) }}" class="cmn-btn">VIEW DETAILS</a>
+                                        <a href="{{ URL('projectDetail/'.encrypt($projectList[$i]['project_id'])) }}" class="cmn-btn">VIEW DETAILS</a>
                                     </div>
                                 </div>
                             </div>

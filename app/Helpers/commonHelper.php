@@ -225,6 +225,7 @@ if(!function_exists("getProjectImage")) {
                 ->get();
 
         }
+
         return $data;
     }
 }
@@ -245,6 +246,7 @@ if(!function_exists("getPropertyList")) {
             'proj_floor_unit_mapping.booking_price',
             'proj_floor_unit_mapping.facing',
             'proj_floor_unit_mapping.overlooking',
+            'proj_floor_unit_mapping.booking_type',
             'proj_floor_unit_mapping.status',
             'category_master.category_name',
             'proj_block_mappings.block_name'
@@ -383,7 +385,7 @@ if(!function_exists("getFloor")) {
     function getFloor($block_id)
     {
         $data  = BlockFloorMapping::where("proj_block_mapg_id", $block_id)->get(["proj_block_floor_id", "floor_no"]);
-dd($data);
+
         return $data;
     }
 }
