@@ -171,8 +171,6 @@
                                         @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
 
-
-
                                 </div>
                             </div>
                             <!--end::Row-->

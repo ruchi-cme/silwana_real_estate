@@ -69,7 +69,7 @@
                                     @if (Auth::guard('front')->check())
                                         @php $image = asset('images/front').'/noProfile.jpeg' ; @endphp
                                         @if(Auth::guard('front')->user()->image)
-                                            @php $image = asset('images/user') . Auth::guard('front')->user()->image; @endphp
+                                            @php $image = asset('images/user') .'/'. Auth::guard('front')->user()->image; @endphp
                                         @endif
                                         <div class="dropdown">
                                         <button class="cmn-btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
