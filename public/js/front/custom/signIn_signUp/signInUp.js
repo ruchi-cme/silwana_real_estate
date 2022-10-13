@@ -1,10 +1,10 @@
 $(document).ready(function() {
 
-  /*  $.ajaxSetup({
+   $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-    });*/
+    });
 
     $(".btn-login").click(function(e){
 
@@ -18,30 +18,36 @@ $(document).ready(function() {
 
             type:'POST',
 
-            url:" /home/login ",
+            url:"/home/login",
 
             data:{email:email, password:password},
 
             success:function(result){
-                  window.location.reload();
+                console.log(result);
+                if(result.success){
+                    window.location.reload();
+                }
+                else if(result.error){
+                    $('#loginError').show();
+                    $('#loginError').html(result.error);
+                }
+                else if(result.errors) { alert(1);
+                    $('#loginError').html('');
+                    jQuery.each(result.errors, function(key, value){
+                        $('#loginError').show();
+                        $('#loginError').append('<li>'+value+'</li>');
+                    });
+                }
+                //  window.location.reload();
             }  ,
             error: function(response) {
-                $('#loginemail').hide();  $('#loginemail').hide();
-                if(response.responseJSON.errors.email != ''){
-
-                    $('#loginemail').text(response.responseJSON.errors.email);
-                    $('#loginemail').show();
-                }
-                if(response.responseJSON.errors.password != ''){
-
-                    $('#loginpassword').text(response.responseJSON.errors.password);
-                    $('#loginpassword').show();
-                }
-
+                console.log(response);
+                $('#loginError').html('');
+                jQuery.each(response.errors, function(key, value){
+                    $('#loginError').show();
+                    $('#loginError').append('<li>'+value+'</li>');
+                });
             },
-
-
-
         });
 
     });
@@ -64,36 +70,29 @@ $(document).ready(function() {
             data:{email:email, password:password, name:name, phone:phone},
 
             success:function(result){
-                window.location.reload();
+                console.log(result);
+                if(result.success){
+                    window.location.reload();
+                }
+                else if(result.error){
+                    $('#signupError').show();
+                    $('#signupError').html(result.error);
+                }
+                else if(result.errors) {
+                    $('#signupError').html('');
+                    jQuery.each(result.errors, function(key, value){
+                        $('#signupError').show();
+                        $('#signupError').append('<li>'+value+'</li>');
+                   });
+                }
             }  ,
             error: function(response) {
+                $('#signupError').html('');
+                jQuery.each(response.errors, function(key, value){
+                    $('#signupError').show();
+                    $('#signupError').append('<li>'+value+'</li>');
+                });
 
-                $('#signupname').hide();  $('#signupphone').hide();
-                $('#signupemail').hide();  $('#signuppass').hide();
-
-                if(response.responseJSON.errors.name != ''){
-
-                    $('#signupname').text(response.responseJSON.errors.name);
-                    $('#signupname').show();
-                }
-
-                if(response.responseJSON.errors.phone != ''){
-
-                    $('#signupphone').text(response.responseJSON.errors.phone);
-                    $('#signupphone').show();
-                }
-
-
-                if(response.responseJSON.errors.email != ''){
-
-                    $('#signupemail').text(response.responseJSON.errors.email);
-                    $('#signupemail').show();
-                }
-                if(response.responseJSON.errors.password != ''){
-
-                    $('#signuppass').text(response.responseJSON.errors.password);
-                    $('#signuppass').show();
-                }
 
             },
 

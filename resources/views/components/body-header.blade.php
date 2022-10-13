@@ -144,7 +144,8 @@
                                 <div>
                                     <h2>Sign up</h2>
                                     <p>Please Sign up and explore your dream house from silwana real estate.</p>
-                                    @include('layouts.alerts.error')
+                                    <div class="alert alert-danger  mt-1 mb-1" id="signupError"  style="display: none"></div>
+
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -200,10 +201,11 @@
                         </div>
                         <div class="col-lg-5">
                             <form method="post"  id="loginForm"  class="sign-up-form"  >
-                              @csrf
+
                                <div>
                                     <h2>login</h2>
                                     <p>Please Sign In and explore your dream house from silwana real estate.</p>
+                                   <div class="alert alert-danger  mt-1 mb-1" id="loginError"  style="display: none"></div>
 
                                 </div>
                                 <div class="row">

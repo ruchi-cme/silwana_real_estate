@@ -24,12 +24,7 @@ class HomeController extends Controller
     }
     public function login(Request $request)
     {
-        $validatedData =  $request->validate([
-            'email'   => 'required',
-            'password' => 'required|min:6'
-        ]);
 
-        //Error messages
         $messages = [
             "email.required" => "Email is required",
             "email.email" => "Email is not valid",
@@ -39,33 +34,36 @@ class HomeController extends Controller
         ];
         // validate the form data
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|exists:users,email',
+            'email' => 'required|email',
             'password' => 'required|min:6'
         ], $messages);
 
         if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
+
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()->all()
+            ]);
+
         } else {
             // attempt to log
-            if (Auth::guard('front')->attempt(['email' => $request->email, 'password' =>  $request->password], $request->get('remember'))) {
+            if (Auth::guard('front')->attempt(['email' => $request->email, 'password' =>  $request->password])) {
                 // if successful -> redirect forward
-                return redirect()->intended(route('home'));
+
+                return response()->json(['success' => true,'error' => '']);
+               // return redirect()->intended(route('home'));
+            }
+            else {
+                return response()->json(['success' => false,'error' => 'These credentials do not match our records.']);
             }
 
             // if unsuccessful -> redirect back
-            return redirect()->back()->withInput($request->only('email', 'remember'))->withErrors([
+          /*  return redirect()->back()->withInput($request->only('email', 'remember'))->withErrors([
                 'approve' => 'These credentials do not match our records. ',
-            ]);
+            ]); */
         }
 
-      /*  if (Auth::guard('front')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
-            return view('front.home' );
-        }
-        else{
-
-            return view('front.home' );
-        }*/
 
     }
 
@@ -78,7 +76,77 @@ class HomeController extends Controller
         return redirect('/');
     }
 
-    public function signup(Request $request){
+
+    public function signup(Request $request)
+
+    {
+        //Error messages
+        $messages = [
+            "email.required" => "Email is required",
+            "email.email" => "Email is not valid",
+            "email.exists" => "Email doesn't exists",
+            "password.required" => "Password is required",
+            "password.min" => "Password must be at least 6 characters"
+        ];
+        // validate the form data
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'phone' => 'required|numeric|min:9',
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ], $messages);
+
+
+
+        if ($validator->fails()) {
+
+
+            return response()->json([
+
+                'success' => false,
+
+                'errors' => $validator->errors()->all()
+
+            ]);
+
+        } else {
+
+            $list = new User();
+            $user = $list->where('email', '=', $request->email)->first();
+
+            if ($user === null) {
+                $list->name = $request->name;
+                $list->phone = $request->phone;
+                $list->email = strtolower(trim($request->email));
+                $list->password = Hash::make($request->password);
+                $list->save();
+
+                if ($list->id) {
+ 
+
+                  if (Auth::guard('front')->attempt(['email' => $list->email, 'password' => $request->password])) {
+
+                        return response()->json(['success' => true,'error' => '']);
+                     }
+
+                } else {
+
+                    return response()->json(['success' => false, 'error' => 'sommething went wrong']);
+
+                }
+            }
+            else {
+                return response()->json(['success' => false, 'error' => 'User already exist.']);
+            }
+
+
+
+        }
+
+    }
+
+
+    public function signup1(Request $request){
 
         $validatedData =  $request->validate([
             'name'   => 'required',
