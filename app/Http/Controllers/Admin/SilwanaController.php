@@ -87,7 +87,7 @@ class SilwanaController extends Controller
         $pageImage = null;
 
         if ($image = $request->file('page_image')) {
-            $destinationPath = 'images/page';
+            $destinationPath = public_path('images/page');
             $pageImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $pageImage);
         }
@@ -112,7 +112,7 @@ class SilwanaController extends Controller
             $headingImage = $request->file('heading_image') ;
             if (isset($headingImage)) {
                 $headingImage = $request->file('heading_image')[$i];
-                $destinationPath = 'images/heading';
+                $destinationPath = public_path('images/heading');
                 $subHeadingImage = date('YmdHis') . "." . $headingImage->getClientOriginalName();
                 $headingImage->move($destinationPath, $subHeadingImage);
             }
@@ -149,13 +149,13 @@ class SilwanaController extends Controller
 
         if (!empty($image) ) {
 
-            $destinationPath = 'images/page';
+            $destinationPath = public_path('images/page');
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
 
             if (!empty($editPageImage) && file_exists(public_path().'/images/page/'.$editPageImage)) {
 
-                unlink("images/page/".$editPageImage);
+                unlink(public_path("images/page/").$editPageImage);
             }
         }
         elseif (!empty($editPageImage)) {
@@ -185,7 +185,7 @@ class SilwanaController extends Controller
                  if ( (!in_array($row['silwana_dtl_mpg_id'] , $request->silwana_dtl_mpg_id))) {
 
                      if (!empty($row['heading_image']) && file_exists(public_path().'/images/heading/'.$row['heading_image'])) {
-                         unlink("images/heading/".$row['heading_image']);
+                         unlink(public_path("images/heading/").$row['heading_image']);
                      }
                      SilwanaDetailMapping::where('silwana_dtl_mpg_id', $row['silwana_dtl_mpg_id'] )->delete();
                  }
@@ -209,11 +209,11 @@ class SilwanaController extends Controller
                 if (isset($headingImage)) {
                     if (array_key_exists($i, $headingImage)) {
                         $headingImage = $request->file('heading_image')[$i];
-                        $destinationPath = 'images/heading';
+                        $destinationPath = public_path('images/heading');
                         $subHeadingImage = date('YmdHis') . "." . $headingImage->getClientOriginalName();
                         $headingImage->move($destinationPath, $subHeadingImage);
                         if (!empty($editHeadingImage) && file_exists(public_path() . '/images/heading/' . $editHeadingImage)) {
-                             unlink("images/heading/" . $editHeadingImage);
+                             unlink(public_path("images/heading/") . $editHeadingImage);
                         }
                     } else {
                         $subHeadingImage = $editHeadingImage;

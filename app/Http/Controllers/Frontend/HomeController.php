@@ -122,7 +122,7 @@ class HomeController extends Controller
                 $list->save();
 
                 if ($list->id) {
- 
+
 
                   if (Auth::guard('front')->attempt(['email' => $list->email, 'password' => $request->password])) {
 

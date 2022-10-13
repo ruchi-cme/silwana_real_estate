@@ -71,7 +71,7 @@ class ContactUsController extends Controller
         $Image  = null;
 
         if ($image = $request->file('image')) {
-            $destinationPath = 'images/contactus';
+            $destinationPath = public_path('images/contactus');
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
         }
@@ -118,11 +118,11 @@ class ContactUsController extends Controller
         $editImage = $request->edit_image;
         if (!empty($image) ) {
 
-            $destinationPath = 'images/contactus';
+            $destinationPath = public_path('images/contactus');
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
             if (!empty($editImage)) {
-                unlink("images/contactus/" . $editImage);
+                unlink(public_path("images/contactus/") . $editImage);
             }
         }
         elseif (!empty($editImage)) {

@@ -53,7 +53,7 @@ class CategoryController extends Controller
         $Image  = null;
 
         if ($image = $request->file('category_image')) {
-            $destinationPath = 'images/category';
+            $destinationPath = public_path('images/category');
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
         }
@@ -77,11 +77,11 @@ class CategoryController extends Controller
         $editImage = $request->edit_category_image;
         if (!empty($image) ) {
 
-            $destinationPath = 'images/category';
+            $destinationPath = public_path('images/category');
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
             if (!empty($editImage)) {
-                unlink("images/category/" . $editImage);
+                unlink(public_path("images/category/") . $editImage);
             }
         }
         elseif (!empty($editImage)) {

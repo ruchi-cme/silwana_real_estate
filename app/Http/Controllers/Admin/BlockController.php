@@ -106,7 +106,7 @@ class BlockController extends Controller
             foreach($request->file('block_image') as $key => $file)
             {
                 $image = $request->file('block_image')[$key];
-                $destinationPath = 'images/block';
+                $destinationPath = public_path('images/block');
                 $name = date('YmdHis') . "." . $file->getClientOriginalName();  ;
                 $image->move($destinationPath, $name);
                 $insertImg[$key]['block_id'] = $block_id['proj_block_map_id'];
@@ -168,7 +168,7 @@ class BlockController extends Controller
             foreach ($image as $img) {
                 if (!in_array($img['title'] , $editImg)) {
                     if (file_exists(public_path() . '/images/block/' . $img['title'])) {
-                        unlink("images/block/" . $img['title']);
+                        unlink(public_path("images/block/") . $img['title']);
                         BlockImageMapping::where('block_img_mpg_id', $img['block_img_mpg_id'])->delete();
                     }
                 }
@@ -181,7 +181,7 @@ class BlockController extends Controller
             foreach($request->file('block_image') as $key => $file)
             {
                 $image = $request->file('block_image')[$key];
-                $destinationPath = 'images/block';
+                $destinationPath = public_path('images/block');
                 $name = date('YmdHis') . "." . $file->getClientOriginalName();  ;
                 $image->move($destinationPath, $name);
                 $insertImg[$key]['block_id'] = $request->proj_block_map_id;

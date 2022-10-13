@@ -34,11 +34,11 @@ class MyProfileController extends Controller
 
         if (!empty($image) ) {
 
-            $destinationPath = 'images/user';
+            $destinationPath = public_path('images/user');
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
             if (!empty($editImage)) {
-                unlink("images/user/" . $editImage);
+                unlink(public_path("images/user/") . $editImage);
             }
         }
         elseif (!empty($editImage)) {

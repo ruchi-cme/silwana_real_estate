@@ -69,7 +69,7 @@ class AmenitiesController extends Controller
         $Image  = null;
 
         if ($image = $request->file('amenity_image')) {
-            $destinationPath = 'images/amenities';
+            $destinationPath = public_path('images/amenities');
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
         }
@@ -121,7 +121,7 @@ class AmenitiesController extends Controller
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
             if (!empty($editAmenityImage)) {
-                unlink("images/amenities/" . $editAmenityImage);
+                unlink( public_path('images/amenities/') . $editAmenityImage);
             }
         }
         elseif (!empty($editAmenityImage)) {
@@ -134,7 +134,7 @@ class AmenitiesController extends Controller
         $updateData->update([
             'amenity_name'  => $request->amenity_name,
             'amenity_detail'=> $request->amenity_detail,
-            'amenity_image' =>  $Image,
+            'amenity_image' => $Image,
             'modified_by'   =>  $userID,
             'modified_date' => now()
         ]);

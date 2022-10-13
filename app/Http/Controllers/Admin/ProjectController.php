@@ -147,7 +147,7 @@ class ProjectController extends Controller
             foreach($request->file('project_pdf') as $key => $file)
             {
                 $pdf = $request->file('project_pdf')[$key];
-                $destinationPath = 'images/project/pdf';
+                $destinationPath = public_path('images/project/pdf');
                 $name = date('YmdHis') . "." . $file->getClientOriginalName();
                 $pdf->move($destinationPath, $name);
                 $insert[$key]['project_id'] = $project_id['project_id'];
@@ -167,7 +167,7 @@ class ProjectController extends Controller
             foreach($request->file('project_image') as $key => $file)
             {
                 $image = $request->file('project_image')[$key];
-                $destinationPath = 'images/project/images';
+                $destinationPath = public_path('images/project/images');
                 $name = date('YmdHis') . "." . $file->getClientOriginalName();  ;
                 $image->move($destinationPath, $name);
                 $insertImg[$key]['project_id'] = $project_id['project_id'];
@@ -303,7 +303,7 @@ class ProjectController extends Controller
                     if (  !in_array($img['title'] , $editProjectPdf) ) {
                         if($img['type'] == 1) {
                             if (  file_exists(public_path().'/images/project/pdf/'.$img['title'])) {
-                                unlink("images/project/pdf/".$img['title']);
+                                unlink(public_path("images/project/pdf/").$img['title']);
                                 ProjectImage::where('project_image_id' , $img['project_image_id'])->where('type' , 1)->delete();
                             }
                         }
@@ -312,7 +312,7 @@ class ProjectController extends Controller
                     if  (  !in_array($img['title'] , $editProjectImg)) {
                         if($img['type'] == 2) {
                             if (file_exists(public_path() . '/images/project/images/' . $img['title'])) {
-                                unlink("images/project/images/" . $img['title']);
+                                unlink(public_path("images/project/images/" ). $img['title']);
                                 ProjectImage::where('project_image_id', $img['project_image_id'])->where('type' , 2)->delete();
                             }
                         }
@@ -325,7 +325,7 @@ class ProjectController extends Controller
             foreach($request->file('project_pdf') as $key => $file)
             {
                 $pdf = $request->file('project_pdf')[$key];
-                $destinationPath = 'images/project/pdf';
+                $destinationPath = public_path('images/project/pdf');
                 $name = date('YmdHis') . "." . $file->getClientOriginalName();
                 $pdf->move($destinationPath, $name);
                 $insert[$key]['project_id'] = $request->project_id;
@@ -346,7 +346,7 @@ class ProjectController extends Controller
             foreach($request->file('project_image') as $key => $file)
             {
                 $image = $request->file('project_image')[$key];
-                $destinationPath = 'images/project/images';
+                $destinationPath = public_path('images/project/images');
                 $name = date('YmdHis') . "." . $file->getClientOriginalName();
                 $image->move($destinationPath, $name);
                 $insertImg[$key]['project_id'] = $request->project_id;

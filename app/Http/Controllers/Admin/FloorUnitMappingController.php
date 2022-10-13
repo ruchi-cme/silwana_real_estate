@@ -120,7 +120,7 @@ class FloorUnitMappingController extends Controller
             foreach($request->file('image') as $key => $file)
             {
                 $image = $request->file('image')[$key];
-                $destinationPath = 'images/unit';
+                $destinationPath = public_path('images/unit');
                 $name = date('YmdHis') . "." . $file->getClientOriginalName();  ;
                 $image->move($destinationPath, $name);
                 $insertImg[$key]['proj_floor_unit_id'] = $proj_floor_unit_id['proj_floor_unit_id'];
@@ -190,7 +190,7 @@ class FloorUnitMappingController extends Controller
             foreach ($image as $img) {
                 if (!in_array($img['title'] , $editImg)) {
                     if (file_exists(public_path() . '/images/unit/' . $img['title'])) {
-                        unlink("images/unit/" . $img['title']);
+                        unlink(public_path("images/unit/") . $img['title']);
                         ProjUnitImage::where('proj_unit_image_id', $img['proj_unit_image_id'])->delete();
                     }
                 }
@@ -203,7 +203,7 @@ class FloorUnitMappingController extends Controller
             foreach($request->file('image') as $key => $file)
             {
                 $image = $request->file('image')[$key];
-                $destinationPath = 'images/unit';
+                $destinationPath = public_path('images/unit');
                 $name = date('YmdHis') . "." . $file->getClientOriginalName();  ;
                 $image->move($destinationPath, $name);
                 $insertImg[$key]['proj_floor_unit_id'] = $request->proj_floor_unit_id;

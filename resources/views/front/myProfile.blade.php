@@ -106,7 +106,7 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <form onsubmit="validationForm()" action="{{route('myProfile/update')}}" method="post" class="edit-profile-form" enctype="multipart/form-data">
+                    <form  action="{{route('myProfile/update')}}" method="post" class="edit-profile-form" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="edit-profile-circle">
@@ -123,19 +123,19 @@
 
                         <div class="form-group">
                             <label for="">First Name</label>
-                            <input type="text" class="form-control" name="firstname" value="{{ !empty($userData['firstname'])? $userData['firstname'] : '' }}">
+                            <input type="text" required class="form-control" name="firstname" value="{{ !empty($userData['firstname'])? $userData['firstname'] : '' }}">
                         </div>
                         <div class="form-group">
                             <label for="">Last Name</label>
-                            <input type="text" class="form-control" name="lastname" value="{{ !empty($userData['lastname'])? $userData['lastname'] : '' }}">
+                            <input type="text" required class="form-control" name="lastname" value="{{ !empty($userData['lastname'])? $userData['lastname'] : '' }}">
                         </div>
                         <div class="form-group">
                             <label for="">Mobile Number</label>
-                            <input type="text" class="form-control"  name="phone"  value="{{  !empty($userData['phone'])? $userData['phone'] :'' }}">
+                            <input type="text" required class="form-control"  name="phone"  value="{{  !empty($userData['phone'])? $userData['phone'] :'' }}">
                         </div>
                         <div class="form-group">
                             <label for="">Email</label>
-                            <input type="email" class="form-control"   name="email"   value="{{ !empty($userData['email']) ? $userData['email'] :'' }}">
+                            <input type="email" required class="form-control"   name="email"   value="{{ !empty($userData['email']) ? $userData['email'] :'' }}">
                         </div>
                         <div class="form-group mb-0 d-flex justify-content-between">
                             <input type="hidden" name="user_id" value="{{!empty($userData['id']) ? $userData['id']  : ''}}">

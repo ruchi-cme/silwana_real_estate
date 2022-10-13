@@ -103,7 +103,7 @@ class BlockFloorMappingController extends Controller
             foreach($request->file('image') as $key => $file)
             {
                 $image = $request->file('image')[$key];
-                $destinationPath = 'images/floor';
+                $destinationPath = public_path('images/floor');
                 $name = date('YmdHis') . "." . $file->getClientOriginalName();  ;
                 $image->move($destinationPath, $name);
                 $insertImg[$key]['proj_block_floor_id'] = $proj_block_floor_id['proj_block_floor_id'];
@@ -166,7 +166,7 @@ class BlockFloorMappingController extends Controller
             foreach ($image as $img) {
                 if (!in_array($img['title'] , $editImg)) {
                     if (file_exists(public_path() . '/images/floor/' . $img['title'])) {
-                        unlink("images/floor/" . $img['title']);
+                        unlink(public_path("images/floor/"). $img['title']);
                         ProjFloorImage::where('proj_floor_image_id', $img['proj_floor_image_id'])->delete();
                     }
                 }
@@ -179,7 +179,7 @@ class BlockFloorMappingController extends Controller
             foreach($request->file('image') as $key => $file)
             {
                 $image = $request->file('image')[$key];
-                $destinationPath = 'images/floor';
+                $destinationPath = public_path('images/floor');
                 $name = date('YmdHis') . "." . $file->getClientOriginalName();  ;
                 $image->move($destinationPath, $name);
                 $insertImg[$key]['proj_block_floor_id'] = $request->proj_block_floor_id;
