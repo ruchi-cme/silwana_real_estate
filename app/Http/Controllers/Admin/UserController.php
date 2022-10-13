@@ -125,7 +125,7 @@ class UserController extends Controller
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
             if (!empty($editImage)) {
-                unlink(public_path("images/user/") . $editImage);
+                @unlink(public_path("images/user/") . $editImage);
             }
         }
         elseif (!empty($editImage)) {

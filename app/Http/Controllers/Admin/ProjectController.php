@@ -303,7 +303,7 @@ class ProjectController extends Controller
                     if (  !in_array($img['title'] , $editProjectPdf) ) {
                         if($img['type'] == 1) {
                             if (  file_exists(public_path().'/images/project/pdf/'.$img['title'])) {
-                                unlink(public_path("images/project/pdf/").$img['title']);
+                                @unlink(public_path("images/project/pdf/").$img['title']);
                                 ProjectImage::where('project_image_id' , $img['project_image_id'])->where('type' , 1)->delete();
                             }
                         }
@@ -312,7 +312,7 @@ class ProjectController extends Controller
                     if  (  !in_array($img['title'] , $editProjectImg)) {
                         if($img['type'] == 2) {
                             if (file_exists(public_path() . '/images/project/images/' . $img['title'])) {
-                                unlink(public_path("images/project/images/" ). $img['title']);
+                                @unlink(public_path("images/project/images/" ). $img['title']);
                                 ProjectImage::where('project_image_id', $img['project_image_id'])->where('type' , 2)->delete();
                             }
                         }

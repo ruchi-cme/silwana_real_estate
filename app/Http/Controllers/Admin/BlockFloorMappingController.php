@@ -166,7 +166,7 @@ class BlockFloorMappingController extends Controller
             foreach ($image as $img) {
                 if (!in_array($img['title'] , $editImg)) {
                     if (file_exists(public_path() . '/images/floor/' . $img['title'])) {
-                        unlink(public_path("images/floor/"). $img['title']);
+                        @unlink(public_path("images/floor/"). $img['title']);
                         ProjFloorImage::where('proj_floor_image_id', $img['proj_floor_image_id'])->delete();
                     }
                 }

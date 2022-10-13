@@ -168,7 +168,7 @@ class BlockController extends Controller
             foreach ($image as $img) {
                 if (!in_array($img['title'] , $editImg)) {
                     if (file_exists(public_path() . '/images/block/' . $img['title'])) {
-                        unlink(public_path("images/block/") . $img['title']);
+                        @unlink(public_path("images/block/") . $img['title']);
                         BlockImageMapping::where('block_img_mpg_id', $img['block_img_mpg_id'])->delete();
                     }
                 }

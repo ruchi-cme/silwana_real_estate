@@ -190,7 +190,7 @@ class FloorUnitMappingController extends Controller
             foreach ($image as $img) {
                 if (!in_array($img['title'] , $editImg)) {
                     if (file_exists(public_path() . '/images/unit/' . $img['title'])) {
-                        unlink(public_path("images/unit/") . $img['title']);
+                        @unlink(public_path("images/unit/") . $img['title']);
                         ProjUnitImage::where('proj_unit_image_id', $img['proj_unit_image_id'])->delete();
                     }
                 }

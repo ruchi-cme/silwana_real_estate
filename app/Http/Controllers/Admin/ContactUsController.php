@@ -122,7 +122,7 @@ class ContactUsController extends Controller
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
             if (!empty($editImage)) {
-                unlink(public_path("images/contactus/") . $editImage);
+                @unlink(public_path("images/contactus/") . $editImage);
             }
         }
         elseif (!empty($editImage)) {

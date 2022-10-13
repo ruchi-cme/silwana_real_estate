@@ -81,7 +81,7 @@ class CategoryController extends Controller
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
             if (!empty($editImage)) {
-                unlink(public_path("images/category/") . $editImage);
+                @unlink(public_path("images/category/") . $editImage);
             }
         }
         elseif (!empty($editImage)) {

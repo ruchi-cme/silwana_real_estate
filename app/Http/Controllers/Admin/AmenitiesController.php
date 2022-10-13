@@ -121,7 +121,7 @@ class AmenitiesController extends Controller
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
             if (!empty($editAmenityImage)) {
-                unlink( public_path('images/amenities/') . $editAmenityImage);
+                @unlink( public_path('images/amenities/') . $editAmenityImage);
             }
         }
         elseif (!empty($editAmenityImage)) {
