@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('project_images');
         Schema::create('project_images', function (Blueprint $table) {
             $table->increments('project_image_id');
             $table->integer('project_id')->comment('From project_master');
             $table->string('title');
             $table->string('path');
+            $table->string('direction')->nullable();
+            $table->string('facing')->nullable();
             $table->tinyInteger('type')->default(1)->comment('1- PDF,2-Image' );
             /* Status :  1- PDF,2-Image */
             $table->tinyInteger('status')->default(1)->comment('1- Active,2-InActive' );

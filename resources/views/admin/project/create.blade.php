@@ -175,37 +175,6 @@
                             </div>
                             <!--end::Row-->
 
-                            <!--begin::Row-->
-                            <div class="row">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3">Images</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="file" name="project_image[]" id="project_image" >
-
-                                    <div class="col-xl-9 fv-row fv-plugins-icon-container images-preview-div">
-
-                                     @if (!empty($selectedImage))
-                                         @foreach ($selectedImage as $image )
-                                             @if ($image['type'] == 2)
-                                                <span class="pip">
-                                                     <input type="hidden" name="edit_project_image[]" value="{{ !empty( $image['title'] ) ? $image['title']  : '' }}" id="edit_project_image">
-                                                    <img height='50' width='50' class="imageThumb" src="{{ asset('images/project/images').'/'.$image['title'] }}" title=""/>
-                                                <br/><span class="removeImg"><i class="fa fa-trash"></i></span>
-                                                </span>
-                                            @endif
-                                        @endforeach
-                                     @endif
-
-                                    </div>
-
-                            </div>
-                            <!--end::Row-->
-
-                        </div>
                         <!--end::Card body-->
                     </div>
                     <!--end::Card-->
@@ -377,35 +346,7 @@
     <script type="text/javascript">
 
          $(document).ready(function() {
-            if (window.File && window.FileList && window.FileReader) {
-                $("#project_image").on("change", function(e) {
-                    var files = e.target.files,
-                        filesLength = files.length;
-                    for (var i = 0; i < filesLength; i++) {
-                        var f = files[i]
-                        var fileReader = new FileReader();
-                        fileReader.onload = (function(e) {
-                            var file = e.target;
-                            $("<span class=\"pip\">" +
-                                "<img height='50' width='50' class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-                                "<br/><span class=\"remove\"><i class=\"fa fa-trash\"></i></span>" +
-                                "</span>").insertAfter(".images-preview-div");
-                            $(".remove").click(function(){
-                                $(this).parent(".pip").remove();
-                            });
 
-                        });
-                        fileReader.readAsDataURL(f);
-                    }
-                });
-            } else {
-                alert("Your browser doesn't support to File API")
-            }
-        });
-         $(".removeImg").click(function(){
-             $(this).parent(".pip").remove();
-
-         });
          $(".removePdf").click(function(){
              $(this).parent(".pip").remove();
          });

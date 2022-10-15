@@ -65,7 +65,9 @@ class BlockController extends Controller
      */
     public function create()
     {
-        return view('admin.block.create' );
+        return view('admin.floor.table' );
+       // return view('admin.block.create' );
+
     }
 
     /**

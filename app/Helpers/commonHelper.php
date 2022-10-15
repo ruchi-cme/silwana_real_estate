@@ -214,16 +214,17 @@ if(!function_exists("getProjectImage")) {
 
     function getProjectImage($project_id,$obj = '') {
 
-        if(!empty($obj)){
-            $data = ProjectImage::select([ 'title','path','type'])
+        $select = ['project_image_id', 'title','path','type' ,'direction','facing'];
+
+        if (!empty($obj)) {
+            $data = ProjectImage::select($select)
                 ->where('project_id' ,  $project_id)
                 ->get()
                 ->first();
         } else {
-            $data = ProjectImage::select([ 'title','path','type'])
+            $data = ProjectImage::select($select)
                 ->where('project_id' ,  $project_id)
                 ->get();
-
         }
 
         return $data;

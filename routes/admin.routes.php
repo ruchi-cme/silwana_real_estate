@@ -82,6 +82,10 @@ Route::name('project.store')->post('/project/store', 'App\Http\Controllers\Admin
 Route::name('project.update')->post('/project/update', 'App\Http\Controllers\Admin\ProjectController@update')->middleware(['permission:project-update']);
 Route::name('project.delete')->get('/project/delete/{id}', 'App\Http\Controllers\Admin\ProjectController@destroy')->middleware(['permission:project-delete']);
 Route::name('project.delete')->get('/project/changeStatus/{id}', 'App\Http\Controllers\Admin\ProjectController@changeStatus')->middleware(['permission:project-changeStatus']);
+Route::name('project.imageUpload/{id}')->get('/project/imageUpload/{id}', 'App\Http\Controllers\Admin\ProjectController@imageUpload')->middleware(['permission:project-imageUpload']);
+Route::name('project.imageUpdate')->post('/project/imageUpdate', 'App\Http\Controllers\Admin\ProjectController@imageUpdate')->middleware(['permission:project-imageUpdate']);
+Route::name('project.imageStore')->post('/project/imageStore', 'App\Http\Controllers\Admin\ProjectController@imageStore')->middleware(['permission:project-imageStore']);
+
 
 // Block Details
 Route::name('block')->get('/block', 'App\Http\Controllers\Admin\BlockController@index')->middleware(['permission:block-view']);

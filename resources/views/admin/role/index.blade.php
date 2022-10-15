@@ -15,6 +15,7 @@
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-5 g-xl-9">
             <!--begin::Col-->
             @foreach ($roles as $role)
+
                 <div class="col-md-4">
                     <!--begin::Card-->
                     <div class="card card-flush shadow-lg h-md-100">
@@ -30,7 +31,7 @@
                         <!--begin::Card body-->
                         <div class="card-body pt-1">
                             <!--begin::Users-->
-                            <div class="fw-bolder text-gray-600 mb-5">Total users with this role: <span class="badge badge-lg badge-primary">{{ \App\Models\User::role($role->name)->count() }}</span></div>
+                            <div class="fw-bolder text-gray-600 mb-5">Total users with this role: <span class="badge badge-lg badge-primary">  <!-- //  \App\Models\User::role($role->name)->count() -->   </span></div>
                             {{-- //TODO make it work 👆 --}}
                             <!--end::Users-->
                             <!--begin::Permissions-->
@@ -90,7 +91,7 @@
             <!--begin::Add new card-->
         </div>
         <!--end::Row-->
-  
+
     </div>
     <!--end::Container-->
 </div>

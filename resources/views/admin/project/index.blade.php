@@ -139,6 +139,8 @@
                         $icon  = '<i class="fa fa-toggle-on"></i>'
                     }
                     return `
+                            <a href="project/imageUpload/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-success me-2"
+                            ><span class="svg-icon svg-icon-1"><i class="fa fa-upload"></i></span></a>
                             <a href="project/edit/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-success me-2"
                             ><span class="svg-icon svg-icon-1"><i class="fa fa-edit"></i></span></a>
                             <a href="project/delete/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2"
