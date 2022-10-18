@@ -62,7 +62,7 @@ class BlockFloorMappingController extends Controller
      */
     public function create()
     {
-        return view('admin.floor.create' );
+        return view('admin.block.table' );
     }
 
     /**
