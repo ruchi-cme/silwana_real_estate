@@ -217,37 +217,23 @@
 <script   src="{{ asset('js/front/custom') }}/general.js"> </script>
 
 <script type="text/javascript">
-    $(document).ready(function() {
 
-        $('#blockForm').validate({});
-        $('input.block_name').each(function () {
-            $(this).rules("add",
-                {
-                    required: true,
-                    messages: {
-                        required: "Please enter block name",
-                    }
-                })
-        });
+    var test = [];
+    function remove_btn(i) {
+        var removeId = $('#removeBlockBtn'+i).attr('removeBlockId');
+        test.push(removeId);
+        $('#removeId').val(test);
+        $('.blockDiv_'+i).remove();
+        var totalblock = $('#total_block').val();
+        var newCount = totalblock - 1 ;
+        $('#total_block').val(newCount);
 
-        
-        var test = [];
+    }
 
-        function remove_btn(i) {
-            var removeId = $('#removeBlockBtn' + i).attr('removeBlockId');
-            test.push(removeId);
-            $('#removeId').val(test);
-            $('.blockDiv_' + i).remove();
-            var totalblock = $('#total_block').val();
-            var newCount = totalblock - 1;
-            $('#total_block').val(newCount);
+        $(".blockType").on('change',function(){
 
-        }
-
-        $(".blockType").on('change', function () {
-
-            var blockType = $(this).val();
-            if (blockType == 2) {
+           var blockType =  $(this).val();
+            if(blockType == 2) {
 
                 $('.rangeDiv').hide();
                 toRange();
@@ -277,47 +263,48 @@
                 return false;
             }
         });
-        $('#blockForm').validate({});
-    });
+
         function toRange() {
 
             var rowCount = $('.PrintDiv div.blockDiv').length;
             var total_block = $("#total_block").val();
 
-            if (rowCount == 0) {
+            if(rowCount == 0) {
                 var tdCount = total_block;
-            } else if (total_block > rowCount) {
+            }
+            else if(total_block > rowCount ) {
                 var tdCount = total_block - rowCount;
-            } else if (total_block < rowCount) {
+            }
+            else if(total_block < rowCount ) {
 
-                for ($i = rowCount; $i >= total_block; $i--) {
-                    var removeId = $('#removeBlockBtn' + $i).attr('removeBlockId');
+                for($i = rowCount; $i >= total_block; $i--) {
+                    var removeId = $('#removeBlockBtn'+$i).attr('removeBlockId');
                     test.push(removeId);
                     $('#removeId').val(test);
-                    $('.blockDiv_' + $i).remove();
+                    $('.blockDiv_'+$i).remove();
                 }
             }
 
             var from = $("#from").val();
 
-            if (typeof (from) === "undefined") {
+            if(typeof(from)  === "undefined"){
                 var nex = '';
                 var curr = '';
 
             }
             //do this
-            else {
+            else{
                 var nex = from.charCodeAt(0);
                 var curr = String.fromCharCode(nex);
 
             }
 
-            for (var k = rowCount; k < total_block; k++) {
+            for (var k = rowCount; k < total_block ; k++) {
 
-                if (nex !== "")
-                    curr = String.fromCharCode(nex++);
+                if(nex  !== "")
+                  curr = String.fromCharCode(nex++);
 
-                $('.PrintDiv').append(`
+             $('.PrintDiv').append(`
                 <div class="row mb-8 blockDiv blockDiv_${k}">
                 <!--begin::Col-->
                     <div class="col-xl-3">
@@ -332,12 +319,17 @@
                 <div class="fv-plugins-message-container invalid-feedback"></div></div>
                 </div> `);
 
-            }
-
-
         }
-
-
+            $('input.block_name').each(function() {
+                $(this).rules("add",
+                    {
+                        required: true,
+                        messages: {
+                            required: "Please enter block name",
+                        }
+                    })
+            });
+    }
 
         var button = document.querySelector("#create_button");
 
