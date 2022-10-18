@@ -210,7 +210,7 @@ if(!function_exists("getProjectAddress")) {
     }
 }
 
-if(!function_exists("getProjectImage")) {
+if (!function_exists("getProjectImage")) {
 
     function getProjectImage($project_id,$obj = '') {
 
@@ -224,7 +224,7 @@ if(!function_exists("getProjectImage")) {
         } else {
             $data = ProjectImage::select($select)
                 ->where('project_id' ,  $project_id)
-                ->get();
+                ->get()->toArray();
         }
 
         return $data;

@@ -14,7 +14,38 @@ $(document).ready(function() {
                 maxlength: 255,
             },
         });
+
+    $("#projectImage").validate({
+
+        rules: {
+
+            "facing[]": "required",
+
+        },
+        messages: {
+
+            "facing[]": "Please enter facing",
+        }
     });
+
+    $("#tableForm").validate({
+        ignore: '',
+        rules: {
+            "block_name" :"required",
+            "floor_no" : "required",
+            "initial_name" : "initial_name",
+
+            "facing[]" : "required",
+
+        },
+        messages: {
+            "block_name" :"Please enter block name",
+            "floor_no" : "Please enter floor number",
+            "initial_name" : "Please enter initial name",
+            "facing[]": "Please enter facing",
+        }
+    });
+});
 
 
 

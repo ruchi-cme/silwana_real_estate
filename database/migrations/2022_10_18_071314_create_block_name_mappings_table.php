@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('proj_block_mappings');
-        Schema::create('proj_block_mappings', function (Blueprint $table) {
-            $table->increments('proj_block_map_id');
+        Schema::create('block_name_mappings', function (Blueprint $table) {
+            $table->increments('block_name_map_id');
+            $table->integer('proj_block_map_id')->comment('From proj_block_mappings');
             $table->integer('project_id')->comment('From project_master');
-            $table->string('total_block');
-            $table->string('type_of_block');
-            $table->string('range')->nullable();
+            $table->string('block_name');
             $table->tinyInteger('status')->default(1)->comment('1- Active,2-InActive' );;
             /* Status :  1- Active,2-InActive */
             $table->integer('created_by')->nullable();
@@ -39,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('proj_block_mappings');
+        Schema::dropIfExists('block_name_mappings');
     }
 };

@@ -63,9 +63,7 @@
                         <thead>
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th>Project Name</th>
-                                <th>Block Name</th>
-                                <th>Floor</th>
-                                <th>Category</th>
+                                <th>Total Block </th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -114,13 +112,7 @@
                 data: 'project_name'
             },
             {
-                data: 'block_name'
-            },
-            {
-                data: 'floor'
-            },
-            {
-                data: 'category_name'
+                data: 'total_block'
             },
             {
                 data: 'status'
@@ -152,7 +144,7 @@
                 },
             },
             {
-                targets: 4,
+                targets: 3,
                 render: function (data, type, row) {
                     return `
                                 <span class="badge badge-primary">${data}</span>

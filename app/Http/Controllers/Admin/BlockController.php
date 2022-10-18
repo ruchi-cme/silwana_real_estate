@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Block;
-use App\Models\{Category,Project,BlockImageMapping};
+use App\Models\{Category,Project,BlockImageMapping,Block_name_mapping};
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Config;
 
 
 class BlockController extends Controller
@@ -25,27 +26,22 @@ class BlockController extends Controller
 
             $select =  [
                  'proj_block_mappings.proj_block_map_id',
-                'proj_block_mappings.block_name',
-                'proj_block_mappings.floor',
-                'proj_block_mappings.facing_text',
+                'proj_block_mappings.total_block',
                 'proj_block_mappings.status',
                 'proj_block_mappings.created_date',
-                'category_master.category_name',
                 'project_master.project_name'
             ];
-            $dbData = Block::leftJoin('category_master', 'category_master.category_id', '=', 'proj_block_mappings.category_id')
-                ->leftJoin('project_master', 'project_master.project_id', '=', 'proj_block_mappings.project_id')
+            $dbData = Block::leftJoin('project_master', 'project_master.project_id', '=', 'proj_block_mappings.project_id')
                 ->select($select)
                 ->orderBy('proj_block_mappings.proj_block_map_id', 'desc')
                 ->where('proj_block_mappings.deleted',0)
                 ->get();
+
             $data = $dbData->map(function ($data){
 
                 return [
                     'id'              => $data->proj_block_map_id,
-                    'block_name'      => $data->block_name,
-                    'floor'           => $data->floor,
-                    'category_name'   => $data->category_name,
+                    'total_block'      => $data->total_block,
                     'project_name'    => $data->project_name,
                     'status'          => !empty($data->status) && ($data->status == 1) ? 'Active' : 'Inctive',
                     'created_date'    => $data->created_date
@@ -65,7 +61,10 @@ class BlockController extends Controller
      */
     public function create()
     {
-        return view('admin.floor.table' );
+        $type_of_block = Config::get('constants.type_of_block');
+
+        return view('admin.block.create', compact('type_of_block') );
+
        // return view('admin.block.create' );
 
     }
@@ -78,13 +77,10 @@ class BlockController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'project_name'  => 'required',
-            'category_name' => 'required',
-            'block_name'    => 'required',
-            'floor'         => 'required',
-            'facing_text'   => 'required',
-            'block_image.*' => 'mimes:jpg,png,jpeg,gif,svg',
+            'total_block'   => 'required',
         ]);
 
         $userID = auth()->user()->id;
@@ -92,32 +88,30 @@ class BlockController extends Controller
         /*****    Insert Block Data    *******/
         $insertData  = [
             'project_id'    => $request->project_name,
-            'category_id'  => $request->category_name,
-            'block_name'   => $request->block_name,
-            'floor'        => $request->floor,
-            'facing_text'   =>  $request->facing_text,
-            'status'         => 1,
-            'created_by'     => $userID
+            'total_block'   => $request->total_block,
+            'type_of_block' => $request->type_of_block,
+            'range'         => $request->range,
+            'status'        => 1,
+            'created_by'    => $userID
         ];
         $block_id = Block::create($insertData);
 
 
         /******* Insert Images *********/
-        if($request->hasfile('block_image'))
+
+        if($request->block_name)
         {
-            foreach($request->file('block_image') as $key => $file)
+            foreach($request->block_name as  $val)
             {
-                $image = $request->file('block_image')[$key];
-                $destinationPath = public_path('images/block');
-                $name = date('YmdHis') . "." . $file->getClientOriginalName();  ;
-                $image->move($destinationPath, $name);
-                $insertImg[$key]['block_id'] = $block_id['proj_block_map_id'];
-                $insertImg[$key]['title']  = $name;
-                $insertImg[$key]['path']   = $destinationPath;
-                $insertImg[$key]['status'] = 1;
-                $insertImg[$key]['created_by'] = $userID;
+                $insertDataa   = [
+                    'project_id'    => $request->project_name,
+                    'proj_block_mappings'  => $block_id,
+                    'block_name'    => $val,
+                    'status'        => 1,
+                    'created_by'    => $userID
+                ];
+                Block_name_mapping::create($insertDataa);
             }
-            BlockImageMapping::insert($insertImg);
         }
 
 

@@ -5,24 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Block extends Model
+class Block_name_mapping extends Model
 {
     use HasFactory;
-    protected $table = 'proj_block_mappings';
+    protected $table = 'block_name_mappings';
     public $timestamps = false;
-    protected $primaryKey = 'proj_block_map_id';
+    protected $primaryKey = 'block_name_map_id';
 
     /**
      * The attributes that are mass assignable.
      * @var array
      */
     protected $fillable = [
-
+        'proj_block_map_id',
         'project_id',
         'block_name',
-        'total_block',
-        'type_of_block',
-        'range',
         'status',
         'created_by',
         'created_date',

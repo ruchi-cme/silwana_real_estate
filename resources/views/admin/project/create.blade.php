@@ -350,7 +350,7 @@
          $(".removePdf").click(function(){
              $(this).parent(".pip").remove();
          });
-         $(document).ready(function() {
+
              if (window.File && window.FileList && window.FileReader) {
                  $("#project_pdf").on("change", function(e) {
                      var files = e.target.files,
@@ -375,7 +375,6 @@
              } else {
                  alert("Your browser doesn't support to File API")
              }
-         });
 
         var button = document.querySelector("#create_button");
 
@@ -413,7 +412,7 @@
             document.querySelector('.select2-search__field').focus();
         }); // focus on search input in select 2 -------------------------------------------------------------------
 
-         $(document).ready(function (e) {
+
              // country select listener ----------------------------------------------------------------------------
 
              $('#country').on("select2:select", function (e) {
@@ -437,7 +436,7 @@
                  });
              });
 
-         });
+
         // state select listener ----------------------------------------------------------------------------
 
          $('#state').on("select2:select", function (e) {
@@ -461,6 +460,7 @@
              });
          });
 
+         });
 
     </script>
 

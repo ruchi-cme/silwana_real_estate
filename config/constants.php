@@ -33,4 +33,8 @@ return [
         '2' => 'Card',
         '3' => 'Online'
     ],
+    'type_of_block' => [
+        '1' => 'Range',
+        '2' => 'Custom'
+    ],
 ];

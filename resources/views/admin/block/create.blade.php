@@ -87,98 +87,41 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
+
                             <!--begin::Row-->
                             <div class="row mb-8">
                                 <!--begin::Col-->
                                 <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Name</div>
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Total Block</div>
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Name" autofocus name="block_name" id="block_name" value="{{ !empty($editData->block_name ) ? $editData->block_name : ''}}" >
+                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Total Block" autofocus name="total_block" id="total_block" value="{{ !empty($editData->total_block ) ? $editData->total_block : ''}}" >
                                 <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
 
                             <!--begin::Row-->
-                            <div class="row mb-8">
+                            <div class="row mb-8 blockTypeDiv">
                                 <!--begin::Col-->
                                 <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required">How many Floor?</div>
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required">Type of Block</div>
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Floor" autofocus name="floor" id="floor" value="{{ !empty($editData->floor ) ? $editData->floor : ''}}" >
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
-
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required">Category</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <select required class="form-select form-select-solid form-select-lg" name="category_name" id="category_id" data-placeholder="Select Category" data-control="select2" >
+                                    <select required class="form-select form-select-solid form-select-lg blockType"  name="type_of_block" id="type_of_block" data-placeholder="Select Type Of Block" data-control="select2" >
                                         <option ></option>
-                                        {{ $categoryData = getCategory() }}
-                                        @if (!empty($categoryData))
-                                            @foreach ($categoryData as $cat)
-                                                <option value="{{ $cat->category_id }}" {{ !empty( $editData->category_id)  && ($editData->category_id ==  $cat->category_id) ? 'selected' : '' }}>{{ $cat->category_name }}</option>
-                                            @endforeach
-                                        @endif
+                                        @foreach ($type_of_block as $key => $val)
+                                            <option value="{{ $key }}" {{ !empty( $editData->category_id) && ($editData->work_status == $key) ? 'selected' : '' }}>{{ $val }}</option>
+                                        @endforeach
                                     </select>
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
 
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required">Facing text</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Facing"   name="facing_text" id="facing_text" value="{{ !empty($editData->facing_text ) ? $editData->facing_text : ''}}" >
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
 
-                            <!--begin::Row-->
-                            <div class="row">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3">Images</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="file" class="form-control form-control-solid" multiple name="block_image[]" id="block_image" >
-
-                                    <div class="col-xl-9 fv-row fv-plugins-icon-container images-preview-div">
-
-                                        @if (!empty($selectedImage))
-                                            @foreach ($selectedImage as $image )
-                                                    <span class="pip">
-                                                     <input type="hidden" name="edit_block_image[]" value="{{ !empty( $image['title'] ) ? $image['title']  : '' }}" id="edit_block_image">
-                                                    <img height='50' width='50' class="imageThumb" src="{{ asset('images/block').'/'.$image['title'] }}" title=""/>
-                                                <br/><span class="removeImg"><i class="fa fa-trash"></i></span>
-                                                </span>
-                                            @endforeach
-                                        @endif
-
-                                    </div>
-
-                                </div>
-                                <!--end::Row-->
-                        </div>
 
                         <!--end::Card body-->
                         <div class="card-footer">
@@ -213,6 +156,9 @@
     <!--end::Container-->
 </div>
 <!--end::Post-->
+
+
+
 @endsection
 
 @push('scripts')
@@ -220,7 +166,98 @@
 
     <script type="text/javascript">
 
+
+        $("#total_block").on('change',function(){
+
+            $('#type_of_block').val('');
+        });
+
+        $(".blockType").on('change',function(){
+
+           var blockType =  $(this).val();
+            if(blockType == 2) {
+
+                $('.rangeDiv').hide();
+                createBlockName();
+                return false;
+            } else {
+                $('.blockDiv').hide();
+                $('.blockTypeDiv').after(`
+                  <div class="row mb-8 rangeDiv">
+                        <!--begin::Col-->
+                        <div class="col-xl-3">
+                            <div class="fs-6 fw-bold mt-2 mb-3 required">Range</div>
+                        </div>
+                    <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                        <div class="d-flex from-to-wrap">
+                         <div>
+                            <label for="">From</label>
+                            <input type="text" class="form-control form-control-solid" name="from" id="from">
+                        </div>
+                  <div>
+                    <label for="">to</label>
+                    <input type="text" name="to" class="form-control form-control-solid" onchange="toRange()" >
+                </div>
+            </div><div class="fv-plugins-message-container invalid-feedback"></div></div>
+                        </div> `);
+                return false;
+            }
+        });
+
+    function createBlockName() {
+
+        var total_block = $("#total_block").val();
+        $('.blockDiv').remove();
+        for (var k = 0; k < total_block ; k++) {
+
+            $('.blockTypeDiv').after(`
+                <div class="row mb-8 blockDiv">
+                <!--begin::Col-->
+                    <div class="col-xl-3">
+                        <div class="fs-6 fw-bold mt-2 mb-3 required">Block Name ${k + 1}</div>
+                    </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                <input required type="text" class="form-control form-control-solid" placeholder="Enter Block Name" autofocus name="block_name[]" id="block_name" value="" >
+                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                </div> `);
+        }
+    }
+
+    function toRange(){
+        var total_block = $("#total_block").val();
+        var from = $("#from").val();
+        $('.blockDiv').remove();
+
+        for (var k = 0; k < total_block ; k++) {
+
+            var nex = from.charCodeAt(0);
+            var curr = String.fromCharCode(nex++);
+            from = curr ;
+            $('.rangeDiv').after(`
+                <div class="row mb-8 blockDiv">
+                <!--begin::Col-->
+                    <div class="col-xl-3">
+                        <div class="fs-6 fw-bold mt-2 mb-3 required">Block Name ${k + 1}</div>
+                    </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-9 fv-row fv-plugins-icon-container">
+
+                <input required type="text" class="form-control form-control-solid" placeholder="Enter Block Name" autofocus name="block_name[]" id="block_name" value="" >
+
+                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                </div> `);
+            nex =  String.fromCharCode(nex++);
+        }
+    }
+
         $(document).ready(function() {
+
+
             if (window.File && window.FileList && window.FileReader) {
                 $("#block_image").on("change", function(e) {
                     var files = e.target.files,

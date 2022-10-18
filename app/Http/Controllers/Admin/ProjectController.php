@@ -161,24 +161,6 @@ class ProjectController extends Controller
         }
 
 
-        /******* Insert Images *********/
-        if($request->hasfile('project_image'))
-        {
-            foreach($request->file('project_image') as $key => $file)
-            {
-                $image = $request->file('project_image')[$key];
-                $destinationPath = public_path('images/project/images');
-                $name = date('YmdHis') . "." . $file->getClientOriginalName();  ;
-                $image->move($destinationPath, $name);
-                $insertImg[$key]['project_id'] = $project_id['project_id'];
-                $insertImg[$key]['title']  = $name;
-                $insertImg[$key]['path']   = $destinationPath;
-                $insertImg[$key]['type']   = 2;  //image
-                $insertImg[$key]['status'] = 1;
-                $insertImg[$key]['created_by'] = $userID;
-            }
-            ProjectImage::insert($insertImg);
-        }
 
         return redirect()->route('admin.project')->with('inserted','project Created👍');
     }
@@ -294,8 +276,6 @@ class ProjectController extends Controller
 
         $projectImages  = ProjectImage::where('project_id' ,  $request->project_id)->get();
         $editProjectPdf = !empty($request->edit_project_pdf) ? $request->edit_project_pdf : [] ;
-        $editProjectImg = !empty($request->edit_project_image) ? $request->edit_project_image :[] ;
-
 
         if (!empty($projectImages)) {
             foreach ($projectImages as $img) {
@@ -309,14 +289,7 @@ class ProjectController extends Controller
                         }
                     }
 
-                    if  (  !in_array($img['title'] , $editProjectImg)) {
-                        if($img['type'] == 2) {
-                            if (file_exists(public_path() . '/images/project/images/' . $img['title'])) {
-                                @unlink(public_path("images/project/images/" ). $img['title']);
-                                ProjectImage::where('project_image_id', $img['project_image_id'])->where('type' , 2)->delete();
-                            }
-                        }
-                    }
+
             }
         }
 
@@ -340,24 +313,6 @@ class ProjectController extends Controller
 
 
 
-        /******* Insert Images *********/
-        if($request->hasfile('project_image'))
-        {
-            foreach($request->file('project_image') as $key => $file)
-            {
-                $image = $request->file('project_image')[$key];
-                $destinationPath = public_path('images/project/images');
-                $name = date('YmdHis') . "." . $file->getClientOriginalName();
-                $image->move($destinationPath, $name);
-                $insertImg[$key]['project_id'] = $request->project_id;
-                $insertImg[$key]['title']  = $name;
-                $insertImg[$key]['path']   = $destinationPath;
-                $insertImg[$key]['type']   = 2;  //image
-                $insertImg[$key]['status'] = 1;
-                $insertImg[$key]['created_by'] = $userID;
-            }
-            ProjectImage::insert($insertImg);
-        }
 
 
         return redirect()->route('admin.project')->with('updated','Project Updated 👍');
@@ -436,86 +391,97 @@ class ProjectController extends Controller
     public function imageUpdate(Request $request) {
 
         /******* Insert Images *********/
-        $userID      = auth()->user()->id;
-        $selectedImage = getProjectImage($request->project_id);
-        dd(array_values($selectedImage['project_id']));
+        $userID        = auth()->user()->id;
 
-        dd($request);
-        for ($i = 0; $i < count($request->file('image')); $i++) {
+        if(!empty($request->removeImgId)){
 
-            $image = $request->file('image');
-            if (isset($image)) {
-                $headingImage = $request->file('image')[$i];
-                $destinationPath = public_path('images/project/images');
-                $name = date('YmdHis') . "." . $headingImage->getClientOriginalName();
-                $headingImage->move($destinationPath, $name);
-            }
+    $removeImgId = explode(',', $request->removeImgId);
 
-            $insertImg[]  = [
-                'project_id'    => $request->project_id  ,
-                'title'         => $name,
-                'direction'     => $request->direction[$i],
-                'facing'        => $request->facing[$i],
-                'path'          => $destinationPath,
-                'type'          => 2  ,
-                'created_by'    => $userID ,
-                'status'        => 1,
-            ];
+    foreach ($removeImgId as $row) {
+        $projectImg = ProjectImage::find($row);
+
+        if (file_exists(public_path() . '/images/project/images/' . $projectImg->title)) {
+            @unlink(public_path("images/project/images/" ). $projectImg->title);
         }
+        ProjectImage::where('project_image_id', $projectImg->project_image_id)->where('type' , 2)->delete();
+        }
+    }
 
-        ProjectImage::insert($insertImg);
+        if (!empty($request->direction)) {
+            for ($i = 0; $i < count($request->direction); $i++) {
 
-
-        if(!empty($request->project_image_id)){
-            for ($i = 0; $i < count($request->project_image_id); $i++) {
-
-                $projectImg = ProjectImage::find($request->project_image_id[$i]);
-
-
-                if( $request->edit_image ){
-                    $editHeadingImage = $request->edit_image[$i];
-                }
-                else{
-                    $editHeadingImage =  '';
-                }
-
-                $headingImage = $request->file('edit_change_image');
-
-                if (isset($headingImage)) {
-                    if (array_key_exists($i, $headingImage)) {
-                        $headingImage = $request->file('edit_change_image')[$i];
-                        $destinationPath = public_path('images/project/images');
-                        $subHeadingImage = date('YmdHis') . "." . $headingImage->getClientOriginalName();
-                        $headingImage->move($destinationPath, $subHeadingImage);
-                        if (!empty($editHeadingImage) && file_exists(public_path() . '/images/project/images/' . $editHeadingImage)) {
-                            @unlink(public_path('images/project/images/') . $editHeadingImage);
-                        }
-                    } else {
-                        $subHeadingImage = $editHeadingImage;
-                    }
-
-                } elseif (!empty($editHeadingImage)) {
-                    $subHeadingImage = $editHeadingImage;
-                } else {
-                    $subHeadingImage = null;
+                $image = $request->file('image');
+                $name = '';
+                $destinationPath = "";
+                if (isset($image)) {
+                    $headingImage = $request->file('image')[$i];
+                    $destinationPath = public_path('images/project/images');
+                    $name = date('YmdHis') . "." . $headingImage->getClientOriginalName();
+                    $headingImage->move($destinationPath, $name);
                 }
 
-                $updateImg[]  = [
-                    'project_id'    => $request->project_id  ,
-                    'title'         => $subHeadingImage,
-                    'direction'     => $request->edit_direction[$i],
-                    'facing'        => $request->edit_facing[$i],
+                $insertImg[]  = [
+                    'project_id'    => $request->project_id,
+                    'title'         => $name,
+                    'direction'     => $request->direction[$i],
+                    'facing'        => $request->facing[$i],
                     'path'          => $destinationPath,
                     'type'          => 2  ,
                     'created_by'    => $userID ,
                     'status'        => 1,
                 ];
             }
-            $projectImg->update($updateImg);
 
+            ProjectImage::insert($insertImg);
         }
-        $projectData = Project::find($request->id);
 
+        if (!empty($request->project_image_id)) {
+           for ($i = 0; $i < count($request->project_image_id); $i++) {
+
+               $projectImg = ProjectImage::find($request->project_image_id[$i]);
+
+               if ($request->edit_image) {
+                   $editHeadingImage = $request->edit_image[$i];
+               } else {
+                   $editHeadingImage = '';
+               }
+
+               $headingImage = $request->file('edit_change_image');
+               $destinationPath = public_path('images/project/images');
+               if (isset($headingImage)) {
+                   if (array_key_exists($i, $headingImage)) {
+                       $headingImage = $request->file('edit_change_image')[$i];
+
+                       $subHeadingImage = date('YmdHis') . "." . $headingImage->getClientOriginalName();
+                       $headingImage->move($destinationPath, $subHeadingImage);
+                       if (!empty($editHeadingImage) && file_exists(public_path() . '/images/project/images/' . $editHeadingImage)) {
+                           @unlink(public_path('images/project/images/') . $editHeadingImage);
+                       }
+                   } else {
+                       $subHeadingImage = $editHeadingImage;
+                   }
+
+               } elseif (!empty($editHeadingImage)) {
+                   $subHeadingImage = $editHeadingImage;
+               } else {
+                   $subHeadingImage = null;
+               }
+
+               $updateImg = [
+                   'project_id' => $request->project_id,
+                   'title' => $subHeadingImage,
+                   'direction' => $request->edit_direction[$i],
+                   'facing' => $request->edit_facing[$i],
+                   'path' => $destinationPath,
+                   'type' => 2,
+                   'created_by' => $userID,
+                   'status' => 1,
+               ];
+
+
+               $projectImg->update($updateImg);
+           }
+       }
         return redirect()->route('admin.project')->with('inserted','Image uploaded👍');
 
     }
