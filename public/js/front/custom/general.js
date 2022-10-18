@@ -45,6 +45,39 @@ $(document).ready(function() {
             "facing[]": "Please enter facing",
         }
     });
+
+    if ($("#blockForm").length > 0) {
+        $("#blockForm").validate({
+            ignore: [],
+            rules: {
+                project_name: {
+                    required: true,
+                },
+                total_block: {
+                    required: true,
+                    digits: true
+                },
+                type_of_block: {
+                    required: true,
+                },
+                from: {
+                    required: true,
+                }
+            },
+            messages: {
+                project_name: {
+                    required: "Please enter project name",
+                },
+                total_block: {
+                    required: "Please enter total block",
+                },
+                type_of_block: {
+                    required: "Please enter type of block",
+                },
+            },
+        })
+    }
+
 });
 
 

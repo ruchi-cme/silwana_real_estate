@@ -84,20 +84,23 @@ class BlockController extends Controller
         ]);
 
         $userID = auth()->user()->id;
-
+        $range = null;
+        if(isset($request->from ) && (isset($request->to ))) {
+            $range =   $request->from.','.$request->to;
+        }
         /*****    Insert Block Data    *******/
         $insertData  = [
             'project_id'    => $request->project_name,
             'total_block'   => $request->total_block,
             'type_of_block' => $request->type_of_block,
-            'range'         => $request->range,
+            'range'         => $range,
             'status'        => 1,
             'created_by'    => $userID
         ];
         $block_id = Block::create($insertData);
 
 
-        /******* Insert Images *********/
+        /******* Insert block name *********/
 
         if($request->block_name)
         {
@@ -105,7 +108,7 @@ class BlockController extends Controller
             {
                 $insertDataa   = [
                     'project_id'    => $request->project_name,
-                    'proj_block_mappings'  => $block_id,
+                    'proj_block_map_id'  => $block_id['proj_block_map_id'],
                     'block_name'    => $val,
                     'status'        => 1,
                     'created_by'    => $userID
@@ -113,7 +116,6 @@ class BlockController extends Controller
                 Block_name_mapping::create($insertDataa);
             }
         }
-
 
         return redirect()->route('admin.block')->with('inserted','Block Created👍');
     }
@@ -128,9 +130,12 @@ class BlockController extends Controller
     public function edit(Request $request)
     {
         $editData = Block::find($request->id);
-        $selectedImage = BlockImageMapping::select([ 'title','path'])->where('block_id' ,  $request->id)->get()->toArray();
 
-        return view('admin.block.create' ,compact('editData','selectedImage'));
+        $blockNameList = Block_name_mapping::where('proj_block_map_id' ,  $request->id)->get()->toArray();
+
+        $type_of_block = Config::get('constants.type_of_block');
+
+        return view('admin.block.create' ,compact('editData','type_of_block','blockNameList'));
     }
 
     /**
@@ -142,51 +147,65 @@ class BlockController extends Controller
      */
     public function update(Request $request  )
     {
-        /*****    Update Block  Data    *******/
-        $updateData  = Block::find( $request->proj_block_map_id);
         $userID      = auth()->user()->id;
+
+
+        /*****    delete Block  Data   *******/
+
+        if(!empty($request->removeId)) {
+           $test =  ltrim($request->removeId,',');
+            $removeId = explode(',', $test);
+            foreach ($removeId as $row) {
+                Block_name_mapping::where('block_name_map_id', $row)->delete();
+            }
+        }
+        /*****    Update Block  Data    *******/
+
+        $updateData  = Block::find( $request->proj_block_map_id);
+
+        $range = null;
+        if(isset($request->from ) && (isset($request->to ))) {
+           $range =   $request->from.','.$request->to;
+         }
 
         $updateData->update([
             'project_id'   => $request->project_name,
-            'category_id'  => $request->category_name,
-            'block_name'   => $request->block_name,
-            'floor'        => $request->floor,
-            'facing_text'  =>  $request->facing_text,
+            'total_block'   => $request->total_block,
+            'type_of_block' => $request->type_of_block,
+            'range'         => $range,
             'modified_by'  => $userID
         ]);
 
-        /******* Insert Image *********/
+        /******* Insert block name *********/
 
-        $image  = BlockImageMapping::where('block_id' ,  $request->proj_block_map_id)->get();
-        $editImg = !empty($request->edit_block_image) ? $request->edit_block_image :[] ;
-
-        if (!empty($image)) {
-            foreach ($image as $img) {
-                if (!in_array($img['title'] , $editImg)) {
-                    if (file_exists(public_path() . '/images/block/' . $img['title'])) {
-                        @unlink(public_path("images/block/") . $img['title']);
-                        BlockImageMapping::where('block_img_mpg_id', $img['block_img_mpg_id'])->delete();
-                    }
-                }
+        if($request->block_name)
+        {
+            foreach($request->block_name  as  $val)
+            {
+                $insertDataa   = [
+                    'project_id'    => $request->project_name,
+                    'proj_block_map_id' => $request->proj_block_map_id,
+                    'block_name'    => $val,
+                    'status'        => 1,
+                    'created_by'    => $userID
+                ];
+                Block_name_mapping::create($insertDataa);
             }
         }
-
-        /******* Insert Images *********/
-        if($request->hasfile('block_image'))
+        if($request->block_name_map_id)
         {
-            foreach($request->file('block_image') as $key => $file)
-            {
-                $image = $request->file('block_image')[$key];
-                $destinationPath = public_path('images/block');
-                $name = date('YmdHis') . "." . $file->getClientOriginalName();  ;
-                $image->move($destinationPath, $name);
-                $insertImg[$key]['block_id'] = $request->proj_block_map_id;
-                $insertImg[$key]['title']  = $name;
-                $insertImg[$key]['path']   = $destinationPath;
-                $insertImg[$key]['status'] = 1;
-                $insertImg[$key]['created_by'] = $userID;
+            for ($i = 0; $i < count($request->block_name_map_id); $i++) {
+
+                $blocks = Block_name_mapping::find($request->block_name_map_id[$i]);
+                $updateBlockData   = [
+                    'project_id'    => $request->project_name,
+                    'proj_block_map_id'  => $request->proj_block_map_id,
+                    'block_name'    => $request->edit_block_name[$i],
+                    'status'        => 1,
+                    'created_by'    => $userID
+                ];
+                $blocks->update($updateBlockData);
             }
-            BlockImageMapping::insert($insertImg);
         }
 
         return redirect()->route('admin.block')->with('updated','Block Updated 👍');
@@ -209,6 +228,20 @@ class BlockController extends Controller
             'deleted_date'  => now(),
             'deleted_by'    =>  $userID,
         ]);
+
+       $block = Block_name_mapping::select('block_name_map_id')->where('proj_block_map_id', $id)->get()->toArray();
+
+        for ($i = 0; $i < count($block); $i++) {
+
+            $blocks = Block_name_mapping::find($block[$i]['block_name_map_id']);
+            $updateBlockData   = [
+                'deleted'  => 1,  //Deleted
+                'deleted_date'  => now(),
+                'deleted_by'    =>  $userID,
+            ];
+            $blocks->update($updateBlockData);
+        }
+
 
         return redirect()->route('admin.block')->with('success','Block Deleted');
     }

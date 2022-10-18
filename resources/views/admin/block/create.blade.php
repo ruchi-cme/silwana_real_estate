@@ -6,20 +6,12 @@
 <li class="breadcrumb-item px-3"><a class="text-hover-primary text-muted" href="{{ route('admin.block') }}">Block</a></li>
 <li class="breadcrumb-item px-3 text-primary">{{ !empty( $editData->proj_block_map_id) ? 'Edit': "Create" }}</li>
 @endsection
+
 <style>
-    input[type="file"] {
-        display: block;
+    .error{
+        color: #FF0000;
     }
-    .imageThumb {
-        max-height: 75px;
-        border: 2px solid;
-        padding: 1px;
-        cursor: pointer;
-    }
-    .pip {
-        display: inline-block;
-        margin: 10px 10px 0 0;
-    }
+
     .remove {
         display: block;
         background: #444;
@@ -49,7 +41,7 @@
 
                 @include('layouts.alerts.error')
 
-                <form class="form" method="POST" action="{{ !empty($editData->proj_block_map_id) ? route('admin.block.update') : route('admin.block.store') }}" id="user_form" enctype="multipart/form-data">
+                <form class="form" method="POST" action="{{ !empty($editData->proj_block_map_id) ? route('admin.block.update') : route('admin.block.store') }}" id="blockForm" enctype="multipart/form-data">
                    @csrf
 
                     <!--begin::Card-->
@@ -75,7 +67,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <select required class="form-select form-select-solid form-select-lg" name="project_name" id="project_id" data-placeholder="Select Project" data-control="select2" >
+                                    <select class="form-select form-select-solid form-select-lg @error('project_name') is-invalid @enderror " name="project_name" id="project_id" data-placeholder="Select Project" data-control="select2" >
                                         <option ></option>
                                         {{ $projectData = getProject() }}
                                         @if (!empty($projectData))
@@ -84,21 +76,10 @@
                                             @endforeach
                                         @endif
                                     </select>
+                                    @error('project_name')
+                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                    @enderror
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
-
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Total Block</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Total Block" autofocus name="total_block" id="total_block" value="{{ !empty($editData->total_block ) ? $editData->total_block : ''}}" >
-                                <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
 
@@ -111,17 +92,85 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <select required class="form-select form-select-solid form-select-lg blockType"  name="type_of_block" id="type_of_block" data-placeholder="Select Type Of Block" data-control="select2" >
+                                    <select class="form-select form-select-solid form-select-lg blockType"  name="type_of_block" id="type_of_block" data-placeholder="Select Type Of Block" data-control="select2" >
                                         <option ></option>
                                         @foreach ($type_of_block as $key => $val)
-                                            <option value="{{ $key }}" {{ !empty( $editData->category_id) && ($editData->work_status == $key) ? 'selected' : '' }}>{{ $val }}</option>
+                                            <option value="{{ $key }}" {{ !empty( $editData->type_of_block) && ($editData->type_of_block == $key) ? 'selected' : '' }}>{{ $val }}</option>
                                         @endforeach
                                     </select>
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
 
+                            @if (!empty( $editData->type_of_block)  &&  ($editData->type_of_block == 1) )
+                                @php
+                                    $from='';$to='';
+                                   if( !empty( $editData->range))
+                                    {
+                                        $range = explode(',', $editData->range);
+                                        $from = $range[0];
+                                        $to   = $range[1];
+                                    }
 
+                                    @endphp
+                                <div class="row mb-8 rangeDiv">
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3 required">Range</div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                        <div class="d-flex from-to-wrap">
+                                            <div>
+                                                <label for="">From</label>
+                                                <input type="text" class="form-control form-control-solid" value="{{  $from  }}" name="from" id="from">
+                                            </div>
+                                            <div>
+                                                <label for="">to</label>
+                                                <input type="text" name="to" value="{{  $to  }}" class="form-control form-control-solid" onchange="toRange()" >
+                                            </div>
+                                        </div><div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                </div>
+                            @endif
+                            <!--begin::Row-->
+                            <div class="row mb-8 totalBlockDiv">
+                                <!--begin::Col-->
+                                <div class="col-xl-3">
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Total Block</div>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                    <input type="text" onchange="toRange()" class="form-control form-control-solid" placeholder="Enter Total Block" autofocus name="total_block" id="total_block" value="{{ !empty($editData->total_block ) ? $editData->total_block : ''}}" >
+                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                            </div>
+
+                            <div class="row mb-8 PrintDiv">
+                                @if(!empty($blockNameList))
+                                    @foreach($blockNameList as $key => $blockname)
+
+                                        <div class="row mb-8 blockDiv blockDiv_{{$key}}">
+                                            <!--begin::Col-->
+                                            <div class="col-xl-1">
+                                                <button type="button"  class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2 button"  removeBlockId="{{ $blockname['block_name_map_id']}}"  onclick="remove_btn({{$key}})" id="removeBlockBtn{{$key}}">
+                                                <span class="svg-icon svg-icon-1"><i class="fa fa-trash"></i></span>
+                                            </button>
+                                                </div>
+                                            <div class="col-xl-3">
+                                                <div class="fs-6 fw-bold mt-2 mb-3 required">Block Name </div>
+                                            </div>
+                                            <!--end::Col-->
+                                            <!--begin::Col-->
+                                            <div class="col-xl-8 fv-row fv-plugins-icon-container">
+                                                <input type="hidden" class="form-control form-control-solid"  name="block_name_map_id[]" id="block_name_map_id" value="{{ $blockname['block_name_map_id'] }}" >
+                                                <input type="text" class="form-control form-control-solid block_name" placeholder="Enter Block Name" autofocus name="edit_block_name[]" id="edit_block_name" value="{{ $blockname['block_name'] }}" >
+                                                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                        </div>
+                                    @endforeach
+                                @endif
+                            </div>
+                            <!--end::Row-->
 
                         <!--end::Card body-->
                         <div class="card-footer">
@@ -131,8 +180,9 @@
                             <!--begin::Actions-->
                             <div class="mb-0">
                                 <input type="hidden" class="form-control form-control-solid" name="proj_block_map_id" id="proj_block_map_id" value="{{ !empty($editData->proj_block_map_id ) ? $editData->proj_block_map_id : ''}}" >
+                                <input type="hidden" name="removeId" id="removeId">
 
-                                <button type="submit" data-form="user_form" class="btn btn-primary" id="create_button">
+                                <button type="submit" data-form="blockForm" class="btn btn-primary" id="create_button">
                                     <!--begin::Indicator-->
                                     <span class="indicator-label">{{ !empty($editData->proj_block_map_id ) ?  'Update' : 'Create'}}  Block</span>
                                     <span class="indicator-progress">Please wait...
@@ -162,26 +212,48 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/swal.js') }}" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 
-    <script type="text/javascript">
+<script   src="{{ asset('js/front/custom') }}/general.js"> </script>
 
+<script type="text/javascript">
+    $(document).ready(function() {
 
-        $("#total_block").on('change',function(){
-
-            $('#type_of_block').val('');
+        $('#blockForm').validate({});
+        $('input.block_name').each(function () {
+            $(this).rules("add",
+                {
+                    required: true,
+                    messages: {
+                        required: "Please enter block name",
+                    }
+                })
         });
 
-        $(".blockType").on('change',function(){
+        
+        var test = [];
 
-           var blockType =  $(this).val();
-            if(blockType == 2) {
+        function remove_btn(i) {
+            var removeId = $('#removeBlockBtn' + i).attr('removeBlockId');
+            test.push(removeId);
+            $('#removeId').val(test);
+            $('.blockDiv_' + i).remove();
+            var totalblock = $('#total_block').val();
+            var newCount = totalblock - 1;
+            $('#total_block').val(newCount);
+
+        }
+
+        $(".blockType").on('change', function () {
+
+            var blockType = $(this).val();
+            if (blockType == 2) {
 
                 $('.rangeDiv').hide();
-                createBlockName();
+                toRange();
                 return false;
             } else {
-                $('.blockDiv').hide();
+
                 $('.blockTypeDiv').after(`
                   <div class="row mb-8 rangeDiv">
                         <!--begin::Col-->
@@ -198,95 +270,74 @@
                         </div>
                   <div>
                     <label for="">to</label>
-                    <input type="text" name="to" class="form-control form-control-solid" onchange="toRange()" >
+                    <input type="text" name="to" class="form-control form-control-solid"  >
                 </div>
             </div><div class="fv-plugins-message-container invalid-feedback"></div></div>
                         </div> `);
                 return false;
             }
         });
+        $('#blockForm').validate({});
+    });
+        function toRange() {
 
-    function createBlockName() {
+            var rowCount = $('.PrintDiv div.blockDiv').length;
+            var total_block = $("#total_block").val();
 
-        var total_block = $("#total_block").val();
-        $('.blockDiv').remove();
-        for (var k = 0; k < total_block ; k++) {
+            if (rowCount == 0) {
+                var tdCount = total_block;
+            } else if (total_block > rowCount) {
+                var tdCount = total_block - rowCount;
+            } else if (total_block < rowCount) {
 
-            $('.blockTypeDiv').after(`
-                <div class="row mb-8 blockDiv">
-                <!--begin::Col-->
-                    <div class="col-xl-3">
-                        <div class="fs-6 fw-bold mt-2 mb-3 required">Block Name ${k + 1}</div>
-                    </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                <input required type="text" class="form-control form-control-solid" placeholder="Enter Block Name" autofocus name="block_name[]" id="block_name" value="" >
-                <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                </div> `);
-        }
-    }
-
-    function toRange(){
-        var total_block = $("#total_block").val();
-        var from = $("#from").val();
-        $('.blockDiv').remove();
-
-        for (var k = 0; k < total_block ; k++) {
-
-            var nex = from.charCodeAt(0);
-            var curr = String.fromCharCode(nex++);
-            from = curr ;
-            $('.rangeDiv').after(`
-                <div class="row mb-8 blockDiv">
-                <!--begin::Col-->
-                    <div class="col-xl-3">
-                        <div class="fs-6 fw-bold mt-2 mb-3 required">Block Name ${k + 1}</div>
-                    </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-
-                <input required type="text" class="form-control form-control-solid" placeholder="Enter Block Name" autofocus name="block_name[]" id="block_name" value="" >
-
-                <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                </div> `);
-            nex =  String.fromCharCode(nex++);
-        }
-    }
-
-        $(document).ready(function() {
-
-
-            if (window.File && window.FileList && window.FileReader) {
-                $("#block_image").on("change", function(e) {
-                    var files = e.target.files,
-                        filesLength = files.length;
-                    for (var i = 0; i < filesLength; i++) {
-                        var f = files[i]
-                        var fileReader = new FileReader();
-                        fileReader.onload = (function(e) {
-                            var file = e.target;
-                            $("<span class=\"pip\">" +
-                                "<img height='50' width='50' class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-                                "<br/><span class=\"remove\"><i class=\"fa fa-trash\"></i></span>" +
-                                "</span>").insertAfter(".images-preview-div");
-                            $(".remove").click(function(){
-                                $(this).parent(".pip").remove();
-                            });
-
-                        });
-                        fileReader.readAsDataURL(f);
-                    }
-                });
-            } else {
-                alert("Your browser doesn't support to File API")
+                for ($i = rowCount; $i >= total_block; $i--) {
+                    var removeId = $('#removeBlockBtn' + $i).attr('removeBlockId');
+                    test.push(removeId);
+                    $('#removeId').val(test);
+                    $('.blockDiv_' + $i).remove();
+                }
             }
-        });
-        $(".removeImg").click(function(){
-            $(this).parent(".pip").remove();
 
-        });
+            var from = $("#from").val();
+
+            if (typeof (from) === "undefined") {
+                var nex = '';
+                var curr = '';
+
+            }
+            //do this
+            else {
+                var nex = from.charCodeAt(0);
+                var curr = String.fromCharCode(nex);
+
+            }
+
+            for (var k = rowCount; k < total_block; k++) {
+
+                if (nex !== "")
+                    curr = String.fromCharCode(nex++);
+
+                $('.PrintDiv').append(`
+                <div class="row mb-8 blockDiv blockDiv_${k}">
+                <!--begin::Col-->
+                    <div class="col-xl-3">
+                        <div class="fs-6 fw-bold mt-2 mb-3 required">Block Name </div>
+                    </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-xl-9 fv-row fv-plugins-icon-container">
+
+                <input required type="text" class="form-control form-control-solid block_name" placeholder="Enter Block Name" autofocus name="block_name[]" id="block_name${k}" value="${curr}" >
+
+                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                </div> `);
+
+            }
+
+
+        }
+
+
 
         var button = document.querySelector("#create_button");
 
@@ -297,28 +348,6 @@
         var blockUI = new KTBlockUI(target, {
             message: '<div class="blockui-message"><span class="spinner-border text-primary"></span> Checking...</div>',
         }); // Element to block white fetching AJAX data ----------------------------------------------------------------------
-
-
-        button.addEventListener("click", function () {
-            if (!$("#user_form")[0].checkValidity()) {
-                $("#user_form")[0].reportValidity();
-
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Please Fill Required Fields',
-                    text: "Make sure required fields are filled properly before moving on"
-                }); //display error toast
-
-                return 0;
-            }
-            // Activate indicator
-            button.setAttribute("data-kt-indicator", "on");
-            button.setAttribute("disabled", "true");
-
-            form = document.getElementById(this.getAttribute('data-form'));
-            form.submit();
-        }); // Handle Button Click Event ----------------------------------------------------------------------------
-
 
         $(document).on('select2:open', () => {
             document.querySelector('.select2-search__field').focus();
