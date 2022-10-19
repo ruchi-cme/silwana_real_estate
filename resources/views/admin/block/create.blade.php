@@ -155,6 +155,7 @@
                                             <div class="col-xl-8 fv-row fv-plugins-icon-container">
                                                 <input type="hidden" class="form-control form-control-solid"  name="block_name_map_id[]" id="block_name_map_id" value="{{ $blockname['block_name_map_id'] }}" >
                                                 <input type="text" class="form-control form-control-solid block_name" placeholder="Enter Block Name" autofocus name="edit_block_name[]" id="edit_block_name" value="{{ $blockname['block_name'] }}" >
+                                                <label class="inputerror" for="block_name" style="">  </label>
                                                 <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                         </div>
                                     @endforeach
@@ -310,17 +311,16 @@
                 </div>
                 </div> `);
         }
-
     }
 
 $(document).ready(function () {
- 
+
     $('#create_button').on('click', function(event) {
 
         // adding rules for inputs with class 'comment'
         var test = 1;
         $(document).find('.block_name').each(function() {
-            console.log($(this));
+            
             if($(this).val() == '') {
              // update time range value already filled
                 $(this).next('.inputerror').html('Please enter block');
@@ -343,8 +343,6 @@ $(document).ready(function () {
         }
     });
 });
-
-
 
         $(document).on('select2:open', () => {
             document.querySelector('.select2-search__field').focus();
