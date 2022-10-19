@@ -148,8 +148,7 @@ class BlockController extends Controller
     public function update(Request $request  )
     {
         $userID      = auth()->user()->id;
-
-
+ 
         /*****    delete Block  Data   *******/
 
         if(!empty($request->removeId)) {

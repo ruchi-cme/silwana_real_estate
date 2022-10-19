@@ -11,18 +11,8 @@
     .error{
         color: #FF0000;
     }
-
-    .remove {
-        display: block;
-        background: #444;
-        border: 1px solid black;
-        color: white;
-        text-align: center;
-        cursor: pointer;
-    }
-    .remove:hover {
-        background: white;
-        color: black;
+    .inputerror {
+        color: #FF0000;
     }
 </style>
 @section('content')
@@ -124,11 +114,11 @@
                                         <div class="d-flex from-to-wrap">
                                             <div>
                                                 <label for="">From</label>
-                                                <input type="text" class="form-control form-control-solid" value="{{  $from  }}" name="from" id="from">
+                                                <input type="text" class="form-control form-control-solid " value="{{  $from  }}" name="from" id="from">
                                             </div>
                                             <div>
                                                 <label for="">to</label>
-                                                <input type="text" name="to" value="{{  $to  }}" class="form-control form-control-solid" onchange="toRange()" >
+                                                <input type="text" name="to" value="{{  $to  }}" class="form-control form-control-solid " onchange="toRange()" >
                                             </div>
                                         </div><div class="fv-plugins-message-container invalid-feedback"></div></div>
                                 </div>
@@ -182,7 +172,7 @@
                                 <input type="hidden" class="form-control form-control-solid" name="proj_block_map_id" id="proj_block_map_id" value="{{ !empty($editData->proj_block_map_id ) ? $editData->proj_block_map_id : ''}}" >
                                 <input type="hidden" name="removeId" id="removeId">
 
-                                <button type="submit" data-form="blockForm" class="btn btn-primary" id="create_button">
+                                <button type="button" data-form="blockForm" class="btn btn-primary" id="create_button">
                                     <!--begin::Indicator-->
                                     <span class="indicator-label">{{ !empty($editData->proj_block_map_id ) ?  'Update' : 'Create'}}  Block</span>
                                     <span class="indicator-progress">Please wait...
@@ -230,6 +220,7 @@
 
     }
 
+
         $(".blockType").on('change',function(){
 
            var blockType =  $(this).val();
@@ -252,11 +243,11 @@
                         <div class="d-flex from-to-wrap">
                          <div>
                             <label for="">From</label>
-                            <input type="text" class="form-control form-control-solid" name="from" id="from">
+                            <input type="text" class="form-control form-control-solid fromTo" name="from" id="from">
                         </div>
                   <div>
                     <label for="">to</label>
-                    <input type="text" name="to" class="form-control form-control-solid"  >
+                    <input type="text" name="to" class="form-control form-control-solid fromTo"  >
                 </div>
             </div><div class="fv-plugins-message-container invalid-feedback"></div></div>
                         </div> `);
@@ -313,33 +304,47 @@
                 <!--end::Col-->
                 <!--begin::Col-->
                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                  <input type="text" class="form-control form-control-solid block_name" placeholder="Enter Block Name" autofocus name="block_name[]" id="block_name${k}" value="${curr}" >
+               <label class="inputerror" for="block_name" style="">  </label>
 
-                <input required type="text" class="form-control form-control-solid block_name" placeholder="Enter Block Name" autofocus name="block_name[]" id="block_name${k}" value="${curr}" >
-
-                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                </div>
                 </div> `);
-
         }
-            $('input.block_name').each(function() {
-                $(this).rules("add",
-                    {
-                        required: true,
-                        messages: {
-                            required: "Please enter block name",
-                        }
-                    })
-            });
+
     }
 
-        var button = document.querySelector("#create_button");
+$(document).ready(function () {
+ 
+    $('#create_button').on('click', function(event) {
 
-        var target = document.querySelector("#blockUI_target");
-        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        // Defination -------------------------------------------------------------------------------------------------------------
+        // adding rules for inputs with class 'comment'
+        var test = 1;
+        $(document).find('.block_name').each(function() {
+            console.log($(this));
+            if($(this).val() == '') {
+             // update time range value already filled
+                $(this).next('.inputerror').html('Please enter block');
+                 test++;
+            }
+            else{
+                $(this).next('.inputerror').html('');
+            }
+        });
 
-        var blockUI = new KTBlockUI(target, {
-            message: '<div class="blockui-message"><span class="spinner-border text-primary"></span> Checking...</div>',
-        }); // Element to block white fetching AJAX data ----------------------------------------------------------------------
+        // prevent default submit action
+        event.preventDefault();
+
+        // test if form is valid
+        if($('#blockForm').valid() && test == 1) { console.log(2);
+           $( '#blockForm' ).submit();
+        } else { console.log(3);
+            console.log("does not validate");
+            return false;
+        }
+    });
+});
+
+
 
         $(document).on('select2:open', () => {
             document.querySelector('.select2-search__field').focus();

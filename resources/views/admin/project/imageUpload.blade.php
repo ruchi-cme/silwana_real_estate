@@ -12,8 +12,6 @@
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container-fluid">
-
-
         <!--begin::Layout-->
         <div class="d-flex flex-column flex-lg-row">
 
@@ -68,10 +66,10 @@
                                                 <div class="col-xl-12 fv-row fv-plugins-icon-container ">
                                                     <div class="row">
                                                         <div class="col-md-4 mb-3">
-                                                            <input  type="text" placeholder="Enter Direction" class="form-control form-control-solid" name="edit_direction[]" value="{{ $row['direction'] }}" >
+                                                            <input  type="text" placeholder="Enter Direction" class="form-control form-control-solid direction" name="edit_direction[]" value="{{ $row['direction'] }}" >
                                                         </div>
                                                         <div class="col-md-4 mb-3">
-                                                            <input  type="text" placeholder="Enter Facing" class="form-control form-control-solid" name="edit_facing[]" value="{{ $row['facing']}}" >
+                                                            <input  type="text" placeholder="Enter Facing" class="form-control form-control-solid facing" name="edit_facing[]" value="{{ $row['facing']}}" >
 
                                                         </div>
                                                         <div class="col-md-3 mb-3">
@@ -143,7 +141,7 @@
                                         <!--begin::Col-->
                                         <!--begin::Actions-->
                                         <div class="mb-0">
-                                            <button type="submit" data-form="projectImage" class="btn btn-primary" id="create_button">
+                                            <button type="submit" data-form="projectImage" class="btn btn-primary" id="submitbtn">
                                                 <!--begin::Indicator-->
                                                 <span class="indicator-label"> create Project</span>
                                                 <span class="indicator-progress">Please wait...
@@ -264,6 +262,7 @@
                 $('#removeImgId').val(test);
                 $(this).parents(".control-group").remove();
             });
+
         });
 
     </script>

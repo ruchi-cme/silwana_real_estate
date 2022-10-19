@@ -46,10 +46,28 @@ $(document).ready(function() {
         }
     });
 
-    if ($("#blockForm").length > 0) {
+    $.validator.addMethod("mytst", function (value, element) {
+        var flag = true;
+
+        $("[name^=block_name]").each(function (i, j) {
+            $(this).parent('p').find('label.error').remove();
+            $(this).parent('p').find('label.error').remove();
+            if ($.trim($(this).val()) == '') {
+                flag = false;
+
+                $(this).parent('p').append('<label  id="id_ct'+i+'-error" class="error">This field is required.</label>');
+            }
+        });
+
+
+        return flag;
+
+
+    }, "");
         $("#blockForm").validate({
-            ignore: [],
+            ignore: '',
             rules: {
+
                 project_name: {
                     required: true,
                 },
@@ -76,7 +94,7 @@ $(document).ready(function() {
                 },
             },
         })
-    }
+
 
 });
 
