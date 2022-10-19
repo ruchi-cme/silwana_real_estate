@@ -42,8 +42,10 @@
                             <div class="card-title">
                                 <h2 class="fw-bolder">Block Detail</h2>
                             </div>
+
                             <!--begin::Card title-->
                         </div>
+
                         <!--end::Card header-->
                         <!--begin::Card body-->
                         <div class="card-body pt-0">
@@ -114,11 +116,20 @@
                                         <div class="d-flex from-to-wrap">
                                             <div>
                                                 <label for="">From</label>
-                                                <input type="text" class="form-control form-control-solid " value="{{  $from  }}" name="from" id="from">
+                                                <select class="form-control form-control-solid " name="from" id="from" onchange="changeFromTo()">
+                                                    @foreach (range('A', 'Z') as $char)
+                                                        <option value="{{$char}}" {{  ($from ==  $char) ? 'selected' : '' }}>{{$char}}</option>
+                                                    @endforeach
+                                                </select>
+
                                             </div>
                                             <div>
                                                 <label for="">to</label>
-                                                <input type="text" name="to" value="{{  $to  }}" class="form-control form-control-solid " onchange="toRange()" >
+                                                <select class="form-control form-control-solid " name="to" id="to" onchange="toRange()">
+                                                    @foreach (range('A', 'Z') as $char)
+                                                        <option value="{{$char}}" {{  ($to ==  $char) ? 'selected' : '' }}>{{$char}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div><div class="fv-plugins-message-container invalid-feedback"></div></div>
                                 </div>
@@ -129,11 +140,14 @@
                                 <div class="col-xl-3">
                                     <div class="fs-6 fw-bold mt-2 mb-3 required"> Total Block</div>
                                 </div>
+
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
                                     <input type="text" onchange="toRange()" class="form-control form-control-solid" placeholder="Enter Total Block" autofocus name="total_block" id="total_block" value="{{ !empty($editData->total_block ) ? $editData->total_block : ''}}" >
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                     <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    <label>Note : if anything change in total blocks, older blocks will deleted and new blocks will generate. If type of block is range</label>
+                                </div>
                             </div>
 
                             <div class="row mb-8 PrintDiv">
@@ -143,7 +157,7 @@
                                         <div class="row mb-8 blockDiv blockDiv_{{$key}}">
                                             <!--begin::Col-->
                                             <div class="col-xl-1">
-                                                <button type="button"  class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2 button"  removeBlockId="{{ $blockname['block_name_map_id']}}"  onclick="remove_btn({{$key}})" id="removeBlockBtn{{$key}}">
+                                                <button type="button"  class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2 button removeBlockBtn"  removeBlockId="{{ $blockname['block_name_map_id']}}"  onclick="remove_btn({{$key}})" id="removeBlockBtn{{$key}}">
                                                 <span class="svg-icon svg-icon-1"><i class="fa fa-trash"></i></span>
                                             </button>
                                                 </div>
@@ -221,7 +235,6 @@
 
     }
 
-
         $(".blockType").on('change',function(){
 
            var blockType =  $(this).val();
@@ -232,26 +245,35 @@
                 return false;
             } else {
 
-                $('.blockTypeDiv').after(`
-                  <div class="row mb-8 rangeDiv">
-                        <!--begin::Col-->
-                        <div class="col-xl-3">
-                            <div class="fs-6 fw-bold mt-2 mb-3 required">Range</div>
-                        </div>
-                    <!--end::Col-->
-                        <!--begin::Col-->
-                        <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                        <div class="d-flex from-to-wrap">
-                         <div>
-                            <label for="">From</label>
-                            <input type="text" class="form-control form-control-solid fromTo" name="from" id="from">
-                        </div>
-                  <div>
-                    <label for="">to</label>
-                    <input type="text" name="to" class="form-control form-control-solid fromTo"  >
-                </div>
-            </div><div class="fv-plugins-message-container invalid-feedback"></div></div>
-                        </div> `);
+                var html = ' <div class="row mb-8 rangeDiv">'+
+               ' <div class="col-xl-3">'+
+               '     <div class="fs-6 fw-bold mt-2 mb-3 required">Range</div>'+
+                '</div>'+
+               ' <div class="col-xl-9 fv-row fv-plugins-icon-container">'+
+               '     <div class="d-flex from-to-wrap">'+
+               '         <div>'+
+               '             <label for="">From</label>'+
+                '<select class="form-control form-control-solid fromTo" name="from" id="from" onchange="changeFromTo()">';
+
+                for (var l = 65; l <= 90; l++) {
+                    html += '<option value="'+String.fromCharCode(l)+'">' + String.fromCharCode(l) + '</option>';
+                }
+                html +=  ' </select>'+
+               '         </div>'+
+                '         <div>'+
+                '             <label for="">to</label>'+
+                    '<select class="form-control form-control-solid fromTo" name="to" id="to">';
+
+                        for (var l = 65; l <= 90; l++) {
+                            html += '<option value="'+String.fromCharCode(l)+'">' + String.fromCharCode(l) + '</option>';
+                        }
+                html +=  ' </select>'+
+                '        </div>'+
+                '     </div><div class="fv-plugins-message-container invalid-feedback"></div></div>'+
+                ' </div>';
+
+                $('.blockTypeDiv').after( html);
+                $('#from').trigger('change');
                 return false;
             }
         });
@@ -260,6 +282,34 @@
 
             var rowCount = $('.PrintDiv div.blockDiv').length;
             var total_block = $("#total_block").val();
+
+            var from = $("#from").val();
+ ;
+            if(typeof(from)  === "undefined" || from == ''){
+                var nex = '';
+                var curr = '';
+            }
+            //do this
+            else{
+                var nex = from.charCodeAt(0);
+                var curr = String.fromCharCode(nex);
+            }
+
+            var blockType = $('#type_of_block').find(":selected").val();
+            if(blockType == 1) {
+
+                var removeId = [];
+                $(document).find('.blockDiv .removeBlockBtn').each(function() {
+                     var removeblockid = $(this).attr('removeblockid');
+
+                    removeId.push(removeblockid);
+                    $('#removeId').val(removeId);
+                });
+                    $('.blockDiv').remove();
+                createBlockName(0, total_block, nex, curr);
+                return false;
+            }
+
 
             if(rowCount == 0) {
                 var tdCount = total_block;
@@ -277,26 +327,16 @@
                 }
             }
 
-            var from = $("#from").val();
+            createBlockName(rowCount, total_block,nex,curr);
+    }
 
-            if(typeof(from)  === "undefined"){
-                var nex = '';
-                var curr = '';
+    function  createBlockName(rowCount, total_block, nex, curr) {
+        for (var k = rowCount; k < total_block ; k++) {
 
-            }
-            //do this
-            else{
-                var nex = from.charCodeAt(0);
-                var curr = String.fromCharCode(nex);
+            if(nex  !== "")
+                curr = String.fromCharCode(nex++);
 
-            }
-
-            for (var k = rowCount; k < total_block ; k++) {
-
-                if(nex  !== "")
-                  curr = String.fromCharCode(nex++);
-
-             $('.PrintDiv').append(`
+            $('.PrintDiv').append(`
                 <div class="row mb-8 blockDiv blockDiv_${k}">
                 <!--begin::Col-->
                     <div class="col-xl-3">
@@ -313,14 +353,29 @@
         }
     }
 
+
+function changeFromTo(){
+    var removeId = [];
+    $(document).find('.blockDiv .removeBlockBtn').each(function() {
+        var removeblockid = $(this).attr('removeblockid');
+
+        removeId.push(removeblockid);
+        $('#removeId').val(removeId);
+    });
+    $('.blockDiv').remove();
+    $('#total_block').val('');
+}
 $(document).ready(function () {
+
+
+
 
     $('#create_button').on('click', function(event) {
 
         // adding rules for inputs with class 'comment'
         var test = 1;
         $(document).find('.block_name').each(function() {
-            
+
             if($(this).val() == '') {
              // update time range value already filled
                 $(this).next('.inputerror').html('Please enter block');

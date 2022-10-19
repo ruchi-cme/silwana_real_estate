@@ -67,10 +67,11 @@
                                                     <div class="row">
                                                         <div class="col-md-4 mb-3">
                                                             <input  type="text" placeholder="Enter Direction" class="form-control form-control-solid direction" name="edit_direction[]" value="{{ $row['direction'] }}" >
+                                                            <label class="inputerror" for="edit_direction" style="">  </label>
                                                         </div>
                                                         <div class="col-md-4 mb-3">
                                                             <input  type="text" placeholder="Enter Facing" class="form-control form-control-solid facing" name="edit_facing[]" value="{{ $row['facing']}}" >
-
+                                                            <label class="inputerror" for="edit_facing" style="">  </label>
                                                         </div>
                                                         <div class="col-md-3 mb-3">
                                                             <!--begin::Image input-->
@@ -87,6 +88,7 @@
                                                                     <input type="hidden" name="avatar_remove" />
                                                                     <!--end::Inputs-->
                                                                 </label>
+                                                                <label class="inputerror" for="edit_image" style="">  </label>
                                                                 <!--end::Label-->
                                                                 <!--begin::Cancel-->
                                                                 <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
@@ -141,7 +143,7 @@
                                         <!--begin::Col-->
                                         <!--begin::Actions-->
                                         <div class="mb-0">
-                                            <button type="submit" data-form="projectImage" class="btn btn-primary" id="submitbtn">
+                                            <button type="button" data-form="projectImage" class="btn btn-primary" id="submitbtn">
                                                 <!--begin::Indicator-->
                                                 <span class="indicator-label"> create Project</span>
                                                 <span class="indicator-progress">Please wait...
@@ -263,7 +265,42 @@
                 $(this).parents(".control-group").remove();
             });
 
+            $('#submitbtn').on('click', function(event) {
+
+                // adding rules for inputs with class 'comment'
+                var test = 1;
+               // $(document).find('.input').each(function() {
+
+                $("#projectImage").find("input[type=file]").each(function(index, field){
+
+                });
+
+
+                    $("#projectImage input[type=text]").each(function() {
+                    if($(this).val() == '') {
+                        // update time range value already filled
+                        $(this).next('.inputerror').html('Please enter block');
+                        test++;
+                    }
+                    else{
+                        $(this).next('.inputerror').html('');
+                    }
+                });
+
+                // prevent default submit action
+                event.preventDefault();
+
+                // test if form is valid
+                if($('#projectImage').valid() && test == 1) { console.log(2);
+                   // $( '#projectImage' ).submit();
+                } else { console.log(3);
+                    console.log("does not validate");
+                    return false;
+                }
+            });
+
         });
+
 
     </script>
 
