@@ -101,7 +101,7 @@
                                     {
                                         $range = explode(',', $editData->range);
                                         $from = $range[0];
-                                        $to   = $range[1];
+
                                     }
 
                                     @endphp
@@ -353,9 +353,6 @@ function changeFromTo(){
     $('#total_block').val('');
 }
 $(document).ready(function () {
-
-
-
 
     $('#create_button').on('click', function(event) {
 

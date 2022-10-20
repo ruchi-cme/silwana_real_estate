@@ -85,8 +85,8 @@ class BlockController extends Controller
 
         $userID = auth()->user()->id;
         $range = null;
-        if(isset($request->from ) && (isset($request->to ))) {
-            $range =   $request->from.','.$request->to;
+        if(isset($request->from ) ) {
+            $range =   $request->from ;
         }
         /*****    Insert Block Data    *******/
         $insertData  = [
@@ -148,7 +148,7 @@ class BlockController extends Controller
     public function update(Request $request  )
     {
         $userID      = auth()->user()->id;
- 
+
         /*****    delete Block  Data   *******/
 
         if(!empty($request->removeId)) {
@@ -163,8 +163,8 @@ class BlockController extends Controller
         $updateData  = Block::find( $request->proj_block_map_id);
 
         $range = null;
-        if(isset($request->from ) && (isset($request->to ))) {
-           $range =   $request->from.','.$request->to;
+        if(isset($request->from )  ) {
+           $range =   $request->from ;
          }
 
         $updateData->update([
