@@ -416,7 +416,7 @@ class ProjectController extends Controller
                 if (isset($image)) {
                     $headingImage = $request->file('image')[$i];
                     $destinationPath = public_path('images/project/images');
-                    $name = date('YmdHis') . "." . $headingImage->getClientOriginalName();
+                    $name = date('YmdHis') . "." . str_replace(' ', '',$headingImage->getClientOriginalName());
                     $headingImage->move($destinationPath, $name);
                 }
 
@@ -452,7 +452,7 @@ class ProjectController extends Controller
                    if (array_key_exists($i, $headingImage)) {
                        $headingImage = $request->file('edit_change_image')[$i];
 
-                       $subHeadingImage = date('YmdHis') . "." . $headingImage->getClientOriginalName();
+                           $subHeadingImage = date('YmdHis') . "." . str_replace(' ', '',$headingImage->getClientOriginalName());
                        $headingImage->move($destinationPath, $subHeadingImage);
                        if (!empty($editHeadingImage) && file_exists(public_path() . '/images/project/images/' . $editHeadingImage)) {
                            @unlink(public_path('images/project/images/') . $editHeadingImage);
