@@ -283,7 +283,6 @@
                 $(document).find("div.imageBgDiv").each(function() {
 
                    var bgImg = $(this).css('background-image');
-                    console.log(bgImg );
 
                    if(bgImg == 'url("about:invalid")' || bgImg == 'none' ){
                        $(this).next('.inputFileError').html('Required');
@@ -298,7 +297,7 @@
                 var error = 1;
                 $("#projectImage input[type=text]").each(function() {
 
-                    if($(this).val() === '') {
+                    if($(this).val().trim() === '') {
                         // update time range value already filled
 
                         $(this).next('.inputerror').html('Please '+  $(this).attr('attrame') );

@@ -360,7 +360,7 @@ $(document).ready(function () {
         var test = 1;
         $(document).find('.block_name').each(function() {
 
-            if($(this).val() == '') {
+            if($(this).val().trim() == '') {
              // update time range value already filled
                 $(this).next('.inputerror').html('Please enter block');
                  test++;
