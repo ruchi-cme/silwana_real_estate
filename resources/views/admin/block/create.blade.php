@@ -117,20 +117,14 @@
                                             <div>
                                                 <label for="">From</label>
                                                 <select class="form-control form-control-solid " name="from" id="from" onchange="changeFromTo()">
+                                                   <option value="">Select Range From</option>
                                                     @foreach (range('A', 'Z') as $char)
                                                         <option value="{{$char}}" {{  ($from ==  $char) ? 'selected' : '' }}>{{$char}}</option>
                                                     @endforeach
                                                 </select>
 
                                             </div>
-                                            <div>
-                                                <label for="">to</label>
-                                                <select class="form-control form-control-solid " name="to" id="to" onchange="toRange()">
-                                                    @foreach (range('A', 'Z') as $char)
-                                                        <option value="{{$char}}" {{  ($to ==  $char) ? 'selected' : '' }}>{{$char}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+
                                         </div><div class="fv-plugins-message-container invalid-feedback"></div></div>
                                 </div>
                             @endif
@@ -253,20 +247,13 @@
                '     <div class="d-flex from-to-wrap">'+
                '         <div>'+
                '             <label for="">From</label>'+
-                '<select class="form-control form-control-solid fromTo" name="from" id="from" onchange="changeFromTo()">';
+                '<select class="form-control form-control-solid fromTo" name="from" id="from" onchange="changeFromTo()">   <option value="">Select Range From</option>';
 
                 for (var l = 65; l <= 90; l++) {
                     html += '<option value="'+String.fromCharCode(l)+'">' + String.fromCharCode(l) + '</option>';
-                }
-                html +=  ' </select>'+
-               '         </div>'+
-                '         <div>'+
-                '             <label for="">to</label>'+
-                    '<select class="form-control form-control-solid fromTo" name="to" id="to">';
 
-                        for (var l = 65; l <= 90; l++) {
-                            html += '<option value="'+String.fromCharCode(l)+'">' + String.fromCharCode(l) + '</option>';
-                        }
+                }
+
                 html +=  ' </select>'+
                 '        </div>'+
                 '     </div><div class="fv-plugins-message-container invalid-feedback"></div></div>'+
@@ -284,7 +271,7 @@
             var total_block = $("#total_block").val();
 
             var from = $("#from").val();
- ;
+
             if(typeof(from)  === "undefined" || from == ''){
                 var nex = '';
                 var curr = '';
