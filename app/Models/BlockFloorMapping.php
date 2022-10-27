@@ -9,9 +9,9 @@ class BlockFloorMapping extends Model
 {
     use HasFactory;
 
-    protected $table = 'proj_block_floor_dtl';
+    protected $table = 'block_floor_mappings';
     public $timestamps = false;
-    protected $primaryKey = 'proj_block_floor_id';
+    protected $primaryKey = 'block_floor_map_id';
 
     /**
      * The attributes that are mass assignable.
@@ -19,11 +19,10 @@ class BlockFloorMapping extends Model
      */
     protected $fillable = [
 
-        'proj_block_mapg_id',
-        'category_id',
-        'floor_no',
-        'unit_count',
-        'floor_detail',
+        'project_id',
+        'block_name_map_id',
+        'total_floor',
+        'initial_name',
         'status',
         'created_by',
         'created_date',

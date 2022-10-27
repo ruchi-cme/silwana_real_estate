@@ -83,7 +83,7 @@
                                                                     <!--begin::Image input-->
                                                                     <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url()">
                                                                         <!--begin::Preview existing image-->
-                                                                        <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: url({{asset('images/project/images' ).'/'.$row['title']}})"></div>
+                                                                        <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: url({{  !empty($row['title']) ?  asset('images/project/images' ).'/'.$row['title'] :''}})"></div>
                                                                         <!--end::Preview existing image-->
                                                                         <!--begin::Label-->
                                                                         <label class="inputFileError errorMsg" for="direction" style="">  </label>
@@ -283,16 +283,15 @@
                 $(document).find("div.imageBgDiv").each(function() {
 
                    var bgImg = $(this).css('background-image');
+                  //  console.log(bgImg);
+                   if (bgImg == 'url("about:invalid")' || bgImg == 'none') {
 
-                   if(bgImg == 'url("about:invalid")' || bgImg == 'none' ){
                        $(this).next('.inputFileError').html('Required');
                        err++;
-                   }else{
+                   } else {
                        $(this).next('.inputFileError').html('');
                    }
-
                 });
-
 
                 var error = 1;
                 $("#projectImage input[type=text]").each(function() {
@@ -312,7 +311,7 @@
                 event.preventDefault();
 
                 // test if form is valid
-                if($('#projectImage').valid() && error == 1  ) { console.log(2);
+                if($('#projectImage').valid() && error == 1 && err == 1  ) { console.log(2);
                     $( '#projectImage' ).submit();
                 } else { console.log(3);
                     console.log("does not validate");

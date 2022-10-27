@@ -6,7 +6,7 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.admin') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
-<<li class="breadcrumb-item px-3 text-primary">Property</li>
+<li class="breadcrumb-item px-3 text-primary">Property</li>
 <li class="breadcrumb-item px-3"><a class="text-hover-primary text-muted" href="{{ route('admin.floor') }}">Floor</a></li>
 @endsection
 
@@ -62,10 +62,9 @@
                     <table id="datatable" class="table table-row-bordered">
                         <thead>
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                <th>Block Name</th>
-                                <th>Category</th>
-                                <th>Floor Number</th>
-                                <th>Total Units</th>
+                                <th>Project</th>
+                                <th>Block</th>
+                                <th>Total Floor</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -77,7 +76,6 @@
             </div>
             <!--end::Card-->
         </div>
-
         <!--end::Container-->
     </div>
     <!--end::Post-->
@@ -111,16 +109,13 @@
             }
         },
         columns: [{
+                data: 'project_name'
+            },
+            {
                 data: 'block_name'
             },
             {
-                data: 'category_name'
-            },
-            {
-                data: 'floor_no'
-            },
-            {
-                data: 'unit_count'
+                data: 'total_floor'
             },
             {
                 data: 'status'
@@ -152,7 +147,7 @@
                 },
             },
             {
-                targets: 4,
+                targets: 3,
                 render: function (data, type, row) {
                     return `
                                 <span class="badge badge-primary">${data}</span>

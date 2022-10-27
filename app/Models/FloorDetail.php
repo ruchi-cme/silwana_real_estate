@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FloorUnitMapping extends Model
+class FloorDetail extends Model
 {
     use HasFactory;
 
-    protected $table = 'floor_unit_mapping';
     public $timestamps = false;
-    protected $primaryKey = 'floor_unit_id';
+    protected $primaryKey = 'floor_detail_id';
 
     /**
      * The attributes that are mass assignable.
@@ -19,13 +18,13 @@ class FloorUnitMapping extends Model
      */
     protected $fillable = [
 
-        'floor_detail_id',
-        'unit_name',
-        'area_in_sq_feet',
-        'total_price',
-        'booking_price',
-        'booking_type',
-        'status',
+        'block_floor_map_id',
+        'project_id',
+        'category_id',
+        'floor_no',
+        'from',
+        'to',
+        'unit_count',
         'created_by',
         'created_date',
         'modified_by',

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\{BlockFloorMapping,ProjFloorImage};
+use App\Models\{BlockFloorMapping,ProjFloorImage,FloorDetail,FloorUnitMapping};
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -22,29 +22,27 @@ class BlockFloorMappingController extends Controller
             $userID = auth()->user()->id;
 
             $select =  [
-                'proj_block_floor_dtl.proj_block_floor_id',
-                'proj_block_floor_dtl.floor_no',
-                'proj_block_floor_dtl.unit_count',
-                'proj_block_floor_dtl.status',
-                'category_master.category_name',
-                'proj_block_mappings.block_name'
+                'block_floor_mappings.block_floor_map_id',
+                'block_floor_mappings.total_floor',
+                'project_master.project_name',
+                'block_name_mappings.block_name',
+                'block_floor_mappings.status',
+                'block_floor_mappings.created_date',
             ];
-            $dbData = BlockFloorMapping::leftJoin('category_master', 'category_master.category_id', '=', 'proj_block_floor_dtl.category_id')
-                ->leftJoin('proj_block_mappings', 'proj_block_mappings.proj_block_map_id', '=', 'proj_block_floor_dtl.proj_block_mapg_id')
+            $dbData = BlockFloorMapping::leftJoin('project_master', 'project_master.project_id', '=', 'block_floor_mappings.project_id')
+                ->leftJoin('block_name_mappings', 'block_name_mappings.block_name_map_id', '=', 'block_floor_mappings.block_name_map_id')
                 ->select($select)
-                ->orderBy('proj_block_floor_dtl.proj_block_floor_id', 'desc')
-                ->where('proj_block_floor_dtl.deleted',0)
+                ->orderBy('block_floor_mappings.block_floor_map_id', 'desc')
+                ->where('block_floor_mappings.deleted',0)
                 ->get();
-
 
             $data = $dbData->map(function ($data){
 
                 return [
-                    'id'              => $data->proj_block_floor_id,
+                    'id'              => $data->block_floor_map_id,
+                    'project_name'    => $data->project_name,
                     'block_name'      => $data->block_name,
-                    'floor_no'        => $data->floor_no,
-                    'category_name'   => $data->category_name,
-                    'unit_count'      => $data->unit_count,
+                    'total_floor'     => $data->total_floor,
                     'status'          => !empty($data->status) && ($data->status == 1) ? 'Active' : 'Inctive',
                     'created_date'    => $data->created_date
                 ];
@@ -62,7 +60,8 @@ class BlockFloorMappingController extends Controller
      */
     public function create()
     {
-        return view('admin.block.table' );
+
+        return view('admin.floor.table' );
     }
 
     /**
@@ -73,46 +72,78 @@ class BlockFloorMappingController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
-            'block_name'    => 'required',
-            'category_name' => 'required',
-            'floor_no'      => 'required',
-            'unit_count'    => 'required',
-            'image.*'       => 'mimes:jpg,png,jpeg,gif,svg',
+            'project_name'=> 'required',
+            'block_name'  => 'required',
+            'total_floor' => 'required',
+            'initial_name'=> 'required',
         ]);
 
         $userID = auth()->user()->id;
 
         /*****    Insert Block Data    *******/
-        $insertData  = [
-            'proj_block_mapg_id'   => $request->block_name,
-            'category_id'   => $request->category_name,
-            'floor_no'     => $request->floor_no,
-            'unit_count'   => $request->unit_count,
-            'floor_detail' => $request->floor_detail,
-            'status'       => 1,
-            'created_by'   => $userID
+
+        $insertBlockFloorData = [
+            'project_id'         => $request->project_name,
+            'block_name_map_id'  => $request->block_name,
+            'total_floor'        => $request->total_floor,
+            'initial_name'       => $request->initial_name,
+            'status'             => 1,
+            'created_by'         => $userID
         ];
 
-        $proj_block_floor_id = BlockFloorMapping::create($insertData);
+        $blockFloorId = BlockFloorMapping::create($insertBlockFloorData);
 
 
-        /******* Insert Images *********/
-        if($request->hasfile('image'))
+        /****** RESET Arrays *******/
+
+       $category_id = array_values($request->category_id);
+        $from       = array_values($request->from);
+        $to         = array_values($request->to);
+        $unit       = array_values($request->unit);
+        $unit_name  = array_values($request->unit_name);
+        $sq_ft      = array_values($request->sq_ft);
+        $total_price    = array_values($request->total_price);
+        $booking_price  = array_values($request->booking_price);
+
+        /****** END RESET Arrays *******/
+
+        /******* Insert Floor Detail *********/
+        if(!empty($request->total_floor))
         {
-            foreach($request->file('image') as $key => $file)
+            for($j=0; $j < $request->total_floor; $j++  )
             {
-                $image = $request->file('image')[$key];
-                $destinationPath = public_path('images/floor');
-                $name = date('YmdHis') . "." . $file->getClientOriginalName();  ;
-                $image->move($destinationPath, $name);
-                $insertImg[$key]['proj_block_floor_id'] = $proj_block_floor_id['proj_block_floor_id'];
-                $insertImg[$key]['title']  = $name;
-                $insertImg[$key]['path']   = $destinationPath;
-                $insertImg[$key]['status'] = 1;
-                $insertImg[$key]['created_by'] = $userID;
+                $insertFloorDetail['project_id']         = $request->project_name;
+                $insertFloorDetail['block_floor_map_id']  = $blockFloorId['block_floor_map_id'];
+                $insertFloorDetail['category_id']        = $category_id[$j];
+                $insertFloorDetail['floor_no']           = $j + 1;
+                $insertFloorDetail['from']               = $from[$j];
+                $insertFloorDetail['to']                 = $to[$j];
+                $insertFloorDetail['unit_count']         = $unit[$j];
+                $insertFloorDetail['status']      = 1;
+                $insertFloorDetail['created_by']  = $userID;
+
+               $floorDetailId = FloorDetail::create($insertFloorDetail);
+
+                /******* Insert Unit Detail *********/
+                if($unit[$j])
+                {
+                    for( $i=0; $i < $unit[$j]; $i++ )
+                    {
+                        $insertUnitDetail['floor_detail_id']   = $floorDetailId['floor_detail_id'] ;
+                        $insertUnitDetail['unit_name']         = $unit_name[$j][$i];
+                        $insertUnitDetail['area_in_sq_feet']   = $sq_ft[$j][$i];
+                        $insertUnitDetail['total_price']       = $total_price[$j][$i];
+                        $insertUnitDetail['booking_price']     = $booking_price[$j][$i];
+                        $insertUnitDetail['booking_type']      = 1;
+                        $insertUnitDetail['status']            = 1;
+                        $insertUnitDetail['created_by']        = $userID;
+
+                        FloorUnitMapping::insert($insertUnitDetail);
+                    }
+                }
             }
-            ProjFloorImage::insert($insertImg);
         }
 
         return redirect()->route('admin.floor')->with('inserted','Floor Created👍');
@@ -128,9 +159,8 @@ class BlockFloorMappingController extends Controller
     public function edit(Request $request)
     {
          $editData = BlockFloorMapping::find($request->id);
-        $selectedImage = ProjFloorImage::select([ 'title','path'])->where('proj_block_floor_id' ,  $request->id)->get()->toArray();
 
-        return view('admin.floor.create' ,compact('editData','selectedImage'));
+        return view('admin.floor.table' ,compact('editData'));
 
     }
 
@@ -236,4 +266,5 @@ class BlockFloorMappingController extends Controller
 
         return redirect()->route('admin.floor')->with('success','Floor Status Changed');
     }
+
 }

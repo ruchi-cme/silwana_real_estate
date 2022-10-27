@@ -59,7 +59,7 @@ Route::middleware(['auth'])->group(function () {
 // Common Routes
 Route::name('state.fetch')->get('/state/fetch', 'App\Http\Controllers\CountryStateCityController@fetchState');
 Route::name('city.fetch')->get('/city/fetch', 'App\Http\Controllers\CountryStateCityController@fetchCity');
-
+Route::name('block.fetch')->get('/block/fetch', 'App\Http\Controllers\CountryStateCityController@fetchBlock');
 // Config Routes
 Route::get('/permission/create', function () {
     $permission = request()->query('name');
