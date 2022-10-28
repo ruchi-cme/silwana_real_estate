@@ -128,6 +128,7 @@
                                         <div class="d-flex floor-wrap cmn-box">
                                             <div class="form-group">
                                                 <label for="">Block</label>
+                                                <input type="hidden" id="edit_block_name" value="{{ !empty( $editData->block_name_map_id)  ? $editData->block_name_map_id : ''}}">
                                                 <select class="form-select form-select-solid form-select-lg" name="block_name" id="block_name" data-placeholder="Select Project" data-control="select2" >
                                                     <option ></option>
                                                 </select>
@@ -259,8 +260,17 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
+           var project_id =  $('#project_id').val();
+            if(project_id != '') {
+                getBlock(project_id);
+            }
+
             $('#project_id').on("select2:select", function (e) {
                 var project_id = this.value;
+                getBlock(project_id);
+            });
+
+            function getBlock(project_id){
                 $("#block_name").html('');
                 $.ajax({
                     url: "{{ route('block.fetch') }}",
@@ -270,16 +280,21 @@
                     },
                     dataType: 'json',
                     success: function (result) {
+
                         $('#block_name').html('<option value="">Select Block</option>');
                         $.each(result.blockData, function (key, value) {
                             $("#block_name").append('<option value="' + value
                                 .block_name_map_id + '">' + value.block_name + '</option>');
                         });
                         $('#block_name').select2('open');
+
+                        var edit_block_name =  $('#edit_block_name').val();
+                        if(edit_block_name != '') {
+                            $("#block_name").val(edit_block_name);
+                        }
                     }
                 });
-            });
-
+            }
             $('.addFloor').on('click', function (e) {
 
                 var floor_count = $('#floor_count').val();

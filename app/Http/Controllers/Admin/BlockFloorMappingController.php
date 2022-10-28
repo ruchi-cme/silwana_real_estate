@@ -75,7 +75,7 @@ class BlockFloorMappingController extends Controller
 
         $request->validate([
             'project_name'=> 'required',
-         //   'block_name'  => 'required',
+            'block_name'  => 'required',
             'total_floor' => 'required',
             'initial_name'=> 'required',
         ]);
@@ -92,7 +92,10 @@ class BlockFloorMappingController extends Controller
             $latestFloor = $updateData->total_floor;
 
             $updateData->update([
+                'project_id'         => $request->project_name,
+                'block_name_map_id'  => $request->block_name,
                 'total_floor'   => $request->total_floor,
+                'initial_name'       => $request->initial_name,
                 'modified_by'  => $userID
             ]);
 
@@ -113,25 +116,22 @@ class BlockFloorMappingController extends Controller
             $latestFloor = '';
         }
 
-        /****** RESET Arrays *******/
-
-       $category_id     = array_values($request->category_id);
-        $from           = array_values($request->from);
-        $to             = array_values($request->to);
-        $unit           = array_values($request->unit);
-        $unit_name      = array_values($request->unit_name);
-        $sq_ft          = array_values($request->sq_ft);
-        $total_price    = array_values($request->total_price);
-        $booking_price  = array_values($request->booking_price);
-        $floor_number   = array_values( $request->floor_number);
-
-
-        /****** END RESET Arrays *******/
-
-
         /******* Insert Floor Detail *********/
         if(!empty($total_floor))
         {
+            /****** RESET Arrays *******/
+
+            $category_id    = array_values($request->category_id);
+            $from           = array_values($request->from);
+            $to             = array_values($request->to);
+            $unit           = array_values($request->unit);
+            $unit_name      = array_values($request->unit_name);
+            $sq_ft          = array_values($request->sq_ft);
+            $total_price    = array_values($request->total_price);
+            $booking_price  = array_values($request->booking_price);
+            $floor_number   = array_values( $request->floor_number);
+            /****** END RESET Arrays *******/
+
             for($j=0; $j < $total_floor; $j++  )
             {
                 $insertFloorDetail['project_id']         = $request->project_name;
