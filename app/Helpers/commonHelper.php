@@ -394,7 +394,11 @@ if(!function_exists("getUnit")) {
 
     function getUnit($floor_id)
     {
-        $data = FloorUnitMapping::where("proj_block_floor_id", $floor_id)->get(["proj_floor_unit_id", "unit_name"]);
+        $data = FloorUnitMapping::where("floor_detail_id", $floor_id)
+            ->get(["floor_unit_id", "floor_detail_id", "unit_name","area_in_sq_feet" , "total_price", "booking_price"])
+            ->toArray();
         return $data;
     }
 }
+
+

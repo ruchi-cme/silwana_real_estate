@@ -157,7 +157,7 @@
                                                 <tbody class="appendHtml">
 
                                                 @if(!empty($editData))
-
+                                                    @foreach($floorData as $row)
                                                     <tr id="tr_clone" >
                                                         <td>
                                                             <button type="button"  class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2 button btn-remove" id="create_button">
@@ -167,40 +167,49 @@
                                                         <td>
                                                             <label for="">categories</label>
                                                             <select name="category_id-{0}" id="">
-                                                                <option value="">categories 1</option>
-                                                                <option value="">categories 1</option>
-                                                                <option value="">categories 1</option>
+                                                                @php $categoryData = getCategory() @endphp
+                                                                @if (!empty($categoryData))
+                                                                    @foreach ($categoryData as $cat)
+                                                                        <option value="{{ $cat->category_id }}" >{{ $cat->category_name }}</option>
+                                                                    @endforeach
+                                                                @endif
                                                             </select>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex from-to-wrap">
                                                                 <div>
                                                                     <label for="">From</label>
-                                                                    <input type="text" name="from">
+                                                                    <input type="text" name="from" value="{{ $row['from'] }}">
                                                                 </div>
                                                                 <div>
                                                                     <label for="">to</label>
-                                                                    <input type="text" name="to">
+                                                                    <input type="text" name="to"  value="{{ $row['to'] }}">
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td class="unitWrap">
                                                             <div class="unit-wrap">
                                                                 <label for="">unit</label>
-                                                                <input type="text" name="unit" class="unitNo">
+                                                                <input type="text" name="unit" class="unitNo" value="{{ $row['unit_count'] }}">
                                                             </div>
                                                         </td>
 
-                                                        <td id="unitTdClone" style="display: none">
-                                                            <input type="text" disabled value="A-101">
-                                                            <input type="text" placeholder="Sq. Ft.">
-                                                            <input type="text" placeholder="Booking price">
-                                                        </td>
-
-
+                                                        @php
+                                                           $getUnit =  getUnit($row['floor_detail_id']);
+                                                        @endphp
+                                                        @if(!empty($getUnit))
+                                                            @foreach($getUnit as $unit)
+                                                                <td id="unitTdClone"  >
+                                                                    <input type="text" value="{{ $unit['unit_name'] }}" disabled  >
+                                                                    <input type="text" value="{{ $unit['area_in_sq_feet'] }}" placeholder="Sq. Ft.">
+                                                                    <input type="text" value="{{ $unit['booking_price'] }}" placeholder="Booking price">
+                                                                    <input type="text" value="{{ $unit['total_price'] }}" placeholder="Total price">
+                                                                </td>
+                                                            @endforeach
+                                                        @endif
 
                                                     </tr>
-
+                                                    @endforeach
                                                 @endif
 
                                                 </tbody>

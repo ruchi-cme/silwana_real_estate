@@ -81,9 +81,12 @@
                                                                 </div>
                                                                 <div class="col-md-3 mb-3">
                                                                     <!--begin::Image input-->
-                                                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url()">
+                                                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
                                                                         <!--begin::Preview existing image-->
-                                                                        <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: url({{  !empty($row['title']) ?  asset('images/project/images' ).'/'.$row['title'] :''}})"></div>
+                                                                       @php
+                                                                          $path =  !empty($row['title']) ? asset('images/project/images' ).'/'.$row['title'] : ''  ;
+                                                                          $test =   "background-image:url('$path')"  ;  @endphp
+                                                                        <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($row['title']) ? $test :'"background-image : none'}}"></div>
                                                                         <!--end::Preview existing image-->
                                                                         <!--begin::Label-->
                                                                         <label class="inputFileError errorMsg" for="direction" style="">  </label>
@@ -207,9 +210,10 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <!--begin::Image input-->
-                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
+                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
                             <!--begin::Preview existing image-->
-                            <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: url()"></div>
+                            @php $img= ''; @endphp
+                            <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: none "></div>
                             <!--end::Preview existing image-->
                             <!--begin::Label-->
                             <label class="inputFileError errorMsg" for="direction" style="">  </label>
@@ -282,8 +286,8 @@
                 var err = 1;
                 $(document).find("div.imageBgDiv").each(function() {
 
-                   var bgImg = $(this).css('background-image');
-                  //  console.log(bgImg);
+                   var bgImg = $(this).css('background-image').trim();
+
                    if (bgImg == 'url("about:invalid")' || bgImg == 'none') {
 
                        $(this).next('.inputFileError').html('Required');

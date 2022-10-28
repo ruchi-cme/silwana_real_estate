@@ -160,7 +160,11 @@ class BlockFloorMappingController extends Controller
     {
          $editData = BlockFloorMapping::find($request->id);
 
-        return view('admin.floor.table' ,compact('editData'));
+        $floorData = FloorDetail::where('block_floor_map_id',$request->id)->get()->toArray();
+        //dd($floorData);
+      //  $unitData = FloorUnitMapping::where();
+
+        return view('admin.floor.table' ,compact('editData','floorData'));
 
     }
 
