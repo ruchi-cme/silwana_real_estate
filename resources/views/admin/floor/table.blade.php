@@ -86,7 +86,6 @@
     <!--begin::Container-->
     <div id="kt_content_container" class="container-fluid">
 
-
         <!--begin::Layout-->
         <div class="d-flex flex-column flex-lg-row">
 
@@ -96,7 +95,7 @@
 
                 @include('layouts.alerts.error')
 
-                   <form id="tableForm" method="post" action="{{ !empty($editData->proj_block_map_id) ? route('admin.floor.update') : route('admin.floor.store') }}">
+                   <form id="tableForm" method="post" action="{{ route('admin.floor.store') }}">
                             @csrf
                         <div class="card shadow-lg card-flush pt-3 mb-5 mb-lg-10">
                             <!--begin::Card header-->
@@ -117,7 +116,7 @@
                                         <label for="">Project</label>
                                         <select class="form-select form-select-solid form-select-lg" name="project_name" id="project_id" data-placeholder="Select Project" data-control="select2" >
                                             <option ></option>
-                                            {{ $projectData = getProject() }}
+                                            @php $projectData = getProject() @endphp
                                             @if (!empty($projectData))
                                                 @foreach ($projectData as $pro)
                                                     <option value="{{ $pro->project_id }}" {{ !empty( $editData->project_id)  && ($editData->project_id ==  $pro->project_id) ? 'selected' : '' }}>{{ $pro->project_name }}</option>
@@ -160,17 +159,21 @@
                                                     @foreach($floorData as $row)
                                                     <tr id="tr_clone" >
                                                         <td>
-                                                            <button type="button"  class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2 button btn-remove" id="create_button">
-                                                                <span class="svg-icon svg-icon-1"><i class="fa fa-trash"></i></span>
-                                                            </button>
+                                                            <div class="d-flex from-to-wrap">
+                                                                <div>
+                                                                    <label for="">Floor</label>
+                                                                    <input type="text" class="floor_number"  disabled name="from" value="{{ $row['floor_no'] }}">
+                                                                </div>
+                                                            </div>
                                                         </td>
                                                         <td>
                                                             <label for="">categories</label>
-                                                            <select name="category_id-{0}" id="">
+                                                            <select name="category_id" disabled  >
+                                                                <option>Select Category</option>
                                                                 @php $categoryData = getCategory() @endphp
                                                                 @if (!empty($categoryData))
                                                                     @foreach ($categoryData as $cat)
-                                                                        <option value="{{ $cat->category_id }}" >{{ $cat->category_name }}</option>
+                                                                        <option value="{{ $cat->category_id }}" {{ !empty( $row['category_id'])  && ($row['category_id'] ==  $cat->category_id) ? 'selected' : '' }}>{{ $cat->category_name }}</option>
                                                                     @endforeach
                                                                 @endif
                                                             </select>
@@ -179,18 +182,18 @@
                                                             <div class="d-flex from-to-wrap">
                                                                 <div>
                                                                     <label for="">From</label>
-                                                                    <input type="text" name="from" value="{{ $row['from'] }}">
+                                                                    <input type="text" name="from" value="{{ $row['from'] }}" disabled>
                                                                 </div>
                                                                 <div>
                                                                     <label for="">to</label>
-                                                                    <input type="text" name="to"  value="{{ $row['to'] }}">
+                                                                    <input type="text" name="to"  value="{{ $row['to'] }}" disabled>
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td class="unitWrap">
                                                             <div class="unit-wrap">
                                                                 <label for="">unit</label>
-                                                                <input type="text" name="unit" class="unitNo" value="{{ $row['unit_count'] }}">
+                                                                <input type="text" name="unit" class="unitNo" value="{{ $row['unit_count'] }}" disabled>
                                                             </div>
                                                         </td>
 
@@ -201,9 +204,9 @@
                                                             @foreach($getUnit as $unit)
                                                                 <td id="unitTdClone"  >
                                                                     <input type="text" value="{{ $unit['unit_name'] }}" disabled  >
-                                                                    <input type="text" value="{{ $unit['area_in_sq_feet'] }}" placeholder="Sq. Ft.">
-                                                                    <input type="text" value="{{ $unit['booking_price'] }}" placeholder="Booking price">
-                                                                    <input type="text" value="{{ $unit['total_price'] }}" placeholder="Total price">
+                                                                    <input type="text" value="{{ $unit['area_in_sq_feet'] }}" placeholder="Sq. Ft." disabled>
+                                                                    <input type="text" value="{{ $unit['booking_price'] }}" placeholder="Booking price" disabled>
+                                                                    <input type="text" value="{{ $unit['total_price'] }}" placeholder="Total price" disabled>
                                                                 </td>
                                                             @endforeach
                                                         @endif
@@ -222,6 +225,7 @@
                                     <!--begin::Actions-->
                                     <div class="mb-0">
                                          <input type="hidden" name="floor_count" id="floor_count" value="">
+                                        <input type="hidden" name="block_floor_map_id" id="block_floor_map_id" value="{{ !empty($editData->block_floor_map_id) ? $editData->block_floor_map_id :'' }}">
 
                                          <button type="button" data-form="tableForm" class="btn btn-primary" id="create_button">
                                             <!--begin::Indicator-->
@@ -276,95 +280,101 @@
                 });
             });
 
-        $('.addFloor').on('click', function (e) {
+            $('.addFloor').on('click', function (e) {
 
-            var floor_count = $('#floor_count').val();
+                var floor_count = $('#floor_count').val();
 
-            var floor_no = $('#floor_no').val();
+                var floor_no = $('#floor_no').val();
 
-                var digitval = $.isNumeric(floor_no);
+                    var digitval = $.isNumeric(floor_no);
 
-                if (digitval == false) {
+                    if (digitval == false) {
 
-                    $('#floor_no').next('.inputerror').html('Please Enter Digits');
-                    event.preventDefault();
-                }else{
-                    $('#floor_no').next('.inputerror').html('');
+                        $('#floor_no').next('.inputerror').html('Please Enter Digits');
+                        event.preventDefault();
+                    }else{
+                        $('#floor_no').next('.inputerror').html('');
+                    }
+
+
+                var rowCount = $('.appendHtml tr').length;
+                if(rowCount == 0) {
+                    var tdCount = floor_no;
+                }
+                else if(floor_no > rowCount ) {
+                    var tdCount = floor_no - rowCount;
+                }
+                else if(floor_no < rowCount ) { alert(rowCount); alert(floor_no);
+                    var removeTr = rowCount - floor_no ;
+                    for($i = rowCount; $i >= floor_no; $i--) {
+                        remove_btn($i);
+                    }
                 }
 
+                var n = 0;
 
-            var rowCount = $('.appendHtml tr').length;
-            if(rowCount == 0) {
-                var tdCount = floor_no;
-            }
-            else if(floor_no > rowCount ) {
-                var tdCount = floor_no - rowCount;
-            }
-            else if(floor_no < rowCount ) { alert(rowCount); alert(floor_no);
-                var removeTr = rowCount - floor_no ;
-                for($i = rowCount; $i >= floor_no; $i--) {
-                    remove_btn($i);
+                if(floor_count != '') {
+                    n =  parseInt(floor_count) + 1 ;
                 }
-            }
 
-            var n = 0;
+                for (var i = rowCount; i < floor_no ; i++) {
 
-            if(floor_count != '') {
-                n =  parseInt(floor_count) + 1 ;
-            }
-
-            for (var i = rowCount; i < floor_no ; i++) {
-
-
-
-                $('.appendHtml').append(`<tr id="tr_clone_${n}" >
-                <td>
-                    <button type="button" class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2 button btn-remove" onclick="remove_btn(${n})" id="create_button">
-                        <span class="svg-icon svg-icon-1"><i class="fa fa-trash"></i></span>
-                    </button>
-                </td>
-                <td>
-                    <label for="">categories</label>
-                    <select name="category_id[]" id="category_id${n}" placeholder="Select Category">
-                       @php $categoryData = getCategory() @endphp
-                          @if (!empty($categoryData))
-                            @foreach ($categoryData as $cat)
-                                 <option value="{{ $cat->category_id }}" >{{ $cat->category_name }}</option>
-                             @endforeach
-                          @endif
-                    </select>
-                    <label class="inputerror errorMsg"  for="category_id" style=""></label>
-                </td>
-                <td>
-                    <div class="d-flex from-to-wrap">
-                        <div>
-                            <label for="">From</label>
-                            <input type="text" id="from${n}" name="from[]" placeholder="Enter From" class="only-numeric">
-                         <label class="inputerror errorMsg" for="from" style=""></label>
+                    $('.appendHtml').append(`<tr id="tr_clone_${n}" >
+                    <td>
+                         <div class="d-flex from-to-wrap">
+                           <div>
+                                <button type="button" class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2 button btn-remove" onclick="remove_btn(${n})" id="create_button">
+                                     <span class="svg-icon svg-icon-1"><i class="fa fa-trash"></i></span>
+                                </button>
+                            </div>
+                            <div>
+                                <label for="">Floor</label>
+                                <input class="floor_number" type="text" readonly name="floor_number[]" value="${i+1}">
+                            </div>
                         </div>
-                        <div>
-                            <label for="">To</label>
-                            <input type="text" class="to" id="to${n}" name="to[]" placeholder="Enter To" class="only-numeric">
-                            <label class="inputerror errorMsg"  for="to" style=""></label>
+                    </td>
+                    <td>
+                        <label for="">categories</label>
+                        <select name="category_id[]" id="category_id${n}" placeholder="Select Category">
+                           @php $categoryData = getCategory() @endphp
+                              @if (!empty($categoryData))
+                                @foreach ($categoryData as $cat)
+                                     <option value="{{ $cat->category_id }}" >{{ $cat->category_name }}</option>
+                                 @endforeach
+                              @endif
+                        </select>
+                        <label class="inputerror errorMsg"  for="category_id" style=""></label>
+                    </td>
+                    <td>
+                        <div class="d-flex from-to-wrap">
+                            <div>
+                                <label for="">From</label>
+                                <input type="text" id="from${n}" name="from[]" placeholder="Enter From" class="only-numeric">
+                             <label class="inputerror errorMsg" for="from" style=""></label>
+                            </div>
+                            <div>
+                                <label for="">To</label>
+                                <input type="text" class="to" id="to${n}" name="to[]" placeholder="Enter To" class="only-numeric">
+                                <label class="inputerror errorMsg"  for="to" style=""></label>
+                            </div>
                         </div>
-                    </div>
-                </td>
-                <td id="unitWrap_${n}">
-                    <div class="unit-wrap">
-                        <label for="">unit</label>
-                        <input type="text" name="unit[]" value="" onchange="triggerKeyUp(${n});" class="unitChange only-numeric"  placeholder="Enter Unit" id="unit_no_${n}">
-                            <label class="inputerror errorMsg"  for="unit" style=""></label>
-                    </div>
-                </td>
-            </tr> `);
+                    </td>
+                    <td id="unitWrap_${n}">
+                        <div class="unit-wrap">
+                            <label for="">unit</label>
+                            <input type="text" name="unit[]" value="" onchange="triggerKeyUp(${n});" class="unitChange only-numeric"  placeholder="Enter Unit" id="unit_no_${n}">
+                                <label class="inputerror errorMsg"  for="unit" style=""></label>
+                        </div>
+                    </td>
+                </tr> `);
 
-                $('#floor_count').val(n);
-                n++;
-            }
-        });
-        });
+                    $('#floor_count').val(n);
+                    n++;
+                }
+            });
+            });
 
-        function triggerKeyUp(i) {
+            function triggerKeyUp(i) {
 
             var totalUnit = $("#unit_no_"+i).val();
             var digitval = $.isNumeric(totalUnit);
@@ -415,9 +425,15 @@
 
         }
 
-        function remove_btn(i) {
-            $('#tr_clone_'+i).remove();
-        }
+            function remove_btn(i) {
+                $('#tr_clone_'+i).remove();
+                var floorVal =   $('#floor_no').val();
+                $('#floor_no').val(parseInt(floorVal) - 1);
+
+                $('.floor_number').each(function($i){
+                     $(this).val($i+1) ;
+                });
+            }
 
         $(document).ready(function () {
 

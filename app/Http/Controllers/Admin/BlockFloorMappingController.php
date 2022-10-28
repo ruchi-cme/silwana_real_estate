@@ -75,7 +75,7 @@ class BlockFloorMappingController extends Controller
 
         $request->validate([
             'project_name'=> 'required',
-            'block_name'  => 'required',
+         //   'block_name'  => 'required',
             'total_floor' => 'required',
             'initial_name'=> 'required',
         ]);
@@ -83,48 +83,68 @@ class BlockFloorMappingController extends Controller
         $userID = auth()->user()->id;
 
         /*****    Insert Block Data    *******/
+        if (!empty($request->block_floor_map_id)) {
 
-        $insertBlockFloorData = [
-            'project_id'         => $request->project_name,
-            'block_name_map_id'  => $request->block_name,
-            'total_floor'        => $request->total_floor,
-            'initial_name'       => $request->initial_name,
-            'status'             => 1,
-            'created_by'         => $userID
-        ];
+            /*****    Update Block  Data    *******/
+            $updateData  = BlockFloorMapping::find( $request->block_floor_map_id);
 
-        $blockFloorId = BlockFloorMapping::create($insertBlockFloorData);
+            $total_floor = $request->total_floor - $updateData->total_floor ;
+            $latestFloor = $updateData->total_floor;
 
+            $updateData->update([
+                'total_floor'   => $request->total_floor,
+                'modified_by'  => $userID
+            ]);
+
+            $blockFloorId['block_floor_map_id'] = $request->block_floor_map_id ;
+
+        } else {
+            $insertBlockFloorData = [
+                'project_id'         => $request->project_name,
+                'block_name_map_id'  => $request->block_name,
+                'total_floor'        => $request->total_floor,
+                'initial_name'       => $request->initial_name,
+                'status'             => 1,
+                'created_by'         => $userID
+            ];
+
+           $blockFloorId = BlockFloorMapping::create($insertBlockFloorData);
+            $total_floor = $request->total_floor;
+            $latestFloor = '';
+        }
 
         /****** RESET Arrays *******/
 
-       $category_id = array_values($request->category_id);
-        $from       = array_values($request->from);
-        $to         = array_values($request->to);
-        $unit       = array_values($request->unit);
-        $unit_name  = array_values($request->unit_name);
-        $sq_ft      = array_values($request->sq_ft);
+       $category_id     = array_values($request->category_id);
+        $from           = array_values($request->from);
+        $to             = array_values($request->to);
+        $unit           = array_values($request->unit);
+        $unit_name      = array_values($request->unit_name);
+        $sq_ft          = array_values($request->sq_ft);
         $total_price    = array_values($request->total_price);
         $booking_price  = array_values($request->booking_price);
+        $floor_number   = array_values( $request->floor_number);
+
 
         /****** END RESET Arrays *******/
 
+
         /******* Insert Floor Detail *********/
-        if(!empty($request->total_floor))
+        if(!empty($total_floor))
         {
-            for($j=0; $j < $request->total_floor; $j++  )
+            for($j=0; $j < $total_floor; $j++  )
             {
                 $insertFloorDetail['project_id']         = $request->project_name;
-                $insertFloorDetail['block_floor_map_id']  = $blockFloorId['block_floor_map_id'];
+                 $insertFloorDetail['block_floor_map_id'] = $blockFloorId['block_floor_map_id'];
                 $insertFloorDetail['category_id']        = $category_id[$j];
-                $insertFloorDetail['floor_no']           = $j + 1;
+                $insertFloorDetail['floor_no']           = $floor_number[$j];  /// !empty($latestFloor) ? $latestFloor + 1 : $j + 1 ;
                 $insertFloorDetail['from']               = $from[$j];
                 $insertFloorDetail['to']                 = $to[$j];
                 $insertFloorDetail['unit_count']         = $unit[$j];
-                $insertFloorDetail['status']      = 1;
-                $insertFloorDetail['created_by']  = $userID;
+                $insertFloorDetail['status']             = 1;
+                $insertFloorDetail['created_by']         = $userID;
 
-               $floorDetailId = FloorDetail::create($insertFloorDetail);
+                $floorDetailId = FloorDetail::create($insertFloorDetail);
 
                 /******* Insert Unit Detail *********/
                 if($unit[$j])
@@ -148,7 +168,6 @@ class BlockFloorMappingController extends Controller
 
         return redirect()->route('admin.floor')->with('inserted','Floor Created👍');
     }
-
 
     /**
      * Show the form for editing the specified resource.
