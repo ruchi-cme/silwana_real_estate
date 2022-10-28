@@ -8,7 +8,7 @@
 @endsection
 <style>
     .errorMsg {
-        color: #FF0000;
+        color: #FF0000 !important;
     }
     .unit-wrapper .table-main-wrapper {
         overflow-x: auto;
@@ -184,11 +184,7 @@
                                                                 <div>
                                                                     <label for="">From</label>
                                                                     <input type="text" name="from" value="{{ $row['from'] }}" disabled>
-                                                                </div>
-                                                                <div>
-                                                                    <label for="">to</label>
-                                                                    <input type="text" name="to"  value="{{ $row['to'] }}" disabled>
-                                                                </div>
+                                                                </div> 
                                                             </div>
                                                         </td>
                                                         <td class="unitWrap">
@@ -215,7 +211,6 @@
                                                     </tr>
                                                     @endforeach
                                                 @endif
-
                                                 </tbody>
                                             </table>
                                         </div>
@@ -254,7 +249,6 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/swal.js') }}" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 
     <script type="text/javascript">
@@ -366,11 +360,6 @@
                                 <label for="">From</label>
                                 <input type="text" id="from${n}" name="from[]" placeholder="Enter From" class="only-numeric">
                              <label class="inputerror errorMsg" for="from" style=""></label>
-                            </div>
-                            <div>
-                                <label for="">To</label>
-                                <input type="text" class="to" id="to${n}" name="to[]" placeholder="Enter To" class="only-numeric">
-                                <label class="inputerror errorMsg"  for="to" style=""></label>
                             </div>
                         </div>
                     </td>
