@@ -62,6 +62,7 @@
                     <table id="datatable" class="table table-row-bordered">
                         <thead>
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                <th>Project Name</th>
                                 <th>Block Name</th>
                                 <th>Category</th>
                                 <th>Unit Name</th>
@@ -112,6 +113,8 @@
             }
         },
         columns: [{
+            data: 'project_name'
+             },{
                 data: 'block_name'
             },
             {
@@ -156,7 +159,7 @@
                 },
             },
             {
-                targets: 5,
+                targets: 6,
                 render: function (data, type, row) {
                     return `
                                 <span class="badge badge-primary">${data}</span>

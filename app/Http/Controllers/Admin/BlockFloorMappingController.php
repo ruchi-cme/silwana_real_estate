@@ -123,7 +123,6 @@ class BlockFloorMappingController extends Controller
 
             $category_id    = array_values($request->category_id);
             $from           = array_values($request->from);
-            $to             = array_values($request->to);
             $unit           = array_values($request->unit);
             $unit_name      = array_values($request->unit_name);
             $sq_ft          = array_values($request->sq_ft);
@@ -135,11 +134,10 @@ class BlockFloorMappingController extends Controller
             for($j=0; $j < $total_floor; $j++  )
             {
                 $insertFloorDetail['project_id']         = $request->project_name;
-                 $insertFloorDetail['block_floor_map_id'] = $blockFloorId['block_floor_map_id'];
+                $insertFloorDetail['block_floor_map_id'] = $blockFloorId['block_floor_map_id'];
                 $insertFloorDetail['category_id']        = $category_id[$j];
                 $insertFloorDetail['floor_no']           = $floor_number[$j];  /// !empty($latestFloor) ? $latestFloor + 1 : $j + 1 ;
                 $insertFloorDetail['from']               = $from[$j];
-                $insertFloorDetail['to']                 = $to[$j];
                 $insertFloorDetail['unit_count']         = $unit[$j];
                 $insertFloorDetail['status']             = 1;
                 $insertFloorDetail['created_by']         = $userID;

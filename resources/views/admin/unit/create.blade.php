@@ -7,40 +7,17 @@
 <li class="breadcrumb-item px-3 text-primary">{{ !empty( $editData->proj_floor_unit_id) ? 'Edit': "Create" }}</li>
 @endsection
 <style>
-    input[type="file"] {
-        display: block;
-    }
-    .imageThumb {
-        max-height: 75px;
-        border: 2px solid;
-        padding: 1px;
-        cursor: pointer;
-    }
-    .pip {
-        display: inline-block;
-        margin: 10px 10px 0 0;
-    }
-    .remove {
-        display: block;
-        background: #444;
-        border: 1px solid black;
-        color: white;
-        text-align: center;
-        cursor: pointer;
-    }
-    .remove:hover {
-        background: white;
-        color: black;
+    .error{
+        color: #FF0000;
     }
 </style>
+
 @section('content')
 <!--begin::Post-->
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container-fluid">
-
-
-        <!--begin::Layout-->
+    <!--begin::Layout-->
         <div class="d-flex flex-column flex-lg-row">
 
             <!--begin::Content-->
@@ -48,8 +25,7 @@
                 <!--begin::Form-->
 
                 @include('layouts.alerts.error')
-
-                <form class="form" method="POST" action="{{ !empty($editData->proj_floor_unit_id) ? route('admin.unit.update') : route('admin.unit.store') }}" id="user_form" enctype="multipart/form-data">
+                <form class="form" method="POST" action="{{ !empty($editData->proj_floor_unit_id) ? route('admin.unit.update') : route('admin.unit.store') }}" id="unit_form" enctype="multipart/form-data">
                    @csrf
 
                     <!--begin::Card-->
@@ -70,17 +46,16 @@
                             <div class="row mb-8">
                                 <!--begin::Col-->
                                 <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required">Block</div>
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required">Project</div>
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <select required class="form-select form-select-solid form-select-lg" name="block_name" id="proj_block_mapg_id" data-placeholder="Select Block" data-control="select2" >
-                                        <option ></option>
-                                        {{ $BlockData = getBlock() }}
-                                        @if (!empty($BlockData))
-                                            @foreach ($BlockData as $pro)
-                                                <option value="{{ $pro->proj_block_map_id }}" {{ !empty( $editData->proj_block_floor_id)  && ($editData->proj_block_floor_id ==  $pro->proj_block_map_id) ? 'selected' : '' }}>{{ $pro->block_name }}</option>
+                                    <select required class="form-select form-select-solid form-select-lg" id="project_id" name="project_name" data-placeholder="Select Project" data-control="select2" >
+                                        @php $projectData = getProject() @endphp
+                                        @if (!empty($projectData))
+                                            @foreach ($projectData as $pro)
+                                                <option value="{{ $pro->project_id }}" {{ !empty( $editData->project_id)  && ($editData->project_id ==  $pro->project_id) ? 'selected' : '' }}>{{ $pro->project_name }}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -88,6 +63,35 @@
                             </div>
                             <!--end::Row-->
 
+                            <!--begin::Row-->
+                            <div class="row mb-8">
+                                <!--begin::Col-->
+                                <div class="col-xl-3">
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required">Block</div>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                    <select   class="form-select form-select-solid form-select-lg" name="block_name" id="block_name" data-placeholder="Select Block" data-control="select2" >
+                                        <option ></option>
+                                    </select>
+                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                            </div>
+                            <!--end::Row-->
+
+                            <!--begin::Row-->
+                            <div class="row mb-8">
+                                <!--begin::Col-->
+                                <div class="col-xl-3">
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Floor </div>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                    <input   type="text" class="form-control form-control-solid" placeholder="Enter Unit Name" autofocus name="floor_number" id="floor_number" value="{{ !empty($editData->floor_number ) ? $editData->floor_number : ''}}" >
+                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                            </div>
+                            <!--end::Row-->
                             <!--begin::Row-->
                             <div class="row mb-8">
                                 <!--begin::Col-->
@@ -97,12 +101,12 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <select required class="form-select form-select-solid form-select-lg" name="category_name" id="category_id" data-placeholder="Select Category" data-control="select2" >
+                                    <select   class="form-select form-select-solid form-select-lg" name="category_name" id="category_id" data-placeholder="Select Category" data-control="select2" >
                                         <option ></option>
-                                        {{ $categoryData = getCategory() }}
+                                        @php $categoryData = getCategory() @endphp
                                         @if (!empty($categoryData))
                                             @foreach ($categoryData as $cat)
-                                                <option value="{{ $cat->category_id }}" {{ !empty( $editData->category_id)  && ($editData->category_id ==  $cat->category_id) ? 'selected' : '' }}>{{ $cat->category_name }}</option>
+                                                <option value="{{ $cat->category_id }}" >{{ $cat->category_name }}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -114,54 +118,12 @@
                             <div class="row mb-8">
                                 <!--begin::Col-->
                                 <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Units on Floor</div>
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Unit Name</div>
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Unit Name" autofocus name="unit_name" id="floor_no" value="{{ !empty($editData->unit_name ) ? $editData->unit_name : ''}}" >
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
-
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3"> Facing</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Facing" autofocus name="facing" id="facing" value="{{ !empty($editData->facing ) ? $editData->facing : ''}}" >
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
-
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3"> Overlooking</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" class="form-control form-control-solid" placeholder="Enter  Overlooking" autofocus name="overlooking" id="overlooking" value="{{ !empty($editData->overlooking ) ? $editData->overlooking : ''}}" >
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
-
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3"> Rooms</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Rooms" autofocus name="rooms" id="rooms" value="{{ !empty($editData->rooms ) ? $editData->rooms : ''}}" >
+                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Unit Name" autofocus name="unit_name" id="unit_name" value="{{ !empty($editData->unit_name ) ? $editData->unit_name : ''}}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -175,7 +137,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Area" autofocus name="area_in_sq_feet" id="area_in_sq_feet" value="{{ !empty($editData->area_in_sq_feet ) ? $editData->area_in_sq_feet : ''}}" >
+                                    <input   type="text" class="form-control form-control-solid" placeholder="Enter Area" autofocus name="area_in_sq_feet" id="area_in_sq_feet" value="{{ !empty($editData->area_in_sq_feet ) ? $editData->area_in_sq_feet : ''}}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -203,65 +165,13 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input required type="text" class="form-control form-control-solid" placeholder="Enter Booking Price" autofocus name="booking_price" id="booking_price" value="{{ !empty($editData->booking_price ) ? $editData->booking_price : ''}}" >
+                                    <input type="text" class="form-control form-control-solid" placeholder="Enter Booking Price" autofocus name="booking_price" id="booking_price" value="{{ !empty($editData->booking_price ) ? $editData->booking_price : ''}}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
-
-
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required">Booking Type</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <select class="form-select form-select-solid form-select-lg" name="booking_type" id="booking_type" data-placeholder="Select Booking Type" data-control="select2"  >
-                                    <option ></option>
-                                        @if (!empty($bookingStatus))
-                                            @foreach ($bookingStatus as $key => $val)
-                                                <option value="{{ $key }}" {{ !empty( $editData->booking_type)  && ($editData->booking_type == $key) ? 'selected' : '' }}>{{ $val }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
-
-
-                            <!--begin::Row-->
-                            <div class="row">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3">Images</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="file" class="form-control form-control-solid" multiple name="image[]" id="image" >
-
-                                    <div class="col-xl-9 fv-row fv-plugins-icon-container images-preview-div">
-
-                                        @if (!empty($selectedImage))
-                                            @foreach ($selectedImage as $image )
-                                                    <span class="pip">
-                                                     <input type="hidden" name="edit_image[]" value="{{ !empty( $image['title'] ) ? $image['title']  : '' }}" id="edit_image">
-                                                    <img height='50' width='50' class="imageThumb" src="{{ asset('images/unit').'/'.$image['title'] }}" title=""/>
-                                                <br/><span class="removeImg"><i class="fa fa-trash"></i></span>
-                                                </span>
-                                            @endforeach
-                                        @endif
-
-                                    </div>
-
-                                </div>
-                                <!--end::Row-->
-                        </div>
 
                         <!--end::Card body-->
-                        <div class="card-footer">
+                            <div class="card-footer">
                             <!--begin::Seperator-->
                             <div class="separator separator-dashed mb-7"></div>
                             <!--end::Seperator-->
@@ -269,7 +179,7 @@
                             <div class="mb-0">
                                 <input type="hidden" class="form-control form-control-solid" name="proj_floor_unit_id" id="proj_floor_unit_id" value="{{ !empty($editData->proj_floor_unit_id ) ? $editData->proj_floor_unit_id : ''}}" >
 
-                                <button type="submit" data-form="user_form" class="btn btn-primary" id="create_button">
+                                <button type="button" data-form="unit_form" class="btn btn-primary" id="create_button">
                                     <!--begin::Indicator-->
                                     <span class="indicator-label">{{ !empty($editData->proj_floor_unit_id ) ?  'Update' : 'Create'}}  Unit</span>
                                     <span class="indicator-progress">Please wait...
@@ -279,9 +189,9 @@
                             </div>
                             <!--end::Actions-->
                         </div>
-                    </div>
+                        </div>
                     <!--end::Card-->
-
+                    </div>
                 </form>
                 <!--end::Form-->
             </div>
@@ -296,71 +206,102 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/swal.js') }}" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 
     <script type="text/javascript">
 
         $(document).ready(function() {
-            if (window.File && window.FileList && window.FileReader) {
-                $("#image").on("change", function(e) {
-                    var files = e.target.files,
-                        filesLength = files.length;
-                    for (var i = 0; i < filesLength; i++) {
-                        var f = files[i]
-                        var fileReader = new FileReader();
-                        fileReader.onload = (function(e) {
-                            var file = e.target;
-                            $("<span class=\"pip\">" +
-                                "<img height='50' width='50' class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-                                "<br/><span class=\"remove\"><i class=\"fa fa-trash\"></i></span>" +
-                                "</span>").insertAfter(".images-preview-div");
-                            $(".remove").click(function(){
-                                $(this).parent(".pip").remove();
-                            });
 
-                        });
-                        fileReader.readAsDataURL(f);
+            $('#create_button').on('click', function(event) {
+
+
+                $("#unit_form").validate({
+                    ignore: '',
+                    rules: {
+                        "project_name" :"required",
+                        "block_name" : "required",
+                        "category_name" : "required",
+                        "unit_name" : "required",
+                        "total_price" : "required",
+                        "booking_price" :"required",
+                        floor_number: {
+                            required: true,
+                            digits: true
+                        },
+                        area_in_sq_feet: {
+                            required: true,
+                            digits: true
+                        }
+                    },
+                    messages: {
+                        "project_name" :"Please select project",
+                        "block_name" : "Please select block",
+                        "category_name" : "Please enter category",
+                        "unit_name" : "Please enter unit name",
+                        "total_price" : "Please enter price",
+                        "booking_price" : "Please enter booking price",
+                        floor_number: {
+                            required: "Please enter floor",
+                            digits: "Please enter digit"
+                        },
+                        area_in_sq_feet: {
+                            required: "Please enter area",
+                            digits: "Please enter digit"
+                        }
                     }
                 });
-            } else {
-                alert("Your browser doesn't support to File API")
+
+                // prevent default submit action
+                event.preventDefault();
+
+                // test if form is valid
+                if($('#unit_form').valid()  ) { console.log(2);
+                    $( '#unit_form' ).submit();
+                } else { console.log(3);
+                    console.log("does not validate");
+                    return false;
+                }
+            });
+
+
+
+            var project_id =  $('#project_id').val();
+            if(project_id != '') {
+                getBlock(project_id);
             }
-        });
-        $(".removeImg").click(function(){
-            $(this).parent(".pip").remove();
 
-        });
+            $('#project_id').on("select2:select", function (e) {
+                var project_id = this.value;
+                getBlock(project_id);
+            });
 
-        var button = document.querySelector("#create_button");
+            function getBlock(project_id){
+                $("#block_name").html('');
+                $.ajax({
+                    url: "{{ route('block.fetch') }}",
+                    type: "GET",
+                    data: {
+                        project_id: project_id,
+                    },
+                    dataType: 'json',
+                    success: function (result) {
 
-        var target = document.querySelector("#blockUI_target");
-        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        // Defination -------------------------------------------------------------------------------------------------------------
+                        $('#block_name').html('<option value="">Select Block</option>');
+                        $.each(result.blockData, function (key, value) {
+                            $("#block_name").append('<option value="' + value
+                                .block_name_map_id + '">' + value.block_name + '</option>');
+                        });
+                        $('#block_name').select2('open');
 
-        var blockUI = new KTBlockUI(target, {
-            message: '<div class="blockui-message"><span class="spinner-border text-primary"></span> Checking...</div>',
-        }); // Element to block white fetching AJAX data ----------------------------------------------------------------------
-
-
-        button.addEventListener("click", function () {
-            if (!$("#user_form")[0].checkValidity()) {
-                $("#user_form")[0].reportValidity();
-
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Please Fill Required Fields',
-                    text: "Make sure required fields are filled properly before moving on"
-                }); //display error toast
-
-                return 0;
+                        var edit_block_name =  $('#edit_block_name').val();
+                        if(edit_block_name != '') {
+                            $("#block_name").val(edit_block_name);
+                        }
+                    }
+                });
             }
-            // Activate indicator
-            button.setAttribute("data-kt-indicator", "on");
-            button.setAttribute("disabled", "true");
 
-            form = document.getElementById(this.getAttribute('data-form'));
-            form.submit();
-        }); // Handle Button Click Event ----------------------------------------------------------------------------
+        });
 
 
         $(document).on('select2:open', () => {

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\{FloorUnitMapping,ProjUnitImage };
+use App\Models\{FloorDetail, FloorUnitMapping, ProjUnitImage, BlockFloorMapping};
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Config;
@@ -24,29 +24,34 @@ class FloorUnitMappingController extends Controller
 
 
             $select =  [
-                'proj_floor_unit_mapping.proj_floor_unit_id',
-                'proj_floor_unit_mapping.unit_name',
-                'proj_floor_unit_mapping.area_in_sq_feet',
-                'proj_floor_unit_mapping.total_price',
-                'proj_floor_unit_mapping.booking_price',
-                'proj_floor_unit_mapping.total_price',
-                'proj_floor_unit_mapping.booking_type',
-                'proj_floor_unit_mapping.status',
+                'floor_unit_mapping.floor_unit_id',
+                'floor_unit_mapping.unit_name',
+                'floor_unit_mapping.area_in_sq_feet',
+                'floor_unit_mapping.total_price',
+                'floor_unit_mapping.booking_price',
+                'floor_unit_mapping.total_price',
+                'floor_unit_mapping.booking_type',
+                'floor_unit_mapping.status',
                 'category_master.category_name',
-                'proj_block_mappings.block_name'
+                'block_name_mappings.block_name',
+                'project_master.project_name'
             ];
-            $dbData = FloorUnitMapping::leftJoin('category_master', 'category_master.category_id', '=', 'proj_floor_unit_mapping.category_id')
-                ->leftJoin('proj_block_mappings', 'proj_block_mappings.proj_block_map_id', '=', 'proj_floor_unit_mapping.proj_block_floor_id')
-                ->leftJoin('project_master', 'project_master.project_id', '=', 'proj_block_mappings.project_id')
+            $dbData = FloorUnitMapping::leftJoin('floor_details', 'floor_details.floor_detail_id', '=', 'floor_unit_mapping.floor_detail_id')
+                ->leftJoin('block_floor_mappings', 'block_floor_mappings.block_floor_map_id', '=', 'floor_details.block_floor_map_id')
+                ->leftJoin('block_name_mappings', 'block_name_mappings.block_name_map_id', '=', 'block_floor_mappings.block_name_map_id')
+                ->leftJoin('project_master', 'project_master.project_id', '=', 'floor_details.project_id')
+                ->leftJoin('category_master', 'category_master.category_id', '=', 'floor_details.category_id')
+
                 ->select($select)
-                ->orderBy('proj_floor_unit_mapping.proj_floor_unit_id', 'desc')
-                ->where('proj_floor_unit_mapping.deleted',0)
+                ->orderBy('floor_unit_mapping.floor_unit_id', 'desc')
+                ->where('floor_unit_mapping.deleted',0)
                 ->get();
 
             $data = $dbData->map(function ($data){
 
                 return [
-                    'id'              => $data->proj_floor_unit_id,
+                    'id'              => $data->floor_unit_id,
+                    'project_name'      => $data->project_name,
                     'block_name'      => $data->block_name,
                     'unit_name'       => $data->unit_name,
                     'category_name'   => $data->category_name,
@@ -82,56 +87,97 @@ class FloorUnitMappingController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $request->validate([
-            'block_name'    => 'required',
-            'category_name' => 'required',
-            'unit_name'     => 'required',
+            'project_name'   => 'required',
+            'block_name'     => 'required',
+            'floor_number'   => 'required',
+            'category_name'  => 'required',
+            'unit_name'      => 'required',
             'area_in_sq_feet' => 'required',
-            'total_price'   => 'required',
-            'booking_price' => 'required',
-            'booking_type'  => 'required',
-            'image.*'       => 'mimes:jpg,png,jpeg,gif,svg',
+            'total_price'    => 'required',
+            'booking_price'  => 'required',
         ]);
 
         $userID = auth()->user()->id;
 
+        //get project data
+        $blockFloorMap = BlockFloorMapping::select([ 'block_floor_map_id','total_floor'])
+            ->where('project_id', $request->project_name)
+            ->where('block_name_map_id', $request->block_name)
+            ->get()->first();
+
+
         /*****    Insert Block Data    *******/
-        $insertData  = [
-            'proj_block_floor_id'   => $request->block_name,
-            'category_id'   => $request->category_name,
-            'unit_name'     => $request->unit_name,
-            'facing'        => $request->facing,
-            'overlooking'   => $request->overlooking,
-            'rooms'         => $request->rooms,
-            'area_in_sq_feet' => $request->area_in_sq_feet,
-            'total_price'   => $request->total_price,
-            'booking_price' => $request->booking_price,
-            'booking_type'  => $request->booking_type,
-            'status'        => 1,
-            'created_by'    => $userID
-        ];
+        if(!empty($blockFloorMap)) {
 
-        $proj_floor_unit_id = FloorUnitMapping::create($insertData);
+             $blockFloorMap->update([
 
+                'total_floor'   =>  $blockFloorMap->total_floor + 1,
+                'modified_by'  => $userID
+            ]);
+            $blockFloorId['block_floor_map_id'] = $blockFloorMap->block_floor_map_id ;
 
-        /******* Insert Images *********/
-        if($request->hasfile('image'))
-        {
-            foreach($request->file('image') as $key => $file)
-            {
-                $image = $request->file('image')[$key];
-                $destinationPath = public_path('images/unit');
-                $name = date('YmdHis') . "." . $file->getClientOriginalName();  ;
-                $image->move($destinationPath, $name);
-                $insertImg[$key]['proj_floor_unit_id'] = $proj_floor_unit_id['proj_floor_unit_id'];
-                $insertImg[$key]['title']  = $name;
-                $insertImg[$key]['path']   = $destinationPath;
-                $insertImg[$key]['status'] = 1;
-                $insertImg[$key]['created_by'] = $userID;
+            //get project data
+            $floorDetail = FloorDetail::select([ 'floor_detail_id','unit_count'])
+                ->where('project_id', $request->project_name)
+                ->where('block_floor_map_id', $blockFloorMap->block_floor_map_id)
+                ->where('floor_no', $request->floor_number)
+                ->get()->first();
+
+            if(!empty($floorDetail)) {
+                $floorDetail->update([
+
+                    'unit_count'   =>  $floorDetail->unit_count + 1,
+                    'modified_by'  => $userID
+                ]);
+                $floorDetailId['floor_detail_id']  = $floorDetail->floor_detail_id;
             }
-            ProjUnitImage::insert($insertImg);
+            else{
+                $insertFloorDetail['project_id']         = $request->project_name;
+                $insertFloorDetail['block_floor_map_id'] = $blockFloorId['block_floor_map_id'];
+                $insertFloorDetail['category_id']        = $request->category_name ;
+                $insertFloorDetail['floor_no']           = $request->floor_number;  /// !empty($latestFloor) ? $latestFloor + 1 : $j + 1 ;
+                $insertFloorDetail['unit_count']         = 1 ;
+                $insertFloorDetail['status']             = 1;
+                $insertFloorDetail['created_by']         = $userID;
+
+                  $floorDetailId = FloorDetail::create($insertFloorDetail);
+            }
+        }  else{
+            $insertBlockFloorData = [
+                'project_id'         => $request->project_name,
+                'block_name_map_id'  => $request->block_name,
+                'total_floor'        => $request->total_floor,
+                'initial_name'       => $request->initial_name,
+                'status'             => 1,
+                'created_by'         => $userID
+            ];
+            $blockFloorId = BlockFloorMapping::create($insertBlockFloorData);
+
+            $insertFloorDetail['project_id']         = $request->project_name;
+            $insertFloorDetail['block_floor_map_id'] = $blockFloorId['block_floor_map_id'];
+            $insertFloorDetail['category_id']        =$request->category_name;
+            $insertFloorDetail['floor_no']           = $request->floor_number;
+            $insertFloorDetail['unit_count']         = 1;
+            $insertFloorDetail['status']             = 1;
+            $insertFloorDetail['created_by']         = $userID;
+
+            $floorDetailId = FloorDetail::create($insertFloorDetail);
+
         }
 
+        $insertUnitDetail['floor_detail_id']   = $floorDetailId['floor_detail_id'] ;
+        $insertUnitDetail['unit_name']         = $request->unit_name ;
+        $insertUnitDetail['area_in_sq_feet']   = $request->area_in_sq_feet ;
+        $insertUnitDetail['total_price']       = $request->total_price ;
+        $insertUnitDetail['booking_price']     = $request->booking_price ;
+        $insertUnitDetail['booking_type']      = 1;
+        $insertUnitDetail['status']            = 1;
+        $insertUnitDetail['created_by']        = $userID;
+
+        FloorUnitMapping::insert($insertUnitDetail);
 
         return redirect()->route('admin.unit')->with('inserted','Unit Created👍');
     }

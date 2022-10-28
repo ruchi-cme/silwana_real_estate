@@ -112,51 +112,51 @@
 
                                 <section class="unit-wrapper">
 
-                                        <div class="form-group">
-                                        <label for="">Project</label>
-                                        <select class="form-select form-select-solid form-select-lg" name="project_name" id="project_id" data-placeholder="Select Project" data-control="select2" >
-                                            <option ></option>
-                                            @php $projectData = getProject() @endphp
-                                            @if (!empty($projectData))
-                                                @foreach ($projectData as $pro)
-                                                    <option value="{{ $pro->project_id }}" {{ !empty( $editData->project_id)  && ($editData->project_id ==  $pro->project_id) ? 'selected' : '' }}>{{ $pro->project_name }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                        <label class="inputerror errorMsg" for="block_name" style="">  </label>
-                                    </div>
-                                        <div class="d-flex floor-wrap cmn-box">
-                                            <div class="form-group">
-                                                <label for="">Block</label>
-                                                <input type="hidden" id="edit_block_name" value="{{ !empty( $editData->block_name_map_id)  ? $editData->block_name_map_id : ''}}">
-                                                <select class="form-select form-select-solid form-select-lg" name="block_name" id="block_name" data-placeholder="Select Project" data-control="select2" >
-                                                    <option ></option>
-                                                </select>
-                                                <label class="inputerror errorMsg" for="block_name" style="">  </label>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="">Floor</label>
-                                                <input type="text" id="floor_no" name="total_floor" value="{{ !empty( $editData->total_floor)  ?  $editData->total_floor : '' }}" placeholder="Enter Floor">
-                                                <label class="inputerror errorMsg" for="total_floor" style="">  </label>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="">Initial name</label>
-                                                <input type="text" id="initial_name" name="initial_name" value="{{ !empty( $editData->initial_name)  ?  $editData->initial_name : '' }}" placeholder="Enter Initial Name">
-                                                <label class="inputerror errorMsg" for="initial_name" style="">  </label>
-                                            </div>
+                                    <div class="form-group">
+                                    <label for="">Project</label>
+                                    <select class="form-select form-select-solid form-select-lg" name="project_name" id="project_id" data-placeholder="Select Project" data-control="select2" >
+                                        <option ></option>
+                                        @php $projectData = getProject() @endphp
+                                        @if (!empty($projectData))
+                                            @foreach ($projectData as $pro)
+                                                <option value="{{ $pro->project_id }}" {{ !empty( $editData->project_id)  && ($editData->project_id ==  $pro->project_id) ? 'selected' : '' }}>{{ $pro->project_name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                    <label class="inputerror errorMsg" for="block_name" style="">  </label>
+                                </div>
 
-                                            <div class="form-group">
-                                                <button type="button" class="btn btn-primary addFloor" name="add floor"> Add Floor</button>
-                                            </div>
+                                    <div class="d-flex floor-wrap cmn-box">
+                                        <div class="form-group">
+                                            <label for="">Block</label>
+                                            <input type="hidden" id="edit_block_name" value="{{ !empty( $editData->block_name_map_id)  ? $editData->block_name_map_id : ''}}">
+                                            <select class="form-select form-select-solid form-select-lg" name="block_name" id="block_name" data-placeholder="Select Project" data-control="select2" >
+                                                <option ></option>
+                                            </select>
+                                            <label class="inputerror errorMsg" for="block_name" style="">  </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Floor</label>
+                                            <input type="text" id="floor_no" name="total_floor" value="{{ !empty( $editData->total_floor)  ?  $editData->total_floor : '' }}" placeholder="Enter Floor">
+                                            <label class="inputerror errorMsg" for="total_floor" style="">  </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Initial name</label>
+                                            <input type="text" id="initial_name" name="initial_name" value="{{ !empty( $editData->initial_name)  ?  $editData->initial_name : '' }}" placeholder="Enter Initial Name">
+                                            <label class="inputerror errorMsg" for="initial_name" style="">  </label>
                                         </div>
 
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-primary addFloor" name="add floor"> Add Floor</button>
+                                        </div>
+                                    </div>
 
-
-                                    <div class="table-main-wrapper cmn-box"  >
+                                    <div class="table-main-wrapper cmn-box" id="main" >
                                             <table class="tablee" id="tble">
                                                 <tbody class="appendHtml">
 
                                                 @if(!empty($editData))
+
                                                     @foreach($floorData as $row)
                                                     <tr id="tr_clone" >
                                                         <td>
@@ -184,7 +184,7 @@
                                                                 <div>
                                                                     <label for="">From</label>
                                                                     <input type="text" name="from" value="{{ $row['from'] }}" disabled>
-                                                                </div> 
+                                                                </div>
                                                             </div>
                                                         </td>
                                                         <td class="unitWrap">
@@ -218,6 +218,7 @@
                                     <!--begin::Seperator-->
                                     <div class="separator separator-dashed mb-7"></div>
                                     <!--end::Seperator-->
+
                                     <!--begin::Actions-->
                                     <div class="mb-0">
                                          <input type="hidden" name="floor_count" id="floor_count" value="">
@@ -289,6 +290,7 @@
                     }
                 });
             }
+
             $('.addFloor').on('click', function (e) {
 
                 var floor_count = $('#floor_count').val();
@@ -406,7 +408,7 @@
 
             var initial_name = $('#initial_name').val();
             var from = $("#from"+i).val();
-            var to   = $("#to"+i).val();
+
                 for (var j = rowCount; j < totalUnit ; j++) {
 
                     /*      set logic for units name   */
@@ -471,6 +473,12 @@
             });
         });
 
+        const scrollContainer = document.getElementById("main");
+
+        scrollContainer.addEventListener("wheel", (evt) => {
+            evt.preventDefault();
+            scrollContainer.scrollLeft += evt.deltaY;
+        });
 
         $(document).on('select2:open', () => {
             document.querySelector('.select2-search__field').focus();
