@@ -1,4 +1,4 @@
-@extends('admin.layouts.main',['title' => 'unit'])
+@extends('admin.layouts.main',['title' => 'Unit'])
 
 @push('stylesheet')
 <link href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
@@ -6,7 +6,7 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.admin') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
-<li class="breadcrumb-item px-3 text-primary">Property</li>
+<li class="breadcrumb-item px-3 text-primary">Projects</li>
 <li class="breadcrumb-item px-3"><a class="text-hover-primary text-muted" href="{{ route('admin.unit') }}">Unit</a></li>
 @endsection
 

@@ -2,7 +2,7 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.admin') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
-<li class="breadcrumb-item px-3 text-primary">Project</li>
+<li class="breadcrumb-item px-3 text-primary">Master</li>
 <li class="breadcrumb-item px-3"><a class="text-hover-primary " href="{{ route('admin.amenities') }}">Amenities</a></li>
 <li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->amenity_name) ?   'Edit' :  'Create' }}</li>
 @endsection
