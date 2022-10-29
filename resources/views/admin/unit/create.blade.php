@@ -2,9 +2,9 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.admin') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
-<li class="breadcrumb-item px-3 text-primary">Property</li>
+<li class="breadcrumb-item px-3 text-primary">Projects</li>
 <li class="breadcrumb-item px-3"><a class="text-hover-primary text-muted" href="{{ route('admin.unit') }}">unit</a></li>
-<li class="breadcrumb-item px-3 text-primary">{{ !empty( $editData->proj_floor_unit_id) ? 'Edit': "Create" }}</li>
+<li class="breadcrumb-item px-3 text-primary">{{ !empty( $editData->floor_unit_id) ? 'Edit': "Create" }}</li>
 @endsection
 <style>
     .error{
@@ -25,7 +25,7 @@
                 <!--begin::Form-->
 
                 @include('layouts.alerts.error')
-                <form class="form" method="POST" action="{{ !empty($editData->proj_floor_unit_id) ? route('admin.unit.update') : route('admin.unit.store') }}" id="unit_form" enctype="multipart/form-data">
+                <form class="form" method="POST" action="{{ !empty($editData->floor_unit_id) ? route('admin.unit.update') : route('admin.unit.store') }}" id="unit_form" enctype="multipart/form-data">
                    @csrf
 
                     <!--begin::Card-->
@@ -72,6 +72,8 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                    <input type="hidden" id="edit_block_name" value="{{ !empty( $editData->block_name_map_id)  ? $editData->block_name_map_id : ''}}">
+
                                     <select   class="form-select form-select-solid form-select-lg" name="block_name" id="block_name" data-placeholder="Select Block" data-control="select2" >
                                         <option ></option>
                                     </select>
@@ -88,7 +90,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input   type="text" class="form-control form-control-solid" placeholder="Enter Unit Name" autofocus name="floor_number" id="floor_number" value="{{ !empty($editData->floor_number ) ? $editData->floor_number : ''}}" >
+                                    <input   type="text" class="form-control form-control-solid" placeholder="Enter Unit Name" autofocus name="floor_number" id="floor_number" value="{{ !empty($editData->floor_no ) ? $editData->floor_no : ''}}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -106,7 +108,7 @@
                                         @php $categoryData = getCategory() @endphp
                                         @if (!empty($categoryData))
                                             @foreach ($categoryData as $cat)
-                                                <option value="{{ $cat->category_id }}" >{{ $cat->category_name }}</option>
+                                                <option value="{{ $cat->category_id }}" {{ !empty( $editData->category_id)  && ($editData->category_id ==  $cat->category_id) ? 'selected' : '' }}>{{ $cat->category_name }}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -177,11 +179,12 @@
                             <!--end::Seperator-->
                             <!--begin::Actions-->
                             <div class="mb-0">
-                                <input type="hidden" class="form-control form-control-solid" name="proj_floor_unit_id" id="proj_floor_unit_id" value="{{ !empty($editData->proj_floor_unit_id ) ? $editData->proj_floor_unit_id : ''}}" >
-
+                                <input type="hidden"  name="floor_unit_id" id="floor_unit_id" value="{{ !empty($editData->floor_unit_id ) ? $editData->floor_unit_id : ''}}" >
+                                <input type="hidden"  name="floor_detail_id" id="floor_detail_id" value="{{ !empty($editData->floor_detail_id ) ? $editData->floor_detail_id : ''}}" >
+                                <input type="hidden"  name="block_floor_map_id" id="block_floor_map_id" value="{{ !empty($editData->block_floor_map_id ) ? $editData->block_floor_map_id : ''}}" >
                                 <button type="button" data-form="unit_form" class="btn btn-primary" id="create_button">
                                     <!--begin::Indicator-->
-                                    <span class="indicator-label">{{ !empty($editData->proj_floor_unit_id ) ?  'Update' : 'Create'}}  Unit</span>
+                                    <span class="indicator-label">{{ !empty($editData->floor_unit_id ) ?  'Update' : 'Create'}}  Unit</span>
                                     <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                     <!--end::Indicator-->

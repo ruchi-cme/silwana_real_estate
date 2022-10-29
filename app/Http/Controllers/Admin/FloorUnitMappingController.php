@@ -87,8 +87,6 @@ class FloorUnitMappingController extends Controller
      */
     public function store(Request $request)
     {
-
-
         $request->validate([
             'project_name'   => 'required',
             'block_name'     => 'required',
@@ -112,11 +110,6 @@ class FloorUnitMappingController extends Controller
         /*****    Insert Block Data    *******/
         if(!empty($blockFloorMap)) {
 
-             $blockFloorMap->update([
-
-                'total_floor'   =>  $blockFloorMap->total_floor + 1,
-                'modified_by'  => $userID
-            ]);
             $blockFloorId['block_floor_map_id'] = $blockFloorMap->block_floor_map_id ;
 
             //get project data
@@ -135,6 +128,12 @@ class FloorUnitMappingController extends Controller
                 $floorDetailId['floor_detail_id']  = $floorDetail->floor_detail_id;
             }
             else{
+                $blockFloorMap->update([
+
+                    'total_floor'   =>  $blockFloorMap->total_floor + 1,
+                    'modified_by'  => $userID
+                ]);
+
                 $insertFloorDetail['project_id']         = $request->project_name;
                 $insertFloorDetail['block_floor_map_id'] = $blockFloorId['block_floor_map_id'];
                 $insertFloorDetail['category_id']        = $request->category_name ;
@@ -165,7 +164,6 @@ class FloorUnitMappingController extends Controller
             $insertFloorDetail['created_by']         = $userID;
 
             $floorDetailId = FloorDetail::create($insertFloorDetail);
-
         }
 
         $insertUnitDetail['floor_detail_id']   = $floorDetailId['floor_detail_id'] ;
@@ -191,12 +189,27 @@ class FloorUnitMappingController extends Controller
      */
     public function edit(Request $request)
     {
-        $editData = FloorUnitMapping::find($request->id);
+        $select =  [
+            'floor_unit_mapping.floor_unit_id',
+            'floor_unit_mapping.unit_name',
+            'floor_unit_mapping.area_in_sq_feet',
+            'floor_unit_mapping.total_price',
+            'floor_unit_mapping.booking_price',
+            'floor_unit_mapping.total_price',
+            'floor_details.floor_detail_id' ,
+            'floor_details.category_id' ,
+            'floor_details.floor_no' ,
+            'floor_details.project_id' ,
+            'block_floor_mappings.block_name_map_id',
+            'block_floor_mappings.block_floor_map_id'
+        ];
+        $editData = FloorUnitMapping::leftJoin('floor_details', 'floor_details.floor_detail_id', '=', 'floor_unit_mapping.floor_detail_id')
+            ->leftJoin('block_floor_mappings', 'block_floor_mappings.block_floor_map_id', '=', 'floor_details.block_floor_map_id')
+            ->select($select)
+            ->where('floor_unit_mapping.floor_unit_id',$request->id)
+            ->get()->first();
 
-        $bookingStatus = Config::get('constants.booking_status');
-        $selectedImage = ProjUnitImage::select([ 'title','path'])->where('proj_floor_unit_id' ,  $request->id)->get()->toArray();
-
-        return view('admin.unit.create' ,compact('editData','selectedImage','bookingStatus'));
+        return view('admin.unit.create' ,compact('editData'));
 
     }
 
@@ -207,59 +220,38 @@ class FloorUnitMappingController extends Controller
      * @param  \App\Models\FloorUnitMapping  $floorUnitMapping
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FloorUnitMapping $floorUnitMapping)
+    public function update(Request $request )
     {
-        /*****    Update Block  Data    *******/
-        $updateData  = FloorUnitMapping::find( $request->proj_floor_unit_id);
-        $userID      = auth()->user()->id;
 
-        $updateData->update([
-            'proj_block_floor_id'   => $request->block_name,
-            'category_id'   => $request->category_name,
-            'unit_name'     => $request->unit_name,
-            'facing'        => $request->facing,
-            'overlooking'   => $request->overlooking,
-            'rooms'         => $request->rooms,
-            'area_in_sq_feet' => $request->area_in_sq_feet,
-            'total_price'   => $request->total_price,
-            'booking_price' => $request->booking_price,
-            'booking_type'  => $request->booking_type,
+        $userID      = auth()->user()->id;
+        /*****    Update Block  Data    *******/
+        $unitData  = FloorUnitMapping::find( $request->floor_unit_id);
+
+        $blockFloorMap = BlockFloorMapping::where('block_floor_map_id', $request->block_floor_map_id)->get()->first() ;
+
+        $floorDetail = FloorDetail::where('floor_detail_id', $request->floor_detail_id)->get()->first() ;
+
+        $blockFloorMap->update([
+            'modified_by'  => $userID,
+            'project_id'         => $request->project_name,
+            'block_name_map_id'  => $request->block_name
+        ]);
+
+        $floorDetail->update([
+            'project_id'   => $request->project_name,
+            'category_id'  => $request->category_name,
+            'floor_no'     => $request->floor_number,
             'modified_by'  => $userID
         ]);
 
-        /******* delete  Image *********/
+        $unitData->update([
 
-        $image  = ProjUnitImage::where('proj_floor_unit_id' ,  $request->proj_floor_unit_id)->get();
-        $editImg = !empty($request->edit_image) ? $request->edit_image :[] ;
-
-        if (!empty($image)) {
-            foreach ($image as $img) {
-                if (!in_array($img['title'] , $editImg)) {
-                    if (file_exists(public_path() . '/images/unit/' . $img['title'])) {
-                        @unlink(public_path("images/unit/") . $img['title']);
-                        ProjUnitImage::where('proj_unit_image_id', $img['proj_unit_image_id'])->delete();
-                    }
-                }
-            }
-        }
-
-        /******* Insert Images *********/
-        if($request->hasfile('image'))
-        {
-            foreach($request->file('image') as $key => $file)
-            {
-                $image = $request->file('image')[$key];
-                $destinationPath = public_path('images/unit');
-                $name = date('YmdHis') . "." . $file->getClientOriginalName();  ;
-                $image->move($destinationPath, $name);
-                $insertImg[$key]['proj_floor_unit_id'] = $request->proj_floor_unit_id;
-                $insertImg[$key]['title']  = $name;
-                $insertImg[$key]['path']   = $destinationPath;
-                $insertImg[$key]['status'] = 1;
-                $insertImg[$key]['created_by'] = $userID;
-            }
-            ProjUnitImage::insert($insertImg);
-        }
+            'unit_name'     => $request->unit_name,
+            'area_in_sq_feet' => $request->area_in_sq_feet,
+            'total_price'   => $request->total_price,
+            'booking_price' => $request->booking_price,
+            'modified_by'  => $userID
+        ]);
 
         return redirect()->route('admin.unit')->with('updated','Unit Updated 👍');
     }

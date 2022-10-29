@@ -6,7 +6,11 @@
 <li class="breadcrumb-item px-3"><a class="text-hover-primary " href="{{ route('admin.project') }}">Project</a></li>
 <li class="breadcrumb-item px-3 text-primary">{{ !empty( $editData->project_id) ? 'Edit': "Create" }}</li>
 @endsection
-
+<style>
+    .error{
+        color: #FF0000;
+    }
+</style>
 @section('content')
 <!--begin::Post-->
 <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -23,7 +27,7 @@
 
                 @include('layouts.alerts.error')
 
-                <form class="form" method="POST" action=" {{ !empty( $editData->project_id) ?  route('admin.project.update') : route('admin.project.store') }}" id="user_form" enctype="multipart/form-data">
+                <form class="form" method="POST" action=" {{ !empty( $editData->project_id) ?  route('admin.project.update') : route('admin.project.store') }}" id="projectForm" enctype="multipart/form-data">
                     @csrf
                     <!--begin::Card-->
                     <div class="card shadow-lg card-flush pt-3 mb-5 mb-lg-10">
@@ -285,7 +289,7 @@
                                 <!--begin::Col-->
                                 <!--begin::Actions-->
                                 <div class="mb-0">
-                                    <button type="submit" data-form="user_form" class="btn btn-primary" id="create_button">
+                                    <button type="button" data-form="projectForm" class="btn btn-primary" id="create_button">
                                         <!--begin::Indicator-->
                                         <span class="indicator-label">{{ !empty( $editData->project_id) ?  'Update' : 'Create' }} Project</span>
                                         <span class="indicator-progress">Please wait...
@@ -341,7 +345,7 @@
     }
 </style>
 @push('scripts')
-    <script src="{{ asset('js/swal.js') }}" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 
     <script type="text/javascript">
 
@@ -376,36 +380,54 @@
                  alert("Your browser doesn't support to File API")
              }
 
-        var button = document.querySelector("#create_button");
+             $('#create_button').on('click', function(event) {
 
-        var target = document.querySelector("#blockUI_target");
-        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        // Defination -------------------------------------------------------------------------------------------------------------
+                 $("#projectForm").validate({
+                     ignore: '',
+                     rules: {
+                         "project_name" :"required",
+                         "category_id" : "required",
+                         "work_status" : "required",
+                         "amenities_id" :  "required",
+                         "address" :  "required",
+                         "landmark" :  "required",
+                         "country" :  "required",
+                         "state" :  "required",
+                         "city" :  "required",
+                         zip: {
+                             required: true,
+                             digits: true
+                         }
+                     },
+                     messages: {
+                         "project_name" : "Please enter project name",
+                         "category_id" :  "Please select category",
+                         "work_status" : "Please select work status",
+                         "amenities_id" : "Please select amenity",
+                         "address" :  "Please enter address",
+                         "landmark" :  "Please enter landmaark",
+                         "country" :  "Please select country",
+                         "state" :  "Please select state",
+                         "city" :  "Please select city",
+                         zip: {
+                             required: "Please enter zip",
+                             digits: "Please enter digit"
+                         }
+                     }
+                 });
 
-        var blockUI = new KTBlockUI(target, {
-            message: '<div class="blockui-message"><span class="spinner-border text-primary"></span> Checking...</div>',
-        }); // Element to block white fetching AJAX data ----------------------------------------------------------------------
+                 // prevent default submit action
+                 event.preventDefault();
 
+                 // test if form is valid
+                 if($('#projectForm').valid()  ) { console.log(2);
+                     $( '#projectForm' ).submit();
+                 } else { console.log(3);
+                     console.log("does not validate");
+                     return false;
+                 }
+             });
 
-        button.addEventListener("click", function () {
-            if (!$("#user_form")[0].checkValidity()) {
-                $("#user_form")[0].reportValidity();
-
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Please Fill Required Fields',
-                    text: "Make sure required fields are filled properly before moving on"
-                }); //display error toast
-
-                return 0;
-            }
-            // Activate indicator
-            button.setAttribute("data-kt-indicator", "on");
-            button.setAttribute("disabled", "true");
-
-            form = document.getElementById(this.getAttribute('data-form'));
-            form.submit();
-        }); // Handle Button Click Event ----------------------------------------------------------------------------
 
 
         $(document).on('select2:open', () => {

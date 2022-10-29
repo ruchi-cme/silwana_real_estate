@@ -16,14 +16,15 @@
                     </a>
                 </div>
 
-                <div data-kt-menu-trigger="click" class="menu-item {{ Route::is('admin.category*')  || Route::is('admin.amenities*')  || Route::is('admin.project*') || Route::is('admin.block*') || Route::is('admin.floor*') ||Route::is('admin.unit*') ? 'show' : '' }} menu-accordion mb-1">
-                    <span class="menu-link {{ Route::is('admin.category*')  || Route::is('admin.amenities*')  || Route::is('admin.project*') || Route::is('admin.block*') || Route::is('admin.floor*') ||Route::is('admin.unit*') ? 'active' : '' }}">
+                <div data-kt-menu-trigger="click" class="menu-item {{ Route::is('admin.category*') ||  Route::is('admin.amenities*') ? 'show' : '' }} menu-accordion mb-1">
+                    <span class="menu-link {{ Route::is('admin.category*') ||  Route::is('admin.amenities*') ? 'active' : '' }}">
                         <span class="menu-icon">
                             <i class="fa fa-project-diagram"></i>
                         </span>
-                        <span class="menu-title">Property</span>
+                        <span class="menu-title">Masters</span>
                         <span class="menu-arrow"></span>
                     </span>
+
                     <div class="menu-sub menu-sub-accordion">
                         @can('category-view')
                             <div class="menu-item {{ Route::is('admin.category*') ? 'show' : '' }}">
@@ -48,6 +49,17 @@
                             </div>
                         @endcan
                     </div>
+                </div>
+
+                <div data-kt-menu-trigger="click" class="menu-item {{   Route::is('admin.project*') || Route::is('admin.block*') || Route::is('admin.floor*') ||Route::is('admin.unit*') ? 'show' : '' }} menu-accordion mb-1">
+                    <span class="menu-link {{   Route::is('admin.project*') || Route::is('admin.block*') || Route::is('admin.floor*') ||Route::is('admin.unit*') ? 'active' : '' }}">
+                        <span class="menu-icon">
+                            <i class="fa fa-project-diagram"></i>
+                        </span>
+                        <span class="menu-title">Projects</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+
                     <div class="menu-sub menu-sub-accordion">
                         @can('project-view')
                             <div class="menu-item {{ Route::is('admin.project*') ? 'show' : '' }}">
