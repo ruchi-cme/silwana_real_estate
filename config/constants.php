@@ -8,8 +8,9 @@ return [
         '2' => 'Booked'
     ],
     'work_status' => [
-        '1' => 'Upcoming',
-        '2' => 'Ready For Sale'
+        '1' => 'Ongoing',
+        '2' => 'Upcoming',
+        '3' => 'Completed'
     ],
     'page_id' => [
         'home_banner'       => 'Home Banner',

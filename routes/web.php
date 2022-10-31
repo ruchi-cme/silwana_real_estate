@@ -15,6 +15,14 @@ Route::name('home/submitInquiry')->post('/home/submitInquiry', 'App\Http\Control
 
 Route::name('about')->get('/about', 'App\Http\Controllers\Frontend\AboutController@index');
 Route::name('ourProject')->get('/ourProject', 'App\Http\Controllers\Frontend\OurProjectController@index');
+Route::name('ourProject/ongoing')->get('/ourProject/ongoing', 'App\Http\Controllers\Frontend\OurProjectController@projectType');
+Route::name('ourProject/upcoming')->get('/ourProject/upcoming', 'App\Http\Controllers\Frontend\OurProjectController@projectType');
+Route::name('ourProject/completed')->get('/ourProject/completed', 'App\Http\Controllers\Frontend\OurProjectController@projectType');
+
+Route::name('ourProject/projectSearch')->post('/ourProject/projectSearch', 'App\Http\Controllers\Frontend\OurProjectController@projectSearch');
+
+
+
 Route::name('projectDetail/{id}')->get('/projectDetail/{id}', 'App\Http\Controllers\Frontend\OurProjectController@projectDetail');
 
 Route::name('propertyList')->get('/propertyList', 'App\Http\Controllers\Frontend\PropertyListController@index');

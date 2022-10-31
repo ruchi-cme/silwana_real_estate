@@ -11,9 +11,9 @@
                         <div class="col-xl-4 col-md-6">
                     <div class="property-sale-wrap">
                         <div class="property-sale-img-wrap">
-                            @php    $img =   getPropertyImage($row['proj_floor_unit_id'],'single');  @endphp
-                            <a href="{{ URL('/propertydetail/'.encrypt($row['proj_floor_unit_id'] ))  }}">
-                                <img src=" {{  asset('images/unit/').'/'.$img['title']  }}" alt="decore">
+                            @php    $img =   getPropertyImage($row['floor_unit_id'],'single');  @endphp
+                            <a href="{{ URL('/propertydetail/'.encrypt($row['floor_unit_id'] ))  }}">
+                                <img src="  " alt="decore">
                             </a>
                         </div>
                         <div class="property-detail-wrap position-relative">
@@ -35,13 +35,45 @@
                             <h6>  {{ !empty($row['rooms']) ?  $row['rooms'] .' Rooms' : ''}} | {{ $row['overlooking'] }}  </h6>
                             <p>
                                @php  $address = getProjectAddress($row['project_id']) @endphp
-                                {{ $address['address'] }}
+
+                                {{ !empty($address['address']) ?$address['address'] : '' }}
                             </p>
                         </div>
                     </div>
                 </div>
                     @endforeach
                 @endif
+                   <div class="col-xl-4 col-md-6">
+                                <div class="property-sale-wrap">
+                                    <div class="property-sale-img-wrap">
+                                          <a href=" ">
+                                            <img src="  " alt="decore">
+                                        </a>
+                                    </div>
+                                    <div class="property-detail-wrap position-relative">
+                                        <div class="property-main-detail">
+                                            <div>
+
+                                                <div class="property-main-total-detail">
+                                                    <div class="property-main-total">
+                                                        <div class="property-main-img-wrap">
+                                                            <img src="./assets/images/home/bed2.svg" alt="">
+                                                        </div>
+                                                        <p>2</p>
+                                                    </div>
+                                                    <p>Bedroom</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h4>AED 222  </h4>
+                                        <h6> dfd  | dfdf</h6>
+                                        <p>
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
 
              <!--   <div class="col-lg-12">
                     <nav aria-label="...">

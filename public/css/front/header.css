@@ -41,8 +41,8 @@ header.scrollUp {
     font-size: 17px;
     font-family: var(--regular);
     text-transform: capitalize;
-    padding: 0;
-    margin-left: 25px;
+    padding: 20px 12px;
+    /* margin-left: 25px; */
     position: relative;
 }
 
@@ -126,7 +126,7 @@ header.scrollUp {
     box-shadow: none;
 }
 
-/*
+/* 
 modal css
 */
 
@@ -210,8 +210,8 @@ modal css
 
 .estimate-wrap .cmn-btn p {
     text-overflow: ellipsis;
-    overflow: hidden;
-    width: 110px;
+    overflow: hidden; 
+    width: 110px; 
     white-space: nowrap;
     text-transform: capitalize;
 }
@@ -239,7 +239,7 @@ modal css
 }
 
 .dropdown-toggle::after {
-    background: url('/images/front/down-arrow-white.svg') center center no-repeat;
+    background: url('../images/down-arrow-white.svg') center center no-repeat;
     background-size: contain;
     border: none;
     width: 15px;
@@ -261,7 +261,7 @@ modal css
 .estimate-wrap .dropdown .dropdown-menu {
     right: 0;
     left: inherit;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     border-radius: 20px;
     border: none;
 }
@@ -291,7 +291,7 @@ modal css
     background: #fff;
     flex-basis: 30%;
     padding: 30px 30px;
-}
+} 
 
 .estimate-wrap .dropdown .profile-detail-header ul:last-child li a {
     color: #000000;
@@ -343,7 +343,11 @@ modal css
 
 .navbar-collapse.justify-content-end .nav-item .dropdown:hover .dropdown-menu {
     display: block;
-    margin-top: 0;
+    /* margin-top: 10px; */
+}
+
+.our-project-dropdown-menu .profile-detail-header ul {
+    margin-top: 0 !important;
 }
 
 .about-menu-wrap.estimate-wrap .dropdown .dropdown-menu {
@@ -420,6 +424,12 @@ modal css
     border-radius: 15px !important;
 }
 
+.our-project-dropdown-menu .profile-detail-header {
+    background: transparent !important;
+    min-width: auto !important;
+    border: none !important;
+    box-shadow: none !important;
+}
 
 
 
@@ -472,8 +482,7 @@ modal css
 
 
 
-
-/*
+/* 
 responsive css
 */
 
@@ -508,7 +517,7 @@ responsive css
 
     .estimate-wrap {
         margin: 0 0 20px;
-    }
+    } 
 }
 
 
@@ -560,5 +569,5 @@ responsive css
     .navbar-toggler {
         padding: 5px 13px;
     }
-
+    
 }

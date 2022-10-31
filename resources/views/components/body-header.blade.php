@@ -50,12 +50,27 @@
                                             </ul>
                                         </div>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('ourProject') }}">Our Projects</a>
+                                    <li class="nav-item estimate-wrap ">
+                                        <div class="dropdown about-dropdown-menu our-project-dropdown-menu">
+                                            <a class="dropdown-toggle nav-link" role="button">
+                                                Our Projects
+                                            </a>
+
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <div class="profile-detail-header">
+                                                    <ul>
+                                                        <li><a class="dropdown-item" href="{{ route('ourProject/ongoing') }}">Ongoing Project</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('ourProject/upcoming') }}">Upcoming Projects</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('ourProject/completed') }}">Completed Projects</a></li>
+                                                    </ul>
+                                                </div>
+                                            </ul>
+                                        </div>
                                     </li>
-                                    <li class="nav-item">
+                                   <!-- <li class="nav-item">
                                         <a class="nav-link" href="{{ route('propertyList') }}">Property on Sale</a>
-                                    </li>
+                                    </li> -->
+
                                     @if (Auth::guard('front')->check())
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('myBooking') }}">My Booking</a>

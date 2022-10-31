@@ -21,10 +21,7 @@ class CountryStateCityController extends Controller
     }
     public function fetchBlock(Request $request)
     {
-        $data['blockData'] = Block_name_mapping::where("project_id",$request->project_id)
-            ->where("status",1)
-            ->where("deleted",0)
-            ->get(["block_name", "block_name_map_id"]);;
+        $data['blockData'] = getBlockData($request->project_id);
         return response()->json($data);
     }
 }
