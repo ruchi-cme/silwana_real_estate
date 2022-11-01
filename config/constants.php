@@ -23,6 +23,7 @@ return [
         'aboutus_sales'     => 'About Us Sales',
         'aboutus_mission'   => 'About Us Mission',
         'aboutus_vision'    => 'About Us Vision',
+        'feature_project'   => 'Features Project',
 
     ],
     'booking_type' => [

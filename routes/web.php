@@ -27,9 +27,11 @@ Route::name('projectDetail/{id}')->get('/projectDetail/{id}', 'App\Http\Controll
 
 Route::name('propertyList')->get('/propertyList', 'App\Http\Controllers\Frontend\PropertyListController@index');
 Route::name('propertydetail/{id}')->get('/propertydetail/{id}', 'App\Http\Controllers\Frontend\PropertyListController@propertydetail');
-Route::name('getFloor')->get('/getFloor', 'App\Http\Controllers\Frontend\PropertyListController@getFloor');
-Route::name('getUnit')->get('/getUnit', 'App\Http\Controllers\Frontend\PropertyListController@getUnit');
+Route::name('getFloor')->get('/getFloor', 'App\Http\Controllers\Frontend\OurProjectController@getFloor');
+Route::name('getUnit')->get('/getUnit', 'App\Http\Controllers\Frontend\OurProjectController@getUnit');
 Route::name('searchProperty')->post('/searchProperty', 'App\Http\Controllers\Frontend\PropertyListController@searchProperty');
+Route::name('getUnitData')->get('/getUnitData', 'App\Http\Controllers\Frontend\OurProjectController@getUnitData');
+
 
 Route::name('booking/{id}')->get('/booking/{id}', 'App\Http\Controllers\Frontend\BookingController@index');
 Route::name('booking/store')->post('/booking/store', 'App\Http\Controllers\Frontend\BookingController@store');

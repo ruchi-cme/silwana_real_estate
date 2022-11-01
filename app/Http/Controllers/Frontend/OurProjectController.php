@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\ProjectImage;
 use Illuminate\Http\Request;
+use Config;
+use Auth;
 
 class OurProjectController extends Controller
 {
@@ -20,8 +22,15 @@ class OurProjectController extends Controller
         $projectList   = getProjectList($project_id);
         $selectedImage = getProjectImage($projectList['project_id']);
         $address       = getProjectAddress($projectList['project_id']);
-
-        return view('front.projectDetail',compact('projectList','selectedImage','address' ));
+        $amenities     = getAmenities();
+        $categories    = getCategory();
+        $blockData     = getBlockData($project_id);
+        $bookingType = Config::get('constants.booking_type');
+        $paymentType = Config::get('constants.payment_type');
+        return view('front.propertyDetail',compact('projectList',
+            'selectedImage',
+            'address','amenities',
+            'categories','blockData','bookingType','paymentType' ));
     }
 
     public function projectType(Request $request) {
@@ -51,8 +60,6 @@ class OurProjectController extends Controller
 
     public function projectSearch(Request $request) {
 
-
-
         $searchProject = $request->searchProject;
         $currentURL    =  $request->currentURL ;
 
@@ -77,7 +84,28 @@ class OurProjectController extends Controller
             $workStatus = 3;
             $projectList  = getProjectList( '' , $workStatus ,$search);
         }
-       // return view('front.OurProjectType',compact('projectList','currentURL'));
-       return redirect('ourProject/'.$currentURL);
+        return view('front.OurProjectType',compact('projectList','currentURL'));
+       //return redirect('ourProject/'.$currentURL);
     }
+
+    public  function getFloor(Request $request)
+    {
+        $data['floors'] =  getFloor($request->block);
+        return response()->json($data);
+    }
+
+    public function getUnit(Request $request)
+    {
+        $data['units'] = getUnit($request->floor_id);
+        return response()->json($data);
+    }
+
+    public function getUnitData(Request $request)
+    {
+        $data['unitData'] = getUnitData($request->unit_id);
+        return response()->json($data);
+    }
+
+
+
 }

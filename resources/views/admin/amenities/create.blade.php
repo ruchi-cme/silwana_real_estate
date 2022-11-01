@@ -7,9 +7,9 @@
 <li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->amenity_name) ?   'Edit' :  'Create' }}</li>
 @endsection
 <style>
-    .error{
-        color: #FF0000;
-    }
+.error{
+    color: #FF0000;
+}
 </style>
 @section('content')
 <!--begin::Post-->

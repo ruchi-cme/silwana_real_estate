@@ -6,8 +6,10 @@ $(document).ready(function() {
     });
 
     $(".cancelBooking").click(function(){
+
         if (confirm('Are you sure?')) {
             var booking_id =  $(this).attr('booking_id');
+            var bookingId =  $(this).attr('bookingId');
 
             $.ajax({
                 url:   'booking/cancel' ,
@@ -18,7 +20,9 @@ $(document).ready(function() {
                 },
                 success: function (result) {
                     alert(result.success);
-                    $('.cancelBooking').replaceWith( '<a className="cmn-btn btn-2 ">CANCELLED </a>' );
+
+
+                    $('#cncl_'+bookingId).replaceWith( '<a className="cmn-btn btn-2">CANCELLED </a>' );
                 }
             });
         }

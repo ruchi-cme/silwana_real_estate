@@ -17,7 +17,10 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('booking_id');
             $table->integer('user_id')->comment('From users table' );
-            $table->integer('unit_id')->comment('From proj_floor_unit_mapping table' );
+            $table->integer('project_id')->comment('From project_master table' );
+            $table->integer('block_id')->comment('From block_name_mappings table' );
+            $table->integer('floor_id')->comment('From floor_detail_id table' );
+            $table->integer('unit_id')->comment('From floor_unit_id table' );
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone');

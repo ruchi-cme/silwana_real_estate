@@ -200,6 +200,15 @@
 
 
                 </div>
+
+                <div class="menu-item">
+                    <a class="menu-link {{ Route::is('admin.booking') ? 'active' : '' }}" href="{{ route('admin.booking') }}">
+                        <span class="menu-icon">
+                            <i class="fa fa-chart-pie me-2"></i>
+                        </span>
+                        <span class="menu-title">Booking</span>
+                    </a>
+                </div>
             </div>
             <!--end::Menu-->
         </div>

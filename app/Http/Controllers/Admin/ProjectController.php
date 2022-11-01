@@ -87,9 +87,7 @@ class ProjectController extends Controller
             'work_status' => 'required',
             'amenities_id' => 'required',
             'address' => 'required',
-            'work_status' => 'required',
             'project_pdf.*' => 'mimes:pdf,txt',
-            'project_image.*' => 'mimes:jpg,png,jpeg,gif,svg'
         ]);
 
         $userID = auth()->user()->id;
@@ -148,7 +146,7 @@ class ProjectController extends Controller
             {
                 $pdf = $request->file('project_pdf')[$key];
                 $destinationPath = public_path('images/project/pdf');
-                $name = date('YmdHis') . "." . $file->getClientOriginalName();
+                $name = date('YmdHis') . "." . str_replace(' ', '',$file->getClientOriginalName());
                 $pdf->move($destinationPath, $name);
                 $insert[$key]['project_id'] = $project_id['project_id'];
                 $insert[$key]['title'] = $name;
@@ -299,7 +297,7 @@ class ProjectController extends Controller
             {
                 $pdf = $request->file('project_pdf')[$key];
                 $destinationPath = public_path('images/project/pdf');
-                $name = date('YmdHis') . "." . $file->getClientOriginalName();
+                $name = date('YmdHis') . "." .str_replace(' ', '',$file->getClientOriginalName());
                 $pdf->move($destinationPath, $name);
                 $insert[$key]['project_id'] = $request->project_id;
                 $insert[$key]['title'] = $name;
@@ -310,9 +308,6 @@ class ProjectController extends Controller
             }
             ProjectImage::insert($insert);
         }
-
-
-
 
 
         return redirect()->route('admin.project')->with('updated','Project Updated 👍');

@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\Route;
 //Dashboard
 Route::name('admin')->get('/', 'App\Http\Controllers\Admin\DashboardController@index');
 
+//Booking
+Route::name('booking')->get('/booking', 'App\Http\Controllers\Admin\BookingController@index');
+Route::name('booking/view')->get('/booking/view/{id}', 'App\Http\Controllers\Admin\BookingController@view');
+
+
 //User Management
 Route::name('user')->get('/user', 'App\Http\Controllers\Admin\UserController@index')->middleware(['permission:user-view']);
 Route::name('user.create')->get('/user/create', 'App\Http\Controllers\Admin\UserController@create')->middleware(['permission:user-create']);

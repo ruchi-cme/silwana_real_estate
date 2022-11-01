@@ -17,10 +17,14 @@ class HomeController extends Controller
         $homeBanner = getSilwanaPages('home_banner');
         $aboutus    = getSilwanaPages('about_us');
         $investment = getSilwanaPages('investment');
+        $ourProject = getSilwanaPages('our_project');
+        $ourProjectList = getProjectList('' ,3,'');
+        $featureProject = getSilwanaPages('feature_project');
+        $featureProjectList = getProjectList('' ,2,'');
         $amenities  = getAmenities();
         $categories = getCategory();
 
-        return view('front.home',compact('homeBanner','aboutus','investment', 'amenities','categories'));
+        return view('front.home',compact('homeBanner','aboutus','investment', 'amenities','categories','ourProject','ourProjectList','featureProject','featureProjectList'));
     }
     public function login(Request $request)
     {

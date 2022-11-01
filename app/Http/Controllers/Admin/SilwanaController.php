@@ -28,6 +28,7 @@ class SilwanaController extends Controller
                             ->where('deleted',0)
                             ->orderByDesc("silwana_detail_id")
                             ->get();
+
             $data = $pageDetails->map(function ($data){
 
                 return [

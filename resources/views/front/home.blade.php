@@ -186,7 +186,7 @@
     @endif
 
     <!-- property-plan -->
-    <section class="property-plan p-100 pt-0">
+        <!--  <section class="property-plan p-100 pt-0">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -386,7 +386,7 @@
             </div>
         </div>
     </section>
-
+ -->
     <!-- our-projects -->
     <section class="our-projects p-100 pb-0 cmn-bg">
         <div class="container">
@@ -394,54 +394,43 @@
                 <div class="col-lg-6">
                     <div class="title">
                         <span class="btn btn-2">Investment</span>
-                        <h2>Our projects</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
+                        @if(!empty($ourProject))
+                        <h2>{{ $ourProject['page'] }}</h2>
+                        <p>  {{ $ourProject['detail'] }} </p>
+                        @endif
                     </div>
                 </div>
-                <div class="col-xl-6 col-lg-6">
-                    <div class="our-projects-wrap position-relative">
-                        <img src="{{asset('images/front/home')}}/building.png" alt="" />
-                        <div class="our-projects-inner">
-                            <p>The perfect silwana residency</p>
+                @for($i=0; count($ourProjectList) > $i; $i++)
+                    @if($i == 0 || $i == 3)
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="our-projects-wrap position-relative">
+                                <img src="{{asset('images/front/home')}}/building.png" alt="" />
+                                <div class="our-projects-inner">
+                                    <p>The perfect silwana residency</p>
+                                </div>
+                                <div class="inquiry-now-wrap">
+                                    <a href="#" class="cmn-btn">INQUIRY Now</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="inquiry-now-wrap">
-                            <a href="#" class="cmn-btn">INQUIRY Now</a>
+                    @elseif($i >= 4)
+                        @break
+                    @else
+                        <div class="col-xl-3 col-lg-6">
+                            <div class="our-projects-wrap our-projects-wrap-main position-relative">
+                                <img src="{{asset('images/front/home')}}/building3.png" alt="" />
+                                <div class="our-projects-inner">
+                                    <p>The perfect silwana residency</p>
+                                </div>
+                                <div class="inquiry-now-wrap">
+                                    <a href="#" class="cmn-btn">INQUIRY Now</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-6">
-                    <div class="our-projects-wrap our-projects-wrap-main position-relative">
-                        <img src="{{asset('images/front/home')}}/building4.png" alt="" />
-                        <div class="our-projects-inner">
-                            <p>The perfect silwana residency</p>
-                        </div>
-                        <div class="inquiry-now-wrap">
-                            <a href="#" class="cmn-btn">INQUIRY Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-6">
-                    <div class="our-projects-wrap our-projects-wrap-main position-relative">
-                        <img src="{{asset('images/front/home')}}/building3.png" alt="" />
-                        <div class="our-projects-inner">
-                            <p>The perfect silwana residency</p>
-                        </div>
-                        <div class="inquiry-now-wrap">
-                            <a href="#" class="cmn-btn">INQUIRY Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6">
-                    <div class="our-projects-wrap position-relative">
-                        <img src="{{asset('images/front/home')}}/building2.png" alt="" />
-                        <div class="our-projects-inner">
-                            <p>The perfect silwana residency</p>
-                        </div>
-                        <div class="inquiry-now-wrap">
-                            <a href="#" class="cmn-btn">INQUIRY Now</a>
-                        </div>
-                    </div>
-                </div>
+                    @endif
+                @endfor
+
+
             </div>
         </div>
     </section>
@@ -475,7 +464,7 @@
     @endif
 
     <!-- Property on sales -->
-    <section class="property-on-sales p-100 pt-0">
+   <!-- <section class="property-on-sales p-100 pt-0">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -663,7 +652,7 @@
             </div>
         </div>
     </section>
-
+-->
     <!-- features Projects -->
     <section class="features-projects p-100 our-projects overflow-hidden">
         <div class="container position-relative">
@@ -673,280 +662,51 @@
                 <div class="col-lg-6">
                     <div class="title">
                         <span class="btn btn-2">Upcoming Projects</span>
-                        <h2>features Projects</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-                    </div>
+                        @if(!empty($featureProject))
+                            <h2>{{ $featureProject['page'] }}</h2>
+                            <p>  {{ $featureProject['detail'] }} </p>
+                        @endif </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="owl-carousel owl-theme project-feature">
-                        <div class="item">
-                            <div class="project-feature-wrap">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="project-feature-img">
-                                            <img src="{{asset('images/front/home')}}/feature1.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="upcoming-projects-wrap">
-                                            <h4>upcoming projects</h4>
-                                            <h2>Furnished | 4 BR + Maids</h2>
-                                            <h6>5137 Compton Ave, Los Angeles</h6>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna .Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-                                            <div class="upcoming-project-detail-lists property-main-detail">
-                                                <div class="position-static">
-                                                    <div class="property-main-total-detail">
-                                                        <div class="property-main-total">
-                                                            <div class="property-main-img-wrap">
-                                                                <img src="{{asset('images/front/home')}}/bed2.svg" alt="">
-                                                            </div>
-                                                            <p>3</p>
-                                                        </div>
-                                                        <p>Bedroom</p>
-                                                    </div>
-                                                </div>
-                                                <div class="position-static">
-                                                    <div class="property-main-total-detail">
-                                                        <div class="property-main-total">
-                                                            <div class="property-main-img-wrap">
-                                                                <img src="{{asset('images/front/home')}}/bed2.svg" alt="">
-                                                            </div>
-                                                            <p>3</p>
-                                                        </div>
-                                                        <p>Bedroom</p>
-                                                    </div>
-                                                </div>
-                                                <div class="position-static">
-                                                    <div class="property-main-total-detail">
-                                                        <div class="property-main-total">
-                                                            <div class="property-main-img-wrap">
-                                                                <img src="{{asset('images/front/home')}}/bed2.svg" alt="">
-                                                            </div>
-                                                            <p>3</p>
-                                                        </div>
-                                                        <p>Bedroom</p>
-                                                    </div>
-                                                </div>
-                                                <div class="position-static">
-                                                    <div class="property-main-total-detail">
-                                                        <div class="property-main-total">
-                                                            <div class="property-main-img-wrap">
-                                                                <img src="{{asset('images/front/home')}}/bed2.svg" alt="">
-                                                            </div>
-                                                            <p>3</p>
-                                                        </div>
-                                                        <p>Bedroom</p>
-                                                    </div>
+                        @if(!empty($featureProjectList))
+                            @foreach($featureProjectList as $featurePro)
+                                <div class="item">
+                                    <div class="project-feature-wrap">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="project-feature-img">
+                                                    <img src="{{asset('images/front/home')}}/feature1.png" alt="">
                                                 </div>
                                             </div>
-                                            <h3>AED 12,500,000</h3>
-                                            <a href="" class="cmn-btn">DOWNLOAD BROCHURE</a>
+                                            <div class="col-lg-6">
+                                                <div class="upcoming-projects-wrap">
+                                                    <h4>upcoming projects</h4>
+                                                    <h2> {{ $featurePro['project_name'] }}</h2>
+                                                    <h6> {{ $featurePro['address'] }}</h6>
+                                                    <p>   {{ $featurePro['project_detail'] }} </p>
+                                                    <div class="upcoming-project-detail-lists property-main-detail">
+
+                                                        <div class="position-static">
+                                                            <div class="property-main-total-detail">
+                                                                <div class="property-main-total">
+                                                                    <p> {{ $featurePro['category_name'] }}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h3 > </h3>
+                                                    <a href="" class="cmn-btn">DOWNLOAD BROCHURE</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="project-feature-wrap">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="project-feature-img">
-                                            <img src="{{asset('images/front/home')}}/feature1.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="upcoming-projects-wrap">
-                                            <h4>upcoming projects</h4>
-                                            <h2>Furnished | 4 BR + Maids</h2>
-                                            <h6>5137 Compton Ave, Los Angeles</h6>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna .Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-                                            <div class="upcoming-project-detail-lists property-main-detail">
-                                                <div class="position-static">
-                                                    <div class="property-main-total-detail">
-                                                        <div class="property-main-total">
-                                                            <div class="property-main-img-wrap">
-                                                                <img src="{{asset('images/front/home')}}/bed2.svg" alt="">
-                                                            </div>
-                                                            <p>3</p>
-                                                        </div>
-                                                        <p>Bedroom</p>
-                                                    </div>
-                                                </div>
-                                                <div class="position-static">
-                                                    <div class="property-main-total-detail">
-                                                        <div class="property-main-total">
-                                                            <div class="property-main-img-wrap">
-                                                                <img src="{{asset('images/front/home')}}/bed2.svg" alt="">
-                                                            </div>
-                                                            <p>3</p>
-                                                        </div>
-                                                        <p>Bedroom</p>
-                                                    </div>
-                                                </div>
-                                                <div class="position-static">
-                                                    <div class="property-main-total-detail">
-                                                        <div class="property-main-total">
-                                                            <div class="property-main-img-wrap">
-                                                                <img src="{{asset('images/front/home')}}/bed2.svg" alt="">
-                                                            </div>
-                                                            <p>3</p>
-                                                        </div>
-                                                        <p>Bedroom</p>
-                                                    </div>
-                                                </div>
-                                                <div class="position-static">
-                                                    <div class="property-main-total-detail">
-                                                        <div class="property-main-total">
-                                                            <div class="property-main-img-wrap">
-                                                                <img src="{{asset('images/front/home')}}/bed2.svg" alt="">
-                                                            </div>
-                                                            <p>3</p>
-                                                        </div>
-                                                        <p>Bedroom</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <h3>AED 12,500,000</h3>
-                                            <a href="" class="cmn-btn">DOWNLOAD BROCHURE</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="project-feature-wrap">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="project-feature-img">
-                                            <img src="{{asset('images/front/home')}}/feature1.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="upcoming-projects-wrap">
-                                            <h4>upcoming projects</h4>
-                                            <h2>Furnished | 4 BR + Maids</h2>
-                                            <h6>5137 Compton Ave, Los Angeles</h6>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna .Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-                                            <div class="upcoming-project-detail-lists property-main-detail">
-                                                <div class="position-static">
-                                                    <div class="property-main-total-detail">
-                                                        <div class="property-main-total">
-                                                            <div class="property-main-img-wrap">
-                                                                <img src="{{asset('images/front/home')}}/bed2.svg" alt="">
-                                                            </div>
-                                                            <p>3</p>
-                                                        </div>
-                                                        <p>Bedroom</p>
-                                                    </div>
-                                                </div>
-                                                <div class="position-static">
-                                                    <div class="property-main-total-detail">
-                                                        <div class="property-main-total">
-                                                            <div class="property-main-img-wrap">
-                                                                <img src="{{asset('images/front/home')}}/bed2.svg" alt="">
-                                                            </div>
-                                                            <p>3</p>
-                                                        </div>
-                                                        <p>Bedroom</p>
-                                                    </div>
-                                                </div>
-                                                <div class="position-static">
-                                                    <div class="property-main-total-detail">
-                                                        <div class="property-main-total">
-                                                            <div class="property-main-img-wrap">
-                                                                <img src="{{asset('images/front/home')}}/bed2.svg" alt="">
-                                                            </div>
-                                                            <p>3</p>
-                                                        </div>
-                                                        <p>Bedroom</p>
-                                                    </div>
-                                                </div>
-                                                <div class="position-static">
-                                                    <div class="property-main-total-detail">
-                                                        <div class="property-main-total">
-                                                            <div class="property-main-img-wrap">
-                                                                <img src="{{asset('images/front/home')}}/bed2.svg" alt="">
-                                                            </div>
-                                                            <p>3</p>
-                                                        </div>
-                                                        <p>Bedroom</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <h3>AED 12,500,000</h3>
-                                            <a href="" class="cmn-btn">DOWNLOAD BROCHURE</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="project-feature-wrap">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="project-feature-img">
-                                            <img src="{{asset('images/front/home')}}/feature1.png" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="upcoming-projects-wrap">
-                                            <h4>upcoming projects</h4>
-                                            <h2>Furnished | 4 BR + Maids</h2>
-                                            <h6>5137 Compton Ave, Los Angeles</h6>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna .Lorem ipsum dolor sit amet, consectetur adipiscing elit, </p>
-                                            <div class="upcoming-project-detail-lists property-main-detail">
-                                                <div class="position-static">
-                                                    <div class="property-main-total-detail">
-                                                        <div class="property-main-total">
-                                                            <div class="property-main-img-wrap">
-                                                                <img src="{{asset('images/front/home')}}/bed2.svg" alt="">
-                                                            </div>
-                                                            <p>3</p>
-                                                        </div>
-                                                        <p>Bedroom</p>
-                                                    </div>
-                                                </div>
-                                                <div class="position-static">
-                                                    <div class="property-main-total-detail">
-                                                        <div class="property-main-total">
-                                                            <div class="property-main-img-wrap">
-                                                                <img src="{{asset('images/front/home')}}/bed2.svg" alt="">
-                                                            </div>
-                                                            <p>3</p>
-                                                        </div>
-                                                        <p>Bedroom</p>
-                                                    </div>
-                                                </div>
-                                                <div class="position-static">
-                                                    <div class="property-main-total-detail">
-                                                        <div class="property-main-total">
-                                                            <div class="property-main-img-wrap">
-                                                                <img src="{{asset('images/front/home')}}/bed2.svg" alt="">
-                                                            </div>
-                                                            <p>3</p>
-                                                        </div>
-                                                        <p>Bedroom</p>
-                                                    </div>
-                                                </div>
-                                                <div class="position-static">
-                                                    <div class="property-main-total-detail">
-                                                        <div class="property-main-total">
-                                                            <div class="property-main-img-wrap">
-                                                                <img src="{{asset('images/front/home')}}/bed2.svg" alt="">
-                                                            </div>
-                                                            <p>3</p>
-                                                        </div>
-                                                        <p>Bedroom</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <h3>AED 12,500,000</h3>
-                                            <a href="" class="cmn-btn">DOWNLOAD BROCHURE</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            @endforeach
+
+                        @endif
+
+
                     </div>
                 </div>
             </div>

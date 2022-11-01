@@ -14,3 +14,5 @@ yarn-error.log
 /.vscode
 resources/views/front/about.blade (copy).php
 public/images
+resources/views/admin/project/imageUpload.blade (copy).php
+

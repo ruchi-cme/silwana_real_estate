@@ -1,14 +1,24 @@
 $(document).ready(function() {
 
+
+    $("#bookingForm").validate({
+        first_name : 'required',
+        last_name  : 'required',
+        phone     : 'required',
+        email: {
+            required: true,
+            email: true,//add an email rule that will ensure the value entered is valid email id.
+            maxlength: 255,
+        },
+    });
     $(".bookNow").click(function(){
         var user_id =  $(this).attr('user_id');
-        var unit_id =  $(this).attr('unit_id');
+
 
         if(user_id != '')
         {
-            var route = "/booking";
-            var url = route+'/'+ unit_id ;
-            window.location.href = url;
+            $(this).attr('data-bs-toggle', 'modal');
+            $(this).attr('data-bs-target', '#myModal');
 
         }else{
             //if not logged in
@@ -32,7 +42,7 @@ $(document).ready(function() {
 
                 $('#floor').html('<option value="">Select Floor</option>');
                 $.each(result.floors, function (key, value) {
-                    $("#floor").append('<option value="' + value.proj_block_floor_id
+                    $("#floor").append('<option value="' + value.floor_detail_id
                           + '">' + value.floor_no + '</option>');
                 });
 
@@ -43,6 +53,7 @@ $(document).ready(function() {
     $('#floor').change(function ()  {
         var floor_id = this.value;
         $("#unit").html('');
+
         $.ajax({
             url:   '/getUnit' ,
             type: "GET",
@@ -51,10 +62,10 @@ $(document).ready(function() {
             },
             dataType: 'json',
             success: function (result) {
-                console.log(result);
+
                 $('#unit').html('<option value="">Select Unit</option>');
                 $.each(result.units, function (key, value) {
-                    $("#unit").append('<option value="' + value.proj_floor_unit_id
+                    $("#unit").append('<option value="' + value.floor_unit_id
                         + '">' + value.unit_name + '</option>');
                 });
 
@@ -62,8 +73,50 @@ $(document).ready(function() {
         });
     })
 
+    $('#unit').change(function ()  {
+        var unit_id = this.value;
+        $('#totalPrice').text('');
+        $('#bookingPrice').text('');
+        $('#sqft').text('');
+        $.ajax({
+            url:   '/getUnitData' ,
+            type: "GET",
+            data: {
+                unit_id: unit_id,
+            },
+            dataType: 'json',
+            success: function (result) {
+                $('#totalPrice').text(result.unitData.total_price);
+                $('#bookingPrice').text(result.unitData.booking_price);
+                $('#sqft').text(result.unitData.area_in_sq_feet);
 
+            }
+        });
+    });
 
+    $('#downloadBrochure').on('click', function () {
+
+        var url = $('#downloadUrl').val();
+        var proName = $(this).attr('proName');
+
+        $.ajax({
+            url:url,
+            method: 'GET',
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function (data) {
+                var a = document.createElement('a');
+                var url = window.URL.createObjectURL(data);
+                a.href = url;
+                a.download = proName+'Brochure.pdf';
+                document.body.append(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
+            }
+        });
+    });
 
 
 });

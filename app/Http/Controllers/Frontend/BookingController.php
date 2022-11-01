@@ -54,11 +54,14 @@ class BookingController extends Controller
             return back()->withErrors($validator)->withInput();
         }
         else {
-            $data = FloorUnitMapping::find(decrypt($request->unit_id));
+            $data = FloorUnitMapping::find($request->unit_id);
 
             $insertData = [
                 'user_id' => Auth::guard('front')->user()->id,
-                'unit_id' => decrypt($request->unit_id),
+                'project_id' => $request->project_id,
+                'block_id' => $request->block_id,
+                'floor_id' =>  $request->floor_id,
+                'unit_id' =>  $request->unit_id,
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'phone' => $request->phone,

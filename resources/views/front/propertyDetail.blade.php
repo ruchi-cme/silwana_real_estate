@@ -1,100 +1,118 @@
 <x-base>
     <x-banner title="Property Details" page="Property Details"></x-banner>
-    <!-- property-detail-main -->
+    @if ($projectList)
+        <!-- property-detail-main -->
+        <section class="property-detail-main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="title">
+                            <input type="hidden" name="project_id" id="project_id" value="{{ $projectList['project_id'] }}">
+                            <span class="btn btn-2">{{ $projectList['category_name'] }}</span>
+                            <h2>{{ $projectList['project_name'] }}</h2>
+                            <h5><img src="{{ asset('/images/front/location.svg') }}" class="location-image" alt="location" />  {{ $address['address'] }} </h5>
+                            <p> {{ $projectList['project_detail'] }}</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="top-categories property-price border-0">
+                            <ul>
+                                <li>
+                                    <a  id="downloadBrochure"  proName="{{ $projectList['project_name'] }}" class="cmn-btn">DOWNLOAD BROCHURE</a>
 
-    <section class="property-detail-main mt-0">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="search-property">
-                        <h2>Search Property</h2>
-                        <form action="{{ route('searchProperty') }}" method="post">
-                             @csrf
-                            <div class="form-group mb-0 position-relative">
-                                <select name="block_name" id="block_name" class="form-control">
-                                    <option value="">Select Block</option>
-                                    @if(!empty($blockData))
-                                        @foreach($blockData as $row)
-                                            <option value="{{ $row['proj_block_map_id'] }}" >{{ $row['block_name'] }} </option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                            <div class="form-group mb-0 position-relative">
-                                <select name="floor" id="floor" class="form-control">
-                                    <option value="">Select Floor</option>
-                                </select>
-                            </div>
-                            <div class="form-group mb-0 position-relative">
-                                <select name="unit" id="unit" class="form-control">
-                                    <option value="">Select Unit</option>
-                                </select>
-                            </div>
-                            <div class="form-group mb-0">
-                                <button type="" class="cmn-btn search-btn"><img src="{{ asset('images/front')}}/search.svg" alt="search" /></button>
-                            </div>
-                        </form>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)"  user_id="{{ Auth::guard('front')->check() ? Auth::guard('front')->user()->id : '' }}" class="cmn-btn bookNow">BOOK NOW</a>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        @if(!empty($selectedImage))
+
+                            @for($i=0; count($selectedImage) > $i; $i++)
+                                @if($i <= 2)
+                                    <div class="col-xl-4 col-lg-6">
+                                        <div class="property-detail-main-wrap">
+                                            <img src="{{ asset('images/project/images/').'/'.$selectedImage[$i]['title'] }}" alt="">
+                                            <div class="property-detail-more-detail">
+                                                <a href="#" class="more-photos">More Photos</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @elseif($selectedImage[$i]['type'] == 1 )
+                                        <div class="col-lg-8">
+                                            <div class="property-detail-main-wrap-big video-wrapper brochure-wrap">
+                                                <img src="{{ asset('images/project/pdf/').'/'.$selectedImage[$i]['title'] }}" alt="architecture" />
+                                                <input type="hidden" id="downloadUrl" name="downloadUrl" value="{{ !empty($selectedImage[$i]['title'] ) ? asset('images/project/pdf/').'/'.$selectedImage[$i]['title'] : ''}}">
+                                                <button  id="downloadBrochure" proName="{{ $projectList['project_name'] }}" class="cmn-btn">DOWNLOAD BROCHURE</button>
+                                            </div>
+                                        </div>
+
+                                 <!--   <div class="col-lg-4 d-flex flex-column">
+                                        <div class="property-detail-main-wrap-small property-detail-main-wrap">
+                                            <img src="{{ asset('images/project/images/').'/'.$selectedImage[$i]['title'] }}" alt="">
+                                            <div class="property-detail-more-detail">
+                                                <a href="#" class="more-photos">More Photos</a>
+                                            </div>
+                                        </div>
+                                        <div class="property-detail-main-wrap-small property-detail-main-wrap">
+                                            <img src="{{ asset('images/project/images/').'/'.$selectedImage[$i]['title'] }}" alt="">
+                                            <div class="property-detail-more-detail">
+                                                <a href="#" class="more-photos">More Photos</a>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+                                @endif
+                            @endfor
+                        @endif
+                    </div>
                     </div>
                 </div>
-                @if(!empty($propertyImage))
-                    @foreach($propertyImage as $row)
-                        <div class="col-xl-4">
-                            <div class="property-detail-main-wrap">
-                                <img src="{{ asset('images/unit').'/'.$row['title'] }}" alt="">
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="apartment-details">
+        <section class="apartment-details">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="title">
-                        <span class="btn btn-2">{{ $propertyDetail['category_name'] }}</span>
-                        <h2>{{ $propertyDetail['project_name'] }}</h2>
-                        @php $address = getProjectAddress($propertyDetail['project_id'])  @endphp
-                        <h5><img src="{{ asset('images/front')}}/location.svg" class="location-image" alt="location" />  {{ $address['address'] }}</h5>
-                        <p> {{ $propertyDetail['project_detail'] }} </p>
-                    </div>
-
                     <div>
                         <h4>Property Detail</h4>
                         <div class="property-detail-list-wrap">
                             <div class="row">
-                                <div class="col-lg-5">
+                                <div class="col-xl-5 col-lg-6">
                                     <div class="property-detail-list-inner">
                                         <ul>
                                             <li>
                                                 <p>Property ID</p>
-                                                <span>{{ $propertyDetail['unit_name'] }}</span>
+                                                <span>SRED369</span>
                                             </li>
                                             <li>
                                                 <p>Home Area</p>
-                                                <span>{{ $propertyDetail['area_in_sq_feet'] }} sqft</span>
+                                                <span>120 sqft</span>
                                             </li>
                                             <li>
                                                 <p>Room</p>
-                                                <span>  {{ $propertyDetail['rooms'] }}  Rooms</span>
+                                                <span>7 Rooms</span>
                                             </li>
                                             <li>
                                                 <p>Baths</p>
-                                                <span>-</span>
+                                                <span>2 Baths</span>
                                             </li>
                                             <li>
                                                 <p>Year Built</p>
-                                                <span>-</span>
+                                                <span>2022</span>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="col-lg-5">
+                                <div class="col-xl-5 col-lg-6">
                                     <div class="property-detail-list-inner">
                                         <ul>
-                                           <!--  <li>
+                                            <li>
                                                 <p>Lot Area</p>
                                                 <span>SRED369</span>
                                             </li>
@@ -105,14 +123,14 @@
                                             <li>
                                                 <p>Beds</p>
                                                 <span>5 Beds</span>
-                                            </li> -->
+                                            </li>
                                             <li>
                                                 <p>Price</p>
-                                                <span>AMD {{ $propertyDetail['total_price'] }}  </span>
+                                                <span>AMD 12,500,000</span>
                                             </li>
                                             <li>
                                                 <p>Property Type</p>
-                                                <span>{{ $propertyDetail['category_name'] }}</span>
+                                                <span>Apartment</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -120,123 +138,175 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="fact-features">
+                        <div class="row">
+                            <h4>Project Amenities</h4>
+                            @foreach($amenities as $amenity)
+                                <div class="col-lx-4 col-lg-6">
+                                    <div class="fact-features-wrap">
+                                        <div class="fact-features-wrap-img">
+                                            <img src="{{ asset('images/amenities').'/'.$amenity['amenity_image'] }}" alt="">
+                                        </div>
+                                        <div>
+                                            <h6>{{ $amenity['amenity_name'] }}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="map-wrap">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14686.38110757174!2d72.50322167825783!3d23.038627905445274!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e9b4c4b8342df%3A0x62dafb0b4b33890b!2sBodakdev%2C%20Ahmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1665982756650!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="top-categories property-price">
-                        <ul>
-                            <h4>Property Price</h4>
-                            <li>
-                                <h6>AED {{ $propertyDetail['total_price'] }} <span>(AMD 2500 / sq.ft)</span> </h6>
-
-                            </li>
-                            <li class="booking-price">
-                                <h6>Booking Price</h6>
-                                <span>AMD {{ $propertyDetail['booking_price'] }}</span>
-                            </li>
-                            <li>
-                                @if( $propertyDetail['booking_type'] == 1)
-                                    <a href="javascript:void(0)"  unit_id="{{ encrypt($propertyDetail['proj_floor_unit_id']) }}"  user_id="{{ Auth::guard('front')->check() ? Auth::guard('front')->user()->id : '' }}" class="cmn-btn bookNow">BOOK NOW</a>
-
-                                @else
-                                    <button class="cmn-btn">BOOKED</button>
-
-                                @endif
-                            </li>
-                        </ul>
-                    </div>
-
-
                     <div class="top-categories">
                         <ul>
                             <h4>Top Categories</h4>
-                            <li>
-                                <p>Offices</p>
-                                <span>(65 Properties)</span>
-                            </li>
-                            <li>
-                                <p>Condos</p>
-                                <span>(15 Properties)</span>
-                            </li>
-                            <li>
-                                <p>House</p>
-                                <span>(31 Properties)</span>
-                            </li>
-                            <li>
-                                <p>Apartments</p>
-                                <span>(47 Properties)</span>
-                            </li>
-                            <li>
-                                <p>Villa</p>
-                                <span>(07 Properties)</span>
-                            </li>
+                            @foreach($categories as $cat)
+                               @php $countProject = getCountCategoryProject($cat['category_id']); @endphp
+                                <li>
+                                    <p>{{ $cat['category_name'] }}</p>
+                                    <span>({{ $countProject }} Properties)</span>
+                                </li>
+                            @endforeach
                         </ul>
-                    </div>
-
-                    <div class="top-categories top-property p-0">
-                        <h4>Top Properties</h4>
-                        <div class="owl-carousel owl-theme top-properties-slider">
-                            <div class="item">
-                                <div class="property-sale-wrap">
-                                    <div class="property-sale-img-wrap">
-                                        <img src="{{ asset('images/front/home')}}/decore.png" alt="decore" />
-                                    </div>
-                                    <div class="property-detail-wrap position-relative">
-                                        <h4>AED 12,500,000</h4>
-                                        <h6>Furnished | 4 BR + Maids| Sea View</h6>
-                                        <p>5137 Compton Ave, Los Angeles</p>
-                                        <div class="top-property-details-wrap">
-                                            <div>
-                                                <img src="{{ asset('images/front')}}/property-detail/bed.svg" alt="bed" />
-                                            </div>
-                                            <h6>3 Bedroom</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="property-sale-wrap">
-                                    <div class="property-sale-img-wrap">
-                                        <img src="{{ asset('images/front/home')}}/decore.png" alt="decore" />
-                                    </div>
-                                    <div class="property-detail-wrap position-relative">
-                                        <h4>AED 12,500,000</h4>
-                                        <h6>Furnished | 4 BR + Maids| Sea View</h6>
-                                        <p>5137 Compton Ave, Los Angeles</p>
-                                        <div class="top-property-details-wrap">
-                                            <div>
-                                                <img src="{{ asset('images/front/property-detail')}}/bed.svg" alt="bed" />
-                                            </div>
-                                            <h6>3 Bedroom</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="property-sale-wrap">
-                                    <div class="property-sale-img-wrap">
-                                        <img src="{{ asset('images/front/home')}}/decore.png" alt="decore" />
-                                    </div>
-                                    <div class="property-detail-wrap position-relative">
-                                        <h4>AED 12,500,000</h4>
-                                        <h6>Furnished | 4 BR + Maids| Sea View</h6>
-                                        <p>5137 Compton Ave, Los Angeles</p>
-                                        <div class="top-property-details-wrap">
-                                            <div>
-                                                <img src="{{ asset('images/front/property-detail')}}/bed.svg" alt="bed" />
-                                            </div>
-                                            <h6>3 Bedroom</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    @section('scripts')
+    @endif
+
+    <!-- The Modal -->
+    <div class="modal apartment-modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header p-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div>
+                    <form action="{{ route('booking/store') }}" method="post" id="bookingForm" name="bookingForm" >
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="title">
+                                    <h2>{{ $projectList['project_name'] }}</h2>
+                                    <p>
+                                        {{ $projectList['project_detail'] }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group select-title">
+                                    <select name="block_id" id="block_name" class="form-control">
+                                        <option value="">Select Block</option>
+                                        @if(!empty($blockData))
+                                            @foreach($blockData as $block)
+                                                <option value="{{ $block['block_name_map_id'] }}">{{ $block['block_name'] }}</option>
+                                            @endforeach
+                                        @endif
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group select-title">
+                                    <select name="floor_id" id="floor" class="form-control">
+                                        <option value="">Select Floor</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group select-title">
+                                    <select name="unit_id" id="unit" class="form-control">
+                                        <option value="">Select Unit</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="text" required placeholder="First Name" name="first_name" value="{{   (Auth::guard('front')->check()) ? Auth::guard('front')->user()->firstname : '' }}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="text" required placeholder="Last Name" name="last_name" value="{{ Auth::guard('front')->user()->lasttname }}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Mobile Number" name="phone" value="{{ Auth::guard('front')->user()->phone }}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Email" name="email" value="{{ Auth::guard('front')->user()->email }}" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <select name="payment_type" id="" class="form-control">
+                                        <option value="">Booking Type</option>
+                                        @foreach ($paymentType as $key => $val)
+                                            <option value="{{ $key }}" >{{ $val }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <select name="booking_type" id="booking_type" class="form-control">
+                                        <option value="">Payment Type</option>
+                                        @foreach ($bookingType as $key => $val)
+                                            <option value="{{ $key }}"  >{{ $val }}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <textarea  id="booking_details" cols="30" rows="3" name="booking_details" class="form-control">Booking Details...</textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="top-categories property-price p-0">
+                                    <ul>
+                                        <h4>Property Price</h4>
+                                        <li>
+                                            <h6 >AED <span id="totalPrice"></span> <span >( <span id="sqft"> 2500  </span> / sq.ft)</span> </h6>
+
+                                        </li>
+                                        <li class="booking-price">
+                                            <h6>Booking Price <span >AMD  <span id="bookingPrice"> </span> </span></h6>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="top-categories property-price border-0 pe-0">
+                                    <ul>
+                                        <li>
+                                            <input type="hidden" name="project_id" id="project_id" value="{{ $projectList['project_id'] }}">
+                                            <button class="cmn-btn bookNow">Book Now</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+@section('scripts')
 
         <script   src="{{ asset('js/front/custom/propertyDetail') }}/propertyDetail.js"> </script>
     @endsection

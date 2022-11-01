@@ -98,38 +98,70 @@ if(!function_exists("getContactUsDetail")){
 
 if(!function_exists("getBookingDetail")){
 
-    function getBookingDetail($user_id) {
+    function getBookingDetail($user_id ='',$booking_id='') {
 
         $select =  [
             'bookings.booking_id',
             'bookings.canceled',
-            'proj_floor_unit_mapping.proj_floor_unit_id',
-            'proj_floor_unit_mapping.unit_name',
-            'proj_floor_unit_mapping.area_in_sq_feet',
-            'proj_floor_unit_mapping.total_price',
-            'proj_floor_unit_mapping.booking_price',
-            'proj_floor_unit_mapping.booking_type',
-           'proj_floor_unit_mapping.rooms',
+            'bookings.project_id',
+            'floor_unit_mapping.floor_unit_id',
+            'floor_unit_mapping.unit_name',
+            'floor_unit_mapping.area_in_sq_feet',
+            'floor_unit_mapping.total_price',
+            'floor_unit_mapping.booking_price',
+            'floor_unit_mapping.booking_type',
             'category_master.category_name',
-           'proj_block_mappings.block_name',
             'project_master.project_name',
            'project_master.project_detail',
-
+            'block_floor_mappings.block_name_map_id',
+            'block_floor_mappings.block_floor_map_id',
+            'floor_details.floor_no',
+            'block_name_mappings.block_name'
         ];
-        $data =  Booking::leftJoin('proj_floor_unit_mapping', 'proj_floor_unit_mapping.proj_floor_unit_id', '=', 'bookings.unit_id')
-            ->leftJoin('proj_block_mappings', 'proj_block_mappings.proj_block_map_id', '=', 'proj_floor_unit_mapping.proj_block_floor_id')
-            ->leftJoin('project_master', 'project_master.project_id', '=', 'proj_block_mappings.project_id')
-           ->leftJoin('category_master', 'category_master.category_id', '=', 'proj_floor_unit_mapping.category_id')
-             ->select($select)
-            ->orderBy('bookings.booking_id', 'desc')
-            ->where('bookings.user_id',$user_id)
-            ->get();
+
+        if(!empty($user_id)){
+            $data =  Booking::leftJoin('floor_unit_mapping', 'floor_unit_mapping.floor_unit_id', '=', 'bookings.unit_id')
+                ->leftJoin('project_master', 'project_master.project_id', '=', 'bookings.project_id')
+                ->leftJoin('category_master', 'category_master.category_id', '=', 'project_master.category_id')
+                ->leftJoin('floor_details', 'floor_details.floor_detail_id', '=', 'floor_unit_mapping.floor_detail_id')
+                ->leftJoin('block_floor_mappings', 'block_floor_mappings.block_floor_map_id', '=', 'floor_details.block_floor_map_id')
+                ->leftJoin('block_name_mappings', 'block_name_mappings.block_name_map_id', '=', 'block_floor_mappings.block_name_map_id')
+                ->select($select)
+                ->orderBy('bookings.booking_id', 'desc')
+                ->where('bookings.user_id',$user_id)
+                ->get();
+        }
+        elseif(!empty($booking_id)){
+                $data =  Booking::leftJoin('floor_unit_mapping', 'floor_unit_mapping.floor_unit_id', '=', 'bookings.unit_id')
+                    ->leftJoin('project_master', 'project_master.project_id', '=', 'bookings.project_id')
+                    ->leftJoin('category_master', 'category_master.category_id', '=', 'project_master.category_id')
+                    ->leftJoin('floor_details', 'floor_details.floor_detail_id', '=', 'floor_unit_mapping.floor_detail_id')
+                    ->leftJoin('block_floor_mappings', 'block_floor_mappings.block_floor_map_id', '=', 'floor_details.block_floor_map_id')
+                    ->leftJoin('block_name_mappings', 'block_name_mappings.block_name_map_id', '=', 'block_floor_mappings.block_name_map_id')
+                    ->select($select)
+                    ->orderBy('bookings.booking_id', 'desc')
+                    ->where('bookings.booking_id',$booking_id)
+                    ->get()->first();
+            }
+
+        else {
+            $data =  Booking::leftJoin('floor_unit_mapping', 'floor_unit_mapping.floor_unit_id', '=', 'bookings.unit_id')
+                ->leftJoin('project_master', 'project_master.project_id', '=', 'bookings.project_id')
+                ->leftJoin('category_master', 'category_master.category_id', '=', 'project_master.category_id')
+                ->leftJoin('floor_details', 'floor_details.floor_detail_id', '=', 'floor_unit_mapping.floor_detail_id')
+                ->leftJoin('block_floor_mappings', 'block_floor_mappings.block_floor_map_id', '=', 'floor_details.block_floor_map_id')
+
+                ->leftJoin('block_name_mappings', 'block_name_mappings.block_name_map_id', '=', 'block_floor_mappings.block_name_map_id')
+                ->select($select)
+                ->orderBy('bookings.booking_id', 'desc')
+                ->get();
+        }
+
 
         return $data;
     }
 
 }
-
 
 if(!function_exists("getBookingImage")) {
 
@@ -143,7 +175,6 @@ if(!function_exists("getBookingImage")) {
 
     }
 }
-
 
 if(!function_exists("getProjectList")) {
 
@@ -192,7 +223,6 @@ if(!function_exists("getProjectList")) {
     }
 
 }
-
 
 if(!function_exists("getProjectAddress")) {
 
@@ -289,7 +319,6 @@ if(!function_exists('getPropertyImage')) {
     }
 }
 
-
 if(!function_exists("getTopCategories")) {
 
     function getTopCategories() {
@@ -364,7 +393,6 @@ if(!function_exists('getBlockFloorByUnit')) {
     }
 }
 
-
 if(!function_exists("getBlockData")) {
 
     function getBlockData($project_id) {
@@ -376,15 +404,22 @@ if(!function_exists("getBlockData")) {
         return  $data ;
     }
 }
+
+//new
 if(!function_exists("getFloor")) {
 
     function getFloor($block_id)
     {
-        $data  = BlockFloorMapping::where("proj_block_mapg_id", $block_id)->get(["proj_block_floor_id", "floor_no"]);
-
+        $select = ['floor_details.floor_detail_id','floor_details.floor_no'];
+        $data  = BlockFloorMapping::leftJoin('floor_details', 'floor_details.block_floor_map_id', '=', 'block_floor_mappings.block_floor_map_id')
+            ->select($select)
+            ->where('block_floor_mappings.block_name_map_id',$block_id)
+            ->orderBy('floor_details.floor_no','ASC')
+            ->get();
         return $data;
     }
 }
+
 if(!function_exists("getUnit")) {
 
     function getUnit($floor_id)
@@ -396,4 +431,29 @@ if(!function_exists("getUnit")) {
     }
 }
 
+if(!function_exists("getUnitData")) {
 
+    function getUnitData($unit_id)
+    {
+        $data = FloorUnitMapping::where("floor_unit_id", $unit_id)
+            ->get(["floor_unit_id", "floor_detail_id", "unit_name","area_in_sq_feet" , "total_price", "booking_price"])
+            ->first();
+        return $data;
+    }
+}
+
+
+if(!function_exists("getCountCategoryProject")){
+
+    function getCountCategoryProject($category_id) {
+
+        $projectData  = Project::select([ 'project_id'])
+            ->where('status' , 1)
+            ->where('deleted',0)
+            ->where('category_id',$category_id)
+            ->get();
+        $countProject = $projectData->count();
+        return $countProject;
+
+    }
+}

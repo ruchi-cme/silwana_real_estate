@@ -19,6 +19,9 @@ class Booking extends Model
 
         'booking_id',
         'user_id',
+        'project_id',
+        'block_id',
+        'floor_id',
         'unit_id',
         'booking_price',
         'booking_details',
