@@ -1,29 +1,42 @@
 <div>
     <!-- looking-for-house -->
+
+    @php $footerData = getSilwanaPages('footer');  @endphp
+
     <section class="looking-for-house">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="looking-for-house-wrap">
-                        <div class="looking-for-house-img">
-                            <img src="{{asset('images/front/home')}}/building5.png" alt="">
-                        </div>
-                        <div class="row looking-for-house-text">
-                            <div class="col-lg-5">
-                                <div>
-                                    <img src="{{asset('images/front')}}/logo2.svg" class="logo-2" alt="">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et </p>
-                                </div>
+                    @if(!empty($footerData))
+                        <div class="looking-for-house-wrap">
+                            <div class="looking-for-house-img">
+                                <img src="{{ asset('images/page').'/'. $footerData['page_image']}}" alt="">
                             </div>
-                            <div class="col-lg-7">
-                                <div class="looking-for-house-inner">
-                                    <h2>LOOKING FOR DREAM HOME?</h2>
-                                    <p>We can help you realize your dream of a new home</p>
-                                    <a href="" class="cmn-btn">EXPLORE PROPERTIES</a>
+                            <div class="row looking-for-house-text">
+                                <div class="col-lg-5">
+                                    <div>
+                                        <img src="{{asset('images/front')}}/logo2.svg" class="logo-2" alt="">
+                                        <p> {{ $footerData['detail'] }} </p>
+                                    </div>
                                 </div>
+
+                                @foreach ($footerData['page_details'] as $row)
+
+                                    <div class="col-lg-7">
+                                        <div class="looking-for-house-inner">
+                                            <h2>{{$row['heading']}}</h2>
+                                            <p>{{$row['heading_detail']}}</p>
+                                            <a href="{{ route('ourProject/ongoing') }}" class="cmn-btn">EXPLORE PROPERTIES</a>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="looking-for-house-wrap">
+                            <div class="looking-for-house-img" style="height: 160px;">    </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

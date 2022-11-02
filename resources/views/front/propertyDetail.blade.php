@@ -127,9 +127,6 @@
                        $lat  =  $projectList['latitude'];
                        $long =  $projectList['longitude'];
                     @endphp
-
-
-
                     <div class="map-wrap">
                         <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14686.38110757174!2d72.50322167825783!3d23.038627905445274!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e9b4c4b8342df%3A0x62dafb0b4b33890b!2sBodakdev%2C%20Ahmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1665982756650!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
                         <iframe

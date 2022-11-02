@@ -213,7 +213,7 @@
                         <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
                             <!--begin::Preview existing image-->
                             @php $img= ''; @endphp
-                            <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: none "></div>
+                            <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: none"></div>
                             <!--end::Preview existing image-->
                             <!--begin::Label-->
                             <label class="inputFileError errorMsg" for="direction" style="">  </label>
@@ -288,7 +288,7 @@
 
                    var bgImg = $(this).css('background-image').trim();
 
-                   if (bgImg == 'url("about:invalid")' ) {
+                   if (bgImg == 'url("about:invalid")' || bgImg == 'none' &&  $(this).is(":visible") == true) {
 
                        $(this).next('.inputFileError').html('Required');
                        err++;
@@ -322,9 +322,7 @@
                     return false;
                 }
             });
-
         });
-
 
     </script>
 

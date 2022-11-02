@@ -7,7 +7,8 @@ Route::name('admin')->get('/', 'App\Http\Controllers\Admin\DashboardController@i
 
 //Booking
 Route::name('booking')->get('/booking', 'App\Http\Controllers\Admin\BookingController@index');
-Route::name('booking/view')->get('/booking/view/{id}', 'App\Http\Controllers\Admin\BookingController@view');
+Route::name('booking.view')->get('/booking/view/{id}', 'App\Http\Controllers\Admin\BookingController@view');
+Route::name('booking/update/{id}')->post('/booking/update/{id}', 'App\Http\Controllers\Admin\BookingController@updateBooking');
 
 
 //User Management

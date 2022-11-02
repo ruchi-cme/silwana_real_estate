@@ -22,22 +22,12 @@ class AboutController extends Controller
     public function ourTeam(Request $request)
     {
 
-        $sales   = getSilwanaPages('aboutus_sales');
-        $mission = getSilwanaPages('aboutus_mission');
-        $vision  = getSilwanaPages('aboutus_vision');
+        $ownermsg   = getSilwanaPages('owner_message');
 
-        return view('front.about',compact( 'sales','mission','vision'));
+
+        return view('front.ourTeam',compact( 'ownermsg'  ));
     }
 
-    public function aboutusOurTeam(Request $request)
-    {
-
-        $sales   = getSilwanaPages('aboutus_sales');
-        $mission = getSilwanaPages('aboutus_mission');
-        $vision  = getSilwanaPages('aboutus_vision');
-
-        return view('front.about',compact( 'sales','mission','vision'));
-    }
 
     public function aboutusFaq(Request $request)
     {
@@ -46,17 +36,16 @@ class AboutController extends Controller
         $mission = getSilwanaPages('aboutus_mission');
         $vision  = getSilwanaPages('aboutus_vision');
 
-        return view('front.about',compact( 'sales','mission','vision'));
+        return view('front.faq',compact( 'sales','mission','vision'));
     }
 
     public function newsMedia(Request $request)
     {
-
         $sales   = getSilwanaPages('aboutus_sales');
         $mission = getSilwanaPages('aboutus_mission');
         $vision  = getSilwanaPages('aboutus_vision');
 
-        return view('front.about',compact( 'sales','mission','vision'));
+        return view('front.newsMedia',compact( 'sales','mission','vision'));
     }
 
     public function blogs(Request $request)

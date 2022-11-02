@@ -22,7 +22,7 @@ class OurProjectController extends Controller
         $projectList   = getProjectList($project_id);
         $selectedImage = getProjectImage($projectList['project_id']);
         $address       = getProjectAddress($projectList['project_id']);
-        $amenities     = getAmenities();
+        $amenities     = getAmenitiesByProject($projectList['project_id']);
         $categories    = getCategory();
         $blockData     = getBlockData($project_id);
         $bookingType = Config::get('constants.booking_type');

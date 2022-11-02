@@ -52,7 +52,7 @@
                                 <th>Category Name</th>
                                 <th>Unit Name </th>
                                 <th> Booking Price</th>
-                                <th>Status</th>
+                                <th> Booking Status</th>
                                 <th>action </th>
                             </tr>
                         </thead>
@@ -109,7 +109,7 @@
                 data:'booking_price'
             },
             {
-                data: 'status'
+                data: 'booing_status'
             },
             {
                 data: null

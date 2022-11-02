@@ -78,7 +78,7 @@ class BookingController extends Controller
             if (!empty($bookingId)) {
 
                 $data->update([
-                    'booking_type' => 2,
+                    'booking_type' => 3,
                     'modified_by' => Auth::guard('front')->user()->id,
                     'modified_date' => now()
                 ]);
@@ -100,11 +100,10 @@ class BookingController extends Controller
         if(!empty($data)) {
             $data->update([
                 'canceled'  => 1,
+                'status'    => 3,
                 'canceled_by'   => Auth::guard('front')->user()->id,
                 'canceled_date' => now()
             ]);
-
-
 
             $unitdata->update([
                 'booking_type'  => 1,

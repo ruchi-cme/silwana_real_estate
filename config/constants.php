@@ -5,8 +5,16 @@ use Illuminate\Support\Str;
 return [
     'booking_status' => [
         '1' => 'Available',
-        '2' => 'Booked'
+        '2' => 'Booked',
+        '3' => 'Pending'
     ],
+     'bookedstatus' => [
+            '1' => 'Booking Price Paid',
+            '2' => 'Full Aamount Paid',
+            '3' => 'cancel',
+            '4' => 'pending',
+            '5' => 'Approved'
+        ],
     'work_status' => [
         '1' => 'Ongoing',
         '2' => 'Upcoming',
@@ -24,7 +32,7 @@ return [
         'aboutus_mission'   => 'About Us Mission',
         'aboutus_vision'    => 'About Us Vision',
         'feature_project'   => 'Features Project',
-
+        'footer'            => 'Footer',
     ],
     'booking_type' => [
         '1' => 'Cash',

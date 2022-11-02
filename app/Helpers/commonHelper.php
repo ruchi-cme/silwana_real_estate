@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\{Amenities, Category, Project, Block, Silwana,SilwanaDetailMapping,ContactUs};
-use App\Models\{FloorUnitMapping, ProjectImage, ProjUnitImage, FloorDetail};
+use App\Models\{FloorUnitMapping, ProjectImage, ProjUnitImage, FloorDetail,Proj_ameni_mapping};
 use App\Models\{Block_name_mapping, Booking, Project_address_detail, BlockFloorMapping};
 use Illuminate\Support\Facades\DB;
 
@@ -28,6 +28,24 @@ if(!function_exists("getAmenities")){
             ->orderBy("amenity_name",'ASC')
             ->get();
          return $amenitiesData;
+
+    }
+}
+
+if(!function_exists("getAmenitiesByProject")){
+
+    function getAmenitiesByProject($project_id) {
+        $select =  [
+            'amenities_master.amenities_id','amenities_master.amenity_name','amenities_master.amenity_image'
+        ];
+        $amenitiesData =Proj_ameni_mapping::leftJoin('amenities_master', 'amenities_master.amenities_id', '=', 'proj_ameni_mappings.amenities_id')
+            ->select($select)
+            ->where('proj_ameni_mappings.project_id',$project_id)
+            ->where('amenities_master.status' , 1)
+            ->where('amenities_master.deleted',0)
+            ->orderBy("amenities_master.amenity_name",'ASC')
+            ->get();
+        return $amenitiesData;
 
     }
 }
@@ -104,6 +122,7 @@ if(!function_exists("getBookingDetail")){
             'bookings.booking_id',
             'bookings.canceled',
             'bookings.project_id',
+            'bookings.status',
             'floor_unit_mapping.floor_unit_id',
             'floor_unit_mapping.unit_name',
             'floor_unit_mapping.area_in_sq_feet',

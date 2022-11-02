@@ -41,10 +41,10 @@
 
                                                     <ul>
                                                         <li><a class="dropdown-item" href="{{ route('about') }}">About Us</a></li>
-                                                        <li><a class="dropdown-item" href="team.php">Our Team</a></li>
-                                                        <li><a class="dropdown-item" href="faq.php">FAQ</a></li>
-                                                        <li><a class="dropdown-item" href="news-media.php">News & Media</a></li>
-                                                        <li><a class="dropdown-item" href="blog.php">Blogs</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('ourTeam') }}">Our Team</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('aboutusFaq') }}">FAQ</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('newsMedia') }}">News & Media</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('blogs') }}">Blogs</a></li>
                                                     </ul>
                                                 </div>
                                             </ul>

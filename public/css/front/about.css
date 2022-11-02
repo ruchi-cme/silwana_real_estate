@@ -98,7 +98,7 @@
 
 .about-silwana-detail {
     margin: 30px 0 0;
-    background: url('/images/front/about/dubai.svg') center center no-repeat;
+    background: url('../images/about/dubai.svg') center center no-repeat;
     background-size: cover;
 }
 

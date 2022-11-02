@@ -6,6 +6,7 @@
         <div class="row">
             <div class="about-banner-text text-center">
                 <h2>{{$title}}</h2>
+                <h4>{{!empty($page) && ($page == 'News Feed') ? 'The latest news and press releases' : ''}}</h4>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
                         <li class="breadcrumb-item"><a href="index.php"> <img src="{{asset('images/front')}}/about/home-icon.png" alt=""> Home</a></li>

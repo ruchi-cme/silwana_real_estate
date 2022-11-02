@@ -32,6 +32,8 @@
                         <!--begin::Card header-->
                         <!--begin::Card body-->
                         <div class="card-body p-9">
+                            <form action="{{ url('admin/booking/update/'.$myBooking['booking_id'])  }}" method="post" id="bookingForm" >
+                                @csrf
                             <!--begin::Row-->
                             <div class="row mb-7">
                                 <!--begin::Label-->
@@ -110,20 +112,58 @@
                             </div>
                             <!--end::Input group-->
 
-                            <!--begin::Input group-->
-                            <div class="row mb-7">
-                                <!--begin::Label-->
-                                <label class="col-lg-4 fw-bold text-muted">Booking Type</label>
-                                <!--end::Label-->
-                                <!--begin::Col-->
-                                <div class="col-lg-8">
-                                    <span class="fw-bolder fs-6 text-gray-800"> {{ $myBooking['canceled'] == 1 ? 'Cancelled': 'Booked'}}</span>
+                        @if(!empty( $myBooking['status']) &&  $myBooking['status'] != 3)
+                                <!--begin::Input group-->
+                                <div class="row mb-7">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 fw-bold text-muted required">Booking Status</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8">
+                                        <select required class="form-select form-select-solid form-select-lg" name="status" id="status" data-placeholder="Select status" data-control="select2" >
+
+                                            @if (!empty($bookingStatus))
+                                                @foreach ($bookingStatus as $key => $val)
+                                                    <option value="{{ $key }}" {{ !empty( $myBooking['status'])  && ($myBooking['status'] == $key) ? 'selected' : '' }}>{{ $val }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <!--end::Col-->
                                 </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
+                                <div class="card-footer">
+                                    <!--begin::Seperator-->
+                                    <div class="separator separator-dashed mb-7"></div>
+                                    <!--end::Seperator-->
+                                    <!--begin::Actions-->
+                                    <div class="mb-0">
+                                        <input type="hidden" class="form-control form-control-solid" name="booking_id" id="booking_id" value="{{ !empty($myBooking['booking_id']) ? $myBooking['booking_id'] : ''}}" >
+                                        <input type="hidden" class="form-control form-control-solid" name="floor_unit_id" id="floor_unit_id" value="{{ !empty($myBooking['floor_unit_id']) ? $myBooking['floor_unit_id'] : ''}}" >
 
-
+                                        <button type="button" data-form="blockForm" class="btn btn-primary" id="create_button">
+                                            <!--begin::Indicator-->
+                                            <span class="indicator-label">Update Booking Status</span>
+                                            <span class="indicator-progress">Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                            <!--end::Indicator-->
+                                        </button>
+                                    </div>
+                                    <!--end::Actions-->
+                                </div>
+                                @else
+                                    <div class="row mb-7">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 fw-bold text-muted">Booking Status</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8">
+                                            <span class="fw-bolder fs-6 text-gray-800"> {{ !empty( $myBooking['status']) && $myBooking['status'] == 3 ? 'Cancelled' : '' }}</span>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                @endif
+                                <!--end::Input group-->
+                            </form>
                         </div>
                         <!--end::Card body-->
                     </div>
@@ -139,3 +179,38 @@
 </div>
 
 @endsection
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function (e) {
+            $("#bookingForm").validate({
+                ignore: '',
+                rules: {
+                    "status" :"required",
+                },
+                messages: {
+                    "status" : "Pleaseselect status",
+
+                }
+            });
+
+            $('#create_button').on('click', function(event) {
+
+                // prevent default submit action
+                event.preventDefault();
+
+                // test if form is valid
+                if($('#bookingForm').valid()  ) { console.log(2);
+                    $( '#bookingForm' ).submit();
+                } else { console.log(3);
+                    console.log("does not validate");
+                    return false;
+                }
+            });
+
+
+        });
+    </script>
+
+@endpush

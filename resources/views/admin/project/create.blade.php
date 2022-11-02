@@ -17,7 +17,6 @@
     <!--begin::Container-->
     <div id="kt_content_container" class="container-fluid">
 
-
         <!--begin::Layout-->
         <div class="d-flex flex-column flex-lg-row">
 
@@ -92,7 +91,6 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
-
 
                             <!--begin::Row-->
                             <div class="row mb-8">
@@ -181,137 +179,138 @@
 
                         <!--end::Card body-->
                     </div>
-                    <!--end::Card-->
+                        <!--end::Card-->
 
-                    <!--begin::Card-->
-                    <div class="card shadow-lg card-flush pt-3 mb-5 mb-lg-10">
-                        <!--begin::Card header-->
-                        <div class="card-header">
-                            <!--begin::Card title-->
-                            <div class="card-title">
-                                <h2 class="fw-bolder">Project Address</h2>
-                            </div>
-                            <!--begin::Card title-->
-                        </div>
-                        <!--end::Card header-->
-                        <!--begin::Card body-->
-                        <div class="card-body pt-0">
-
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Address</div>
+                        <!--begin::Card-->
+                        <div class="card shadow-lg card-flush pt-3 mb-5 mb-lg-10">
+                            <!--begin::Card header-->
+                            <div class="card-header">
+                                <!--begin::Card title-->
+                                <div class="card-title">
+                                    <h2 class="fw-bolder">Project Address</h2>
                                 </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                   <!-- <input type="text" required placeholder="Enter Address" class="form-control form-control-solid" id="autocompletes" name="address" value="{{ !empty( $editData->address) ? $editData->address : '' }}" >
-                                   -->
-                                    <input type="text" required  class="form-control form-control-solid"   name="autocomplete" id="autocomplete"  placeholder="Choose Location" value="{{ !empty( $editData->address) ? $editData->address : '' }}" >
-
-
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                <!--begin::Card title-->
                             </div>
-                            <!--end::Row-->
+                            <!--end::Card header-->
+                            <!--begin::Card body-->
+                            <div class="card-body pt-0">
 
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Landmark</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input required type="text" placeholder="Enter Landmark" class="form-control form-control-solid" name="landmark" value="{{ !empty( $editData->landmark) ? $editData->landmark : '' }}" id="landmark" >
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
+                                <!--begin::Row-->
+                                <div class="row mb-8">
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3 required"> Address</div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                       <!-- <input type="text" required placeholder="Enter Address" class="form-control form-control-solid" id="autocompletes" name="address" value="{{ !empty( $editData->address) ? $editData->address : '' }}" >
+                                       -->
+                                        <input type="text" required  class="form-control form-control-solid"   name="autocomplete" id="autocomplete"  placeholder="Choose Location" value="{{ !empty( $editData->address) ? $editData->address : '' }}" >
 
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3">Location</div>
+
+                                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                 </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <div class="row">
-                                        <div class="col-md-4 mb-3">
-                                            <select class="form-select form-select-solid form-select-lg" name="country" id="country" data-control="select2" data-placeholder="Choose Country" >
-                                                @foreach ($countries as $country)
+                                <!--end::Row-->
+
+                                <!--begin::Row-->
+                                <div class="row mb-8">
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3 required"> Landmark</div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                        <input required type="text" placeholder="Enter Landmark" class="form-control form-control-solid" name="landmark" value="{{ !empty( $editData->landmark) ? $editData->landmark : '' }}" id="landmark" >
+                                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                </div>
+                                <!--end::Row-->
+
+                                <!--begin::Row-->
+                                <div class="row mb-8">
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3">Location</div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                        <div class="row">
+                                            <div class="col-md-4 mb-3">
+                                                <select class="form-select form-select-solid form-select-lg" name="country" id="country" data-control="select2" data-placeholder="Choose Country" >
                                                     <option ></option>
-                                                    <option value="{{ $country->id }}" {{ !empty($editData->country)  && ($editData->country ==  $country->id) ? 'selected' : '' }}>{{ $country->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <select class="form-select form-select-solid form-select-lg" name="state" id="state" data-placeholder="Select State" data-control="select2" >
-                                                @if(!empty($states))
-                                                @foreach ($states as $state)
-                                                    <option ></option>
-                                                    <option value="{{ $state->id }}" {{ !empty($editData->state)  && ($editData->state ==  $state->id) ? 'selected' : '' }}>{{ $state->name }}</option>
-                                                @endforeach
-                                                @endif
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <select class="form-select form-select-solid form-select-lg" name="city" id="city" data-control="select2"  data-placeholder="Select City">
-                                                @if(!empty($cities))
-                                                @foreach ($cities as $city)
-                                                    <option ></option>
-                                                    <option value="{{ $city->id }}" {{ !empty($editData->city)  && ($editData->city ==  $city->id) ? 'selected' : '' }}>{{ $city->name }}</option>
-                                                @endforeach
-                                                @endif
-                                            </select>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->id }}" {{ !empty($editData->country)  && ($editData->country ==  $country->id) ? 'selected' : '' }}>{{ $country->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <select class="form-select form-select-solid form-select-lg" name="state" id="state" data-placeholder="Select State" data-control="select2" >
+                                                    @if(!empty($states))    <option ></option>
+                                                    @foreach ($states as $state)
+
+                                                        <option value="{{ $state->id }}" {{ !empty($editData->state)  && ($editData->state ==  $state->id) ? 'selected' : '' }}>{{ $state->name }}</option>
+                                                    @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 mb-3">
+                                                <select class="form-select form-select-solid form-select-lg" name="city" id="city" data-control="select2"  data-placeholder="Select City">
+                                                    @if(!empty($cities))    <option ></option>
+                                                    @foreach ($cities as $city)
+
+                                                        <option value="{{ $city->id }}" {{ !empty($editData->city)  && ($editData->city ==  $city->id) ? 'selected' : '' }}>{{ $city->name }}</option>
+                                                    @endforeach
+                                                    @endif
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
+                                    <!--begin::Col-->
                                 </div>
-                                <!--begin::Col-->
-                            </div>
-                            <!--end::Row-->
+                                <!--end::Row-->
 
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Zip  </div>
+                                <!--begin::Row-->
+                                <div class="row mb-8">
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3 required"> Zip  </div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                        <input id="zip" type="text" placeholder="Enter Zip" class="form-control form-control-solid" name="zip" value="{{ !empty( $editData->zip) ? $editData->zip : '' }}" >
+                                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                 </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input id="zip" type="text" placeholder="Enter Zip" class="form-control form-control-solid" name="zip" value="{{ !empty( $editData->zip) ? $editData->zip : '' }}" >
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
+                                <!--end::Row-->
 
-                            <!--begin::Row-->
-                            <div class="row text-center">
-                                <input type="hidden" name="project_id" value="{{ !empty( $editData->project_id) ? $editData->project_id : '' }}" id="project_id">
-                                <input type="hidden" name="latitude" value="{{ !empty( $editData->latitude) ? $editData->latitude : '' }}" id="latitude">
-                                <input type="hidden" name="longitude" value="{{ !empty( $editData->longitude) ? $editData->longitude : '' }}" id="longitude">
-
-                                <!--begin::Col-->
-                                <!--begin::Actions-->
-                                <div class="mb-0">
-                                    <button type="button" data-form="projectForm" class="btn btn-primary" id="create_button">
-                                        <!--begin::Indicator-->
-                                        <span class="indicator-label">{{ !empty( $editData->project_id) ?  'Update' : 'Create' }} Project</span>
-                                        <span class="indicator-progress">Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        <!--end::Indicator-->
-                                    </button>
+                                <!--begin::Row-->
+                                <div class="row text-center">
+                                    <input type="hidden" name="project_id" value="{{ !empty( $editData->project_id) ? $editData->project_id : '' }}" id="project_id">
+                                    <input type="hidden" name="latitude" value="{{ !empty( $editData->latitude) ? $editData->latitude : '' }}" id="latitude">
+                                    <input type="hidden" name="longitude" value="{{ !empty( $editData->longitude) ? $editData->longitude : '' }}" id="longitude">
+                                    <input type="hidden" name="countryid" value="" id="countryid">
+                                    <input type="hidden" name="stateid" value="" id="stateid">
+                                    <!--begin::Col-->
+                                    <!--begin::Actions-->
+                                    <div class="mb-0">
+                                        <button type="button" data-form="projectForm" class="btn btn-primary" id="create_button">
+                                            <!--begin::Indicator-->
+                                            <span class="indicator-label">{{ !empty( $editData->project_id) ?  'Update' : 'Create' }} Project</span>
+                                            <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                            <!--end::Indicator-->
+                                        </button>
+                                    </div>
+                                    <!--end::Actions-->
                                 </div>
-                                <!--end::Actions-->
+                                <!--end::Row-->
                             </div>
-                            <!--end::Row-->
+                            <!--end::Card body-->
                         </div>
-                        <!--end::Card body-->
+                        <!--end::Card-->
                     </div>
-                    <!--end::Card-->
-
                 </form>
                 <!--end::Form-->
             </div>
@@ -377,46 +376,48 @@
                             console.log(addressObj.long_name); // confirm that this is the country name
                             console.log(addressObj.short_name);
                             var countryShortName = addressObj.short_name;
-                            selectCountry(countryShortName,'country');
-                        }
 
+                        }
+                        if (addressObj.types[j] === 'locality') {
+                            console.log(addressObj.types[j]); // confirm that this is 'city'
+                            console.log(addressObj.long_name); // confirm that this is the city name
+                            var cityShortName = addressObj.long_name;
+
+                        }
                         if (addressObj.types[j] === 'route') {
                             console.log(addressObj.types[j]); // confirm that this is 'country'
                             console.log(addressObj.long_name); // confirm that this is the country name
                             $('#landmark').val(addressObj.long_name);
                         }
                         if (addressObj.types[j] === 'administrative_area_level_1') {
-                            console.log(addressObj.types[j]); // confirm that this is 'country'
-                            console.log(addressObj.long_name); // confirm that this is the country name
+                            console.log(addressObj.types[j]); // confirm that this is 'state'
+                            console.log(addressObj.long_name); // confirm that this is the state name
                             var stateShortName = addressObj.long_name;
-                            selectCountry(stateShortName,'state');
-                        }
 
-                        if (addressObj.types[j] === 'locality') {
-                            console.log(addressObj.types[j]); // confirm that this is 'country'
-                            console.log(addressObj.long_name); // confirm that this is the country name
-                            var cityShortName = addressObj.long_name;
-                            selectCountry(cityShortName,'city');
                         }
 
                         if (addressObj.types[j] === 'postal_code') {
-                            console.log(addressObj.types[j]); // confirm that this is 'country'
-                            console.log(addressObj.long_name); // confirm that this is the country name
+                            console.log(addressObj.types[j]); // confirm that this is 'postal_code'
+                            console.log(addressObj.long_name); // confirm that this is the postal_code
                             $('#zip').val(addressObj.long_name);
                         }
 
                         if (addressObj.types[j] === 'street_number') {
-                            console.log(addressObj.types[j]); // confirm that this is 'country'
-                            console.log(addressObj.long_name); // confirm that this is the country name
+                            console.log(addressObj.types[j]); // confirm that this is 'street_number'
+                            console.log(addressObj.long_name); // confirm that this is the street_number
                         }
                     }
                 }
+                selectCountry(countryShortName,'country');
+                selectCountry(stateShortName,'state' );
+                selectCountry(cityShortName,'city');
                 $('#latitude').val(place.geometry['location'].lat());
                 $('#longitude').val(place.geometry['location'].lng());
 
             });
         }
-        function selectCountry(countryShortName,selectId){
+        function selectCountry(countryShortName,selectId   ){
+         
             var path = '';
             if(selectId == 'country'){
                  path = "{{ route('country.fetch') }}"
@@ -440,7 +441,9 @@
                     $.each(result.countries, function (key, value) {
                         $("#"+selectId).append('<option value="' + value
                             .id + '">' + value.name + '</option>');
+
                         $('#'+selectId).val(value.id).trigger('change');
+
                     });
                 }
             });
@@ -478,41 +481,41 @@
                  alert("Your browser doesn't support to File API")
              }
 
-             $('#create_button').on('click', function(event) {
-
-                 $("#projectForm").validate({
-                     ignore: '',
-                     rules: {
-                         "project_name" :"required",
-                         "category_id" : "required",
-                         "work_status" : "required",
-                         "amenities_id" :  "required",
-                         "address" :  "required",
-                         "landmark" :  "required",
-                         "country" :  "required",
-                         "state" :  "required",
-                         "city" :  "required",
-                         zip: {
-                             required: true,
-                             digits: true
-                         }
-                     },
-                     messages: {
-                         "project_name" : "Please enter project name",
-                         "category_id" :  "Please select category",
-                         "work_status" : "Please select work status",
-                         "amenities_id" : "Please select amenity",
-                         "address" :  "Please enter address",
-                         "landmark" :  "Please enter landmaark",
-                         "country" :  "Please select country",
-                         "state" :  "Please select state",
-                         "city" :  "Please select city",
-                         zip: {
-                             required: "Please enter zip",
-                             digits: "Please enter digit"
-                         }
+             $("#projectForm").validate({
+                 ignore: '',
+                 rules: {
+                     "project_name" :"required",
+                     "category_id" : "required",
+                     "work_status" : "required",
+                     "amenities_id" :  "required",
+                     "address" :  "required",
+                     "landmark" :  "required",
+                     "country" :  "required",
+                     "state" :  "required",
+                     "city" :  "required",
+                     zip: {
+                         required: true,
+                         digits: true
                      }
-                 });
+                 },
+                 messages: {
+                     "project_name" : "Please enter project name",
+                     "category_id" :  "Please select category",
+                     "work_status" : "Please select work status",
+                     "amenities_id" : "Please select amenity",
+                     "address" :  "Please enter address",
+                     "landmark" :  "Please enter landmaark",
+                     "country" :  "Please select country",
+                     "state" :  "Please select state",
+                     "city" :  "Please select city",
+                     zip: {
+                         required: "Please enter zip",
+                         digits: "Please enter digit"
+                     }
+                 }
+             });
+
+             $('#create_button').on('click', function(event) {
 
                  // prevent default submit action
                  event.preventDefault();
@@ -525,7 +528,6 @@
                      return false;
                  }
              });
-
 
 
         $(document).on('select2:open', () => {
