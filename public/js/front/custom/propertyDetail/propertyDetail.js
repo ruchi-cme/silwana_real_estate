@@ -5,6 +5,10 @@ $(document).ready(function() {
         first_name : 'required',
         last_name  : 'required',
         phone     : 'required',
+        block_id : 'required',
+        floor_id : 'required',
+        unit_id : 'required',
+
         email: {
             required: true,
             email: true,//add an email rule that will ensure the value entered is valid email id.

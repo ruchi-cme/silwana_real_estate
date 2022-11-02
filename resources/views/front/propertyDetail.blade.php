@@ -170,7 +170,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group select-title">
-                                    <select name="block_id" id="block_name" class="form-control">
+                                    <select required name="block_id" id="block_name" class="form-control">
                                         <option value="">Select Block</option>
                                         @if(!empty($blockData))
                                             @foreach($blockData as $block)
@@ -183,14 +183,14 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group select-title">
-                                    <select name="floor_id" id="floor" class="form-control">
+                                    <select required name="floor_id" id="floor" class="form-control">
                                         <option value="">Select Floor</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group select-title">
-                                    <select name="unit_id" id="unit" class="form-control">
+                                    <select required name="unit_id" id="unit" class="form-control">
                                         <option value="">Select Unit</option>
                                     </select>
                                 </div>
