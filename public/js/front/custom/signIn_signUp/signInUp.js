@@ -6,6 +6,15 @@ $(document).ready(function() {
         }
     });
 
+    $("#loginForm").validate({
+
+        password     : 'required',
+        email: {
+            required: true,
+            email: true,//add an email rule that will ensure the value entered is valid email id.
+            maxlength: 255,
+        },
+    });
     $(".btn-login").click(function(e){
 
         e.preventDefault();
@@ -31,7 +40,7 @@ $(document).ready(function() {
                     $('#loginError').show();
                     $('#loginError').html(result.error);
                 }
-                else if(result.errors) { alert(1);
+                else if(result.errors) {
                     $('#loginError').html('');
                     jQuery.each(result.errors, function(key, value){
                         $('#loginError').show();
