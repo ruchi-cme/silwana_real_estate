@@ -85,56 +85,24 @@
                             <div class="row">
                                 <div class="col-xl-5 col-lg-6">
                                     <div class="property-detail-list-inner">
+                                        @php  $detail =  getpropertyDetailsByProject( $projectList['project_id']) @endphp
                                         <ul>
-                                            <li>
-                                                <p>Property ID</p>
-                                                <span>SRED369</span>
-                                            </li>
                                             <li>
                                                 <p>Home Area</p>
                                                 <span>120 sqft</span>
                                             </li>
                                             <li>
-                                                <p>Room</p>
-                                                <span>7 Rooms</span>
-                                            </li>
-                                            <li>
-                                                <p>Baths</p>
-                                                <span>2 Baths</span>
-                                            </li>
-                                            <li>
-                                                <p>Year Built</p>
-                                                <span>2022</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="col-xl-5 col-lg-6">
-                                    <div class="property-detail-list-inner">
-                                        <ul>
-                                            <li>
-                                                <p>Lot Area</p>
-                                                <span>SRED369</span>
-                                            </li>
-                                            <li>
-                                                <p>Lot Dimensions</p>
-                                                <span>120 sqft</span>
-                                            </li>
-                                            <li>
-                                                <p>Beds</p>
-                                                <span>5 Beds</span>
+                                                <p>Property Type</p>
+                                                <span> {{ $projectList['category_name'] }}</span>
                                             </li>
                                             <li>
                                                 <p>Price</p>
-                                                <span>AMD 12,500,000</span>
-                                            </li>
-                                            <li>
-                                                <p>Property Type</p>
-                                                <span>Apartment</span>
+                                                <span> {{ !empty($detail) ? $detail['min']  : '' }} -  {{ !empty($detail) ? $detail['max'] :'' }}</span>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
