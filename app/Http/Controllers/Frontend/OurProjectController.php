@@ -96,7 +96,8 @@ class OurProjectController extends Controller
 
     public function getUnit(Request $request)
     {
-        $data['units'] = getUnit($request->floor_id);
+        $booking_type = 1;
+        $data['units'] = getUnit($request->floor_id, $booking_type);
         return response()->json($data);
     }
 

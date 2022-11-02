@@ -66,6 +66,16 @@ class AboutController extends Controller
         $mission = getSilwanaPages('aboutus_mission');
         $vision  = getSilwanaPages('aboutus_vision');
 
-        return view('front.about',compact( 'sales','mission','vision'));
+        return view('front.blogs',compact( 'sales','mission','vision'));
+    }
+
+    public function sales(Request $request)
+    {
+
+        $sales   = getSilwanaPages('aboutus_sales');
+        $mission = getSilwanaPages('aboutus_mission');
+        $vision  = getSilwanaPages('aboutus_vision');
+
+        return view('front.sales',compact( 'sales','mission','vision'));
     }
 }

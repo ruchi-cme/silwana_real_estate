@@ -62,7 +62,7 @@
                             <div class="row">
                                 <!--begin::Col-->
                                 <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3">Image</div>
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required">Image</div>
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
@@ -153,17 +153,20 @@
 
         $(document).ready(function (e) {
 
+            $("#categoryForm").validate({
+                ignore: '',
+                rules: {
+                    "category_name" :"required",
+                    "category_image":"required",
+                },
+                messages: {
+                    "category_name" : "Please enter category",
+                    "category_image": "Please select image"
+                }
+            });
+
             $('#create_button').on('click', function(event) {
 
-                $("#categoryForm").validate({
-                    ignore: '',
-                    rules: {
-                        "category_name" :"required",
-                    },
-                    messages: {
-                        "category_name" : "Please enter category",
-                    }
-                });
 
                 // prevent default submit action
                 event.preventDefault();

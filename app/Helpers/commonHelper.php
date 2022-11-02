@@ -422,11 +422,19 @@ if(!function_exists("getFloor")) {
 
 if(!function_exists("getUnit")) {
 
-    function getUnit($floor_id)
+    function getUnit($floor_id,$booking_type='')
     {
-        $data = FloorUnitMapping::where("floor_detail_id", $floor_id)
-            ->get(["floor_unit_id", "floor_detail_id", "unit_name","area_in_sq_feet" , "total_price", "booking_price"])
-            ->toArray();
+
+        if(!empty($booking_type)){
+            $data = FloorUnitMapping::where("floor_detail_id", $floor_id)->where('booking_type',$booking_type)
+                ->get(["floor_unit_id", "floor_detail_id", "unit_name","area_in_sq_feet" , "total_price", "booking_price"])
+                ->toArray();
+        } else {
+            $data = FloorUnitMapping::where("floor_detail_id", $floor_id)
+                ->get(["floor_unit_id", "floor_detail_id", "unit_name","area_in_sq_feet" , "total_price", "booking_price"])
+                ->toArray();
+        }
+
         return $data;
     }
 }
@@ -459,7 +467,7 @@ if(!function_exists("getCountCategoryProject")){
 }
 
 if(!function_exists("getpropertyDetailsByProject")){
- 
+
     function getpropertyDetailsByProject($project_id) {
 
         $select = [ DB::raw('max(floor_unit_mapping.booking_price) as max,   min(floor_unit_mapping.booking_price) as min')];

@@ -74,7 +74,7 @@
                             <div class="row">
                                 <!--begin::Col-->
                                 <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3">Image</div>
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required">Image</div>
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
@@ -182,11 +182,13 @@
                     ignore: '',
                     rules: {
                         "amenity_name" :"required",
-                        "amenity_detail" : "required"
+                        "amenity_detail" : "required",
+                        "amenity_image":"required",
                     },
                     messages: {
                         "amenity_name" : "Please enter amenity name",
                         "amenity_detail" :  "Please enter amenity detail",
+                        "amenity_image": "Please select image"
                     }
                 });
 

@@ -206,7 +206,11 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" required placeholder="Enter Address" class="form-control form-control-solid" name="address" value="{{ !empty( $editData->address) ? $editData->address : '' }}" >
+                                   <!-- <input type="text" required placeholder="Enter Address" class="form-control form-control-solid" id="autocompletes" name="address" value="{{ !empty( $editData->address) ? $editData->address : '' }}" >
+                                   -->
+                                    <input type="text" required  class="form-control form-control-solid"   name="autocomplete" id="autocomplete"  placeholder="Choose Location" value="{{ !empty( $editData->address) ? $editData->address : '' }}" >
+
+
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -220,7 +224,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input required type="text" placeholder="Enter Landmark" class="form-control form-control-solid" name="landmark" value="{{ !empty( $editData->landmark) ? $editData->landmark : '' }}" >
+                                    <input required type="text" placeholder="Enter Landmark" class="form-control form-control-solid" name="landmark" value="{{ !empty( $editData->landmark) ? $editData->landmark : '' }}" id="landmark" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -278,7 +282,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" placeholder="Enter Zip" class="form-control form-control-solid" name="zip" value="{{ !empty( $editData->zip) ? $editData->zip : '' }}" >
+                                    <input id="zip" type="text" placeholder="Enter Zip" class="form-control form-control-solid" name="zip" value="{{ !empty( $editData->zip) ? $editData->zip : '' }}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -286,6 +290,9 @@
                             <!--begin::Row-->
                             <div class="row text-center">
                                 <input type="hidden" name="project_id" value="{{ !empty( $editData->project_id) ? $editData->project_id : '' }}" id="project_id">
+                                <input type="hidden" name="latitude" value="{{ !empty( $editData->latitude) ? $editData->latitude : '' }}" id="latitude">
+                                <input type="hidden" name="longitude" value="{{ !empty( $editData->longitude) ? $editData->longitude : '' }}" id="longitude">
+
                                 <!--begin::Col-->
                                 <!--begin::Actions-->
                                 <div class="mb-0">
@@ -346,9 +353,82 @@
 </style>
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script type="text/javascript"  src="https://maps.google.com/maps/api/js?key=AIzaSyCaGutB-33lg0jkFrBPKeQnusQSv2I2hyA&sensor=false&libraries=places"></script>
 
     <script type="text/javascript">
 
+        $(document).ready(function () {
+            $("#latitudeArea").addClass("d-none");
+            $("#longtitudeArea").addClass("d-none");
+        });
+        google.maps.event.addDomListener(window, 'load', initialize);
+        function initialize() {
+            var input = document.getElementById('autocomplete');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+
+            autocomplete.addListener('place_changed', function () {
+                var place = autocomplete.getPlace();
+                console.log(place.address_components );
+                for(var i = 0; i < place.address_components.length; i += 1) {
+                    var addressObj = place.address_components[i];
+                    for(var j = 0; j < addressObj.types.length; j += 1) {
+                        if (addressObj.types[j] === 'country') {
+                            console.log(addressObj.types[j]); // confirm that this is 'country'
+                            console.log(addressObj.long_name); // confirm that this is the country name
+                            console.log(addressObj.short_name);
+                            var countryShortName = addressObj.short_name;
+                            selectCountry(countryShortName);
+                        }
+
+                        if (addressObj.types[j] === 'route') {
+                            console.log(addressObj.types[j]); // confirm that this is 'country'
+                            console.log(addressObj.long_name); // confirm that this is the country name
+                            $('#landmark').val(addressObj.long_name);
+                        }
+
+                        if (addressObj.types[j] === 'locality') {
+                            console.log(addressObj.types[j]); // confirm that this is 'country'
+                            console.log(addressObj.long_name); // confirm that this is the country name
+                        }
+
+                        if (addressObj.types[j] === 'postal_code') {
+                            console.log(addressObj.types[j]); // confirm that this is 'country'
+                            console.log(addressObj.long_name); // confirm that this is the country name
+                            $('#zip').val(addressObj.long_name);
+                        }
+
+                        if (addressObj.types[j] === 'street_number') {
+                            console.log(addressObj.types[j]); // confirm that this is 'country'
+                            console.log(addressObj.long_name); // confirm that this is the country name
+                        }
+                    }
+                }
+
+                $('#latitude').val(place.geometry['location'].lat());
+                $('#longitude').val(place.geometry['location'].lng());
+
+            });
+        }
+        function selectCountry(countryShortName){
+
+            $("#country").html('');
+            $.ajax({
+                url: "{{ route('country.fetch') }}",
+                type: "GET",
+                data: {
+                    sortname: "'"+countryShortName+"'",
+                },
+                dataType: 'json',
+                success: function (result) {
+                    $('#country').html('<option value="">Select Country</option>');
+                    $.each(result.countries, function (key, value) {
+                        $("#country").append('<option value="' + value
+                            .id + '">' + value.name + '</option>');
+                    });
+                    $('#country').select2('open');
+                }
+            });
+        }
          $(document).ready(function() {
 
          $(".removePdf").click(function(){

@@ -24,4 +24,10 @@ class CountryStateCityController extends Controller
         $data['blockData'] = getBlockData($request->project_id);
         return response()->json($data);
     }
+    public function fetchCountry(Request $request)
+    {
+        $data['countries'] = Country::where("sortname",$request->sortname)->get(["name", "id"]);
+       
+        return response()->json($data);
+    }
 }
