@@ -288,7 +288,7 @@
 
                    var bgImg = $(this).css('background-image').trim();
 
-                   if (bgImg == 'url("about:invalid")' || bgImg == 'none') {
+                   if (bgImg == 'url("about:invalid")' ) {
 
                        $(this).next('.inputFileError').html('Required');
                        err++;

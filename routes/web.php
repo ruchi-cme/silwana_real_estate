@@ -68,6 +68,9 @@ Route::middleware(['auth'])->group(function () {
 
 // Common Routes
 Route::name('country.fetch')->get('/country/fetch', 'App\Http\Controllers\CountryStateCityController@fetchCountry');
+Route::name('selectState.fetch')->get('/country/selectState', 'App\Http\Controllers\CountryStateCityController@selectState');
+Route::name('selectCity.fetch')->get('/country/selectCity', 'App\Http\Controllers\CountryStateCityController@selectCity');
+
 Route::name('state.fetch')->get('/state/fetch', 'App\Http\Controllers\CountryStateCityController@fetchState');
 Route::name('city.fetch')->get('/city/fetch', 'App\Http\Controllers\CountryStateCityController@fetchCity');
 Route::name('block.fetch')->get('/block/fetch', 'App\Http\Controllers\CountryStateCityController@fetchBlock');

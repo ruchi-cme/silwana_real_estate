@@ -195,6 +195,8 @@ if(!function_exists("getProjectList")) {
             'project_address_details.state',
             'project_address_details.city',
             'project_address_details.zip',
+            'project_address_details.latitude',
+            'project_address_details.longitude'
         ];
 
        if (!empty($project_id)) {

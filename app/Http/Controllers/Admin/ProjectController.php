@@ -86,7 +86,7 @@ class ProjectController extends Controller
             'category_id' => 'required',
             'work_status' => 'required',
             'amenities_id' => 'required',
-            'address' => 'required',
+            'autocomplete' => 'required',
             'project_pdf.*' => 'mimes:pdf,txt',
         ]);
 
@@ -124,7 +124,7 @@ class ProjectController extends Controller
 
         $projectAddressData  = [
             'project_id'     => $project_id['project_id'],
-            'address'        => $request->address,
+            'address'        => $request->autocomplete,
             'landmark'       => $request->landmark,
             'country'        => $request->country,
             'state'          => $request->state,
@@ -220,7 +220,6 @@ class ProjectController extends Controller
      */
     public function update(Request $request )
     {
-
         /*****    Update Project  Data    *******/
         $updateData  = Project::find( $request->project_id);
         $userID      = auth()->user()->id;
@@ -258,7 +257,7 @@ class ProjectController extends Controller
 
         $projectAddressData->update([
             'project_id'     => $request->project_id,
-            'address'        => $request->address,
+            'address'        => $request->autocomplete,
             'landmark'       => $request->landmark,
             'country'        => $request->country,
             'state'          =>  $request->state,
@@ -278,16 +277,14 @@ class ProjectController extends Controller
         if (!empty($projectImages)) {
             foreach ($projectImages as $img) {
 
-                    if (  !in_array($img['title'] , $editProjectPdf) ) {
-                        if($img['type'] == 1) {
-                            if (  file_exists(public_path().'/images/project/pdf/'.$img['title'])) {
-                                @unlink(public_path("images/project/pdf/").$img['title']);
-                                ProjectImage::where('project_image_id' , $img['project_image_id'])->where('type' , 1)->delete();
-                            }
+                if (  !in_array($img['title'] , $editProjectPdf) ) {
+                    if($img['type'] == 1) {
+                        if (  file_exists(public_path().'/images/project/pdf/'.$img['title'])) {
+                            @unlink(public_path("images/project/pdf/").$img['title']);
+                            ProjectImage::where('project_image_id' , $img['project_image_id'])->where('type' , 1)->delete();
                         }
                     }
-
-
+                }
             }
         }
 

@@ -61,12 +61,12 @@
                             <div class="row mb-8">
                                 <!--begin::Col-->
                                 <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 ">  Detail</div>
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required">  Detail</div>
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <textarea placeholder="Enter Project Detail" name="project_detail" class="form-control form-control-solid h-100px" >{{ !empty( $editData->project_detail) ? $editData->project_detail : '' }}</textarea>
+                                    <textarea required placeholder="Enter Project Detail" name="project_detail" class="form-control form-control-solid h-100px" >{{ !empty( $editData->project_detail) ? $editData->project_detail : '' }}</textarea>
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -377,7 +377,7 @@
                             console.log(addressObj.long_name); // confirm that this is the country name
                             console.log(addressObj.short_name);
                             var countryShortName = addressObj.short_name;
-                            selectCountry(countryShortName);
+                            selectCountry(countryShortName,'country');
                         }
 
                         if (addressObj.types[j] === 'route') {
@@ -385,10 +385,18 @@
                             console.log(addressObj.long_name); // confirm that this is the country name
                             $('#landmark').val(addressObj.long_name);
                         }
+                        if (addressObj.types[j] === 'administrative_area_level_1') {
+                            console.log(addressObj.types[j]); // confirm that this is 'country'
+                            console.log(addressObj.long_name); // confirm that this is the country name
+                            var stateShortName = addressObj.long_name;
+                            selectCountry(stateShortName,'state');
+                        }
 
                         if (addressObj.types[j] === 'locality') {
                             console.log(addressObj.types[j]); // confirm that this is 'country'
                             console.log(addressObj.long_name); // confirm that this is the country name
+                            var cityShortName = addressObj.long_name;
+                            selectCountry(cityShortName,'city');
                         }
 
                         if (addressObj.types[j] === 'postal_code') {
@@ -403,32 +411,42 @@
                         }
                     }
                 }
-
                 $('#latitude').val(place.geometry['location'].lat());
                 $('#longitude').val(place.geometry['location'].lng());
 
             });
         }
-        function selectCountry(countryShortName){
+        function selectCountry(countryShortName,selectId){
+            var path = '';
+            if(selectId == 'country'){
+                 path = "{{ route('country.fetch') }}"
+            } else if(selectId == 'state'){
+                path = "{{ route('selectState.fetch') }}"
+            } else {
+                path = "{{ route('selectCity.fetch') }}"
+            }
 
-            $("#country").html('');
+
+            $("#"+selectId).html('');
             $.ajax({
-                url: "{{ route('country.fetch') }}",
+                url:  path,
                 type: "GET",
                 data: {
-                    sortname: "'"+countryShortName+"'",
+                    sortname: countryShortName,
                 },
                 dataType: 'json',
                 success: function (result) {
-                    $('#country').html('<option value="">Select Country</option>');
+                    $('#'+selectId).html('<option value="">Select  </option>');
                     $.each(result.countries, function (key, value) {
-                        $("#country").append('<option value="' + value
+                        $("#"+selectId).append('<option value="' + value
                             .id + '">' + value.name + '</option>');
+                        $('#'+selectId).val(value.id).trigger('change');
                     });
-                    $('#country').select2('open');
                 }
             });
         }
+
+
          $(document).ready(function() {
 
          $(".removePdf").click(function(){
