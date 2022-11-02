@@ -39,11 +39,11 @@
                         </a>
                     </div>
                 @endforeach
-                    <div class="col-lg-12">
+                    <!-- <div class="col-lg-12">
                         <div class="text-center">
                             <button class="cmn-btn load-more-btn">LOAD MORE</button>
                         </div>
-                    </div>
+                    </div> -->
             @endif
 
 
