@@ -27,7 +27,7 @@ class CountryStateCityController extends Controller
     public function fetchCountry(Request $request)
     {
         $data['countries'] = Country::where("sortname",$request->sortname)->get(["name", "id"]);
-       
+
         return response()->json($data);
     }
 }

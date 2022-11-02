@@ -176,21 +176,21 @@
             });
 
 
-            $('#create_button').on('click', function(event) {
+            $("#amenityForm").validate({
+                ignore: '',
+                rules: {
+                    "amenity_name" :"required",
+                    "amenity_detail" : "required",
+                    "amenity_image":"required",
+                },
+                messages: {
+                    "amenity_name" : "Please enter amenity name",
+                    "amenity_detail" :  "Please enter amenity detail",
+                    "amenity_image": "Please select image"
+                }
+            });
 
-                $("#amenityForm").validate({
-                    ignore: '',
-                    rules: {
-                        "amenity_name" :"required",
-                        "amenity_detail" : "required",
-                        "amenity_image":"required",
-                    },
-                    messages: {
-                        "amenity_name" : "Please enter amenity name",
-                        "amenity_detail" :  "Please enter amenity detail",
-                        "amenity_image": "Please select image"
-                    }
-                });
+            $('#create_button').on('click', function(event) {
 
                 // prevent default submit action
                 event.preventDefault();
