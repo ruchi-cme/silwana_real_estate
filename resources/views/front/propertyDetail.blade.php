@@ -234,17 +234,17 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="text" required placeholder="Last Name" name="last_name" value="{{ Auth::guard('front')->user()->lasttname }}" class="form-control">
+                                    <input type="text" required placeholder="Last Name" name="last_name" value="{{  (Auth::guard('front')->check()) ?  Auth::guard('front')->user()->lasttname :'' }}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Mobile Number" name="phone" value="{{ Auth::guard('front')->user()->phone }}" class="form-control">
+                                    <input type="text" placeholder="Mobile Number" name="phone" value="{{  (Auth::guard('front')->check()) ? Auth::guard('front')->user()->phone :'' }}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Email" name="email" value="{{ Auth::guard('front')->user()->email }}" class="form-control">
+                                    <input type="text" placeholder="Email" name="email" value="{{  (Auth::guard('front')->check()) ?  Auth::guard('front')->user()->email :'' }}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
