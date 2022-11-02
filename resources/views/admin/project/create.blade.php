@@ -174,7 +174,7 @@
                                             @endforeach
                                         @endif
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
-
+                                    <label>Note : Upload only PDF file </label>
                                 </div>
                             </div>
                             <!--end::Row-->
