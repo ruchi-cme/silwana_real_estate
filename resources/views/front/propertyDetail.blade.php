@@ -38,7 +38,7 @@
                                         <div class="property-detail-main-wrap">
                                             <img src="{{ asset('images/project/images/').'/'.$selectedImage[$i]['title'] }}" alt="">
                                             <div class="property-detail-more-detail"  data-bs-toggle="modal" data-bs-target="#photoModal">
-                                                <a href="#" class="more-photos">More Photos</a>
+                                                <a href="javascript:void(0)" class="more-photos">More Photos</a>
                                             </div>
                                         </div>
                                     </div>
@@ -302,21 +302,17 @@
                 </div>
                 <div class="bg-transparent">
                     <div class="owl-carousel owl-theme media-image-slider">
-                        <div class="item">
-                            <div class="media-image-slider-wrap">
-                                <img src="http://127.0.0.1:8000/images/project/images/20221020172759.Screenshotfrom2022-10-0612-02-09.png" alt="social-media1" />
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="media-image-slider-wrap">
-                                <img src="http://127.0.0.1:8000/images/project/images/20221020172759.Screenshotfrom2022-10-0612-02-09.png" alt="social-media2" />
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="media-image-slider-wrap">
-                                <img src="http://127.0.0.1:8000/images/project/images/20221020172759.Screenshotfrom2022-10-0612-02-09.png" alt="social-media3" />
-                            </div>
-                        </div>
+                        @if(!empty($selectedImage))
+                            @for($i=0; count($selectedImage) > $i; $i++)
+                                <div class="item">
+                                    <div class="media-image-slider-wrap">
+                                        <img src="{{ asset('images/project/images/').'/'.$selectedImage[$i]['title'] }}"/>
+                                    </div>
+                                </div>
+                            @endfor
+                        @endif
+
+
                     </div>
                 </div>
             </div>
