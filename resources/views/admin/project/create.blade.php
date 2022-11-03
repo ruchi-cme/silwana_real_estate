@@ -292,6 +292,7 @@
                                     <input type="hidden" name="longitude" value="{{ !empty( $editData->longitude) ? $editData->longitude : '' }}" id="longitude">
                                     <input type="hidden" name="countryid" value="" id="countryid">
                                     <input type="hidden" name="stateid" value="" id="stateid">
+                                    <input type="hidden" name="cityid" value="" id="cityid">
                                     <!--begin::Col-->
                                     <!--begin::Actions-->
                                     <div class="mb-0">
@@ -408,9 +409,17 @@
                         }
                     }
                 }
-                selectCountry(countryShortName,'country');
-                selectCountry(stateShortName,'state' );
-                selectCountry(cityShortName,'city');
+                setTimeout(function () {
+                    selectCountry(countryShortName,'country');
+                }, 500);
+                setTimeout(function () {
+                    selectCountry(stateShortName,'state' );
+                }, 1200);
+                setTimeout(function () {
+                    selectCountry(cityShortName,'city');
+                }, 2000);
+
+
                 $('#latitude').val(place.geometry['location'].lat());
                 $('#longitude').val(place.geometry['location'].lng());
 
@@ -423,10 +432,11 @@
                  path = "{{ route('country.fetch') }}"
             } else if(selectId == 'state'){
                 path = "{{ route('selectState.fetch') }}"
+                 var countryid = $("#countryid").val();
             } else {
                 path = "{{ route('selectCity.fetch') }}"
+                var stateid = $("#stateid").val();
             }
-
 
             $("#"+selectId).html('');
             $.ajax({
@@ -434,24 +444,29 @@
                 type: "GET",
                 data: {
                     sortname: countryShortName,
-                    countryid:  $("#countryid").val(),
+                    countryid:  countryid,
+                    state_id : stateid
                 },
                 dataType: 'json',
-                success: function (chooseCountryIdchooseCountryId) {
+                success: function (result) {
                     $('#'+selectId).html('<option value="">Select  </option>');
                     $.each(result.countries, function (key, value) {
-                        if(selectId == 'country'){
-                            $("#countryid").val( value.id);
 
-
-                        } else if(selectId == 'state'){
-                            $("#stateid").val( value.id);
+                        if(selectId == 'country') {
+                            $("#countryid").val( result.chooseCountryId);
+                        } else if(selectId == 'state') {
+                            $("#stateid").val( result.chooseStateId);
+                        }
+                        else{
+                            $("#cityid").val( result.chooseCityId);
                         }
 
                         $("#"+selectId).append('<option value="' + value.id + '">' + value.name + '</option>');
+
                         $('#'+selectId).val(value.id).trigger('change');
-
-
+                        $("#country").val($("#countryid").val());
+                        $("#state").val($("#stateid").val());
+                        $("#city").val($("#cityid").val());
                     });
                 }
             });
@@ -473,7 +488,6 @@
                          var fileReader = new FileReader();
                          fileReader.onload = (function(e) {
                              var file = e.target;
-                             console.log(f );
 
                              $("<span class=\"pip\">" +
                                  "<img height='50' width='50' class=\"imageThumb\" src=\"" + pdfthumb + "\" title=\"" + f.name + "\"/>" +
