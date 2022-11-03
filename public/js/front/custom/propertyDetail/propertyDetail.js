@@ -26,6 +26,9 @@ $(document).ready(function() {
             },
             unit_id: {
                 required: true,
+            },
+            booking_details : {
+                required: true,
             }
         }
     })
@@ -126,6 +129,14 @@ $(document).ready(function() {
 
             }
         });
+    });
+
+    $('#downloadBrochure12').on('click', function () {
+
+        if ($(this).attr('href').length < 1 || $(this).attr('href') == 'javascript:void(0)'){
+             $(this).attr('href','javascript:void(0)');
+            alert('No Pdf of this project!');
+        }
     });
 
     $('#downloadBrochure').on('click', function () {

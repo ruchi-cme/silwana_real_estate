@@ -1,6 +1,15 @@
 <x-base>
     <x-banner title="Property Details" page="Property Details"></x-banner>
+    @php  $imagePDFile = '';  @endphp
+        @if($pdf)
+            @php
+       $imagePDFile  =  !empty($pdf['title'] ) ? asset('images/project/pdf/').'/'.$pdf['title'] : ''
+
+            @endphp
+
+    @endif
     @if ($projectList)
+
         <!-- property-detail-main -->
         <section class="property-detail-main">
             <div class="container">
@@ -18,7 +27,7 @@
                         <div class="top-categories property-price border-0">
                             <ul>
                                 <li>
-                                    <a id="downloadBrochure1" proName="{{ $projectList['project_name'] }}"  class="cmn-btn">DOWNLOAD BROCHURE</a>
+                                    <a id="downloadBrochure12"  {{ !empty($imagePDFile) ? 'download' :'' }}  href="{{ $imagePDFile }}" proName="{{ $projectList['project_name'] }}"  class="cmn-btn">DOWNLOAD BROCHURE</a>
 
                                 </li>
                                 <li>
@@ -36,7 +45,7 @@
                         @for($i=0; count($selectedImage) > $i; $i++)
 
                             @if($selectedImage[$i]['type'] == 1)
-                                    @php $files[] = $selectedImage[$i]['title'];@endphp
+                                    @php $files[] = $selectedImage[$i]['title']; @endphp
                                        @endif
 
                                 @if($i <= 2)
@@ -56,7 +65,7 @@
                                             <div class="property-detail-main-wrap-big video-wrapper brochure-wrap">
                                                 <img src="{{ asset('images/project/pdf/').'/'.$selectedImage[$i]['title'] }}" alt="architecture" />
                                                 <input type="hidden"  id="downloadUrl" name="downloadUrl" value="{{ !empty($selectedImage[$i]['title'] ) ? asset('images/project/pdf/').'/'.$selectedImage[$i]['title'] : ''}}">
-                                                <button  id="downloadBrochure1" proName="{{ $projectList['project_name'] }}" class="cmn-btn" >DOWNLOAD BROCHURE</button>
+                                                <a  id="downloadBrochure12"  download href="{{ $imagePDFile }}" proName="{{ $projectList['project_name'] }}" class="cmn-btn" >DOWNLOAD BROCHURE</a>
                                             </div>
                                         </div>
 
