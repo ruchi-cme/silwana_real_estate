@@ -165,7 +165,7 @@
                                                 @if ($image['type'] == 1)
                                                     <span class="pip">
                                                          <input type="hidden" name="edit_project_pdf[]" value="{{ !empty( $image['title'] ) ? $image['title']  : '' }}" id="edit_project_pdf">
-                                                        <img height='50' width='50' class="imageThumb" src="{{ asset('images/project/pdf').'/'.$image['title'] }}" title=""/>
+                                                        <img height='50' width='50' class="imageThumb" src="{{ asset('images/front/pdfThumbnail.png')}}" title="{{ !empty( $image['title'] ) ? $image['title']  : '' }}"/>
                                                 <br/><span class="removePdf"><i class="fa fa-trash"></i></span>
                                                 </span>
                                                 @endif
@@ -355,7 +355,7 @@
     <script type="text/javascript"  src="https://maps.google.com/maps/api/js?key=AIzaSyCaGutB-33lg0jkFrBPKeQnusQSv2I2hyA&sensor=false&libraries=places"></script>
 
     <script type="text/javascript">
-
+    var pdfthumb = "{{ asset('images/front/pdfThumbnail.png')}}";
         $(document).ready(function () {
             $("#latitudeArea").addClass("d-none");
             $("#longtitudeArea").addClass("d-none");
@@ -417,7 +417,7 @@
             });
         }
         function selectCountry(countryShortName,selectId   ){
-         
+
             var path = '';
             if(selectId == 'country'){
                  path = "{{ route('country.fetch') }}"
@@ -434,15 +434,21 @@
                 type: "GET",
                 data: {
                     sortname: countryShortName,
+                    countryid:  $("#countryid").val(),
                 },
                 dataType: 'json',
                 success: function (result) {
                     $('#'+selectId).html('<option value="">Select  </option>');
                     $.each(result.countries, function (key, value) {
-                        $("#"+selectId).append('<option value="' + value
-                            .id + '">' + value.name + '</option>');
+                        if(selectId == 'country'){
+                            $("#countryid").val( value.id);
+                        } else if(selectId == 'state'){
+                            $("#stateid").val( value.id);
+                        }
 
+                        $("#"+selectId).append('<option value="' + value.id + '">' + value.name + '</option>');
                         $('#'+selectId).val(value.id).trigger('change');
+
 
                     });
                 }
@@ -465,8 +471,10 @@
                          var fileReader = new FileReader();
                          fileReader.onload = (function(e) {
                              var file = e.target;
+                             console.log(f );
+
                              $("<span class=\"pip\">" +
-                                 "<img height='50' width='50' class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+                                 "<img height='50' width='50' class=\"imageThumb\" src=\"" + pdfthumb + "\" title=\"" + f.name + "\"/>" +
                                  "<br/><span class=\"remove\"><i class=\"fa fa-trash\"></i></span>" +
                                  "</span>").insertAfter(".pdf-preview-div");
                              $(".remove").click(function(){

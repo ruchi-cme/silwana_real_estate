@@ -81,6 +81,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'project_name'   => 'required',
             'category_id' => 'required',
@@ -157,8 +158,6 @@ class ProjectController extends Controller
             }
             ProjectImage::insert($insert);
         }
-
-
 
         return redirect()->route('admin.project')->with('inserted','project Created👍');
     }
