@@ -2,7 +2,7 @@
 
 use App\Models\{Amenities, Category, Project, Block, Silwana,SilwanaDetailMapping,ContactUs};
 use App\Models\{FloorUnitMapping, ProjectImage, ProjUnitImage, FloorDetail,Proj_ameni_mapping};
-use App\Models\{Block_name_mapping, Booking, Project_address_detail, BlockFloorMapping};
+use App\Models\{Block_name_mapping, Booking, Project_address_detail, BlockFloorMapping,Builder};
 use Illuminate\Support\Facades\DB;
 
 if(!function_exists("getCategory")){
@@ -498,5 +498,17 @@ if(!function_exists("getpropertyDetailsByProject")){
             ->get()->first();
 
         return $projectData;
+    }
+}
+if(!function_exists("getBuilderDetail")){
+
+    function getBuilderDetail() {
+
+        $builderDetail = Builder::select([ 'builder_id','phone_number','builder_email','company_name'])
+            ->where('deleted',0)
+            ->where('status' , 1)
+             ->get()->first();
+        return $builderDetail;
+
     }
 }

@@ -18,7 +18,7 @@
                         <div class="top-categories property-price border-0">
                             <ul>
                                 <li>
-                                    <a  id="downloadBrochure"  proName="{{ $projectList['project_name'] }}" class="cmn-btn">DOWNLOAD BROCHURE</a>
+                                    <a id="downloadBrochure1" proName="{{ $projectList['project_name'] }}"  class="cmn-btn">DOWNLOAD BROCHURE</a>
 
                                 </li>
                                 <li>
@@ -32,7 +32,13 @@
                     <div class="row">
                         @if(!empty($selectedImage))
 
-                            @for($i=0; count($selectedImage) > $i; $i++)
+                            @php $files = []; @endphp
+                        @for($i=0; count($selectedImage) > $i; $i++)
+
+                            @if($selectedImage[$i]['type'] == 1)
+                                    @php $files[] = $selectedImage[$i]['title'];@endphp
+                                       @endif
+
                                 @if($i <= 2)
                                     <div class="col-xl-4 col-lg-6">
                                         <div class="property-detail-main-wrap">
@@ -43,11 +49,14 @@
                                         </div>
                                     </div>
                                 @elseif($selectedImage[$i]['type'] == 1 )
-                                        <div class="col-lg-8">
+
+                                    <input type="hidden" id="pdfFile" name="pdfFile" value=" ">
+
+                                    <div class="col-lg-8">
                                             <div class="property-detail-main-wrap-big video-wrapper brochure-wrap">
                                                 <img src="{{ asset('images/project/pdf/').'/'.$selectedImage[$i]['title'] }}" alt="architecture" />
-                                                <input type="hidden" id="downloadUrl" name="downloadUrl" value="{{ !empty($selectedImage[$i]['title'] ) ? asset('images/project/pdf/').'/'.$selectedImage[$i]['title'] : ''}}">
-                                                <button  id="downloadBrochure" proName="{{ $projectList['project_name'] }}" class="cmn-btn">DOWNLOAD BROCHURE</button>
+                                                <input type="hidden"  id="downloadUrl" name="downloadUrl" value="{{ !empty($selectedImage[$i]['title'] ) ? asset('images/project/pdf/').'/'.$selectedImage[$i]['title'] : ''}}">
+                                                <button  id="downloadBrochure1" proName="{{ $projectList['project_name'] }}" class="cmn-btn" >DOWNLOAD BROCHURE</button>
                                             </div>
                                         </div>
 
@@ -68,7 +77,12 @@
 
                                 @endif
                             @endfor
+
+                            @php  $pdfFiles =   implode(",",$files) ; @endphp
+                            <input type="hidden"  id="files" name="files" value="{{ $pdfFiles }}">
+
                         @endif
+
                     </div>
                     </div>
                 </div>
@@ -220,22 +234,22 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="text" required placeholder="Last Name" name="last_name" value="{{  (Auth::guard('front')->check()) ?  Auth::guard('front')->user()->lasttname :'' }}" class="form-control">
+                                    <input type="text" required placeholder="Last Name" name="last_name" value="{{  (Auth::guard('front')->check()) ?  Auth::guard('front')->user()->lastname :'' }}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Mobile Number" name="phone" value="{{  (Auth::guard('front')->check()) ? Auth::guard('front')->user()->phone :'' }}" class="form-control">
+                                    <input type="text" required placeholder="Mobile Number" name="phone" value="{{  (Auth::guard('front')->check()) ? Auth::guard('front')->user()->phone :'' }}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Email" name="email" value="{{  (Auth::guard('front')->check()) ?  Auth::guard('front')->user()->email :'' }}" class="form-control">
+                                    <input type="text" required placeholder="Email" name="email" value="{{  (Auth::guard('front')->check()) ?  Auth::guard('front')->user()->email :'' }}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <select name="payment_type" id="" class="form-control">
+                                    <select required name="payment_type" id="" class="form-control">
                                         <option value="">Booking Type</option>
                                         @foreach ($paymentType as $key => $val)
                                             <option value="{{ $key }}" >{{ $val }}</option>
@@ -245,7 +259,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <select name="booking_type" id="booking_type" class="form-control">
+                                    <select required name="booking_type" id="booking_type" class="form-control">
                                         <option value="">Payment Type</option>
                                         @foreach ($bookingType as $key => $val)
                                             <option value="{{ $key }}"  >{{ $val }}</option>
@@ -256,7 +270,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <textarea  id="booking_details" cols="30" rows="3" name="booking_details" class="form-control">Booking Details...</textarea>
+                                    <textarea  id="booking_details" cols="30" rows="3" name="booking_details" class="form-control" placeholder="Booking Details"></textarea>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -278,7 +292,7 @@
                                     <ul>
                                         <li>
                                             <input type="hidden" name="project_id" id="project_id" value="{{ $projectList['project_id'] }}">
-                                            <button class="cmn-btn bookNow">Book Now</button>
+                                            <button  id="create_button" class="cmn-btn bookNows">Book Now</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -320,6 +334,11 @@
     </div>
 
 @section('scripts')
+        <script src="{{asset('js/front')}}/script.js"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js" type="text/javascript"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
+        <script src="{{asset('js/front')}}/jszip.js"></script>
 
         <script   src="{{ asset('js/front/custom/propertyDetail') }}/propertyDetail.js"> </script>
     @endsection

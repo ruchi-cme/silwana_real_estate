@@ -64,7 +64,7 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="form-group">
-                                                <textarea name="message" id="message" cols="30" rows="6" class="form-control inquiryText">Message</textarea>
+                                                <textarea name="message" id="message" cols="30" rows="6" class="form-control inquiryText" placeholder="Message"></textarea>
                                                 <span class="text-danger" id="messageErrorMsg"></span>
                                             </div>
                                         </div>

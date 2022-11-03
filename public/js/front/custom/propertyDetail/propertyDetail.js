@@ -1,23 +1,37 @@
 $(document).ready(function() {
 
-
     $("#bookingForm").validate({
-        first_name : 'required',
-        last_name  : 'required',
-        phone     : 'required',
-        block_id : 'required',
-        floor_id : 'required',
-        unit_id : 'required',
+        ignore: '',
+        rules: {
+            email: {
+                required: true,
+                email: true,//add an email rule that will ensure the value entered is valid email id.
+                maxlength: 255,
+            },
+            first_name: {
+                required: true,
+            },
+            phone: {
+                required: true,
+                digits: true
+            },
+            last_name: {
+                required: true,
+            },
+            block_id: {
+                required: true,
+            },
+            floor_id: {
+                required: true,
+            },
+            unit_id: {
+                required: true,
+            }
+        }
+    })
 
-        email: {
-            required: true,
-            email: true,//add an email rule that will ensure the value entered is valid email id.
-            maxlength: 255,
-        },
-    });
     $(".bookNow").click(function(){
         var user_id =  $(this).attr('user_id');
-
 
         if(user_id != '')
         {
@@ -30,6 +44,22 @@ $(document).ready(function() {
             $(this).attr('data-bs-target', '#login-modal');
         }
 
+    });
+
+    $('#create_button').on('click', function(event) {
+
+        // adding rules for inputs with class 'comment'
+
+        // prevent default submit action
+        event.preventDefault();
+
+        // test if form is valid
+        if($('#bookingForm').valid()  ) { console.log(2);
+            $( '#bookingForm' ).submit();
+        } else { console.log(3);
+            console.log("does not validate");
+            return false;
+        }
     });
 
     $('#block_name').change(function ()  {
@@ -121,6 +151,19 @@ $(document).ready(function() {
             }
         });
     });
+    $('#downloadBrochure1').on('click', function () {
 
+        var pdfFiles =  $('#files').val();
+        console.log(pdfFiles);
+        var proName = $(this).attr('proName');
+        var zip = new JSZip();
+        zip.file(pdfFiles);
 
+        zip.generateAsync({type:"blob"})
+            .then(function(content) {
+                // see FileSaver.js
+                saveAs(content, proName+".zip");
+            });
+
+    });
 });

@@ -437,11 +437,13 @@
                     countryid:  $("#countryid").val(),
                 },
                 dataType: 'json',
-                success: function (result) {
+                success: function (chooseCountryIdchooseCountryId) {
                     $('#'+selectId).html('<option value="">Select  </option>');
                     $.each(result.countries, function (key, value) {
                         if(selectId == 'country'){
                             $("#countryid").val( value.id);
+
+
                         } else if(selectId == 'state'){
                             $("#stateid").val( value.id);
                         }
