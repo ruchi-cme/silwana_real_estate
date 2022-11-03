@@ -37,7 +37,7 @@
                                     <div class="col-xl-4 col-lg-6">
                                         <div class="property-detail-main-wrap">
                                             <img src="{{ asset('images/project/images/').'/'.$selectedImage[$i]['title'] }}" alt="">
-                                            <div class="property-detail-more-detail">
+                                            <div class="property-detail-more-detail"  data-bs-toggle="modal" data-bs-target="#photoModal">
                                                 <a href="#" class="more-photos">More Photos</a>
                                             </div>
                                         </div>
@@ -291,6 +291,37 @@
         </div>
     </div>
 
+    <!-- The Photo Modal -->
+    <div class="modal media-image-slider-main" id="photoModal">
+        <div class="modal-dialog">
+
+            <div class="modal-content bg-transparent">
+                <div class="modal-header">
+                    <!-- <h4 class="modal-title">Modal Heading</h4> -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="bg-transparent">
+                    <div class="owl-carousel owl-theme media-image-slider">
+                        <div class="item">
+                            <div class="media-image-slider-wrap">
+                                <img src="http://127.0.0.1:8000/images/project/images/20221020172759.Screenshotfrom2022-10-0612-02-09.png" alt="social-media1" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="media-image-slider-wrap">
+                                <img src="http://127.0.0.1:8000/images/project/images/20221020172759.Screenshotfrom2022-10-0612-02-09.png" alt="social-media2" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="media-image-slider-wrap">
+                                <img src="http://127.0.0.1:8000/images/project/images/20221020172759.Screenshotfrom2022-10-0612-02-09.png" alt="social-media3" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @section('scripts')
 

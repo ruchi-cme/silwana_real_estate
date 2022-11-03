@@ -1,5 +1,5 @@
 .banner {
-    background: url('/images/front/home/banner.png');
+    background: url('../images/home/banner.png');
     background-size: cover;
     display: flex;
     align-items: center;
@@ -767,11 +767,11 @@
     box-shadow: 0px 11px 14px rgba(0, 0, 0, 0.17);
 }
 
-.banner-form form .select-title {
+form .select-title {
     position: relative;
 }
 
-.banner-form form .select-title::after {
+form .select-title::after {
     content: '';
     width: 15px;
     height: 15px;

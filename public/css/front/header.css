@@ -518,6 +518,15 @@ responsive css
     .estimate-wrap {
         margin: 0 0 20px;
     } 
+
+    .navbar-collapse .navbar-nav .nav-link {
+        padding: 0;
+    }
+
+    .estimate-wrap .dropdown .dropdown-menu {
+        left: 0;
+        right: inherit;
+    }
 }
 
 
