@@ -491,7 +491,7 @@ if(!function_exists("getpropertyDetailsByProject")){
 
     function getpropertyDetailsByProject($project_id) {
 
-        $select = [ DB::raw('max(floor_unit_mapping.booking_price) as max,   min(floor_unit_mapping.booking_price) as min')];
+        $select = [ DB::raw('max(floor_unit_mapping.total_price) as max,   min(floor_unit_mapping.total_price) as min')];
         $projectData  = FloorDetail::leftJoin('floor_unit_mapping', 'floor_unit_mapping.floor_detail_id', '=', 'floor_details.floor_detail_id')
             ->select($select)
             ->where('floor_details.project_id',$project_id)
