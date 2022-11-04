@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Amenities;
+use App\Models\ourTeam;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class AmenitiesController extends Controller
+class OurTeamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,24 +21,24 @@ class AmenitiesController extends Controller
             /* Current Login User ID */
             $userID = auth()->user()->id;
 
-            $dbData = Amenities::select([ 'amenities_id','amenity_name','amenity_detail','amenity_image','status'])
+            $dbData = ourTeam::select([ 'ourteam_id','name','detail','image','status' ])
                 ->where('deleted',0)
-                ->orderBy("amenities_id",'DESC')
+                ->orderBy("ourteam_id",'DESC')
                 ->get();
             $data = $dbData->map(function ($data){
 
                 return [
-                    'id'             => $data->amenities_id,
-                    'amenity_name' => $data->amenity_name,
-                    'amenity_detail' => $data->amenity_detail,
-                    'amenity_image'  => asset('images/amenities')."/".$data->amenity_image,
+                    'id'             => $data->ourteam_id,
+                    'name'           => $data->name,
+                    'detail'         => $data->detail,
+                    'image'          => asset('images/ourTeam')."/".$data->image,
                     'status'         => !empty($data->status) && ($data->status == 1) ? 'Active' : 'Inctive',
                     'created_date'   => $data->created_date
                 ];
             });
             return DataTables::of($data)->toJson();
         }
-        return view('admin.amenities.index');
+        return view('admin.ourTeam.index');
     }
 
     /**
@@ -46,9 +46,9 @@ class AmenitiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        return view('admin.amenities.create' );
+        return view('admin.ourTeam.create' );
     }
 
     /**
@@ -60,108 +60,98 @@ class AmenitiesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'amenity_name'   => 'required',
-            'amenity_detail' => 'required',
-            //'page_image' => 'required|page_image|mimes:jpeg,png,jpg',
+            'name'   => 'required',
+            'detail' => 'required',
         ]);
-        /* Insert Amenities data */
+        /* Insert FAQ data */
         $userID = auth()->user()->id;
         $Image  = null;
 
-        if ($image = $request->file('amenity_image')) {
-            $destinationPath = public_path('images/amenities');
+        if ($image = $request->file('image')) {
+            $destinationPath = public_path('images/ourTeam');
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
         }
-        $page  = [
-            'amenity_name'   => $request->amenity_name,
-            'amenity_detail' => $request->amenity_detail,
-            'amenity_image'  => $Image,
-            'status'         => 1,
-            'created_by'     => $userID
+        $data  = [
+            'name'        => $request->name,
+            'detail'      => $request->detail,
+            'image'       => $Image,
+            'status'      => 1,
+            'created_by'  => $userID
         ];
-        $silwana_id = Amenities::create($page);
-        return redirect()->route('admin.amenities')->with('inserted','Amenities Created👍');
+        ourTeam::create($data);
+        return redirect()->route('admin.ourTeam')->with('inserted','Our Team Created👍');
     }
-
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\amenities  $request
+     * @param  \App\Models\ourTeam  $faq
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request)
     {
-        $editData = Amenities::find($request->id);
-        return view('admin.amenities.create' ,compact('editData'));
+        $editData = ourTeam::find($request->id);
+
+        return view('admin.ourTeam.create' ,compact('editData'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\amenities  $amenities
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
-
-        $updateData  = Amenities::find( $request->amenities_id);
+        $updateData  = ourTeam::find( $request->ourteam_id);
         $userID      = auth()->user()->id;
         /* Insert Page data */
         $input = $request->all();
 
-        $image = $request->file('amenity_image');
-        $editAmenityImage = $request->edit_amenity_image;
+        $image = $request->file('image');
+        $editImage = $request->edit_image;
         if (!empty($image) ) {
 
-            $destinationPath = public_path('images/amenities');
+            $destinationPath = public_path('images/ourTeam');
 
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
-            if (!empty($editAmenityImage)) {
-                @unlink( public_path('images/amenities/') . $editAmenityImage);
+            if (!empty($editImage)) {
+                @unlink( public_path('images/ourTeam/') . $editImage);
             }
         }
-        elseif (!empty($editAmenityImage)) {
-            $Image = $editAmenityImage;
+        elseif (!empty($editImage)) {
+            $Image = $editImage;
         }
         else
-          {
-              $Image = null;
+        {
+            $Image = null;
         }
         $updateData->update([
-            'amenity_name'  => $request->amenity_name,
-            'amenity_detail'=> $request->amenity_detail,
-            'amenity_image' => $Image,
+            'name'  => $request->name,
+            'detail'=> $request->detail,
+            'image' => $Image,
             'modified_by'   =>  $userID,
             'modified_date' => now()
         ]);
-        return redirect()->route('admin.amenities')->with('updated','Amenities Updated 👍');
+        return redirect()->route('admin.ourTeam')->with('updated','Our Team Updated 👍');
     }
-
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\amenities  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        /*$data = Amenities::find($id);
-        if ( !empty($data->amenity_image) ){
-            unlink("images/amenities/".$data->amenity_image);
-        }
-        $data->delete();*/
-        $data = Amenities::find($id);
+        $data = ourTeam::find($id);
         $userID   = auth()->user()->id;
         $data->update([
             'deleted'  => 1,  //Deleted
             'deleted_date'  => now(),
             'deleted_by'    =>  $userID,
         ]);
-        return redirect()->route('admin.amenities')->with('success','Amenities Deleted');
+        return redirect()->route('admin.ourTeam')->with('success','Our Team Deleted');
     }
 
     /**
@@ -172,7 +162,7 @@ class AmenitiesController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $updateData = Amenities::find($request->id);
+        $updateData = ourTeam::find($request->id);
         $userID   = auth()->user()->id;
         $status   =  ( !empty($updateData->status) && $updateData->status == 1 ) ?  2 :  1 ;
 
@@ -182,7 +172,7 @@ class AmenitiesController extends Controller
             'modified_date' => now()
         ]);
 
-        return redirect()->route('admin.amenities')->with('success','Amenities Status Changed');
+        return redirect()->route('admin.ourTeam')->with('success','Our Team Status Changed');
     }
 
 }

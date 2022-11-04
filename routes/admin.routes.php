@@ -49,8 +49,6 @@ Route::name('category.store')->post('/category/store', 'App\Http\Controllers\Adm
  Route::name('category.delete')->get('/category/delete/{id}', 'App\Http\Controllers\Admin\CategoryController@delete')->middleware(['permission:category-delete']);
 Route::name('category.delete')->get('/category/changeStatus/{id}', 'App\Http\Controllers\Admin\CategoryController@changeStatus')->middleware(['permission:category-changeStatus']);
 
-
-
 // About Silwana
 Route::name('silwana')->get('/silwana', 'App\Http\Controllers\Admin\SilwanaController@index')->middleware(['permission:silwana-view']);
 Route::name('silwana.create')->get('/silwana/create', 'App\Http\Controllers\Admin\SilwanaController@create')->middleware(['permission:silwana-create']);
@@ -131,5 +129,23 @@ Route::name('contactus.store')->post('/contactus/store', 'App\Http\Controllers\A
 Route::name('contactus.update')->post('/contactus/update', 'App\Http\Controllers\Admin\ContactUsController@update')->middleware(['permission:contactus-update']);
 Route::name('contactus.delete')->get('/contactus/delete/{id}', 'App\Http\Controllers\Admin\ContactUsController@destroy')->middleware(['permission:contactus-delete']);
 Route::name('contactus.delete')->get('/contactus/changeStatus/{id}', 'App\Http\Controllers\Admin\ContactUsController@changeStatus')->middleware(['permission:contactus-changeStatus']);
+
+// FAQ cms
+Route::name('faq')->get('/faq', 'App\Http\Controllers\Admin\FaqController@index')->middleware(['permission:faq-view']);
+Route::name('faq.create')->get('/faq/create', 'App\Http\Controllers\Admin\FaqController@create')->middleware(['permission:faq-create']);
+Route::name('faq.create/{id}')->get('/faq/edit/{id}', 'App\Http\Controllers\Admin\FaqController@edit')->middleware(['permission:faq-create']);
+Route::name('faq.store')->post('/faq/store', 'App\Http\Controllers\Admin\FaqController@store')->middleware(['permission:faq-create']);
+Route::name('faq.update')->post('/faq/update', 'App\Http\Controllers\Admin\FaqController@update')->middleware(['permission:faq-update']);
+Route::name('faq.delete')->get('/faq/delete/{id}', 'App\Http\Controllers\Admin\FaqController@destroy')->middleware(['permission:faq-delete']);
+Route::name('faq.delete')->get('/faq/changeStatus/{id}', 'App\Http\Controllers\Admin\FaqController@changeStatus')->middleware(['permission:faq-changeStatus']);
+
+// OUR TEAM cms
+Route::name('ourTeam')->get('/ourTeam', 'App\Http\Controllers\Admin\OurTeamController@index')->middleware(['permission:ourTeam-view']);
+Route::name('ourTeam.create')->get('/ourTeam/create', 'App\Http\Controllers\Admin\OurTeamController@create')->middleware(['permission:ourTeam-create']);
+Route::name('ourTeam.create/{id}')->get('/ourTeam/edit/{id}', 'App\Http\Controllers\Admin\OurTeamController@edit')->middleware(['permission:ourTeam-create']);
+Route::name('ourTeam.store')->post('/ourTeam/store', 'App\Http\Controllers\Admin\OurTeamController@store')->middleware(['permission:ourTeam-create']);
+Route::name('ourTeam.update')->post('/ourTeam/update', 'App\Http\Controllers\Admin\OurTeamController@update')->middleware(['permission:ourTeam-update']);
+Route::name('ourTeam.delete')->get('/ourTeam/delete/{id}', 'App\Http\Controllers\Admin\OurTeamController@destroy')->middleware(['permission:ourTeam-delete']);
+Route::name('ourTeam.delete')->get('/ourTeam/changeStatus/{id}', 'App\Http\Controllers\Admin\OurTeamController@changeStatus')->middleware(['permission:ourTeam-changeStatus']);
 
 ?>

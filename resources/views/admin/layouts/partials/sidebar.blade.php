@@ -16,6 +16,41 @@
                     </a>
                 </div>
 
+                <div data-kt-menu-trigger="click" class="menu-item {{ Route::is('admin.faq*') || Route::is('admin.ourTeam*')  ? 'show' : '' }} menu-accordion mb-1">
+                    <span class="menu-link {{ Route::is('admin.faq*') || Route::is('admin.ourTeam*') ? 'active' : '' }}">
+                        <span class="menu-icon">
+                            <i class="fa fa-project-diagram"></i>
+                        </span>
+                        <span class="menu-title">CMS</span>
+                        <span class="menu-arrow"></span>
+                    </span>
+
+                    <div class="menu-sub menu-sub-accordion">
+                        @can('faq-view')
+                            <div class="menu-item {{ Route::is('admin.faq*') ? 'show' : '' }}">
+                                <a class="menu-link" href="{{ route('admin.faq') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                    <span class="menu-title">FAQ</span>
+                                </a>
+                            </div>
+                        @endcan
+                    </div>
+                    <div class="menu-sub menu-sub-accordion">
+                        @can('ourTeam-view')
+                            <div class="menu-item {{ Route::is('admin.ourTeam*') ? 'show' : '' }}">
+                                <a class="menu-link" href="{{ route('admin.ourTeam') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                    <span class="menu-title">Our Team</span>
+                                </a>
+                            </div>
+                        @endcan
+                    </div>
+                </div>
+
                 <div data-kt-menu-trigger="click" class="menu-item {{ Route::is('admin.category*') ||  Route::is('admin.amenities*') ? 'show' : '' }} menu-accordion mb-1">
                     <span class="menu-link {{ Route::is('admin.category*') ||  Route::is('admin.amenities*') ? 'active' : '' }}">
                         <span class="menu-icon">
