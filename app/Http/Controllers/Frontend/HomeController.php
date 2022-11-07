@@ -18,9 +18,9 @@ class HomeController extends Controller
         $aboutus    = getSilwanaPages('about_us');
         $investment = getSilwanaPages('investment');
         $ourProject = getSilwanaPages('our_project');
-        $ourProjectList = getProjectList('' ,3,'');
+        $ourProjectList = getProjectList('' ,array('3'),'');
         $featureProject = getSilwanaPages('feature_project');
-        $featureProjectList = getProjectList('' ,2,'');
+        $featureProjectList = getProjectList('' ,array('2'),'');
         $amenities  = getAmenities();
         $categories = getCategory();
 

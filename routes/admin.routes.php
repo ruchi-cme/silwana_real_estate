@@ -148,4 +148,68 @@ Route::name('ourTeam.update')->post('/ourTeam/update', 'App\Http\Controllers\Adm
 Route::name('ourTeam.delete')->get('/ourTeam/delete/{id}', 'App\Http\Controllers\Admin\OurTeamController@destroy')->middleware(['permission:ourTeam-delete']);
 Route::name('ourTeam.delete')->get('/ourTeam/changeStatus/{id}', 'App\Http\Controllers\Admin\OurTeamController@changeStatus')->middleware(['permission:ourTeam-changeStatus']);
 
+// About Us cms
+Route::name('aboutUs')->get('/aboutUs', 'App\Http\Controllers\Admin\AboutUsController@index')->middleware(['permission:aboutus-view']);
+Route::name('aboutUs.create')->get('/aboutUs/create', 'App\Http\Controllers\Admin\AboutUsController@create')->middleware(['permission:aboutus-create']);
+Route::name('aboutUs.create/{id}')->get('/aboutUs/edit/{id}', 'App\Http\Controllers\Admin\AboutUsController@edit')->middleware(['permission:aboutus-create']);
+Route::name('aboutUs.store')->post('/aboutUs/store', 'App\Http\Controllers\Admin\AboutUsController@store')->middleware(['permission:aboutus-create']);
+Route::name('aboutUs.update')->post('/aboutUs/update', 'App\Http\Controllers\Admin\AboutUsController@update')->middleware(['permission:aboutus-update']);
+Route::name('aboutUs.delete')->get('/aboutUs/delete/{id}', 'App\Http\Controllers\Admin\AboutUsController@destroy')->middleware(['permission:aboutus-delete']);
+Route::name('aboutUs.delete')->get('/aboutUs/changeStatus/{id}', 'App\Http\Controllers\Admin\AboutUsController@changeStatus')->middleware(['permission:aboutus-changeStatus']);
+
+// News cms
+Route::name('news')->get('/news', 'App\Http\Controllers\Admin\NewsController@index')->middleware(['permission:news-view']);
+Route::name('news.create')->get('/news/create', 'App\Http\Controllers\Admin\NewsController@create')->middleware(['permission:news-create']);
+Route::name('news.create/{id}')->get('/news/edit/{id}', 'App\Http\Controllers\Admin\NewsController@edit')->middleware(['permission:news-create']);
+Route::name('news.store')->post('/news/store', 'App\Http\Controllers\Admin\NewsController@store')->middleware(['permission:news-create']);
+Route::name('news.update')->post('/news/update', 'App\Http\Controllers\Admin\NewsController@update')->middleware(['permission:news-update']);
+Route::name('news.delete')->get('/news/delete/{id}', 'App\Http\Controllers\Admin\NewsController@destroy')->middleware(['permission:news-delete']);
+Route::name('news.delete')->get('/news/changeStatus/{id}', 'App\Http\Controllers\Admin\NewsController@changeStatus')->middleware(['permission:news-changeStatus']);
+
+// Media cms
+Route::name('media')->get('/media', 'App\Http\Controllers\Admin\MediaController@index')->middleware(['permission:media-view']);
+Route::name('media.create')->get('/media/create', 'App\Http\Controllers\Admin\MediaController@create')->middleware(['permission:media-create']);
+Route::name('media.create/{id}')->get('/media/edit/{id}', 'App\Http\Controllers\Admin\MediaController@edit')->middleware(['permission:media-create']);
+Route::name('media.store')->post('/media/store', 'App\Http\Controllers\Admin\MediaController@store')->middleware(['permission:media-create']);
+Route::name('media.update')->post('/media/update', 'App\Http\Controllers\Admin\MediaController@update')->middleware(['permission:media-update']);
+Route::name('media.delete')->get('/media/delete/{id}', 'App\Http\Controllers\Admin\MediaController@destroy')->middleware(['permission:media-delete']);
+Route::name('media.delete')->get('/media/changeStatus/{id}', 'App\Http\Controllers\Admin\MediaController@changeStatus')->middleware(['permission:media-changeStatus']);
+
+// Home  cms
+Route::name('aboutUsHome')->get('/aboutUsHome', 'App\Http\Controllers\Admin\AboutUsHomeController@index')->middleware(['permission:aboutUsHome-view']);
+Route::name('aboutUsHome.create')->get('/aboutUsHome/create', 'App\Http\Controllers\Admin\AboutUsHomeController@create')->middleware(['permission:aboutUsHome-create']);
+Route::name('aboutUsHome.create/{id}')->get('/aboutUsHome/edit/{id}', 'App\Http\Controllers\Admin\AboutUsHomeController@edit')->middleware(['permission:aboutUsHome-create']);
+Route::name('aboutUsHome.store')->post('/aboutUsHome/store', 'App\Http\Controllers\Admin\AboutUsHomeController@store')->middleware(['permission:aboutUsHome-create']);
+Route::name('aboutUsHome.update')->post('/aboutUsHome/update', 'App\Http\Controllers\Admin\AboutUsHomeController@update')->middleware(['permission:aboutUsHome-update']);
+Route::name('aboutUsHome.delete')->get('/aboutUsHome/delete/{id}', 'App\Http\Controllers\Admin\AboutUsHomeController@destroy')->middleware(['permission:aboutUsHome-delete']);
+Route::name('aboutUsHome.delete')->get('/aboutUsHome/changeStatus/{id}', 'App\Http\Controllers\Admin\AboutUsHomeController@changeStatus')->middleware(['permission:aboutUsHome-changeStatus']);
+
+// Home  cms
+Route::name('investmentHome')->get('/investmentHome', 'App\Http\Controllers\Admin\InvestmentHomeController@index')->middleware(['permission:investmentHome-view']);
+Route::name('investmentHome.create')->get('/investmentHome/create', 'App\Http\Controllers\Admin\InvestmentHomeController@create')->middleware(['permission:investmentHome-create']);
+Route::name('investmentHome.create/{id}')->get('/investmentHome/edit/{id}', 'App\Http\Controllers\Admin\InvestmentHomeController@edit')->middleware(['permission:investmentHome-create']);
+Route::name('investmentHome.store')->post('/investmentHome/store', 'App\Http\Controllers\Admin\InvestmentHomeController@store')->middleware(['permission:investmentHome-create']);
+Route::name('investmentHome.update')->post('/investmentHome/update', 'App\Http\Controllers\Admin\InvestmentHomeController@update')->middleware(['permission:investmentHome-update']);
+Route::name('investmentHome.delete')->get('/investmentHome/delete/{id}', 'App\Http\Controllers\Admin\InvestmentHomeController@destroy')->middleware(['permission:investmentHome-delete']);
+Route::name('investmentHome.delete')->get('/investmentHome/changeStatus/{id}', 'App\Http\Controllers\Admin\InvestmentHomeController@changeStatus')->middleware(['permission:investmentHome-changeStatus']);
+
+// Home  cms
+Route::name('ourProjectHome')->get('/ourProjectHome', 'App\Http\Controllers\Admin\OurProjectHomeController@index')->middleware(['permission:ourProjectHome-view']);
+Route::name('ourProjectHome.create')->get('/ourProjectHome/create', 'App\Http\Controllers\Admin\OurProjectHomeController@create')->middleware(['permission:ourProjectHome-create']);
+Route::name('ourProjectHome.create/{id}')->get('/ourProjectHome/edit/{id}', 'App\Http\Controllers\Admin\OurProjectHomeController@edit')->middleware(['permission:ourProjectHome-create']);
+Route::name('ourProjectHome.store')->post('/ourProjectHome/store', 'App\Http\Controllers\Admin\OurProjectHomeController@store')->middleware(['permission:ourProjectHome-create']);
+Route::name('ourProjectHome.update')->post('/ourProjectHome/update', 'App\Http\Controllers\Admin\OurProjectHomeController@update')->middleware(['permission:ourProjectHome-update']);
+Route::name('ourProjectHome.delete')->get('/ourProjectHome/delete/{id}', 'App\Http\Controllers\Admin\OurProjectHomeController@destroy')->middleware(['permission:ourProjectHome-delete']);
+Route::name('ourProjectHome.delete')->get('/ourProjectHome/changeStatus/{id}', 'App\Http\Controllers\Admin\OurProjectHomeController@changeStatus')->middleware(['permission:ourProjectHome-changeStatus']);
+
+// Home  cms
+Route::name('featureProjectHome')->get('/featureProjectHome', 'App\Http\Controllers\Admin\FeatureProjectHomeController@index')->middleware(['permission:featureProjectHome-view']);
+Route::name('featureProjectHome.create')->get('/featureProjectHome/create', 'App\Http\Controllers\Admin\FeatureProjectHomeController@create')->middleware(['permission:featureProjectHome-create']);
+Route::name('featureProjectHome.create/{id}')->get('/featureProjectHome/edit/{id}', 'App\Http\Controllers\Admin\FeatureProjectHomeController@edit')->middleware(['permission:featureProjectHome-create']);
+Route::name('featureProjectHome.store')->post('/featureProjectHome/store', 'App\Http\Controllers\Admin\FeatureProjectHomeController@store')->middleware(['permission:featureProjectHome-create']);
+Route::name('featureProjectHome.update')->post('/featureProjectHome/update', 'App\Http\Controllers\Admin\FeatureProjectHomeController@update')->middleware(['permission:featureProjectHome-update']);
+Route::name('featureProjectHome.delete')->get('/featureProjectHome/delete/{id}', 'App\Http\Controllers\Admin\FeatureProjectHomeController@destroy')->middleware(['permission:featureProjectHome-delete']);
+Route::name('featureProjectHome.delete')->get('/featureProjectHome/changeStatus/{id}', 'App\Http\Controllers\Admin\FeatureProjectHomeController@changeStatus')->middleware(['permission:featureProjectHome-changeStatus']);
+
+
 ?>

@@ -31,7 +31,7 @@ class FaqController extends Controller
                     'id'             => $data->faq_id,
                     'name'           => $data->name,
                     'detail'         => $data->detail,
-                    'image'          => asset('images/faq')."/".$data->image,
+                  //  'image'          => asset('images/faq')."/".$data->image,
                     'status'         => !empty($data->status) && ($data->status == 1) ? 'Active' : 'Inctive',
                     'created_date'   => $data->created_date
                 ];
@@ -75,7 +75,7 @@ class FaqController extends Controller
         $data  = [
             'name'        => $request->name,
             'detail'      => $request->detail,
-            'image'       => $Image,
+          //  'image'       => $Image,
             'status'      => 1,
             'created_by'  => $userID
         ];
@@ -132,7 +132,7 @@ class FaqController extends Controller
         $updateData->update([
             'name'  => $request->name,
             'detail'=> $request->detail,
-            'image' => $Image,
+       //     'image' => $Image,
             'modified_by'   =>  $userID,
             'modified_date' => now()
         ]);

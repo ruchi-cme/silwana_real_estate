@@ -1,4 +1,4 @@
-@extends('admin.layouts.main',['title' => 'Our Team'])
+@extends('admin.layouts.main',['title' => 'News'])
 
 @push('stylesheet')
 <link href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
@@ -7,7 +7,7 @@
 @section('breadcrumb')
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.admin') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
 <li class="breadcrumb-item px-3 text-primary">CMS</li>
-<li class="breadcrumb-item px-3 text-primary">Our Team</li>
+<li class="breadcrumb-item px-3 text-primary">News</li>
 @endsection
 
 @section('content')
@@ -31,7 +31,7 @@
                         <div class="d-flex align-items-center position-relative my-1">
                             <i class="fa fa-search position-absolute ms-6"></i>
                             <input type="text" id="search" data-kt-docs-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search Team" />
+                                class="form-control form-control-solid w-250px ps-14" placeholder="Search News" />
                         </div>
                         <!--end::Search-->
                     </div>
@@ -41,9 +41,9 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                             <!--begin::Add user-->
-                            @can('ourTeam-create')
-                            <a href="{{ route('admin.ourTeam.create') }}" class="btn btn-hover-scale btn-success">
-                            <i class="fa fa-plus"></i> Add Team </a>
+                            @can('news-create')
+                            <a href="{{ route('admin.news.create') }}" class="btn btn-hover-scale btn-success">
+                            <i class="fa fa-plus"></i> News</a>
                             @endcan
                             <!--end::Add user-->
                         </div>
@@ -63,8 +63,7 @@
                         <thead>
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th>Name</th>
-                                <th>Designation</th>
-                                <th>Detail</th>
+                                <th>Link</th>
                                 <th>Image</th>
                                 <th>Status</th>
                                 <th>Action</th>
@@ -101,7 +100,7 @@
         "scrollX": true,
         "sScrollXInner": "100%",
         ajax: {
-            url: "{{ route('admin.ourTeam') }}",
+            url: "{{ route('admin.news') }}",
             error: function (request, err) {
                 Toast.fire({
                     icon: 'error',
@@ -114,10 +113,7 @@
                 data: 'name'
             },
             {
-                data: 'designation'
-            },
-            {
-                data: 'detail'
+                data: 'link'
             },
             {
                 data: 'image'
@@ -143,17 +139,17 @@
                         $icon  = '<i class="fa fa-toggle-on"></i>'
                     }
                     return `
-                            <a href="ourTeam/edit/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-success me-2"
+                            <a href="news/edit/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-success me-2"
                             ><span class="svg-icon svg-icon-1"><i class="fa fa-edit"></i></span></a>
-                            <a href="ourTeam/delete/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2"
+                            <a href="news/delete/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2"
                             ><span class="svg-icon svg-icon-1"><i class="fa fa-trash"></i></span></a>
-                             <a href="ourTeam/changeStatus/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-primary  me-2"
+                             <a href="news/changeStatus/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-primary  me-2"
                             ><span class="svg-icon svg-icon-1">${ $icon }</span></a>
                             `;
                 },
             },
             {
-                targets: 3,
+                targets: 2,
                 render: function (data, type, row) {
                     console.log(data  )
 
@@ -163,7 +159,7 @@
                 },
             },
             {
-                targets: 4,
+                targets: 3,
                 render: function (data, type, row) {
 
                     return `

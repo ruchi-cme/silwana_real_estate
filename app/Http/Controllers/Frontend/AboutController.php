@@ -9,43 +9,30 @@ class AboutController extends Controller
 {
     public function index(Request $request)
     {
-       // $aboutus = getSilwanaPages('about_us');
-      //  $rental  = getSilwanaPages('aboutus_rental');
-
-       // $sales   = getSilwanaPages('aboutus_sales');
-        $mission = getSilwanaPages('aboutus_mission');
-        $vision  = getSilwanaPages('aboutus_vision');
-
-        return view('front.about',compact('mission','vision'));
+        $aboutUs = getAboutUs();
+        return view('front.about',compact( 'aboutUs'));
     }
 
     public function ourTeam(Request $request)
     {
+        $ourTeam   = getOurTeam();
 
-        $ownermsg   = getSilwanaPages('owner_message');
-
-
-        return view('front.ourTeam',compact( 'ownermsg'  ));
+        return view('front.ourTeam',compact( 'ourTeam'  ));
     }
-
 
     public function aboutusFaq(Request $request)
     {
-
-        $sales   = getSilwanaPages('aboutus_sales');
-        $mission = getSilwanaPages('aboutus_mission');
-        $vision  = getSilwanaPages('aboutus_vision');
-
-        return view('front.faq',compact( 'sales','mission','vision'));
+        $faq   = getFaq();
+        return view('front.faq',compact( 'faq'));
     }
 
     public function newsMedia(Request $request)
     {
-        $sales   = getSilwanaPages('aboutus_sales');
-        $mission = getSilwanaPages('aboutus_mission');
-        $vision  = getSilwanaPages('aboutus_vision');
+        $news   = getNews();
+        $media  = getMedia();
 
-        return view('front.newsMedia',compact( 'sales','mission','vision'));
+
+        return view('front.newsMedia',compact( 'news','media'));
     }
 
     public function blogs(Request $request)
@@ -67,4 +54,5 @@ class AboutController extends Controller
 
         return view('front.sales',compact( 'sales','mission','vision'));
     }
+
 }

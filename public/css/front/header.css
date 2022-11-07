@@ -126,7 +126,7 @@ header.scrollUp {
     box-shadow: none;
 }
 
-/* 
+/*
 modal css
 */
 
@@ -210,8 +210,8 @@ modal css
 
 .estimate-wrap .cmn-btn p {
     text-overflow: ellipsis;
-    overflow: hidden; 
-    width: 110px; 
+    overflow: hidden;
+    width: 110px;
     white-space: nowrap;
     text-transform: capitalize;
 }
@@ -239,7 +239,7 @@ modal css
 }
 
 .dropdown-toggle::after {
-    background: url('../images/down-arrow-white.svg') center center no-repeat;
+    background: url('/images/front/down-arrow-white.svg') center center no-repeat;
     background-size: contain;
     border: none;
     width: 15px;
@@ -291,7 +291,7 @@ modal css
     background: #fff;
     flex-basis: 30%;
     padding: 30px 30px;
-} 
+}
 
 .estimate-wrap .dropdown .profile-detail-header ul:last-child li a {
     color: #000000;
@@ -482,7 +482,7 @@ modal css
 
 
 
-/* 
+/*
 responsive css
 */
 
@@ -517,7 +517,7 @@ responsive css
 
     .estimate-wrap {
         margin: 0 0 20px;
-    } 
+    }
 
     .navbar-collapse .navbar-nav .nav-link {
         padding: 0;
@@ -578,5 +578,5 @@ responsive css
     .navbar-toggler {
         padding: 5px 13px;
     }
-    
+
 }

@@ -157,7 +157,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="file" class="form-control form-control-solid" name="project_pdf[]" multiple id="project_pdf" >
+                                    <input type="file" class="form-control form-control-solid" name="project_pdf[]"   id="project_pdf" >
 
                                     <div class="col-xl-9 fv-row fv-plugins-icon-container pdf-preview-div">
                                         @if (!empty($selectedImage))
@@ -477,6 +477,7 @@
 
          $(".removePdf").click(function(){
              $(this).parent(".pip").remove();
+             $('#project_pdf').val('');
          });
 
              if (window.File && window.FileList && window.FileReader) {
@@ -495,6 +496,7 @@
                                  "</span>").insertAfter(".pdf-preview-div");
                              $(".remove").click(function(){
                                  $(this).parent(".pip").remove();
+                                 $('#project_pdf').val('');
                              });
 
                          });

@@ -3,6 +3,7 @@
 use App\Models\{Amenities, Category, Project, Block, Silwana,SilwanaDetailMapping,ContactUs};
 use App\Models\{FloorUnitMapping, ProjectImage, ProjUnitImage, FloorDetail,Proj_ameni_mapping};
 use App\Models\{Block_name_mapping, Booking, Project_address_detail, BlockFloorMapping,Builder};
+use App\Models\{AboutUs, Faq, News ,Media,  ourTeam};
 use Illuminate\Support\Facades\DB;
 
 if(!function_exists("getCategory")){
@@ -225,6 +226,7 @@ if(!function_exists("getProjectList")) {
                ->select($select)
                ->where('project_master.deleted',0)
                ->where('project_master.project_id', $project_id)
+               ->where('project_master.status',1)
                ->orderBy('project_master.project_id', 'desc')
                ->get()->first();
        } else {
@@ -233,7 +235,8 @@ if(!function_exists("getProjectList")) {
                ->leftJoin('project_address_details','project_address_details.project_id' , '=', 'project_master.project_id')
                ->select($select)
                ->where('project_master.deleted',0)
-               ->where('project_master.work_status',$work_status)
+               ->where('project_master.status',1)
+               ->whereIn('project_master.work_status',$work_status)
                ->where('project_master.project_name', 'like', '%'. $search .'%')
                ->orderBy('project_master.project_id', 'desc')
               // ->get();
@@ -500,6 +503,7 @@ if(!function_exists("getpropertyDetailsByProject")){
         return $projectData;
     }
 }
+
 if(!function_exists("getBuilderDetail")){
 
     function getBuilderDetail() {
@@ -512,3 +516,66 @@ if(!function_exists("getBuilderDetail")){
 
     }
 }
+
+//CMS Start
+if(!function_exists("getAboutUs")) {
+
+    function getAboutUs()
+    {
+        $data = AboutUs::where('status', 1)
+            ->where('deleted', 0)
+            ->where('status' , 1)
+            ->get()->toArray()  ;
+
+        return $data;
+    }
+}
+
+if(!function_exists("getOurTeam")) {
+
+    function getOurTeam()
+    {
+        $data = ourTeam::where('status', 1)
+            ->where('deleted', 0)
+            ->where('status' , 1)
+            ->get()->toArray()   ;
+
+        return $data;
+    }
+}
+
+if(!function_exists("getFaq")) {
+
+    function getFaq()
+    {
+        $data = Faq::select([ 'faq_id','name','detail' ,'status' ])
+            ->where('deleted',0)
+            ->where('status' , 1)
+            ->get();
+
+        return $data;
+    }
+}
+if(!function_exists("getNews")) {
+
+    function getNews()
+    {
+        $data = News::where('deleted',0)
+            ->where('status' , 1)
+            ->get();
+
+        return $data;
+    }
+}
+if(!function_exists("getMedia")) {
+
+    function getMedia()
+    {
+        $data = Media::where('deleted',0)
+            ->where('status' , 1)
+            ->get();
+
+        return $data;
+    }
+}
+//CMS END

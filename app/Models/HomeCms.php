@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ourTeam extends Model
+class HomeCms extends Model
 {
     use HasFactory;
     public $timestamps    = false;
-    protected $primaryKey = 'ourteam_id';
+    protected $primaryKey = 'home_id';
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +19,6 @@ class ourTeam extends Model
     protected $fillable = [
         'name',
         'detail',
-        'designation',
         'image',
         'status',
         'created_by',

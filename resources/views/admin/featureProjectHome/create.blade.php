@@ -46,6 +46,19 @@
                             <div class="row mb-8">
                                 <!--begin::Col-->
                                 <div class="col-xl-3">
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Title</div>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                    <input type="text" required placeholder="Enter Title" class="form-control form-control-solid" name="title" value="{{ !empty( $editData->title) ? $editData->title : '' }}" >
+                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                            </div>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <div class="row mb-8">
+                                <!--begin::Col-->
+                                <div class="col-xl-3">
                                     <div class="fs-6 fw-bold mt-2 mb-3 required"> Name</div>
                                 </div>
                                 <!--end::Col-->
@@ -55,7 +68,6 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
-
                             <!--begin::Row-->
                             <div class="row mb-8">
                                 <!--begin::Col-->
@@ -70,47 +82,6 @@
                             </div>
                             <!--end::Row-->
 
-                            <!--begin::Row-->
-                          <!--  <div class="row">
-                                <! -begin::Col >
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3">Image</div>
-                                </div>
-                                <! -end::Col- >
-                                <! -begin::Col ->
-                                <div class="col-md-3 mb-3">
-                                    <! -begin::Image input ->
-                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
-                                        <! -begin::Preview existing image ->
-                                        @php
-                                            $path =  !empty($editData->image) ? asset('images/faq' ).'/'.$editData->image : ''  ;
-                                            $test =   "background-image:url('$path')"  ;  @endphp
-                                        <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($editData->image) ? $test :'"background-image : none'}}"></div>
-                                        <! end::Preview existing image ->
-                                        <!- begin::Label ->
-                                        <label class="inputFileError errorMsg" for="direction" style="">  </label>
-                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
-                                            <i class="bi bi-pencil-fill fs-7"></i>
-                                            <! -begin::Inputs ->
-                                            <input type="file" value="{{ !empty($editData->image) ? $editData->image : '' }}" name="image" accept=".png, .jpg, .jpeg" />
-                                            <input type="hidden" name="edit_image"  value="{{ !empty($editData->image) ? $editData->image : ''  }}" />
-                                            <input type="hidden" name="avatar_remove" />
-                                            <!-  end::Inputs ->
-                                        </label>
-
-                                        <! end::Label-->
-                                        <!--begin::Cancel ->
-                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
-                                                                    <i class="bi bi-x fs-2"></i>
-                                                                </span>
-                                        <!- end::Cancel ->
-                                        <!- begin::Remove ->
-                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
-                                                                    <i class="bi bi-x fs-2"></i>
-                                                                </span>
-                                        <!- end::Remove ->
-                                    </div>-->
-                                    <!- end::Image input ->
                                 </div>
                             </div>
                             <!--end::Row-->

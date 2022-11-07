@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('our_teams', function (Blueprint $table) {
-            $table->increments('ourteam_id');
+        Schema::dropIfExists('about_us');
+        Schema::create('about_us', function (Blueprint $table) {
+            $table->increments('aboutus_id');
             $table->string('name');
-            $table->string('designation');
             $table->text('detail');
             $table->string('image')->nullable();
             $table->tinyInteger('status')->default(1)->comment('1- Active,2-InActive' );
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('our_teams');
+        Schema::dropIfExists('about_us');
     }
 };

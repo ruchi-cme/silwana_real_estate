@@ -99,7 +99,7 @@
 
 .video-wrapper button img {
     max-width: 55px;
-    
+
 }
 
 .video-wrapper button {
@@ -109,7 +109,7 @@
 
 
 
-/* 
+/*
 product-lists
 */
 
@@ -182,7 +182,7 @@ product-lists
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
-} 
+}
 
 .property-detail-list-inner ul {
     margin-bottom: 0;
@@ -492,7 +492,7 @@ product-lists
 }
 
 
-/* 
+/*
 property-booking-form
 */
 
@@ -507,7 +507,7 @@ property-booking-form
 .select-arrow::after {
     content: '';
     position: absolute;
-    background: url('../images/down-arrow.svg') center center no-repeat;
+    background: url('/images/front/down-arrow.svg') center center no-repeat;
     background-size: contain;
     width: 16px;
     height: 16px;
@@ -782,7 +782,7 @@ form label {
 .search-property form .form-group .search-btn:hover img {
     filter: none;
 }
-/* 
+/*
 .search-property form .form-group::after {
     content: '';
     width: 15px;
@@ -870,7 +870,7 @@ form label {
 
 
 
-/* 
+/*
 responsive css
 */
 
@@ -892,7 +892,7 @@ responsive css
         padding: 10px 0;
     }
 
-   
+
 }
 
 @media only screen and (max-width: 767px) {
@@ -905,7 +905,7 @@ responsive css
     .map-wrap {
         margin-bottom: 50px;
     }
-} 
+}
 
 
 @media only screen and (max-width: 576px) {

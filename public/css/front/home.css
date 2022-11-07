@@ -1,5 +1,5 @@
 .banner {
-    background: url('../images/home/banner.png');
+    background: url('/images/home/banner.png');
     background-size: cover;
     display: flex;
     align-items: center;
@@ -240,15 +240,15 @@
     height: 420px;
     position: relative;
     margin-bottom: 25px;
-} 
+}
 
 .property-by-categories-wrap img {
     object-fit: cover;
 }
 
 .property-by-categories-detail {
-    position: absolute; 
-    padding: 40px 55px;  
+    position: absolute;
+    padding: 40px 55px;
     top: 50%;
     left: 50%;
     max-width: 325px;
@@ -775,7 +775,7 @@ form .select-title::after {
     content: '';
     width: 15px;
     height: 15px;
-    background: url('../images/down-arrow.svg') center center no-repeat;
+    background: url('/images/front/down-arrow.svg') center center no-repeat;
     background-size: contain;
     display: block;
     position: absolute;
@@ -1056,12 +1056,12 @@ form .select-title::after {
 
 
 
-/* 
+/*
 responsive css
 */
 
 @media only screen and (max-width: 1400px) {
-    
+
     .navbar-collapse .navbar-nav .nav-link {
         font-size: 14px;
     }
@@ -1155,7 +1155,7 @@ responsive css
     .banner {
         padding: 200px 0;
     }
-} 
+}
 
 @media only screen and (max-width: 576px) {
     .banner {
@@ -1168,7 +1168,7 @@ responsive css
     .banner-form form {
         padding: 25px;
     }
-} 
+}
 
 
 

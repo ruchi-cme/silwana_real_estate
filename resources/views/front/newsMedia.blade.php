@@ -10,39 +10,22 @@
                         <h2>News & Events</h2>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="news-event-wrap news-media-wrap">
-                        <div class="news-event-img-wrap">
-                            <img src="./assets/images/news-media/news-media1.png" alt="" />
+                @if(!empty($news))
+                   @foreach($news as $new)
+                        <div class="col-lg-4">
+                            <div class="news-event-wrap news-media-wrap">
+                                <div class="news-event-img-wrap">
+                                    <img src="{{ asset('images/news/').'/'.$new['image'] }}" alt="" />
+                                </div>
+                                <div class="news-events-text">
+                                    <h6> {{ $new['name'] }}</h6>
+                                    <a href="{{  $new['link']  }}" target="_blank" class="cmn-btn">READ MORE <img src="{{ asset('images/front/about/arrow.svg')   }}" alt=""></a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="news-events-text">
-                            <h6>The Arab Marketing Agency announces the launch of its digital website</h6>
-                            <a href="#" class="cmn-btn">READ MORE <img src="./assets/images/about/arrow.svg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="news-event-wrap news-media-wrap">
-                        <div class="news-event-img-wrap">
-                            <img src="./assets/images/news-media/news-media2.png" alt="" />
-                        </div>
-                        <div class="news-events-text">
-                            <h6>GogolCoin Unveils Its Cryptocurrency Exchange</h6>
-                            <a href="#" class="cmn-btn">READ MORE <img src="./assets/images/about/arrow.svg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="news-event-wrap news-media-wrap">
-                        <div class="news-event-img-wrap">
-                            <img src="./assets/images/news-media/news-media3.png" alt="" />
-                        </div>
-                        <div class="news-events-text">
-                            <h6>Silwana Group, ADA Energy to extract 3b barrels of oil in Guinea-Bissau</h6>
-                            <a href="#" class="cmn-btn">READ MORE <img src="./assets/images/about/arrow.svg" alt=""></a>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endif
+
             </div>
         </div>
     </section>
@@ -70,53 +53,42 @@
                         <div class="tab-content">
                             <div id="images" class="container tab-pane active"><br>
                                 <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="media-image-wrap position-relative">
-                                            <img src="./assets/images/news-media/social-media1.png" alt="social-media-img" />
-                                            <div class="media-wrap-inner position-absolute" data-bs-toggle="modal" data-bs-target="#myModal">
-                                                <div class="view-img">
-                                                    <img src="./assets/images/news-media/view-eye.png" alt="eye-img" />
-                                                </div>
 
-                                                <div class="media-inner-text">
-                                                    <h5>Rewards & Recognitions</h5>
+                                    @if(!empty($media))
+                                        @foreach($media as $row)
+                                            @if($row['type'] == 1)
+                                            <div class="col-lg-4">
+                                                <div class="media-image-wrap position-relative">
+                                                    <img src="{{ asset('images/media/image').'/'.$row['image_video_title'] }}" alt="social-media-img" />
+                                                    <div class="media-wrap-inner position-absolute" data-bs-toggle="modal" data-bs-target="#myModal">
+                                                        <div class="view-img">
+                                                            <img src="{{ asset('images/front/view-eye.png') }}" alt="eye-img" />
+                                                        </div>
+
+                                                        <div class="media-inner-text">
+                                                            <h5>{{ $row['name'] }}</h5>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="media-image-wrap position-relative">
-                                            <img src="./assets/images/news-media/social-media2.png" alt="social-media-img" />
-                                            <div class="media-wrap-inner position-absolute">
-                                                <div class="view-img">
-                                                    <img src="./assets/images/news-media/view-eye.png" alt="eye-img" />
-                                                </div>
-
-                                                <div class="media-inner-text">
-                                                    <h5>Rewards & Recognitions</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="media-image-wrap position-relative">
-                                            <img src="./assets/images/news-media/social-media3.png" alt="social-media-img" />
-                                            <div class="media-wrap-inner position-absolute">
-                                                <div class="view-img">
-                                                    <img src="./assets/images/news-media/view-eye.png" alt="eye-img" />
-                                                </div>
-
-                                                <div class="media-inner-text">
-                                                    <h5>Rewards & Recognitions</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                             <div id="video" class="container tab-pane fade"><br>
                                 <div class="row">
-
+                                    @if(!empty($media))
+                                        @foreach($media as $row)
+                                            @if($row['type'] ==2)
+                                                <div class="col-lg-4">
+                                                    <div class="media-image-wrap position-relative">
+                                                        <video controls="" src=" {{ asset('images/media/video').'/'.$row['image_video_title'] }}" ></video>
+                                                    </div>
+                                                </div>
+                                           @endif
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -125,7 +97,6 @@
             </div>
         </div>
     </section>
-
 
     <!-- The Modal -->
     <div class="modal media-image-slider-main" id="myModal">
@@ -138,21 +109,17 @@
                 </div>
                 <div class="bg-transparent">
                     <div class="owl-carousel owl-theme media-image-slider">
-                        <div class="item">
-                            <div class="media-image-slider-wrap">
-                                <img src="./assets/images/news-media/social-media1.png" alt="social-media1" />
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="media-image-slider-wrap">
-                                <img src="./assets/images/news-media/social-media2.png" alt="social-media2" />
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="media-image-slider-wrap">
-                                <img src="./assets/images/news-media/social-media3.png" alt="social-media3" />
-                            </div>
-                        </div>
+                        @if(!empty($media))
+                            @foreach($media as $row)
+                                @if($row['type'] == 1)
+                                    <div class="item">
+                                        <div class="media-image-slider-wrap">
+                                            <img src="{{ asset('images/media/image').'/'.$row['image_video_title'] }}" alt="{{ $row['image_video_title'] }}" />
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>

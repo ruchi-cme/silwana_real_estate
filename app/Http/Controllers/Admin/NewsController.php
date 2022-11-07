@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ourTeam;
+use App\Models\News;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class OurTeamController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,25 +21,24 @@ class OurTeamController extends Controller
             /* Current Login User ID */
             $userID = auth()->user()->id;
 
-            $dbData = ourTeam::select([ 'ourteam_id','name','designation','detail','image','status' ])
+            $dbData = News::select([ 'news_id','name','link','image','status' ])
                 ->where('deleted',0)
-                ->orderBy("ourteam_id",'DESC')
+                ->orderBy("news_id",'DESC')
                 ->get();
             $data = $dbData->map(function ($data){
 
                 return [
-                    'id'             => $data->ourteam_id,
+                    'id'             => $data->news_id,
                     'name'           => $data->name,
-                    'designation'    => $data->designation,
-                    'detail'         => $data->detail,
-                    'image'          => asset('images/ourTeam')."/".$data->image,
+                    'link'           => $data->link,
+                    'image'          => asset('images/news')."/".$data->image,
                     'status'         => !empty($data->status) && ($data->status == 1) ? 'Active' : 'Inctive',
                     'created_date'   => $data->created_date
                 ];
             });
             return DataTables::of($data)->toJson();
         }
-        return view('admin.ourTeam.index');
+        return view('admin.news.index');
     }
 
     /**
@@ -49,7 +48,7 @@ class OurTeamController extends Controller
      */
     public function create()
     {
-        return view('admin.ourTeam.create' );
+        return view('admin.news.create' );
     }
 
     /**
@@ -62,28 +61,27 @@ class OurTeamController extends Controller
     {
         $request->validate([
             'name'   => 'required',
-            'designation' => 'required',
-            'detail' => 'required',
+            'link'  => 'required',
         ]);
-        /* Insert FAQ data */
+        /* Insert AboutUs data */
         $userID = auth()->user()->id;
         $Image  = null;
 
         if ($image = $request->file('image')) {
-            $destinationPath = public_path('images/ourTeam');
+            $destinationPath = public_path('images/news');
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
         }
         $data  = [
             'name'        => $request->name,
             'detail'      => $request->detail,
-            'designation' => $request->designation,
+            'link'        => $request->link,
             'image'       => $Image,
             'status'      => 1,
             'created_by'  => $userID
         ];
-        ourTeam::create($data);
-        return redirect()->route('admin.ourTeam')->with('inserted','Our Team Created👍');
+        News::create($data);
+        return redirect()->route('admin.news')->with('inserted','News Created👍');
     }
 
     /**
@@ -94,9 +92,9 @@ class OurTeamController extends Controller
      */
     public function edit(Request $request)
     {
-        $editData = ourTeam::find($request->id);
+        $editData = News::find($request->id);
 
-        return view('admin.ourTeam.create' ,compact('editData'));
+        return view('admin.news.create' ,compact('editData'));
     }
 
     /**
@@ -107,7 +105,7 @@ class OurTeamController extends Controller
      */
     public function update(Request $request)
     {
-        $updateData  = ourTeam::find( $request->ourteam_id);
+        $updateData  = News::find( $request->id);
         $userID      = auth()->user()->id;
         /* Insert Page data */
         $input = $request->all();
@@ -116,12 +114,12 @@ class OurTeamController extends Controller
         $editImage = $request->edit_image;
         if (!empty($image) ) {
 
-            $destinationPath = public_path('images/ourTeam');
+            $destinationPath = public_path('images/news');
 
             $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
             $image->move($destinationPath, $Image);
             if (!empty($editImage)) {
-                @unlink( public_path('images/ourTeam/') . $editImage);
+                @unlink( public_path('images/news/') . $editImage);
             }
         }
         elseif (!empty($editImage)) {
@@ -134,12 +132,12 @@ class OurTeamController extends Controller
         $updateData->update([
             'name'  => $request->name,
             'detail'=> $request->detail,
-            'designation' => $request->designation,
+            'link'  => $request->link,
             'image' => $Image,
             'modified_by'   =>  $userID,
             'modified_date' => now()
         ]);
-        return redirect()->route('admin.ourTeam')->with('updated','Our Team Updated 👍');
+        return redirect()->route('admin.news')->with('updated','News Updated 👍');
     }
     /**
      * Remove the specified resource from storage.
@@ -148,14 +146,14 @@ class OurTeamController extends Controller
      */
     public function destroy($id)
     {
-        $data = ourTeam::find($id);
+        $data = AboutUs::find($id);
         $userID   = auth()->user()->id;
         $data->update([
             'deleted'  => 1,  //Deleted
             'deleted_date'  => now(),
             'deleted_by'    =>  $userID,
         ]);
-        return redirect()->route('admin.ourTeam')->with('success','Our Team Deleted');
+        return redirect()->route('admin.news')->with('success','News Deleted');
     }
 
     /**
@@ -166,7 +164,7 @@ class OurTeamController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $updateData = ourTeam::find($request->id);
+        $updateData = News::find($request->id);
         $userID   = auth()->user()->id;
         $status   =  ( !empty($updateData->status) && $updateData->status == 1 ) ?  2 :  1 ;
 
@@ -176,7 +174,6 @@ class OurTeamController extends Controller
             'modified_date' => now()
         ]);
 
-        return redirect()->route('admin.ourTeam')->with('success','Our Team Status Changed');
+        return redirect()->route('admin.news')->with('success','News Status Changed');
     }
-
 }

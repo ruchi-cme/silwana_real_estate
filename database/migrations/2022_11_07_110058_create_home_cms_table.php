@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('our_teams', function (Blueprint $table) {
-            $table->increments('ourteam_id');
+        Schema::create('home_cms', function (Blueprint $table) {
+            $table->increments('home_id');
             $table->string('name');
-            $table->string('designation');
             $table->text('detail');
             $table->string('image')->nullable();
             $table->tinyInteger('status')->default(1)->comment('1- Active,2-InActive' );
@@ -38,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('our_teams');
+        Schema::dropIfExists('home_cms');
     }
 };

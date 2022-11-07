@@ -45,7 +45,6 @@
                                                         <li><a class="dropdown-item" href="{{ route('ourTeam') }}">Our Team</a></li>
                                                         <li><a class="dropdown-item" href="{{ route('aboutusFaq') }}">FAQ</a></li>
                                                         <li><a class="dropdown-item" href="{{ route('newsMedia') }}">News & Media</a></li>
-                                                        <li><a class="dropdown-item" href="{{ route('blogs') }}">Blogs</a></li>
                                                     </ul>
                                                 </div>
                                             </ul>
@@ -53,7 +52,7 @@
                                     </li>
                                     <li class="nav-item estimate-wrap ">
                                         <div class="dropdown about-dropdown-menu our-project-dropdown-menu">
-                                            <a class="dropdown-toggle nav-link" role="button">
+                                            <a href="{{ route('ourProject') }}"  class="dropdown-toggle nav-link" role="button">
                                                 Our Projects
                                             </a>
 

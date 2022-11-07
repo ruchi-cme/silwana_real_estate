@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ourTeam;
+use App\Models\FeatureProjectHome;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class OurTeamController extends Controller
+class FeatureProjectHomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,25 +21,24 @@ class OurTeamController extends Controller
             /* Current Login User ID */
             $userID = auth()->user()->id;
 
-            $dbData = ourTeam::select([ 'ourteam_id','name','designation','detail','image','status' ])
+            $dbData = FeatureProjectHome::select([ 'id','name','detail','title','status' ])
                 ->where('deleted',0)
-                ->orderBy("ourteam_id",'DESC')
+                ->orderBy("id",'DESC')
                 ->get();
             $data = $dbData->map(function ($data){
 
                 return [
-                    'id'             => $data->ourteam_id,
+                    'id'             => $data->id,
                     'name'           => $data->name,
-                    'designation'    => $data->designation,
                     'detail'         => $data->detail,
-                    'image'          => asset('images/ourTeam')."/".$data->image,
+                    'title'          =>  $data->title,
                     'status'         => !empty($data->status) && ($data->status == 1) ? 'Active' : 'Inctive',
                     'created_date'   => $data->created_date
                 ];
             });
             return DataTables::of($data)->toJson();
         }
-        return view('admin.ourTeam.index');
+        return view('admin.aboutUs.index');
     }
 
     /**
@@ -49,7 +48,7 @@ class OurTeamController extends Controller
      */
     public function create()
     {
-        return view('admin.ourTeam.create' );
+        return view('admin.aboutUs.create' );
     }
 
     /**
@@ -62,28 +61,21 @@ class OurTeamController extends Controller
     {
         $request->validate([
             'name'   => 'required',
-            'designation' => 'required',
             'detail' => 'required',
+            'title'   =>  'required',
         ]);
-        /* Insert FAQ data */
+        /* Insert AboutUs data */
         $userID = auth()->user()->id;
-        $Image  = null;
 
-        if ($image = $request->file('image')) {
-            $destinationPath = public_path('images/ourTeam');
-            $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $Image);
-        }
         $data  = [
             'name'        => $request->name,
             'detail'      => $request->detail,
-            'designation' => $request->designation,
-            'image'       => $Image,
+            'title'       =>  $request->title,
             'status'      => 1,
             'created_by'  => $userID
         ];
-        ourTeam::create($data);
-        return redirect()->route('admin.ourTeam')->with('inserted','Our Team Created👍');
+        FeatureProjectHome::create($data);
+        return redirect()->route('admin.aboutUs')->with('inserted','About Us Created👍');
     }
 
     /**
@@ -94,9 +86,9 @@ class OurTeamController extends Controller
      */
     public function edit(Request $request)
     {
-        $editData = ourTeam::find($request->id);
+        $editData = FeatureProjectHome::find($request->id);
 
-        return view('admin.ourTeam.create' ,compact('editData'));
+        return view('admin.aboutUs.create' ,compact('editData'));
     }
 
     /**
@@ -107,39 +99,18 @@ class OurTeamController extends Controller
      */
     public function update(Request $request)
     {
-        $updateData  = ourTeam::find( $request->ourteam_id);
+        $updateData  = FeatureProjectHome::find( $request->id);
         $userID      = auth()->user()->id;
-        /* Insert Page data */
-        $input = $request->all();
 
-        $image = $request->file('image');
-        $editImage = $request->edit_image;
-        if (!empty($image) ) {
 
-            $destinationPath = public_path('images/ourTeam');
-
-            $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($destinationPath, $Image);
-            if (!empty($editImage)) {
-                @unlink( public_path('images/ourTeam/') . $editImage);
-            }
-        }
-        elseif (!empty($editImage)) {
-            $Image = $editImage;
-        }
-        else
-        {
-            $Image = null;
-        }
         $updateData->update([
             'name'  => $request->name,
             'detail'=> $request->detail,
-            'designation' => $request->designation,
-            'image' => $Image,
+            'title' => $request->title,
             'modified_by'   =>  $userID,
             'modified_date' => now()
         ]);
-        return redirect()->route('admin.ourTeam')->with('updated','Our Team Updated 👍');
+        return redirect()->route('admin.aboutUs')->with('updated','About Us Updated 👍');
     }
     /**
      * Remove the specified resource from storage.
@@ -148,14 +119,14 @@ class OurTeamController extends Controller
      */
     public function destroy($id)
     {
-        $data = ourTeam::find($id);
+        $data = AboutUs::find($id);
         $userID   = auth()->user()->id;
         $data->update([
             'deleted'  => 1,  //Deleted
             'deleted_date'  => now(),
             'deleted_by'    =>  $userID,
         ]);
-        return redirect()->route('admin.ourTeam')->with('success','Our Team Deleted');
+        return redirect()->route('admin.aboutUs')->with('success','About Us Deleted');
     }
 
     /**
@@ -166,7 +137,7 @@ class OurTeamController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $updateData = ourTeam::find($request->id);
+        $updateData = AboutUs::find($request->id);
         $userID   = auth()->user()->id;
         $status   =  ( !empty($updateData->status) && $updateData->status == 1 ) ?  2 :  1 ;
 
@@ -176,7 +147,6 @@ class OurTeamController extends Controller
             'modified_date' => now()
         ]);
 
-        return redirect()->route('admin.ourTeam')->with('success','Our Team Status Changed');
+        return redirect()->route('admin.aboutUs')->with('success','About Us Status Changed');
     }
-
 }

@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ourTeam extends Model
+class Media extends Model
 {
     use HasFactory;
     public $timestamps    = false;
-    protected $primaryKey = 'ourteam_id';
+    protected $primaryKey = 'media_id';
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +18,8 @@ class ourTeam extends Model
      */
     protected $fillable = [
         'name',
-        'detail',
-        'designation',
-        'image',
+        'type',
+        'image_video_title',
         'status',
         'created_by',
         'created_date',

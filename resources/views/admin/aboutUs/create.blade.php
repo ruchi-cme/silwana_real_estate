@@ -1,10 +1,10 @@
-@extends('admin.layouts.main',['title' => 'Amenities'])
+@extends('admin.layouts.main',['title' => 'About Us'])
 
 @section('breadcrumb')
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.admin') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
-<li class="breadcrumb-item px-3 text-primary">Master</li>
-<li class="breadcrumb-item px-3"><a class="text-hover-primary " href="{{ route('admin.faq') }}">FAQ</a></li>
-<li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->faq_id) ?   'Edit' :  'Create' }}</li>
+<li class="breadcrumb-item px-3 text-primary">CMS</li>
+<li class="breadcrumb-item px-3"><a class="text-hover-primary " href="{{ route('admin.aboutUs') }}">About Us</a></li>
+<li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->aboutus_id) ?   'Edit' :  'Create' }}</li>
 @endsection
 <style>
 .error{
@@ -26,7 +26,7 @@
 
                 @include('layouts.alerts.error')
 
-                <form class="form" method="POST" action=" {{ !empty( $editData->faq_id) ?  route('admin.faq.update') : route('admin.faq.store') }}" id="dataForm" enctype="multipart/form-data">
+                <form class="form" method="POST" action=" {{ !empty( $editData->aboutus_id) ?  route('admin.aboutUs.update') : route('admin.aboutUs.store') }}" id="dataForm" enctype="multipart/form-data">
                     @csrf
                     <!--begin::Card-->
                     <div class="card shadow-lg card-flush pt-3 mb-5 mb-lg-10">
@@ -34,7 +34,7 @@
                         <div class="card-header">
                             <!--begin::Card title-->
                             <div class="card-title">
-                                <h2 class="fw-bolder">FAQ</h2>
+                                <h2 class="fw-bolder">About Us</h2>
                             </div>
                             <!--begin::Card title-->
                         </div>
@@ -71,59 +71,58 @@
                             <!--end::Row-->
 
                             <!--begin::Row-->
-                          <!--  <div class="row">
-                                <! -begin::Col >
+                            <div class="row">
+                                <!--begin::Col-->
                                 <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3">Image</div>
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required">Image</div>
                                 </div>
-                                <! -end::Col- >
-                                <! -begin::Col ->
-                                <div class="col-md-3 mb-3">
-                                    <! -begin::Image input ->
+                                <!--end::Col-->
+                                <!--begin::Col--> <div class="col-md-3 mb-3">
+                                    <!--begin::Image input-->
                                     <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
-                                        <! -begin::Preview existing image ->
+                                        <!--begin::Preview existing image-->
                                         @php
-                                            $path =  !empty($editData->image) ? asset('images/faq' ).'/'.$editData->image : ''  ;
+                                            $path =  !empty($editData->image) ? asset('images/ourTeam' ).'/'.$editData->image : ''  ;
                                             $test =   "background-image:url('$path')"  ;  @endphp
                                         <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($editData->image) ? $test :'"background-image : none'}}"></div>
-                                        <! end::Preview existing image ->
-                                        <!- begin::Label ->
+                                        <!--end::Preview existing image-->
+                                        <!--begin::Label-->
                                         <label class="inputFileError errorMsg" for="direction" style="">  </label>
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
                                             <i class="bi bi-pencil-fill fs-7"></i>
-                                            <! -begin::Inputs ->
+                                            <!--begin::Inputs-->
                                             <input type="file" value="{{ !empty($editData->image) ? $editData->image : '' }}" name="image" accept=".png, .jpg, .jpeg" />
                                             <input type="hidden" name="edit_image"  value="{{ !empty($editData->image) ? $editData->image : ''  }}" />
                                             <input type="hidden" name="avatar_remove" />
-                                            <!-  end::Inputs ->
+                                            <!--end::Inputs-->
                                         </label>
 
-                                        <! end::Label-->
-                                        <!--begin::Cancel ->
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
                                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
                                                                     <i class="bi bi-x fs-2"></i>
                                                                 </span>
-                                        <!- end::Cancel ->
-                                        <!- begin::Remove ->
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
                                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
                                                                     <i class="bi bi-x fs-2"></i>
                                                                 </span>
-                                        <!- end::Remove ->
-                                    </div>-->
-                                    <!- end::Image input ->
+                                        <!--end::Remove-->
+                                    </div>
+                                    <!--end::Image input-->
                                 </div>
                             </div>
                             <!--end::Row-->
 
                             <!--begin::Row-->
                             <div class="row text-center">
-                                <input type="hidden" name="faq_id" value="{{ !empty( $editData->faq_id) ? $editData->faq_id : '' }}" id="faq_id">
+                                <input type="hidden" name="id" value="{{ !empty( $editData->aboutus_id) ? $editData->aboutus_id : '' }}" id="aboutus_id">
                                 <!--begin::Col-->
                                 <!--begin::Actions-->
                                 <div class="mb-0">
                                     <button type="button" data-form="amenityForm" class="btn btn-primary" id="create_button">
                                         <!--begin::Indicator-->
-                                        <span class="indicator-label">{{ !empty( $editData->faq_id) ?  'Update' : 'Create' }} FAQ</span>
+                                        <span class="indicator-label">{{ !empty( $editData->aboutus_id) ?  'Update' : 'Create' }} About Us</span>
                                         <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         <!--end::Indicator-->
@@ -161,10 +160,12 @@
                 rules: {
                     "name" :"required",
                     "detail" : "required",
+                    "image" : "required"
                 },
                 messages: {
                     "name" : "Please enter name",
                     "detail" :  "Please enter detail",
+                    "image" : "Please select image"
                 }
             });
 

@@ -12,8 +12,9 @@ class OurProjectController extends Controller
 {
     public function index(Request $request)
     {
-        $projectList    = getProjectList();
-        return view('front.ourProject',compact('projectList' ));
+        $projectList    = getProjectList('',array('1','2','3'));
+        $currentURL    = last(request()->segments());
+        return view('front.OurProjectType',compact('projectList','currentURL' ));
     }
 
     public function projectDetail(Request $request)
@@ -47,17 +48,17 @@ class OurProjectController extends Controller
 
         if ($currentURL == 'ongoing') {
             //work_status = 1 for ongoing
-            $workStatus = 1;
+            $workStatus =  array('1' );
             $projectList  = getProjectList( '' , $workStatus );
         }
         elseif ($currentURL == 'upcoming') {
             //work_status = 2 for ongoing
-            $workStatus = 2;
+            $workStatus =  array('2' );
             $projectList  = getProjectList( '' , $workStatus);
         }
         else {
             //work_status = 3 for ongoing
-            $workStatus = 3;
+            $workStatus =  array('3' );
             $projectList  = getProjectList( '' , $workStatus );
         }
 
@@ -78,17 +79,17 @@ class OurProjectController extends Controller
 
         if ($currentURL == 'ongoing') {
             //work_status = 1 for ongoing
-            $workStatus = 1;
+            $workStatus =  array('1' );
             $projectList  = getProjectList( '' , $workStatus ,$search);
         }
         elseif ($currentURL == 'upcoming') {
             //work_status = 2 for ongoing
-            $workStatus = 2;
+            $workStatus =  array('2' );
             $projectList  = getProjectList( '' , $workStatus,$search);
         }
         else {
             //work_status = 3 for ongoing
-            $workStatus = 3;
+            $workStatus =  array('3' );
             $projectList  = getProjectList( '' , $workStatus ,$search);
         }
         return view('front.OurProjectType',compact('projectList','currentURL'));

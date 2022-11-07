@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('our_teams', function (Blueprint $table) {
-            $table->increments('ourteam_id');
+        Schema::create('media', function (Blueprint $table) {
+            $table->increments('media_id');
             $table->string('name');
-            $table->string('designation');
-            $table->text('detail');
-            $table->string('image')->nullable();
+            $table->tinyInteger('type')->default(1)->comment('1- Images,2-Video');
+            $table->string('image_video_title')->nullable();
             $table->tinyInteger('status')->default(1)->comment('1- Active,2-InActive' );
             /* Status :  1- Active,2-InActive */
             $table->integer('created_by')->nullable();
@@ -38,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('our_teams');
+        Schema::dropIfExists('media');
     }
 };

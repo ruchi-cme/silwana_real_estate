@@ -55,6 +55,19 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
+                            <!--begin::Row-->
+                            <div class="row mb-8">
+                                <!--begin::Col-->
+                                <div class="col-xl-3">
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Designation</div>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                    <input type="text" required placeholder="Enter designation" class="form-control form-control-solid" name="designation" value="{{ !empty( $editData->designation) ? $editData->designation : '' }}" >
+                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                            </div>
+                            <!--end::Row-->
 
                             <!--begin::Row-->
                             <div class="row mb-8">
@@ -160,11 +173,13 @@
                 rules: {
                     "name" :"required",
                     "detail" : "required",
+                    "designation" : "required",
                     "image" : "required"
                 },
                 messages: {
-                    "amenity_name" : "Please enter name",
-                    "amenity_detail" :  "Please enter detail",
+                    "name" : "Please enter name",
+                    "detail" :  "Please enter detail",
+                    "designation" : "Please enter designation",
                     "image" : "Please select image"
                 }
             });
