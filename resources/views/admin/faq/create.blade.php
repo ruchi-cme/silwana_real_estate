@@ -1,8 +1,8 @@
-@extends('admin.layouts.main',['title' => 'Amenities'])
+@extends('admin.layouts.main',['title' => 'FAQ'])
 
 @section('breadcrumb')
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.admin') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
-<li class="breadcrumb-item px-3 text-primary">Master</li>
+<li class="breadcrumb-item px-3 text-primary">CMS</li>
 <li class="breadcrumb-item px-3"><a class="text-hover-primary " href="{{ route('admin.faq') }}">FAQ</a></li>
 <li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->faq_id) ?   'Edit' :  'Create' }}</li>
 @endsection
