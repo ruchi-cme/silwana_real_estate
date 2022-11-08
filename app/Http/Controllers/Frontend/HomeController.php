@@ -15,11 +15,12 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $homeBanner = getSilwanaPages('home_banner');
-        $aboutus    = getSilwanaPages('about_us');
+        $aboutus    = getAboutUsHome();
+
+        $ourProject = getOurProjectHome();
+        $featureProject = getFeatureProjectHome();
         $investment = getSilwanaPages('investment');
-        $ourProject = getSilwanaPages('our_project');
         $ourProjectList = getProjectList('' ,array('3'),'');
-        $featureProject = getSilwanaPages('feature_project');
         $featureProjectList = getProjectList('' ,array('2'),'');
         $amenities  = getAmenities();
         $categories = getCategory();

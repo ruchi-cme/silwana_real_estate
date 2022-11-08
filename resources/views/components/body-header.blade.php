@@ -9,7 +9,7 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-xl p-0">
                         <div class="container p-0">
-                            <a class="navbar-brand" href="index.php">
+                            <a class="navbar-brand" href="{{ route('home') }}">
                                 <img src="{{asset('images/front')}}/logo.svg" alt="">
                             </a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">

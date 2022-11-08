@@ -1,4 +1,4 @@
-@extends('admin.layouts.main',['title' => 'Feature Project'])
+@extends('admin.layouts.main',['title' => 'Our Project'])
 
 @push('stylesheet')
 <link href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
@@ -7,7 +7,7 @@
 @section('breadcrumb')
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.admin') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
 <li class="breadcrumb-item px-3 text-primary">Home CMS</li>
-<li class="breadcrumb-item px-3 text-primary">Feature Project</li>
+<li class="breadcrumb-item px-3 text-primary">Our Project</li>
 @endsection
 
 @section('content')
@@ -31,7 +31,7 @@
                         <div class="d-flex align-items-center position-relative my-1">
                             <i class="fa fa-search position-absolute ms-6"></i>
                             <input type="text" id="search" data-kt-docs-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search Feature Project" />
+                                class="form-control form-control-solid w-250px ps-14" placeholder="Search Our Project" />
                         </div>
                         <!--end::Search-->
                     </div>
@@ -41,9 +41,9 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                             <!--begin::Add user-->
-                            @can('featureProjectHome-create')
-                            <a href="{{ route('admin.featureProjectHome.create') }}" class="btn btn-hover-scale btn-success">
-                            <i class="fa fa-plus"></i> Add Feature Project</a>
+                            @can('ourProjectHome-create')
+                            <a href="{{ route('admin.ourProjectHome.create') }}" class="btn btn-hover-scale btn-success">
+                            <i class="fa fa-plus"></i> Add Our Project</a>
                             @endcan
                             <!--end::Add user-->
                         </div>
@@ -100,7 +100,7 @@
         "scrollX": true,
         "sScrollXInner": "100%",
         ajax: {
-            url: "{{ route('admin.featureProjectHome') }}",
+            url: "{{ route('admin.ourProjectHome') }}",
             error: function (request, err) {
                 Toast.fire({
                     icon: 'error',
@@ -139,11 +139,11 @@
                         $icon  = '<i class="fa fa-toggle-on"></i>'
                     }
                     return `
-                            <a href="featureProjectHome/edit/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-success me-2"
+                            <a href="ourProjectHome/edit/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-success me-2"
                             ><span class="svg-icon svg-icon-1"><i class="fa fa-edit"></i></span></a>
-                            <a href="featureProjectHome/delete/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2"
+                            <a href="ourProjectHome/delete/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2"
                             ><span class="svg-icon svg-icon-1"><i class="fa fa-trash"></i></span></a>
-                             <a href="featureProjectHome/changeStatus/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-primary  me-2"
+                             <a href="ourProjectHome/changeStatus/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-primary  me-2"
                             ><span class="svg-icon svg-icon-1">${ $icon }</span></a>
                             `;
                 },

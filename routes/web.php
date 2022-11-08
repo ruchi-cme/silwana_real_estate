@@ -17,7 +17,6 @@ Route::name('about')->get('/about', 'App\Http\Controllers\Frontend\AboutControll
 Route::name('ourTeam')->get('/about/ourTeam', 'App\Http\Controllers\Frontend\AboutController@ourTeam');
 Route::name('aboutusFaq')->get('/about/aboutusFaq', 'App\Http\Controllers\Frontend\AboutController@aboutusFaq');
 Route::name('newsMedia')->get('/about/newsMedia', 'App\Http\Controllers\Frontend\AboutController@newsMedia');
-Route::name('blogs')->get('/about/blogs', 'App\Http\Controllers\Frontend\AboutController@blogs');
 
 Route::name('ourProject')->get('/ourProject', 'App\Http\Controllers\Frontend\OurProjectController@index');
 Route::name('ourProject/ongoing')->get('/ourProject/ongoing', 'App\Http\Controllers\Frontend\OurProjectController@projectType');

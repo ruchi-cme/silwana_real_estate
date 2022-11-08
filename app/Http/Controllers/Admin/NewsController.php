@@ -146,7 +146,7 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        $data = AboutUs::find($id);
+        $data = News::find($id);
         $userID   = auth()->user()->id;
         $data->update([
             'deleted'  => 1,  //Deleted

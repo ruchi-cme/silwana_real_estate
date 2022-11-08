@@ -1,10 +1,10 @@
-@extends('admin.layouts.main',['title' => 'Amenities'])
+@extends('admin.layouts.main',['title' => 'Feature Project'])
 
 @section('breadcrumb')
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.admin') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
-<li class="breadcrumb-item px-3 text-primary">Master</li>
-<li class="breadcrumb-item px-3"><a class="text-hover-primary " href="{{ route('admin.faq') }}">FAQ</a></li>
-<li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->faq_id) ?   'Edit' :  'Create' }}</li>
+<li class="breadcrumb-item px-3 text-primary">Home CMS</li>
+<li class="breadcrumb-item px-3"><a class="text-hover-primary " href="{{ route('admin.featureProjectHome') }}">Feature Project </a></li>
+<li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->id) ?   'Edit' :  'Create' }}</li>
 @endsection
 <style>
 .error{
@@ -26,7 +26,7 @@
 
                 @include('layouts.alerts.error')
 
-                <form class="form" method="POST" action=" {{ !empty( $editData->faq_id) ?  route('admin.faq.update') : route('admin.faq.store') }}" id="dataForm" enctype="multipart/form-data">
+                <form class="form" method="POST" action=" {{ !empty( $editData->id) ?  route('admin.featureProjectHome.update') : route('admin.featureProjectHome.store') }}" id="dataForm" enctype="multipart/form-data">
                     @csrf
                     <!--begin::Card-->
                     <div class="card shadow-lg card-flush pt-3 mb-5 mb-lg-10">
@@ -34,7 +34,7 @@
                         <div class="card-header">
                             <!--begin::Card title-->
                             <div class="card-title">
-                                <h2 class="fw-bolder">FAQ</h2>
+                                <h2 class="fw-bolder">Feature Project</h2>
                             </div>
                             <!--begin::Card title-->
                         </div>
@@ -88,13 +88,13 @@
 
                             <!--begin::Row-->
                             <div class="row text-center">
-                                <input type="hidden" name="faq_id" value="{{ !empty( $editData->faq_id) ? $editData->faq_id : '' }}" id="faq_id">
+                                <input type="hidden" name="id" value="{{ !empty( $editData->id) ? $editData->id : '' }}" id="id">
                                 <!--begin::Col-->
                                 <!--begin::Actions-->
                                 <div class="mb-0">
                                     <button type="button" data-form="amenityForm" class="btn btn-primary" id="create_button">
                                         <!--begin::Indicator-->
-                                        <span class="indicator-label">{{ !empty( $editData->faq_id) ?  'Update' : 'Create' }} FAQ</span>
+                                        <span class="indicator-label">{{ !empty( $editData->id) ?  'Update' : 'Create' }} Feature Project Home</span>
                                         <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         <!--end::Indicator-->
@@ -130,10 +130,12 @@
             $("#dataForm").validate({
                 ignore: '',
                 rules: {
+                    "title" :"required",
                     "name" :"required",
                     "detail" : "required",
                 },
                 messages: {
+                    "title" : "Please enter title",
                     "name" : "Please enter name",
                     "detail" :  "Please enter detail",
                 }

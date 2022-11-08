@@ -57,25 +57,29 @@
                 <div class="col-lg-12">
                     <div class="title text-center">
                         <span class="btn btn-2">About Us</span>
-                        <h2>{{$aboutus['page']}}</h2>
+                        <h2>{{$aboutus['name']}}</h2>
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="about-us-wrap">
                         <div class="about-us-img">
-                            <img src="{{ asset('images/page').'/'. $aboutus['page_image']}}" alt="about-us" />
+                            <img src="{{ asset('images/aboutUs').'/'. $aboutus['image']}}" alt="about-us" />
                         </div>
                             <div class="about-us-wrapper">
-                                <p>   {{$aboutus['detail']}} </p>
+                                <p>   {{$aboutus['detail'] }} </p>
                                 <div class="about-us-main">
-                                    @foreach ($aboutus['page_details'] as $row)
+
+                                    @php
+                                       $subtitle = json_decode($aboutus['sub_title']);
+                                    @endphp
+                                    @foreach ($subtitle as $row)
 
                                     <div class="about-us-detail">
                                         <div class="about-us-lists">
                                             <div class="about-us-lists-inner">
-                                                <img src="{{ asset('images/heading').'/'. $row['heading_image']}}" alt="about-list" />
+                                                <img src="{{ asset('images/front/about/home-icon.svg')  }}" alt="about-list" />
                                             </div>
-                                            <h6> {{$row['heading']}}</h6>
+                                            <h6> {{$row }}</h6>
                                         </div>
                                     </div>
                                     @endforeach
@@ -169,7 +173,7 @@
                         <div class="property-by-categories-detail">
                             <div>
                                 <h3>{{$cat['category_name']}}</h3>
-                                <a href="#" class="cmn-btn">GREATE DEAL AVAILABLE</a>
+                                <a href="{{route('ourProject')}}" class="cmn-btn">GREATE DEAL AVAILABLE</a>
                             </div>
                         </div>
                     </div>
@@ -177,7 +181,6 @@
                     @php
                         $i++;
                     @endphp
-
                 @endforeach
 
             </div>
@@ -392,13 +395,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
+                    @if(!empty($ourProject))
                     <div class="title">
-                        <span class="btn btn-2">Investment</span>
-                        @if(!empty($ourProject))
-                        <h2>{{ $ourProject['page'] }}</h2>
+                        <span class="btn btn-2">{{ $ourProject['title'] }}</span>
+                        <h2>{{ $ourProject['name'] }}</h2>
                         <p>  {{ $ourProject['detail'] }} </p>
-                        @endif
                     </div>
+                    @endif
                 </div>
                 @for($i=0; count($ourProjectList) > $i; $i++)
                     @if($i == 0 || $i == 3)
@@ -409,7 +412,7 @@
                                     <p>The perfect silwana residency</p>
                                 </div>
                                 <div class="inquiry-now-wrap">
-                                    <a href="#" class="cmn-btn">INQUIRY Now</a>
+                                    <a href="{{route('contactUs')}}" class="cmn-btn">INQUIRY Now</a>
                                 </div>
                             </div>
                         </div>
@@ -447,13 +450,14 @@
                     <h2>Our Amenities</h2>
                 </div>
                 @foreach($amenities as $aminity)
+                    @php $countProject = getCountAmenityProject($aminity['amenities_id']); @endphp
                 <div class="col-xl-3 col-lg-4 col-md-6">
                     <div class="our-amenities-wrap text-center">
                         <div class="our-amenities-img">
                             <img src="{{ asset('images/amenities').'/'.$aminity['amenity_image']}}" alt="">
                         </div>
                         <h6>{{$aminity['amenity_name']}}</h6>
-                        <p>4 Properties</p>
+                        <p>{{$countProject}} Properties</p>
                     </div>
                 </div>
                 @endforeach
@@ -660,12 +664,13 @@
             <img src="{{asset('images/front/home')}}/plan4.svg" class="our-amenities-plan img4" alt="">
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="title">
-                        <span class="btn btn-2">Upcoming Projects</span>
-                        @if(!empty($featureProject))
-                            <h2>{{ $featureProject['page'] }}</h2>
-                            <p>  {{ $featureProject['detail'] }} </p>
-                        @endif </div>
+                    @if(!empty($featureProject))
+                        <div class="title">
+                            <span class="btn btn-2">{{ $featureProject['title'] }}</span>
+                                <h2>{{ $featureProject['name'] }}</h2>
+                                <p>  {{ $featureProject['detail'] }} </p>
+                        </div>
+                    @endif
                 </div>
                 <div class="col-lg-12">
                     <div class="owl-carousel owl-theme project-feature">
@@ -696,7 +701,15 @@
                                                         </div>
                                                     </div>
                                                     <h3 > </h3>
-                                                    <a href="" class="cmn-btn">DOWNLOAD BROCHURE</a>
+
+                                                    @php
+                                                        $pdf = getProjectPdf($featurePro['project_id']);
+                                                         $imagePDFile  = '';
+                                                        if(!empty($pdf))
+                                                            $imagePDFile  =  !empty($pdf['title'] ) ? asset('images/project/pdf/').'/'.$pdf['title'] : ''
+
+                                                    @endphp
+                                                    <a   {{ !empty($imagePDFile) ? 'download' :'' }}  href="{{ $imagePDFile }}"   class="downloadBrochuretest cmn-btn">DOWNLOAD BROCHURE</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -714,6 +727,15 @@
     </section>
 @section('scripts')
     <script   src="{{ asset('js/front/custom/inquiry') }}/inquiry.js"> </script>
+    <script>
+        $('.downloadBrochuretest').on('click', function () {
+
+            if ($(this).attr('href').length < 1 || $(this).attr('href') == 'javascript:void(0)'){
+                $(this).attr('href','javascript:void(0)');
+                 alert('No Pdf of this project!');
+            }
+        });
+    </script>
 @endsection
 
 </x-base>

@@ -7,7 +7,7 @@
 <li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->aboutus_id) ?   'Edit' :  'Create' }}</li>
 @endsection
 <style>
-.error{
+.error , .inputFileError{
     color: #FF0000;
 }
 </style>
@@ -82,13 +82,13 @@
                                     <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
                                         <!--begin::Preview existing image-->
                                         @php
-                                            $path =  !empty($editData->image) ? asset('images/ourTeam' ).'/'.$editData->image : ''  ;
+                                            $path =  !empty($editData->image) ? asset('images/aboutUs' ).'/'.$editData->image : ''  ;
                                             $test =   "background-image:url('$path')"  ;  @endphp
                                         <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($editData->image) ? $test :'"background-image : none'}}"></div>
                                         <!--end::Preview existing image-->
                                         <!--begin::Label-->
-                                        <label class="inputFileError errorMsg" for="direction" style="">  </label>
-                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
+                                        <label class="inputFileError  errorMsg" for="direction" style="">  </label>
+                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="{{  !empty($editData->image) ? 'Change' : 'Upload' }} image">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
                                             <input type="file" value="{{ !empty($editData->image) ? $editData->image : '' }}" name="image" accept=".png, .jpg, .jpeg" />
@@ -160,21 +160,33 @@
                 rules: {
                     "name" :"required",
                     "detail" : "required",
-                    "image" : "required"
                 },
                 messages: {
                     "name" : "Please enter name",
                     "detail" :  "Please enter detail",
-                    "image" : "Please select image"
                 }
             });
 
             $('#create_button').on('click', function(event) {
+
+                var err = 1;
+                $(document).find("div.imageBgDiv").each(function() {
+
+                    var bgImg = $(this).css('background-image').trim();
+
+                    if (bgImg == 'url("about:invalid")' || bgImg == 'none'  ) {
+
+                        $(this).next('.inputFileError').html('Required');
+                        err++;
+                    } else {
+                        $(this).next('.inputFileError').html('');
+                    }
+                });
                 // prevent default submit action
                 event.preventDefault();
 
                 // test if form is valid
-                if($('#dataForm').valid()  ) { console.log(2);
+                if($('#dataForm').valid() && err == 1 ) { console.log(2);
                     $( '#dataForm' ).submit();
                 } else { console.log(3);
                     console.log("does not validate");

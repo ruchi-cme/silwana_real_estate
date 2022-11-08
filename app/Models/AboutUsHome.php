@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FeatureProjectHome extends Model
+class AboutUsHome extends Model
 {
     use HasFactory;
     public $timestamps    = false;
@@ -16,9 +16,10 @@ class FeatureProjectHome extends Model
      * @var array
      */
     protected $fillable = [
-        'title',
         'name',
         'detail',
+        'image',
+        'sub_title',
         'status',
         'created_by',
         'created_date',

@@ -1,14 +1,13 @@
 <x-base>
     <x-banner title="Property Details" page="Property Details"></x-banner>
     @php  $imagePDFile = '';  @endphp
-        @if($pdf)
+        @if(!empty($pdf))
             @php
        $imagePDFile  =  !empty($pdf['title'] ) ? asset('images/project/pdf/').'/'.$pdf['title'] : ''
-
-            @endphp
-
+         @endphp
     @endif
-    @if ($projectList)
+
+    @if (!empty($projectList))
 
         <!-- property-detail-main -->
         <section class="property-detail-main">
@@ -19,7 +18,7 @@
                             <input type="hidden" name="project_id" id="project_id" value="{{ $projectList['project_id'] }}">
                             <span class="btn btn-2">{{ $projectList['category_name'] }}</span>
                             <h2>{{ $projectList['project_name'] }}</h2>
-                            <h5><img src="{{ asset('/images/front/location.svg') }}" class="location-image" alt="location" />  {{ $address['address'] }} </h5>
+                            <h5><img src="{{ asset('/images/front/location.svg') }}" class="location-image" alt="location" /> {{ !empty($address['address']) ? $address['address'] : '' }} </h5>
                             <p> {{ $projectList['project_detail'] }}</p>
                         </div>
                     </div>

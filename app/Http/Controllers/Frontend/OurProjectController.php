@@ -28,11 +28,13 @@ class OurProjectController extends Controller
         $blockData     = getBlockData($project_id);
         $bookingType = Config::get('constants.booking_type');
         $paymentType = Config::get('constants.payment_type');
-        $pdf = ProjectImage::select(['project_image_id', 'title','path','type'])
+        $pdf = getProjectPdf($projectList['project_id']);
+
+        /*ProjectImage::select(['project_image_id', 'title','path','type'])
             ->where('project_id' ,  $projectList['project_id'])
             ->where('type' ,  1)
             ->get()
-            ->first();
+            ->first();*/
 
 
         return view('front.propertyDetail',compact('projectList',

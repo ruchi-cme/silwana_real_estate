@@ -3,7 +3,7 @@
 use App\Models\{Amenities, Category, Project, Block, Silwana,SilwanaDetailMapping,ContactUs};
 use App\Models\{FloorUnitMapping, ProjectImage, ProjUnitImage, FloorDetail,Proj_ameni_mapping};
 use App\Models\{Block_name_mapping, Booking, Project_address_detail, BlockFloorMapping,Builder};
-use App\Models\{AboutUs, Faq, News ,Media,  ourTeam};
+use App\Models\{AboutUs, Faq, News ,Media,  ourTeam, FeatureProjectHome , OurProjectHome, AboutUsHome};
 use Illuminate\Support\Facades\DB;
 
 if(!function_exists("getCategory")){
@@ -556,6 +556,7 @@ if(!function_exists("getFaq")) {
         return $data;
     }
 }
+
 if(!function_exists("getNews")) {
 
     function getNews()
@@ -567,6 +568,7 @@ if(!function_exists("getNews")) {
         return $data;
     }
 }
+
 if(!function_exists("getMedia")) {
 
     function getMedia()
@@ -578,4 +580,71 @@ if(!function_exists("getMedia")) {
         return $data;
     }
 }
+
+if(!function_exists("getAboutUsHome")) {
+
+    function getAboutUsHome()
+    {
+        $data = AboutUsHome::where('deleted',0)
+            ->where('status' , 1)
+            ->get()->first();
+
+        return $data;
+    }
+}
+
+if(!function_exists("getOurProjectHome")) {
+
+    function getOurProjectHome()
+    {
+        $data = OurProjectHome::where('deleted',0)
+            ->where('status' , 1)
+            ->get()->first();
+
+        return $data;
+    }
+}
+
+if(!function_exists("getFeatureProjectHome")) {
+
+    function getFeatureProjectHome()
+    {
+        $data = FeatureProjectHome::where('deleted',0)
+            ->where('status' , 1)
+            ->get()->first();
+
+        return $data;
+    }
+}
+
 //CMS END
+
+if(!function_exists("getCountAmenityProject")){
+
+    function getCountAmenityProject($amenities_id) {
+
+        $projectData  = Proj_ameni_mapping::leftJoin('project_master', 'project_master.project_id', '=', 'proj_ameni_mappings.project_id')
+            ->select([ 'project_master.project_id'])
+            ->where('project_master.status' , 1)
+            ->where('project_master.deleted' , 0)
+            ->where('proj_ameni_mappings.status' , 1)
+            ->where('proj_ameni_mappings.amenities_id',$amenities_id)
+            ->get();
+        $countProject = $projectData->count();
+        return $countProject;
+
+    }
+}
+
+if(!function_exists("getProjectPdf")){
+
+    function getProjectPdf($project_id)
+    {
+        $data =  ProjectImage::select(['project_image_id', 'title', 'path', 'type'])
+            ->where('project_id',$project_id)
+            ->where('type', 1)
+            ->get()
+            ->first();
+        return $data;
+    }
+}

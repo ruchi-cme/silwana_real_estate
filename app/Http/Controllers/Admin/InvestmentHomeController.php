@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Media;
+use App\Models\InvestmentHome;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class MediaController extends Controller
+class InvestmentHomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,26 +21,17 @@ class MediaController extends Controller
             /* Current Login User ID */
             $userID = auth()->user()->id;
 
-            $dbData = Media::select([ 'media_id','name','image_video_title','type','status' ])
+            $dbData = InvestmentHome::select([ 'id','name','image_video_title','type','status' ])
                 ->where('deleted',0)
-                ->orderBy("media_id",'DESC')
+                ->orderBy("id",'DESC')
                 ->get();
             $data = $dbData->map(function ($data) {
 
-
-                if($data->type == 1 ){
-
-                    $path = asset('images/media/image')."/".$data->image_video_title;
-                }
-                else {
-
-                    $path = asset('images/media/video')."/".$data->image_video_title;
-                }
                 return [
                     'id'                 => $data->media_id,
                     'name'               => $data->name,
                     'type'              =>  $data->type ,
-                    'image'              => $path,
+
                     'status'             => !empty($data->status) && ($data->status == 1) ? 'Active' : 'Inctive',
                     'created_date'       => $data->created_date
                 ];
@@ -93,7 +84,7 @@ class MediaController extends Controller
                 $insert[$key]['status'] = 1;
                 $insert[$key]['created_by'] = $userID;
             }
-          Media::insert($insert);
+            Media::insert($insert);
         }
 
         /******* Insert Images *********/

@@ -7,7 +7,7 @@
 <li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->news_id) ?   'Edit' :  'Create' }}</li>
 @endsection
 <style>
-.error{
+.error , .inputFileError{
     color: #FF0000;
 }
 </style>
@@ -70,19 +70,19 @@
                             </div>
                             <!--end::Row-->
 
-                            <!--begin::Row-->
+                            <!--begin::Row ->
                             <div class="row mb-8">
-                                <!--begin::Col-->
+                                <! -begin::Col ->
                                 <div class="col-xl-3">
                                     <div class="fs-6 fw-bold mt-2 mb-3"> Detail</div>
                                 </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
+                                <!- end::Col >
+                                <!- begin::Col ->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
                                     <textarea placeholder="Enter Detail" name="detail" class="form-control form-control-solid h-100px" >{{ !empty( $editData->detail) ? $editData->detail : '' }}</textarea>
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
-                            <!--end::Row-->
+                            <!- end::Row-->
 
                             <!--begin::Row-->
                             <div class="row">
@@ -173,7 +173,6 @@
                 ignore: '',
                 rules: {
                     "name" :"required",
-                    "image" : "required",
                     link : {
                         required: true,
                         url: true
@@ -181,16 +180,30 @@
                 },
                 messages: {
                     "name" : "Please enter name",
-                    "image" : "Please select image"
                 }
             });
 
             $('#create_button').on('click', function(event) {
+
+                var err = 1;
+                $(document).find("div.imageBgDiv").each(function() {
+
+                    var bgImg = $(this).css('background-image').trim();
+
+                    if (bgImg == 'url("about:invalid")' || bgImg == 'none'  ) {
+
+                        $(this).next('.inputFileError').html('Required');
+                        err++;
+                    } else {
+                        $(this).next('.inputFileError').html('');
+                    }
+                });
+
                 // prevent default submit action
                 event.preventDefault();
 
                 // test if form is valid
-                if($('#dataForm').valid()  ) { console.log(2);
+                if($('#dataForm').valid() && err == 1  ) { console.log(2);
                     $( '#dataForm' ).submit();
                 } else { console.log(3);
                     console.log("does not validate");

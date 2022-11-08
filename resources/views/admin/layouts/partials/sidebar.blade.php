@@ -101,7 +101,6 @@
                             </div>
                         @endcan
                     </div>
-
                 </div>
 
                 <div data-kt-menu-trigger="click" class="menu-item {{ Route::is('admin.aboutUsHome*') || Route::is('admin.investmentHome*')  || Route::is('admin.ourProjectHome*')  || Route::is('admin.featureProjectHome*')  ? 'show' : '' }} menu-accordion mb-1">
@@ -109,7 +108,7 @@
                         <span class="menu-icon">
                             <i class="fa fa-project-diagram"></i>
                         </span>
-                        <span class="menu-title">Home</span>
+                        <span class="menu-title">Home CMS</span>
                         <span class="menu-arrow"></span>
                     </span>
 
@@ -126,7 +125,7 @@
                         @endcan
                     </div>
 
-                    <div class="menu-sub menu-sub-accordion">
+                    <!--<div class="menu-sub menu-sub-accordion">
                         @can('investmentHome-view')
                             <div class="menu-item {{ Route::is('admin.investmentHome*') ? 'show' : '' }}">
                                 <a class="menu-link" href="{{ route('admin.investmentHome') }}">
@@ -137,7 +136,7 @@
                                 </a>
                             </div>
                         @endcan
-                    </div>
+                    </div> -->
 
                     <div class="menu-sub menu-sub-accordion">
                         @can('ourProjectHome-view')

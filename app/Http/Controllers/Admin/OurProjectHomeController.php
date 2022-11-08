@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\FeatureProjectHome;
+use App\Models\OurProjectHome;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class FeatureProjectHomeController extends Controller
+class OurProjectHomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +21,7 @@ class FeatureProjectHomeController extends Controller
             /* Current Login User ID */
             $userID = auth()->user()->id;
 
-            $dbData = FeatureProjectHome::select([ 'id','name','detail','title','status' ])
+            $dbData = OurProjectHome::select([ 'id','name','detail','title','status' ])
                 ->where('deleted',0)
                 ->orderBy("id",'DESC')
                 ->get();
@@ -38,7 +38,7 @@ class FeatureProjectHomeController extends Controller
             });
             return DataTables::of($data)->toJson();
         }
-        return view('admin.featureProjectHome.index');
+        return view('admin.ourProjectHome.index');
     }
 
     /**
@@ -48,7 +48,7 @@ class FeatureProjectHomeController extends Controller
      */
     public function create()
     {
-        return view('admin.featureProjectHome.create' );
+        return view('admin.ourProjectHome.create' );
     }
 
     /**
@@ -74,8 +74,8 @@ class FeatureProjectHomeController extends Controller
             'status'      => 1,
             'created_by'  => $userID
         ];
-        FeatureProjectHome::create($data);
-        return redirect()->route('admin.featureProjectHome')->with('inserted','Feature Project Created👍');
+        OurProjectHome::create($data);
+        return redirect()->route('admin.ourProjectHome')->with('inserted','Our Project Created👍');
     }
 
     /**
@@ -86,8 +86,8 @@ class FeatureProjectHomeController extends Controller
      */
     public function edit(Request $request)
     {
-        $editData = FeatureProjectHome::find($request->id);
-        return view('admin.featureProjectHome.create' ,compact('editData'));
+        $editData = OurProjectHome::find($request->id);
+        return view('admin.ourProjectHome.create' ,compact('editData'));
     }
 
     /**
@@ -98,7 +98,7 @@ class FeatureProjectHomeController extends Controller
      */
     public function update(Request $request)
     {
-        $updateData  = FeatureProjectHome::find( $request->id);
+        $updateData  = OurProjectHome::find( $request->id);
 
         $userID      = auth()->user()->id;
 
@@ -110,7 +110,7 @@ class FeatureProjectHomeController extends Controller
             'modified_by'   =>  $userID,
             'modified_date' => now()
         ]);
-        return redirect()->route('admin.featureProjectHome')->with('updated','Feature Project Updated 👍');
+        return redirect()->route('admin.ourProjectHome')->with('updated','Our Project Updated 👍');
     }
     /**
      * Remove the specified resource from storage.
@@ -119,14 +119,14 @@ class FeatureProjectHomeController extends Controller
      */
     public function destroy($id)
     {
-        $data = FeatureProjectHome::find($id);
+        $data = OurProjectHome::find($id);
         $userID   = auth()->user()->id;
         $data->update([
             'deleted'  => 1,  //Deleted
             'deleted_date'  => now(),
             'deleted_by'    =>  $userID,
         ]);
-        return redirect()->route('admin.featureProjectHome')->with('success','Feature Project Deleted');
+        return redirect()->route('admin.ourProjectHome')->with('success','Our Project Deleted');
     }
 
     /**
@@ -137,7 +137,7 @@ class FeatureProjectHomeController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $updateData = FeatureProjectHome::find($request->id);
+        $updateData = OurProjectHome::find($request->id);
         $userID   = auth()->user()->id;
         $status   =  ( !empty($updateData->status) && $updateData->status == 1 ) ?  2 :  1 ;
 
@@ -147,6 +147,6 @@ class FeatureProjectHomeController extends Controller
             'modified_date' => now()
         ]);
 
-        return redirect()->route('admin.featureProjectHome')->with('success','Feature Project Status Changed');
+        return redirect()->route('admin.ourProjectHome')->with('success','Our Project Status Changed');
     }
 }

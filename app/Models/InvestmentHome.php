@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FeatureProjectHome extends Model
+class InvestmentHome extends Model
 {
     use HasFactory;
     public $timestamps    = false;
@@ -19,6 +19,9 @@ class FeatureProjectHome extends Model
         'title',
         'name',
         'detail',
+        'sub_title',
+        'type',
+        'image_video_title',
         'status',
         'created_by',
         'created_date',

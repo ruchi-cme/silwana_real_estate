@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\FeatureProjectHome;
+use App\Models\AboutUsHome;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class FeatureProjectHomeController extends Controller
+class AboutUsHomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +21,7 @@ class FeatureProjectHomeController extends Controller
             /* Current Login User ID */
             $userID = auth()->user()->id;
 
-            $dbData = FeatureProjectHome::select([ 'id','name','detail','title','status' ])
+            $dbData = AboutUsHome::select([ 'id','name', 'detail','image','status' ])
                 ->where('deleted',0)
                 ->orderBy("id",'DESC')
                 ->get();
@@ -31,14 +31,14 @@ class FeatureProjectHomeController extends Controller
                     'id'             => $data->id,
                     'name'           => $data->name,
                     'detail'         => $data->detail,
-                    'title'          =>  $data->title,
+                    'image'          => asset('images/aboutUs')."/".$data->image,
                     'status'         => !empty($data->status) && ($data->status == 1) ? 'Active' : 'Inctive',
                     'created_date'   => $data->created_date
                 ];
             });
             return DataTables::of($data)->toJson();
         }
-        return view('admin.featureProjectHome.index');
+        return view('admin.aboutUsHome.index');
     }
 
     /**
@@ -48,7 +48,7 @@ class FeatureProjectHomeController extends Controller
      */
     public function create()
     {
-        return view('admin.featureProjectHome.create' );
+        return view('admin.aboutUsHome.create' );
     }
 
     /**
@@ -62,20 +62,28 @@ class FeatureProjectHomeController extends Controller
         $request->validate([
             'name'   => 'required',
             'detail' => 'required',
-            'title'   =>  'required',
         ]);
-        /* Insert AboutUs data */
+        /* Insert FAQ data */
         $userID = auth()->user()->id;
+        $Image  = null;
 
+        if ($image = $request->file('image')) {
+            $destinationPath = public_path('images/aboutUs');
+            $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $Image);
+        }
+
+        $sub_title =  json_encode($request->sub_title);
         $data  = [
             'name'        => $request->name,
             'detail'      => $request->detail,
-            'title'       =>  $request->title,
+            'sub_title'   => $sub_title,
+            'image'       => $Image,
             'status'      => 1,
             'created_by'  => $userID
         ];
-        FeatureProjectHome::create($data);
-        return redirect()->route('admin.featureProjectHome')->with('inserted','Feature Project Created👍');
+        AboutUsHome::create($data);
+        return redirect()->route('admin.aboutUsHome')->with('inserted','AboutUs Created👍');
     }
 
     /**
@@ -86,8 +94,9 @@ class FeatureProjectHomeController extends Controller
      */
     public function edit(Request $request)
     {
-        $editData = FeatureProjectHome::find($request->id);
-        return view('admin.featureProjectHome.create' ,compact('editData'));
+        $editData = AboutUsHome::find($request->id);
+
+        return view('admin.aboutUsHome.create' ,compact('editData'));
     }
 
     /**
@@ -98,19 +107,40 @@ class FeatureProjectHomeController extends Controller
      */
     public function update(Request $request)
     {
-        $updateData  = FeatureProjectHome::find( $request->id);
-
+        $updateData  = AboutUsHome::find( $request->id);
         $userID      = auth()->user()->id;
+        /* Insert Page data */
+        $input = $request->all();
 
+        $image = $request->file('image');
+        $editImage = $request->edit_image;
+        if (!empty($image) ) {
 
+            $destinationPath = public_path('images/aboutUs');
+
+            $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $Image);
+            if (!empty($editImage)) {
+                @unlink( public_path('images/aboutUs/') . $editImage);
+            }
+        }
+        elseif (!empty($editImage)) {
+            $Image = $editImage;
+        }
+        else
+        {
+            $Image = null;
+        }
+        $sub_title =  json_encode($request->sub_title);
         $updateData->update([
-            'name'  => $request->name,
-            'detail'=> $request->detail,
-            'title' => $request->title,
-            'modified_by'   =>  $userID,
+            'name'          => $request->name,
+            'detail'        => $request->detail,
+            'sub_title'     => $sub_title,
+            'image'         => $Image,
+            'modified_by'   => $userID,
             'modified_date' => now()
         ]);
-        return redirect()->route('admin.featureProjectHome')->with('updated','Feature Project Updated 👍');
+        return redirect()->route('admin.aboutUsHome')->with('updated','About Us Updated 👍');
     }
     /**
      * Remove the specified resource from storage.
@@ -119,14 +149,14 @@ class FeatureProjectHomeController extends Controller
      */
     public function destroy($id)
     {
-        $data = FeatureProjectHome::find($id);
+        $data = AboutUsHome::find($id);
         $userID   = auth()->user()->id;
         $data->update([
             'deleted'  => 1,  //Deleted
             'deleted_date'  => now(),
             'deleted_by'    =>  $userID,
         ]);
-        return redirect()->route('admin.featureProjectHome')->with('success','Feature Project Deleted');
+        return redirect()->route('admin.aboutUsHome')->with('success','About Us Deleted');
     }
 
     /**
@@ -137,7 +167,7 @@ class FeatureProjectHomeController extends Controller
 
     public function changeStatus(Request $request)
     {
-        $updateData = FeatureProjectHome::find($request->id);
+        $updateData = AboutUsHome::find($request->id);
         $userID   = auth()->user()->id;
         $status   =  ( !empty($updateData->status) && $updateData->status == 1 ) ?  2 :  1 ;
 
@@ -147,6 +177,6 @@ class FeatureProjectHomeController extends Controller
             'modified_date' => now()
         ]);
 
-        return redirect()->route('admin.featureProjectHome')->with('success','Feature Project Status Changed');
+        return redirect()->route('admin.aboutUsHome')->with('success','About Us Status Changed');
     }
 }

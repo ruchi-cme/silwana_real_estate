@@ -42,7 +42,7 @@
 }
 
 .accordion-button:not(.collapsed)::after {
-    background-image: url('../images/faq/minus.svg');
+    background-image: url('/images/front/faq/minus.svg');
 }
 
 .accordion-button::after {
@@ -54,7 +54,7 @@
     background-repeat: no-repeat;
     background-size: 15px;
     background-position: center;
-    background-image: url('../images/faq/plus.svg');
+    background-image: url('/images/front/faq/plus.svg');
 }
 
 .accordion-button {

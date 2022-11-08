@@ -26,7 +26,7 @@
                                         <div class="looking-for-house-inner">
                                             <h2>{{$row['heading']}}</h2>
                                             <p>{{$row['heading_detail']}}</p>
-                                            <a href="{{ route('ourProject/ongoing') }}" class="cmn-btn">EXPLORE PROPERTIES</a>
+                                            <a href="{{ route('ourProject') }}" class="cmn-btn">EXPLORE PROPERTIES</a>
                                         </div>
                                     </div>
                                 @endforeach
@@ -52,8 +52,10 @@
                     <ul>
                         <li><a href="{{ route('home') }}">Home</a></li>
                         <li><a href="{{ route('about') }}">About us</a></li>
-                        <li><a href="{{ route('propertyList') }}">Property on Sale</a></li>
-                        <li><a href="{{ route('myBooking') }}">My Booking</a></li>
+                        <li><a href="{{ route('ourProject') }}">Our Project</a></li>
+                        @if (Auth::guard('front')->check())
+                            <li><a href="{{ route('myBooking') }}">My Booking</a></li>
+                        @endif
                         <li><a href="{{ route('contactUs') }}">Contact us</a></li>
                     </ul>
                 </div>
