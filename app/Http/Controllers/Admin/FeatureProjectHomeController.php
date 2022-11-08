@@ -16,9 +16,12 @@ class FeatureProjectHomeController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->ajax())
+        $editData = getFeatureProjectHome();
+        return view('admin.featureProjectHome.create' ,compact('editData'));
+
+       /* if($request->ajax())
         {
-            /* Current Login User ID */
+            // Current Login User ID  /
             $userID = auth()->user()->id;
 
             $dbData = FeatureProjectHome::select([ 'id','name','detail','title','status' ])
@@ -38,7 +41,7 @@ class FeatureProjectHomeController extends Controller
             });
             return DataTables::of($data)->toJson();
         }
-        return view('admin.featureProjectHome.index');
+        return view('admin.featureProjectHome.index');*/
     }
 
     /**

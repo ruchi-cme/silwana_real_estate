@@ -241,22 +241,35 @@
                     "name" :"required",
                     "detail" : "required",
                     "sub_title[]" : "required",
-                    "image" : "required"
                 },
                 messages: {
                     "name" : "Please enter name",
                     "detail" :  "Please enter detail",
                     "sub_title[]" : "Please enter title",
-                    "image" : "Please select image"
                 }
             });
 
             $('#create_button').on('click', function(event) {
+
+                var err = 1;
+                $(document).find("div.imageBgDiv").each(function() {
+
+                    var bgImg = $(this).css('background-image').trim();
+
+                    if (bgImg == 'url("about:invalid")' || bgImg == 'none'  ) {
+
+                        $(this).next('.inputFileError').html('Required');
+                        err++;
+                    } else {
+                        $(this).next('.inputFileError').html('');
+                    }
+                });
+
                 // prevent default submit action
                 event.preventDefault();
 
                 // test if form is valid
-                if($('#dataForm').valid()  ) { console.log(2);
+                if($('#dataForm').valid()  && err == 1) {
                     $( '#dataForm' ).submit();
                 } else { console.log(3);
                     console.log("does not validate");

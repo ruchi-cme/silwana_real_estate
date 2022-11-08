@@ -7,7 +7,7 @@
 <li class="breadcrumb-item px-3 text-primary">{{ !empty( $editData->category_id) ?   'Edit' :  'Create' }}</li>
 @endsection
 <style>
-    .error{
+    .error ,  .inputFileError{
         color: #FF0000;
     }
 </style>
@@ -65,49 +65,43 @@
                                     <div class="fs-6 fw-bold mt-2 mb-3 required">Image</div>
                                 </div>
                                 <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="file" class="form-control form-control-solid" name="category_image" id="category_image" >
-                                    <input type="hidden" name="edit_category_image" value="{{ !empty( $editData->category_image) ? $editData->category_image : '' }}" id="edit_category_image">
+                                <!--begin::Col--> <div class="col-md-3 mb-3">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
+                                        <!--begin::Preview existing image-->
+                                        @php
+                                            $path =  !empty($editData->category_image) ? asset('images/category' ).'/'.$editData->category_image : ''  ;
+                                            $test =   "background-image:url('$path')"  ;  @endphp
+                                        <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($editData->category_image) ? $test :'"background-image : none'}}"></div>
+                                        <!--end::Preview existing image-->
+                                        <!--begin::Label-->
+                                        <label class="inputFileError errorMsg" for="direction" style="">  </label>
+                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="{{  !empty($editData->category_image) ? 'Change' : 'Upload' }} image">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" value="{{ !empty($editData->category_image) ? $editData->category_image : '' }}" name="category_image" accept=".png, .jpg, .jpeg" />
+                                            <input type="hidden" name="edit_category_image" value="{{ !empty( $editData->category_image) ? $editData->category_image : '' }}" id="edit_category_image">
+                                            <input type="hidden" name="avatar_remove" />
+                                            <!--end::Inputs-->
+                                        </label>
 
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
-
-
-                            <!--begin::Row-->
-                            <?php if (!empty( $editData->category_image)) {
-                                ?>
-                            <div class="row">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3">Preview Image</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-
-                                    <img src="{{ asset('images/category').'/'.$editData->category_image }}" width="100px" height="100px">
-
-                                </div>
-                            </div>
-                                <?php
-                            }  ?>
-                                <!--end::Row-->
-
-                            <!--begin::Row-->
-                            <div class="row previewImage" style="display: none">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3">Current Selected Preview Image</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <img id="preview-image-before-upload" src=""   alt="preview image" style="max-height: 250px;">
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
+                                                                    <i class="bi bi-x fs-2"></i>
+                                                                </span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
+                                                                    <i class="bi bi-x fs-2"></i>
+                                                                </span>
+                                        <!--end::Remove-->
+                                    </div>
+                                    <!--end::Image input-->
                                 </div>
                             </div>
                             <!--end::Row-->
+
 
 
                         </div>
@@ -157,22 +151,34 @@
                 ignore: '',
                 rules: {
                     "category_name" :"required",
-                    "category_image":"required",
+
                 },
                 messages: {
                     "category_name" : "Please enter category",
-                    "category_image": "Please select image"
+
                 }
             });
 
             $('#create_button').on('click', function(event) {
 
+                var err = 1;
+                $(document).find("div.imageBgDiv").each(function() {
 
+                    var bgImg = $(this).css('background-image').trim();
+
+                    if (bgImg == 'url("about:invalid")' || bgImg == 'none'  ) {
+
+                        $(this).next('.inputFileError').html('Required');
+                        err++;
+                    } else {
+                        $(this).next('.inputFileError').html('');
+                    }
+                });
                 // prevent default submit action
                 event.preventDefault();
 
                 // test if form is valid
-                if($('#categoryForm').valid()  ) { console.log(2);
+                if($('#categoryForm').valid() && err == 1 ) { console.log(2);
                     $( '#categoryForm' ).submit();
                 } else { console.log(3);
                     console.log("does not validate");
@@ -180,16 +186,7 @@
                 }
             });
 
-            $('#preview-image-before-upload').attr('src','');
-            $('#category_image').change(function(){
 
-                $('.previewImage').css('display','block');
-                let reader = new FileReader();
-                reader.onload = (e) => {
-                    $('#preview-image-before-upload').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(this.files[0]);
-            });
         });
 
         $(document).on('select2:open', () => {

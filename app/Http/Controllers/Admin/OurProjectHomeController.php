@@ -16,29 +16,31 @@ class OurProjectHomeController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->ajax())
-        {
-            /* Current Login User ID */
+        $editData = getOurProjectHome();
+        return view('admin.ourProjectHome.create' ,compact('editData'));
+        /*  if($request->ajax())
+         {
+            // Current Login User ID
             $userID = auth()->user()->id;
 
-            $dbData = OurProjectHome::select([ 'id','name','detail','title','status' ])
-                ->where('deleted',0)
-                ->orderBy("id",'DESC')
-                ->get();
-            $data = $dbData->map(function ($data){
+             $dbData = OurProjectHome::select([ 'id','name','detail','title','status' ])
+                 ->where('deleted',0)
+                 ->orderBy("id",'DESC')
+                 ->get();
+             $data = $dbData->map(function ($data){
 
-                return [
-                    'id'             => $data->id,
-                    'name'           => $data->name,
-                    'detail'         => $data->detail,
-                    'title'          =>  $data->title,
-                    'status'         => !empty($data->status) && ($data->status == 1) ? 'Active' : 'Inctive',
-                    'created_date'   => $data->created_date
-                ];
-            });
-            return DataTables::of($data)->toJson();
-        }
-        return view('admin.ourProjectHome.index');
+                 return [
+                     'id'             => $data->id,
+                     'name'           => $data->name,
+                     'detail'         => $data->detail,
+                     'title'          =>  $data->title,
+                     'status'         => !empty($data->status) && ($data->status == 1) ? 'Active' : 'Inctive',
+                     'created_date'   => $data->created_date
+                 ];
+             });
+             return DataTables::of($data)->toJson();
+         }
+         return view('admin.ourProjectHome.index');*/
     }
 
     /**
@@ -98,19 +100,22 @@ class OurProjectHomeController extends Controller
      */
     public function update(Request $request)
     {
-        $updateData  = OurProjectHome::find( $request->id);
 
+        $updateData  = OurProjectHome::find( $request->id);
         $userID      = auth()->user()->id;
 
-
         $updateData->update([
-            'name'  => $request->name,
-            'detail'=> $request->detail,
-            'title' => $request->title,
+            'name'          => $request->name,
+            'detail'        => $request->detail,
+            'title'         => $request->title,
             'modified_by'   =>  $userID,
             'modified_date' => now()
         ]);
-        return redirect()->route('admin.ourProjectHome')->with('updated','Our Project Updated 👍');
+        $editData = OurProjectHome::find($request->id);
+        return redirect()->route('admin.ourProjectHome')->with('success','Our Project Updated 👍');
+      //  return view('admin.ourProjectHome.create' ,compact('editData'));
+
+        //return redirect()->route('admin.ourProjectHome')->with('updated','Our Project Updated 👍');
     }
     /**
      * Remove the specified resource from storage.

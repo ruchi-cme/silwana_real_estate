@@ -94,7 +94,7 @@
                                 <div class="mb-0">
                                     <button type="button" data-form="amenityForm" class="btn btn-primary" id="create_button">
                                         <!--begin::Indicator-->
-                                        <span class="indicator-label">{{ !empty( $editData->id) ?  'Update' : 'Create' }} Feature Project Home</span>
+                                        <span class="indicator-label">{{ !empty( $editData->id) ?  'Update' : 'Create' }} Feature Project</span>
                                         <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         <!--end::Indicator-->

@@ -6,7 +6,11 @@
 <li class="breadcrumb-item px-3"><a class="text-hover-primary " href="{{ route('admin.contactus') }}">Contact Us</a></li>
 <li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->contactus_id) ?   'Edit' :  'Create' }}</li>
 @endsection
-
+<style>
+    .error ,  .inputFileError{
+        color: #FF0000;
+    }
+</style>
 @section('content')
 <!--begin::Post-->
 <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -57,7 +61,7 @@
                             <div class="row mb-8">
                                 <!--begin::Col-->
                                 <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required">Description</div>
+                                    <div required class="fs-6 fw-bold mt-2 mb-3 required">Description</div>
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
@@ -71,66 +75,61 @@
                             <div class="row mb-8">
                                 <!--begin::Col-->
                                 <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3  ">  Notes </div>
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required">  Notes </div>
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" placeholder="Enter Notes" class="form-control form-control-solid" name="notes" value="{{ !empty( $editData->notes) ? $editData->notes : '' }}" >
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
-
-                            <!--begin::Row-->
-                            <div class="row">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3">Image</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="file" class="form-control form-control-solid" name="image" id="image" >
-                                    <input type="hidden" name="edit_image" value="{{ !empty( $editData->image) ? $editData->image : '' }}" id="edit_image">
-
+                                    <input required type="text" placeholder="Enter Notes" class="form-control form-control-solid" name="notes" value="{{ !empty( $editData->notes) ? $editData->notes : '' }}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
 
 
                             <!--begin::Row-->
-                            <?php if (!empty( $editData->image)) {
-                                ?>
                             <div class="row">
                                 <!--begin::Col-->
                                 <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3">Preview Image</div>
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required">Image</div>
                                 </div>
                                 <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                <!--begin::Col--> <div class="col-md-3 mb-3">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
+                                        <!--begin::Preview existing image-->
+                                        @php
+                                            $path =  !empty($editData->image) ? asset('images/contactus' ).'/'.$editData->image : ''  ;
+                                            $test =   "background-image:url('$path')"  ;  @endphp
+                                        <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($editData->image) ? $test :'"background-image : none'}}"></div>
+                                        <!--end::Preview existing image-->
+                                        <!--begin::Label-->
+                                        <label class="inputFileError errorMsg" for="direction" style="">  </label>
+                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="{{  !empty($editData->image) ? 'Change' : 'Upload' }} image">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" value="{{ !empty($editData->image) ? $editData->image : '' }}" name="image" accept=".png, .jpg, .jpeg" />
+                                            <input type="hidden" name="edit_image" value="{{ !empty( $editData->image) ? $editData->image : '' }}" id="edit_image">
+                                            <input type="hidden" name="avatar_remove" />
+                                            <!--end::Inputs-->
+                                        </label>
 
-                                    <img src="{{ asset('images/contactus').'/'.$editData->image }}" width="100px" height="100px">
-
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
+                                                                    <i class="bi bi-x fs-2"></i>
+                                                                </span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
+                                                                    <i class="bi bi-x fs-2"></i>
+                                                                </span>
+                                        <!--end::Remove-->
+                                    </div>
+                                    <!--end::Image input-->
                                 </div>
                             </div>
-                                <?php
-                            }  ?>
                             <!--end::Row-->
 
-                            <!--begin::Row-->
-                            <div class="row previewImage" style="display: none">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3">Current Selected Preview Image</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <img id="preview-image-before-upload" src=""   alt="preview image" style="max-height: 250px;">
-                                </div>
-                            </div>
-                            <!--end::Row-->
 
                             <!--begin::Row-->
                             <div class="row text-center">
@@ -138,7 +137,7 @@
                                 <!--begin::Col-->
                                 <!--begin::Actions-->
                                 <div class="mb-0">
-                                    <button type="submit" data-form="user_form" class="btn btn-primary" id="create_button">
+                                    <button type="button" data-form="user_form" class="btn btn-primary" id="create_button">
                                         <!--begin::Indicator-->
                                         <span class="indicator-label">{{ !empty( $editData->contactus_id) ?  'Update' : 'Create' }} Contact</span>
                                         <span class="indicator-progress">Please wait...
@@ -169,7 +168,7 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/swal.js') }}" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 
     <script type="text/javascript">
 
@@ -188,37 +187,48 @@
 
         });
 
-
-        var button = document.querySelector("#create_button");
-
-        var target = document.querySelector("#blockUI_target");
-        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        // Defination -------------------------------------------------------------------------------------------------------------
-
-        var blockUI = new KTBlockUI(target, {
-            message: '<div class="blockui-message"><span class="spinner-border text-primary"></span> Checking...</div>',
-        }); // Element to block white fetching AJAX data ----------------------------------------------------------------------
-
-
-        button.addEventListener("click", function () {
-            if (!$("#user_form")[0].checkValidity()) {
-                $("#user_form")[0].reportValidity();
-
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Please Fill Required Fields',
-                    text: "Make sure required fields are filled properly before moving on"
-                }); //display error toast
-
-                return 0;
+        $("#user_form").validate({
+            ignore: '',
+            rules: {
+                "title" :"required",
+                "desc":"required",
+                "notes":"required",
+            },
+            messages: {
+                "title" : "Please enter title",
+                "desc": "Please select description",
+                "notes":"Please enter notes",
             }
-            // Activate indicator
-            button.setAttribute("data-kt-indicator", "on");
-            button.setAttribute("disabled", "true");
+        });
 
-            form = document.getElementById(this.getAttribute('data-form'));
-            form.submit();
-        }); // Handle Button Click Event ----------------------------------------------------------------------------
+        $('#create_button').on('click', function(event) {
+
+            var err = 1;
+            $(document).find("div.imageBgDiv").each(function() {
+
+                var bgImg = $(this).css('background-image').trim();
+
+                if (bgImg == 'url("about:invalid")' || bgImg == 'none'  ) {
+
+                    $(this).next('.inputFileError').html('Required');
+                    err++;
+                } else {
+                    $(this).next('.inputFileError').html('');
+                }
+            });
+            // prevent default submit action
+            event.preventDefault();
+
+            // test if form is valid
+            if($('#user_form').valid()  ) { console.log(2);
+                $( '#user_form' ).submit();
+            } else { console.log(3);
+                console.log("does not validate");
+                return false;
+            }
+        });
+
+
 
 
         $(document).on('select2:open', () => {

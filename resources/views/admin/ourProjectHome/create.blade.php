@@ -1,4 +1,4 @@
-@extends('admin.layouts.main',['title' => 'Feature Project'])
+@extends('admin.layouts.main',['title' => 'Our Project'])
 
 @section('breadcrumb')
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.admin') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>

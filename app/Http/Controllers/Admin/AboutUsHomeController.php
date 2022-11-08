@@ -16,9 +16,13 @@ class AboutUsHomeController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->ajax())
+        $editData = getAboutUsHome();
+
+        return view('admin.aboutUsHome.create' ,compact('editData'));
+
+       /* if($request->ajax())
         {
-            /* Current Login User ID */
+            // Current Login User ID
             $userID = auth()->user()->id;
 
             $dbData = AboutUsHome::select([ 'id','name', 'detail','image','status' ])
@@ -38,7 +42,7 @@ class AboutUsHomeController extends Controller
             });
             return DataTables::of($data)->toJson();
         }
-        return view('admin.aboutUsHome.index');
+        return view('admin.aboutUsHome.index');*/
     }
 
     /**
