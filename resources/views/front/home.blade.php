@@ -1,12 +1,11 @@
 <x-base>
-
-    @if(!empty($homeBanner))
+ 
     <section class="banner">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="banner-content">
-                            <h1>{{$homeBanner['page']}}</h1>
+                            <h1>FIND YOUR DREAM HOUSE BY US</h1>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -46,7 +45,7 @@
             </div>
         </div>
     </section>
-    @endif
+
     <!-- banner -->
 
     <!-- about us -->
