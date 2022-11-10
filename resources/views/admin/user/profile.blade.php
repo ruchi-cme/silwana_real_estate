@@ -261,7 +261,7 @@
                         <!--begin: Pic-->
                         <div class="me-7 mb-4">
                             <div class="symbol symbol-125px symbol-lg-125px symbol-fixed position-relative">
-                                <img class="img img-fluid" src="{{ asset('media/logos/madara.svg') }}" alt="image">
+                                <img class="img img-fluid" src="{{asset('images/user/'.$user->image)}}" alt="image">
                             </div>
                         </div>
                         <!--end::Pic-->
@@ -273,7 +273,7 @@
                                 <div class="d-flex flex-column">
                                     <!--begin::Name-->
                                     <div class="d-flex align-items-center mb-2">
-                                        <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{ auth()->user()->name }}</a>
+                                        <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bolder me-1">{{ $user->name }}</a>
 
                                     </div>
                                     <!--end::Name-->
@@ -283,7 +283,7 @@
                                         <a  class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                             <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
 
-                                            <!--end::Svg Icon-->{{ auth()->user()->email }}  </a>
+                                            <!--end::Svg Icon--> {{$user->email}} </a>
 
                                     </div>
                                     <!--end::Info-->
@@ -316,7 +316,7 @@
                             </div>
                             <!--end::Card title-->
                             <!--begin::Action-->
-                            <a href="{{route('admin.user.editProfile')}}" class="btn btn-primary align-self-center">Edit Profile</a>
+                            <a href="/admin/user/editProfile/{{$user->id}}" class="btn btn-primary align-self-center">Edit Profile</a>
                             <!--end::Action-->
                         </div>
                         <!--begin::Card header-->

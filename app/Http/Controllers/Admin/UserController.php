@@ -100,13 +100,18 @@ class UserController extends Controller
         $user = User::find(auth()->user()->id);
         return view('admin.user.profile',compact('user'));
     }
-    public  function editProfile() {
-        $user = User::find(auth()->user()->id);
+    public  function editProfile( $id) {
+
+        $user = User::find($id);
 
         $editUser = 1;
         return view('admin.user.profile',compact('user', 'editUser'));
     }
-
+    public function userEdit(  $id)
+    {
+        $user = User::find($id);
+        return view('admin.user.profile',compact('user'));
+    }
     public function updateProfile(Request $request)
     {
         $editUser = 1;
@@ -143,8 +148,14 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->save();
 
-       // return redirect()->back()->with('success','User Updated Successsfully`');
-        return view('admin.user.profile',compact('user', 'editUser'));
+        if($request->user_id == auth()->user()->id){
+
+            return redirect()->route('admin.user.profile')->with('Updated','User Updated👍');
+        }
+        else {
+            return redirect()->route('admin.user')->with('Updated','User Updated👍');
+        }
+
     }
 
     public function updatePassword(Request $request)
