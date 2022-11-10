@@ -142,12 +142,12 @@
             $("#dataForm").validate({
                 ignore: '',
                 rules: {
-                    "employee_id" : "required",
-                    "project_id"  : "required",
+                    "user_id" : "required",
+                    "project_id[]"  : "required",
                 },
                 messages: {
-                    "employee_id" : "Please select employee",
-                    "project_id"  : "Please select project",
+                    "user_id" : "Please select user",
+                    "project_id[]"  : "Please select project",
                 }
             });
 
