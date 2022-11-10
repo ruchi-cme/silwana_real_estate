@@ -82,20 +82,6 @@ class ProjectAssignController extends Controller
         /* Insert FAQ data */
         $userID = auth()->user()->id;
 
-        $project_id =  $request->project_id;
-
-      /*  if (!empty($project_id)) {
-            for($i = 0; $i < count($project_id); $i++) {
-                $data[] = [
-                    'user_id'       => $request->user_id,
-                    'project_id'    => $project_id[$i],
-                    'status'        => 1,
-                    'created_by'    => $userID
-                ];
-            }
-        }
-        */
-
         $project_id =  implode(',', $request->project_id);
         $data = [
             'user_id'       => $request->user_id,

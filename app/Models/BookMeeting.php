@@ -5,12 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class BookMeeting extends Model
 {
     use HasFactory;
-    protected $table = 'project_master';
     public $timestamps = false;
-    protected $primaryKey = 'project_id';
 
     /**
      * The attributes that are mass assignable.
@@ -18,11 +16,14 @@ class Project extends Model
      */
     protected $fillable = [
 
-        'project_name',
-        'project_detail',
-        'category_id',
-        'maintenance',
-        'work_status',
+        'user_id',
+        'booked_by',
+        'name',
+        'phone',
+        'email',
+        'date',
+        'time',
+        'detail',
         'status',
         'created_by',
         'created_date',

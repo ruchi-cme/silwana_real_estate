@@ -15,6 +15,13 @@ return [
             '4' => 'pending',
             '5' => 'Approved'
         ],
+    'book_meeting_status' => [
+        'booked' => 'Booked',
+        'success' => 'Success',
+        'cancelled' => 'Cancelled',
+        'reschedule ' => 'Reschedule',
+        'Not_attended' => 'Not Attended'
+    ],
     'work_status' => [
         '1' => 'Ongoing',
         '2' => 'Upcoming',

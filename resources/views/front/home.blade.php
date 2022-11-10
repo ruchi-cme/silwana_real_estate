@@ -1,5 +1,5 @@
 <x-base>
- 
+
     <section class="banner">
         <div class="container">
             <div class="row align-items-center">

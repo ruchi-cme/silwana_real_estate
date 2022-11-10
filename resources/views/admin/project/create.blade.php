@@ -353,7 +353,7 @@
 </style>
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-    <script type="text/javascript"  src="https://maps.google.com/maps/api/js?key=AIzaSyCaGutB-33lg0jkFrBPKeQnusQSv2I2hyA&sensor=false&libraries=places"></script>
+    <script type="text/javascript"  src="https://maps.google.com/maps/api/js?key=AIzaSyB-nS3x_SS2JjPSrbq772nwf4QEHRSK1y4&sensor=false&libraries=places"></script>
 
     <script type="text/javascript">
     var pdfthumb = "{{ asset('images/front/pdfThumbnail.png')}}";

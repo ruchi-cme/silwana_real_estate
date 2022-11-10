@@ -78,6 +78,8 @@ Route::name('selectCity.fetch')->get('/country/selectCity', 'App\Http\Controller
 Route::name('state.fetch')->get('/state/fetch', 'App\Http\Controllers\CountryStateCityController@fetchState');
 Route::name('city.fetch')->get('/city/fetch', 'App\Http\Controllers\CountryStateCityController@fetchCity');
 Route::name('block.fetch')->get('/block/fetch', 'App\Http\Controllers\CountryStateCityController@fetchBlock');
+Route::name('user.fetch')->get('/user/fetch', 'App\Http\Controllers\Admin\BookMeetingController@fetchUser');
+
 // Config Routes
 Route::get('/permission/create', function () {
     $permission = request()->query('name');
