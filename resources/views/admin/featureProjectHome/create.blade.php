@@ -25,6 +25,7 @@
                 <!--begin::Form-->
 
                 @include('layouts.alerts.error')
+                @include('layouts.alerts.alert')
 
                 <form class="form" method="POST" action=" {{ !empty( $editData->id) ?  route('admin.featureProjectHome.update') : route('admin.featureProjectHome.store') }}" id="dataForm" enctype="multipart/form-data">
                     @csrf

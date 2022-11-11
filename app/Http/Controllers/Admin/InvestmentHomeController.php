@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\InvestmentHome;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\DataTables;
 
 class InvestmentHomeController extends Controller
 {
@@ -14,41 +13,10 @@ class InvestmentHomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if($request->ajax())
-        {
-            /* Current Login User ID */
-            $userID = auth()->user()->id;
-
-            $dbData = InvestmentHome::select([ 'id','name','image_video_title','type','status' ])
-                ->where('deleted',0)
-                ->orderBy("id",'DESC')
-                ->get();
-            $data = $dbData->map(function ($data) {
-
-                return [
-                    'id'                 => $data->media_id,
-                    'name'               => $data->name,
-                    'type'              =>  $data->type ,
-
-                    'status'             => !empty($data->status) && ($data->status == 1) ? 'Active' : 'Inctive',
-                    'created_date'       => $data->created_date
-                ];
-            });
-            return DataTables::of($data)->toJson();
-        }
-        return view('admin.media.index');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.media.create' );
+        $editData = getInvestmentHomeCMS();
+        return view('admin.investmentHome.create' ,compact('editData'));
     }
 
     /**
@@ -59,67 +27,69 @@ class InvestmentHomeController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
-            'name'   => 'required',
-
+            "title" => "required",
+            "name"  => "required",
+            "detail" => "required",
         ]);
         /* Insert AboutUs data */
         $userID = auth()->user()->id;
 
-        /******* Insert PDF *********/
+        /******* Insert Images *********/
+        $Image = ''; $video  = '';
+
 
         if($request->hasfile('image_title'))
         {
-            foreach($request->file('image_title') as $key => $file)
-            {
-                $pdf = $request->file('image_title')[$key];
-                $destinationPath = public_path('images/media/image');
-                $name = date('YmdHis') . "." . $file->getClientOriginalName();
-                $pdf->move($destinationPath, $name);
-
-                $insert[$key]['image_video_title'] = $name;
-                $insert[$key]['name'] = $request->name;
-                $insert[$key]['type']  = 1;  //image
-                $insert[$key]['status'] = 1;
-                $insert[$key]['created_by'] = $userID;
-            }
-            Media::insert($insert);
+            $image = $request->file('image_title') ;
+            $destinationPath = public_path('images/investmentHome/image');
+            $Image = date('YmdHis') . "." .  str_replace(' ', '', $image->getClientOriginalExtension());;
+            $image->move($destinationPath, $Image);
         }
 
-        /******* Insert Images *********/
+        /******* Insert Video *********/
         if($request->hasfile('video_title'))
         {
-            foreach($request->file('video_title') as $key => $file)
-            {
-                $image = $request->file('video_title')[$key];
-                $destinationPath = public_path('images/media/video');
-                $name = date('YmdHis') . "." . $file->getClientOriginalName();  ;
-                $image->move($destinationPath, $name);
-                $insertVideo[$key]['image_video_title'] = $name;
-                $insertVideo[$key]['name'] = $request->name;
-                $insertVideo[$key]['type']   = 2;  //video
-                $insertVideo[$key]['status'] = 1;
-                $insertVideo[$key]['created_by'] = $userID;
+                $image = $request->file('video_title') ;
+                $destinationPath = public_path('images/investmentHome/video');
+                $video = date('YmdHis') . "." .  str_replace(' ', '', $image->getClientOriginalExtension());  ;
+                $image->move($destinationPath, $video);
+        }
+        $arr = [];
+        if($request->hasfile('icon')) {
+
+            foreach ($request->file('icon') as $key => $file) {
+
+                $icon = $request->file('icon')[$key];
+                $destinationPath = public_path('images/investmentHome/icon');
+                $iconName = date('YmdHis') . "." . $file->getClientOriginalName();
+                $icon->move($destinationPath, $iconName);
+
+                $arr[] = [
+                    'icon' => $iconName,
+                    'sub_title' => $request->sub_title[$key],
+                    'sub_title_detail' => $request->sub_title_detail[$key],
+                ];
             }
-            Media::insert($insertVideo);
         }
 
-        return redirect()->route('admin.media')->with('inserted','Media Created👍');
+        $data  = [
+            'title'        => $request->title,
+            'name'         => $request->name,
+            'detail'       => $request->detail,
+            'sub_title'    => json_encode($arr),
+            'image_title'  => $Image,
+            'video_title'  => $video,
+            'status'       => 1,
+            'created_by'   => $userID
+        ];
+
+         InvestmentHome::create($data);
+
+        return redirect()->route('admin.investmentHome')->with('inserted','Investment Data Created👍');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ourTeam  $faq
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request)
-    {
-        $editData = Media::find($request->id);
 
-        return view('admin.media.create' ,compact('editData'));
-    }
 
     /**
      * Update the specified resource in storage.
@@ -138,12 +108,12 @@ class InvestmentHomeController extends Controller
             $editImage = $request->edit_image_title;
             if (!empty($image)) {
 
-                $destinationPath = public_path('images/media/image/');
+                $destinationPath = public_path('images/investmentHome/image/');
 
                 $Image = date('YmdHis') . "." . $image->getClientOriginalExtension();
                 $image->move($destinationPath, $Image);
                 if (!empty($editImage)) {
-                    @unlink(public_path('images/media/image/') . $editImage);
+                    @unlink(public_path('images/investmentHome/image/') . $editImage);
                 }
             } elseif (!empty($editImage)) {
                 $Image = $editImage;
@@ -156,68 +126,53 @@ class InvestmentHomeController extends Controller
             $video = $request->file('video_title');
             $editVideo = $request->edit_video_title;
             if (!empty($video) ) {
-                $destinationPath = public_path('images/media/video/');
+                $destinationPath = public_path('images/investmentHome/video/');
 
-                $Image = date('YmdHis') . "." . $video->getClientOriginalExtension();
-                $video->move($destinationPath, $Image);
+                $Video = date('YmdHis') . "." . $video->getClientOriginalExtension();
+                $video->move($destinationPath, $Video);
                 if (!empty($editVideo)) {
-                    @unlink( public_path('images/media/video/') . $editVideo);
+                    @unlink( public_path('images/investmentHome/video/') . $editVideo);
                 }
             }
             elseif (!empty($editVideo)) {
-                $Image = $editVideo;
+                $Video = $editVideo;
             }
             else
             {
-                $Image = null;
+                $Video = null;
+            }
+        }
+
+        $arr = [];
+        if($request->hasfile('icon')) {
+
+            foreach ($request->file('icon') as $key => $file) {
+
+                $icon = $request->file('icon')[$key];
+                $destinationPath = public_path('images/investmentHome/icon');
+                $iconName = date('YmdHis') . "." . $file->getClientOriginalName();
+                $icon->move($destinationPath, $iconName);
+
+                $arr[] = [
+                    'icon' => $iconName,
+                    'sub_title' => $request->sub_title[$key],
+                    'sub_title_detail' => $request->sub_title_detail[$key],
+                ];
             }
         }
 
         $updateData->update([
-            'name'  => $request->name,
-            'type'  => $request->imageType,
-            'image_video_title' => $Image,
+            'title'        => $request->title,
+            'name'         => $request->name,
+            'detail'       => $request->detail,
+            'sub_title'    => json_encode($arr),
+            'image_title'  => $Image,
+            'video_title'  => $Video,
             'modified_by'   =>  $userID,
             'modified_date' => now()
         ]);
 
-        return redirect()->route('admin.media')->with('updated','Media Updated 👍');
-    }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $data = Media::find($id);
-        $userID   = auth()->user()->id;
-        $data->update([
-            'deleted'  => 1,  //Deleted
-            'deleted_date'  => now(),
-            'deleted_by'    =>  $userID,
-        ]);
-        return redirect()->route('admin.media')->with('success','Media Deleted');
+        return redirect()->route('admin.investmentHome')->with('updated','Media Updated 👍');
     }
 
-    /**
-     * Responds with a welcome message with instructions
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    public function changeStatus(Request $request)
-    {
-        $updateData = Media::find($request->id);
-        $userID   = auth()->user()->id;
-        $status   =  ( !empty($updateData->status) && $updateData->status == 1 ) ?  2 :  1 ;
-
-        $updateData->update([
-            'status' => $status,
-            'modified_by'   =>  $userID,
-            'modified_date' => now()
-        ]);
-
-        return redirect()->route('admin.media')->with('success','Media Status Changed');
-    }
 }

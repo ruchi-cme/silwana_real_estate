@@ -3,7 +3,7 @@
 use App\Models\{Amenities, Category, Project, Block, Silwana,SilwanaDetailMapping,ContactUs};
 use App\Models\{FloorUnitMapping, ProjectImage, ProjUnitImage, FloorDetail,Proj_ameni_mapping};
 use App\Models\{Block_name_mapping, Booking, Project_address_detail, BlockFloorMapping,Builder};
-use App\Models\{AboutUs, Faq, News ,Media,  ourTeam, FeatureProjectHome , OurProjectHome, AboutUsHome};
+use App\Models\{AboutUs, Faq, News ,Media,  ourTeam, FeatureProjectHome , OurProjectHome, AboutUsHome,InvestmentHome, Footer};
 use Illuminate\Support\Facades\DB;
 
 if(!function_exists("getCategory")){
@@ -645,6 +645,29 @@ if(!function_exists("getProjectPdf")){
             ->where('type', 1)
             ->get()
             ->first();
+        return $data;
+    }
+}
+
+if(!function_exists("getFooterData")) {
+
+    function getFooterData()
+    {
+        $data =  Footer::where('deleted',0)
+            ->where('status' , 1)
+            ->get()->first();
+
+        return $data;
+    }
+}
+if(!function_exists("getInvestmentHomeCMS")) {
+
+    function getInvestmentHomeCMS()
+    {
+        $data =  InvestmentHome::where('deleted',0)
+            ->where('status' , 1)
+            ->get()->first();
+
         return $data;
     }
 }

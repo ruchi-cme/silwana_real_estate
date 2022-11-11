@@ -1,7 +1,7 @@
 <div>
     <!-- looking-for-house -->
 
-    @php $footerData = getSilwanaPages('footer');  @endphp
+    @php $footerData = getFooterData();  @endphp
 
     <section class="looking-for-house">
         <div class="container">
@@ -10,7 +10,7 @@
                     @if(!empty($footerData))
                         <div class="looking-for-house-wrap">
                             <div class="looking-for-house-img">
-                                <img src="{{ asset('images/page').'/'. $footerData['page_image']}}" alt="">
+                                <img src="{{ asset('images/footer').'/'. $footerData['image']}}" alt="">
                             </div>
                             <div class="row looking-for-house-text">
                                 <div class="col-lg-5">
@@ -20,16 +20,13 @@
                                     </div>
                                 </div>
 
-                                @foreach ($footerData['page_details'] as $row)
-
-                                    <div class="col-lg-7">
-                                        <div class="looking-for-house-inner">
-                                            <h2>{{$row['heading']}}</h2>
-                                            <p>{{$row['heading_detail']}}</p>
-                                            <a href="{{ route('ourProject') }}" class="cmn-btn">EXPLORE PROPERTIES</a>
-                                        </div>
+                                <div class="col-lg-7">
+                                    <div class="looking-for-house-inner">
+                                        <h2>{{$footerData['title']}}</h2>
+                                        <p>{{$footerData['notes']}}</p>
+                                        <a href="{{ route('ourProject') }}" class="cmn-btn">EXPLORE PROPERTIES</a>
                                     </div>
-                                @endforeach
+                                </div>
                             </div>
                         </div>
                     @else

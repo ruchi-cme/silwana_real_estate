@@ -101,6 +101,18 @@
                             </div>
                         @endcan
                     </div>
+                    <div class="menu-sub menu-sub-accordion">
+                        @can('footer-view')
+                            <div class="menu-item {{ Route::is('admin.footer*') ? 'show' : '' }}">
+                                <a class="menu-link" href="{{ route('admin.footer') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                    <span class="menu-title">Footer</span>
+                                </a>
+                            </div>
+                        @endcan
+                    </div>
                 </div>
 
                 <div data-kt-menu-trigger="click" class="menu-item {{ Route::is('admin.aboutUsHome*') || Route::is('admin.investmentHome*')  || Route::is('admin.ourProjectHome*')  || Route::is('admin.featureProjectHome*')  ? 'show' : '' }} menu-accordion mb-1">
@@ -125,7 +137,7 @@
                         @endcan
                     </div>
 
-                    <!--<div class="menu-sub menu-sub-accordion">
+                   <!--  <div class="menu-sub menu-sub-accordion">
                         @can('investmentHome-view')
                             <div class="menu-item {{ Route::is('admin.investmentHome*') ? 'show' : '' }}">
                                 <a class="menu-link" href="{{ route('admin.investmentHome') }}">

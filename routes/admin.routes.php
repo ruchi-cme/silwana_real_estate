@@ -184,7 +184,7 @@ Route::name('aboutUsHome.update')->post('/aboutUsHome/update', 'App\Http\Control
 Route::name('aboutUsHome.delete')->get('/aboutUsHome/delete/{id}', 'App\Http\Controllers\Admin\AboutUsHomeController@destroy')->middleware(['permission:aboutUsHome-delete']);
 Route::name('aboutUsHome.delete')->get('/aboutUsHome/changeStatus/{id}', 'App\Http\Controllers\Admin\AboutUsHomeController@changeStatus')->middleware(['permission:aboutUsHome-changeStatus']);
 
-// Home  cms
+// investment Home  cms
 Route::name('investmentHome')->get('/investmentHome', 'App\Http\Controllers\Admin\InvestmentHomeController@index')->middleware(['permission:investmentHome-view']);
 Route::name('investmentHome.create')->get('/investmentHome/create', 'App\Http\Controllers\Admin\InvestmentHomeController@create')->middleware(['permission:investmentHome-create']);
 Route::name('investmentHome.create/{id}')->get('/investmentHome/edit/{id}', 'App\Http\Controllers\Admin\InvestmentHomeController@edit')->middleware(['permission:investmentHome-create']);
@@ -193,7 +193,7 @@ Route::name('investmentHome.update')->post('/investmentHome/update', 'App\Http\C
 Route::name('investmentHome.delete')->get('/investmentHome/delete/{id}', 'App\Http\Controllers\Admin\InvestmentHomeController@destroy')->middleware(['permission:investmentHome-delete']);
 Route::name('investmentHome.delete')->get('/investmentHome/changeStatus/{id}', 'App\Http\Controllers\Admin\InvestmentHomeController@changeStatus')->middleware(['permission:investmentHome-changeStatus']);
 
-// Home  cms
+// our Project Home  cms
 Route::name('ourProjectHome')->get('/ourProjectHome', 'App\Http\Controllers\Admin\OurProjectHomeController@index')->middleware(['permission:ourProjectHome-view']);
 Route::name('ourProjectHome.create')->get('/ourProjectHome/create', 'App\Http\Controllers\Admin\OurProjectHomeController@create')->middleware(['permission:ourProjectHome-create']);
 Route::name('ourProjectHome.create/{id}')->get('/ourProjectHome/edit/{id}', 'App\Http\Controllers\Admin\OurProjectHomeController@edit')->middleware(['permission:ourProjectHome-create']);
@@ -202,7 +202,7 @@ Route::name('ourProjectHome.update')->post('/ourProjectHome/update', 'App\Http\C
 Route::name('ourProjectHome.delete')->get('/ourProjectHome/delete/{id}', 'App\Http\Controllers\Admin\OurProjectHomeController@destroy')->middleware(['permission:ourProjectHome-delete']);
 Route::name('ourProjectHome.delete')->get('/ourProjectHome/changeStatus/{id}', 'App\Http\Controllers\Admin\OurProjectHomeController@changeStatus')->middleware(['permission:ourProjectHome-changeStatus']);
 
-// Home  cms
+// feature Projec tHome  cms
 Route::name('featureProjectHome')->get('/featureProjectHome', 'App\Http\Controllers\Admin\FeatureProjectHomeController@index')->middleware(['permission:featureProjectHome-view']);
 Route::name('featureProjectHome.create')->get('/featureProjectHome/create', 'App\Http\Controllers\Admin\FeatureProjectHomeController@create')->middleware(['permission:featureProjectHome-create']);
 Route::name('featureProjectHome.create/{id}')->get('/featureProjectHome/edit/{id}', 'App\Http\Controllers\Admin\FeatureProjectHomeController@edit')->middleware(['permission:featureProjectHome-create']);
@@ -211,6 +211,12 @@ Route::name('featureProjectHome.update')->post('/featureProjectHome/update', 'Ap
 Route::name('featureProjectHome.delete')->get('/featureProjectHome/delete/{id}', 'App\Http\Controllers\Admin\FeatureProjectHomeController@destroy')->middleware(['permission:featureProjectHome-delete']);
 Route::name('featureProjectHome.delete')->get('/featureProjectHome/changeStatus/{id}', 'App\Http\Controllers\Admin\FeatureProjectHomeController@changeStatus')->middleware(['permission:featureProjectHome-changeStatus']);
 
+// Footer cms
+Route::name('footer')->get('/footer', 'App\Http\Controllers\Admin\FooterController@index')->middleware(['permission:footer-view']);
+Route::name('footer.store')->post('/footer/store', 'App\Http\Controllers\Admin\FooterController@store')->middleware(['permission:footer-store']);
+Route::name('footer.update')->post('/footer/update', 'App\Http\Controllers\Admin\FooterController@update')->middleware(['permission:footer-update']);
+
+// book Meeting
 Route::name('bookMeeting')->get('/bookMeeting', 'App\Http\Controllers\Admin\BookMeetingController@index')->middleware(['permission:bookMeeting-view']);
 Route::name('bookMeeting.create')->get('/bookMeeting/create', 'App\Http\Controllers\Admin\BookMeetingController@create')->middleware(['permission:bookMeeting-create']);
 Route::name('bookMeeting.create/{id}')->get('/bookMeeting/edit/{id}', 'App\Http\Controllers\Admin\BookMeetingController@edit')->middleware(['permission:bookMeeting-create']);
@@ -219,6 +225,7 @@ Route::name('bookMeeting.update')->post('/bookMeeting/update', 'App\Http\Control
 Route::name('bookMeeting.delete')->get('/bookMeeting/delete/{id}', 'App\Http\Controllers\Admin\BookMeetingController@destroy')->middleware(['permission:bookMeeting-delete']);
 Route::name('bookMeeting.delete')->get('/bookMeeting/changeStatus/{id}', 'App\Http\Controllers\Admin\BookMeetingController@changeStatus')->middleware(['permission:bookMeeting-changeStatus']);
 
+// projectAssign
 Route::name('projectAssign')->get('/projectAssign', 'App\Http\Controllers\Admin\ProjectAssignController@index')->middleware(['permission:projectAssign-view']);
 Route::name('projectAssign.create')->get('/projectAssign/create', 'App\Http\Controllers\Admin\ProjectAssignController@create')->middleware(['permission:projectAssign-create']);
 Route::name('projectAssign.create/{id}')->get('/projectAssign/edit/{id}', 'App\Http\Controllers\Admin\ProjectAssignController@edit')->middleware(['permission:projectAssign-create']);
@@ -226,5 +233,6 @@ Route::name('projectAssign.store')->post('/projectAssign/store', 'App\Http\Contr
 Route::name('projectAssign.update')->post('/projectAssign/update', 'App\Http\Controllers\Admin\ProjectAssignController@update')->middleware(['permission:projectAssign-update']);
 Route::name('projectAssign.delete')->get('/projectAssign/delete/{id}', 'App\Http\Controllers\Admin\ProjectAssignController@destroy')->middleware(['permission:projectAssign-delete']);
 Route::name('projectAssign.delete')->get('/projectAssign/changeStatus/{id}', 'App\Http\Controllers\Admin\ProjectAssignController@changeStatus')->middleware(['permission:projectAssign-changeStatus']);
+
 
 ?>

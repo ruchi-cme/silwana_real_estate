@@ -1,13 +1,13 @@
-@extends('admin.layouts.main',['title' => 'About Us'])
+@extends('admin.layouts.main',['title' => 'Footer CMS'])
 
 @section('breadcrumb')
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.admin') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
 <li class="breadcrumb-item px-3 text-primary">CMS</li>
-<li class="breadcrumb-item px-3"><a class="text-hover-primary " href="{{ route('admin.aboutUsHome') }}">About Us</a></li>
+<li class="breadcrumb-item px-3"><a class="text-hover-primary " href="{{ route('admin.footer') }}"> Footer</a></li>
 <li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->id) ?   'Edit' :  'Create' }}</li>
 @endsection
 <style>
-.error{
+.error ,  .inputFileError{
     color: #FF0000;
 }
 </style>
@@ -27,7 +27,7 @@
                 @include('layouts.alerts.error')
                 @include('layouts.alerts.alert')
 
-                <form class="form" method="POST" action=" {{ !empty( $editData->id) ?  route('admin.aboutUsHome.update') : route('admin.aboutUsHome.store') }}" id="dataForm" enctype="multipart/form-data">
+                <form class="form" method="POST" action=" {{ !empty( $editData->id) ?  route('admin.footer.update') : route('admin.footer.store') }}" id="dataForm" enctype="multipart/form-data">
                     @csrf
                     <!--begin::Card-->
                     <div class="card shadow-lg card-flush pt-3 mb-5 mb-lg-10">
@@ -35,7 +35,7 @@
                         <div class="card-header">
                             <!--begin::Card title-->
                             <div class="card-title">
-                                <h2 class="fw-bolder">About Us</h2>
+                                <h2 class="fw-bolder">Footer Details</h2>
                             </div>
                             <!--begin::Card title-->
                         </div>
@@ -47,12 +47,25 @@
                             <div class="row mb-8">
                                 <!--begin::Col-->
                                 <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Name</div>
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Title</div>
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" required placeholder="Enter Name" class="form-control form-control-solid" name="name" value="{{ !empty( $editData->name) ? $editData->name : '' }}" >
+                                    <input type="text" required placeholder="Enter Title" class="form-control form-control-solid" name="title" value="{{ !empty( $editData->title) ? $editData->title : '' }}" >
+                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                            </div>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <div class="row mb-8">
+                                <!--begin::Col-->
+                                <div class="col-xl-3">
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Notes</div>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                    <input type="text" required placeholder="Enter Notes" class="form-control form-control-solid" name="notes" value="{{ !empty( $editData->notes) ? $editData->notes : '' }}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -70,86 +83,6 @@
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
-                            @if(!empty($editData))
-                                @php
-                                   $subtitles = json_decode($editData->sub_title) ;
-                                @endphp
-
-                                @foreach($subtitles as $row)
-
-                                    <!--begin::Row-->
-                                    <div class="row mb-8">
-                                        <!--begin::Col-->
-                                        <div class="col-xl-3">
-                                            <div class="fs-6 fw-bold mt-2 mb-3 required"> Title </div>
-                                        </div>
-                                        <!--end::Col-->
-                                        <!--begin::Col-->
-                                        <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                            <input type="text" required placeholder="Enter Title" class="form-control form-control-solid" name="sub_title[]" value="{{   $row  }}" >
-                                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                                    </div>
-                                    <!--end::Row-->
-                                @endforeach
-                            @else
-                                <!--begin::Row-->
-                                <div class="row mb-8">
-                                    <!--begin::Col-->
-                                    <div class="col-xl-3">
-                                        <div class="fs-6 fw-bold mt-2 mb-3 required"> Title 1</div>
-                                    </div>
-                                    <!--end::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                        <input type="text" required placeholder="Enter Title" class="form-control form-control-solid" name="sub_title[]" value="{{ !empty( $editData->designation) ? $editData->designation : '' }}" >
-                                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                                </div>
-                                <!--end::Row-->
-
-                                <!--begin::Row-->
-                                <div class="row mb-8">
-                                    <!--begin::Col-->
-                                    <div class="col-xl-3">
-                                        <div class="fs-6 fw-bold mt-2 mb-3 required">  Title 2</div>
-                                    </div>
-                                    <!--end::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                        <input type="text" required placeholder="Enter Title" class="form-control form-control-solid" name="sub_title[]" value="{{ !empty( $editData->designation) ? $editData->designation : '' }}" >
-                                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                                </div>
-                                <!--end::Row-->
-
-                                <!--begin::Row-->
-                                <div class="row mb-8">
-                                    <!--begin::Col-->
-                                    <div class="col-xl-3">
-                                        <div class="fs-6 fw-bold mt-2 mb-3 required">  Title 3</div>
-                                    </div>
-                                    <!--end::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                        <input type="text" required placeholder="Enter Title" class="form-control form-control-solid" name="sub_title[]" value="{{ !empty( $editData->designation) ? $editData->designation : '' }}" >
-                                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                                </div>
-                                <!--end::Row-->
-
-                                <!--begin::Row-->
-                                <div class="row mb-8">
-                                    <!--begin::Col-->
-                                    <div class="col-xl-3">
-                                        <div class="fs-6 fw-bold mt-2 mb-3 required">  Title 4</div>
-                                    </div>
-                                    <!--end::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                        <input type="text" required placeholder="Enter Title" class="form-control form-control-solid" name="sub_title[]" value="{{ !empty( $editData->designation) ? $editData->designation : '' }}" >
-                                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                                </div>
-                                <!--end::Row-->
-
-                            @endif
-
 
                             <!--begin::Row-->
                             <div class="row">
@@ -163,13 +96,13 @@
                                     <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
                                         <!--begin::Preview existing image-->
                                         @php
-                                            $path =  !empty($editData->image) ? asset('images/aboutUs' ).'/'.$editData->image : ''  ;
+                                            $path =  !empty($editData->image) ? asset('images/footer' ).'/'.$editData->image : ''  ;
                                             $test =   "background-image:url('$path')"  ;  @endphp
                                         <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($editData->image) ? $test :'"background-image : none'}}"></div>
                                         <!--end::Preview existing image-->
                                         <!--begin::Label-->
                                         <label class="inputFileError errorMsg" for="direction" style="">  </label>
-                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
+                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="{{  !empty($editData->image) ? 'Change' : 'Upload' }} image">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
                                             <input type="file" value="{{ !empty($editData->image) ? $editData->image : '' }}" name="image" accept=".png, .jpg, .jpeg" />
@@ -181,13 +114,13 @@
                                         <!--end::Label-->
                                         <!--begin::Cancel-->
                                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
-                                            <i class="bi bi-x fs-2"></i>
-                                        </span>
+                                                                    <i class="bi bi-x fs-2"></i>
+                                                                </span>
                                         <!--end::Cancel-->
                                         <!--begin::Remove-->
                                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
-                                            <i class="bi bi-x fs-2"></i>
-                                        </span>
+                                                                    <i class="bi bi-x fs-2"></i>
+                                                                </span>
                                         <!--end::Remove-->
                                     </div>
                                     <!--end::Image input-->
@@ -203,7 +136,7 @@
                                 <div class="mb-0">
                                     <button type="button" data-form="amenityForm" class="btn btn-primary" id="create_button">
                                         <!--begin::Indicator-->
-                                        <span class="indicator-label">{{ !empty( $editData->id) ?  'Update' : 'Create' }} About Us</span>
+                                        <span class="indicator-label">{{ !empty( $editData->id) ?  'Update' : 'Create' }}  </span>
                                         <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         <!--end::Indicator-->
@@ -239,14 +172,14 @@
             $("#dataForm").validate({
                 ignore: '',
                 rules: {
-                    "name" :"required",
+                    "title" :"required",
                     "detail" : "required",
-                    "sub_title[]" : "required",
+                    "notes" : "required"
                 },
                 messages: {
-                    "name" : "Please enter name",
+                    "title" : "Please enter title",
                     "detail" :  "Please enter detail",
-                    "sub_title[]" : "Please enter title",
+                    "notes" : "Please enter notes"
                 }
             });
 
@@ -270,7 +203,7 @@
                 event.preventDefault();
 
                 // test if form is valid
-                if($('#dataForm').valid()  && err == 1) {
+                if($('#dataForm').valid() && err == 1  ) { console.log(2);
                     $( '#dataForm' ).submit();
                 } else { console.log(3);
                     console.log("does not validate");

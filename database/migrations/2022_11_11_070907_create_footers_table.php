@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('investment_homes');
-        Schema::create('investment_homes', function (Blueprint $table) {
+        Schema::create('footers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->string('notes');
             $table->text('detail');
-            $table->text('sub_title');
-            $table->string('name');
-            $table->string('video_title')->nullable();
-            $table->string('image_title')->nullable();
+            $table->string('image')->nullable();
             $table->tinyInteger('status')->default(1)->comment('1- Active,2-InActive' );
             /* Status :  1- Active,2-InActive */
             $table->integer('created_by')->nullable();
@@ -41,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('investment_homes');
+        Schema::dropIfExists('footers');
     }
 };
