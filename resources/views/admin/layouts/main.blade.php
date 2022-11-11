@@ -15,6 +15,9 @@
         <link href="{{ asset('plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet"/>
+
         <!-- Pagewise Stylesheet -->
         @stack('stylesheet')
 	</head>
@@ -67,10 +70,16 @@
 		<!--begin::Global Javascript Bundle(used by all pages)-->
         <script src="{{ asset('plugins/global/plugins.bundle.js') }}"></script>
         <script src="{{ asset('js/scripts.bundle.js') }}"></script>
+        <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.validate.min.js') }}moment.js"></script>
+        <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap-datetimepicker.min.js')}}"></script>
+
+        </script>
 		<!--end::Global Javascript Bundle-->
 		@stack('scripts')
 		<!--end::Javascript-->
-		
+
 	</body>
 	<!--end::Body-->
 </html>

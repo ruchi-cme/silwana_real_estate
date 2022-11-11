@@ -76,10 +76,11 @@ class BookMeetingController extends Controller
             'date' => 'required',
             'time' => 'required',
         ]);
+
         /* Insert   data */
         $userID = auth()->user()->id;
         $Image  = null;
-
+        date_default_timezone_set('Asia/Calcutta');
         $data  = [
 
             'user_id'        => $request->user_id,
@@ -87,12 +88,13 @@ class BookMeetingController extends Controller
             'name'           => $request->name,
             'phone'          => $request->phone,
             'email'          => $request->email,
-            'date'           => $request->date,
-            'time'           => $request->time,
+            'date'           => date('Y-m-d',strtotime($request->date)) ,
+            'time'           => date('H:i:s',strtotime($request->time))  ,
             'detail'         => $request->detail,
             'status'         => 'booked',
             'created_by'  => $userID
         ];
+
         BookMeeting::create($data);
         return redirect()->route('admin.bookMeeting')->with('inserted','Meeting Created👍');
     }
@@ -130,8 +132,8 @@ class BookMeetingController extends Controller
             'name'           => $request->name,
             'phone'          => $request->phone,
             'email'          => $request->email,
-            'date'           => $request->date,
-            'time'           => $request->time,
+            'date'           => date('Y-m-d',strtotime($request->date)) ,
+            'time'           => date('H:i:s',strtotime($request->time))  ,
             'detail'         => $request->detail,
             'status'         => $request->status,
             'modified_by'   =>  $userID,

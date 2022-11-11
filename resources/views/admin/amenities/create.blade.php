@@ -151,10 +151,7 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-
     <script type="text/javascript">
-
         $(document).ready(function (e) {
 
             $('#preview-image-before-upload').attr('src','');

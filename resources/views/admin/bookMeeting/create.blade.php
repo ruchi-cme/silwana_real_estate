@@ -113,7 +113,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" id='date' required placeholder="Enter Date" class="datepicker form-control form-control-solid" name="date"   value="{{ !empty( $editData->date) ? $editData->date : '' }}" >
+                                    <input type="text" id='date' required placeholder="Enter Date" class="datepicker form-control form-control-solid" name="date"   value="{{ !empty( $editData->date) ? date('Y-m-d', strtotime($editData->date )) : '' }}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -127,7 +127,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" required placeholder="Enter Time" class="form-control form-control-solid" name="time" id="time" value="{{ !empty( $editData->time) ? $editData->time : '' }}" >
+                                    <input type="text" required placeholder="Enter Time" class="form-control datepicker form-control-solid" name="time" id="timepick" value="{{ !empty( $editData->time) ? $editData->time : '' }}" >
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->
@@ -210,21 +210,23 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-    <script type="text/javascript">
+     <script type="text/javascript">
 
         $(document).ready(function (e) {
-            $('#date').datepicker({
-                weekStart: 1,
-                daysOfWeekHighlighted: "6,0",
-                autoclose: true,
-                todayHighlight: true,
-            });
-            $('#date').datepicker("setDate", new Date());
 
+            var date = new Date();
+            date.setDate(date.getDate());
+
+            $('#date').datepicker({
+                startDate: date,
+                format:"yyyy-m-d"
+            });
+
+
+            $('#timepick').datetimepicker({
+                format: 'hh:mm:ss a'
+            });
 
             $('#user_id').on("select2:select", function (e) {
                 var user_id = this.value;
