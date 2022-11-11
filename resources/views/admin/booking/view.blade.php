@@ -1,9 +1,9 @@
-@extends('admin.layouts.main',['title' => 'Booking'])
+@extends('admin.layouts.main',['title' => 'Property Booking'])
 
 @section('breadcrumb')
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.booking') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
-<li class="breadcrumb-item px-3 text-primary"><a href="{{ route('admin.booking') }}" class="pe-3">Booking </a> </li>
-<li class="breadcrumb-item px-3 text-primary">Booking View</li>
+<li class="breadcrumb-item px-3 text-primary"><a href="{{ route('admin.booking') }}" class="pe-3">Property Booking </a> </li>
+<li class="breadcrumb-item px-3 text-primary">Property Booking View</li>
 @endsection
 
 @section('content')

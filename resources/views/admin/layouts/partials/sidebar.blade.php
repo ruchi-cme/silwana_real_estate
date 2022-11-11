@@ -352,27 +352,32 @@
                     </div>
                 </div>
 
-                <div class="menu-item">
-                    <a class="menu-link {{ Route::is('admin.booking') ? 'active' : '' }}" href="{{ route('admin.booking') }}">
-                        <span class="menu-icon">
-                            <i class="fa fa-chart-pie me-2"></i>
-                        </span>
-                        <span class="menu-title">Booking</span>
-                    </a>
-                </div>
 
-                @can('bookMeeting-view')
-                    <div data-kt-menu-trigger="click" class="menu-item {{   Route::is('admin.bookMeeting*') ? 'show' : '' }} menu-accordion mb-1">
-                    <span class="menu-link {{   Route::is('admin.bookMeeting*') ? 'active' : '' }}">
+
+                    <div data-kt-menu-trigger="click" class="menu-item {{   Route::is('admin.bookMeeting*')  || Route::is('admin.booking*')? 'show' : '' }} menu-accordion mb-1">
+                    <span class="menu-link {{   Route::is('admin.bookMeeting*')  || Route::is('admin.booking*') ? 'active' : '' }}">
                         <span class="menu-icon">
                             <i class="fa fa-project-diagram"></i>
                         </span>
-                        <span class="menu-title">Masters</span>
+                        <span class="menu-title">Bookings</span>
                         <span class="menu-arrow"></span>
                     </span>
 
                         <div class="menu-sub menu-sub-accordion">
-                            @can('amenities-view')
+                            @can('propertyBooking-list')
+                                <div class="menu-item {{ Route::is('admin.booking*') ? 'show' : '' }}">
+                                    <a class="menu-link" href="{{ route('admin.booking') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                        <span class="menu-title">Property Booking </span>
+                                    </a>
+                                </div>
+                            @endcan
+                        </div>
+
+                        <div class="menu-sub menu-sub-accordion">
+                            @can('bookMeeting-view')
                                 <div class="menu-item {{ Route::is('admin.bookMeeting*') ? 'show' : '' }}">
                                     <a class="menu-link" href="{{ route('admin.bookMeeting') }}">
                                 <span class="menu-bullet">
@@ -384,7 +389,7 @@
                             @endcan
                         </div>
                     </div>
-                @endcan
+
 
             </div>
             <!--end::Menu-->

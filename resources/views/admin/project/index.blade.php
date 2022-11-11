@@ -41,7 +41,7 @@
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                             <!--begin::Add user-->
-                            @can('amenities-create')
+                            @can('project-create')
                             <a href="{{ route('admin.project.create') }}" class="btn btn-hover-scale btn-success">
                             <i class="fa fa-plus"></i> Add Project</a>
                             @endcan
@@ -139,14 +139,25 @@
                         $icon  = '<i class="fa fa-toggle-on"></i>'
                     }
                     return `
+                        @can('project-imageUpload')
                             <a href="project/imageUpload/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-success me-2"
                             ><span class="svg-icon svg-icon-1"><i class="fa fa-upload"></i></span></a>
+                        @endcan
+                        @can('project-create')
                             <a href="project/edit/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-success me-2"
                             ><span class="svg-icon svg-icon-1"><i class="fa fa-edit"></i></span></a>
+                         @endcan
+                        @can('project-delete')
                             <a href="project/delete/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2"
                             ><span class="svg-icon svg-icon-1"><i class="fa fa-trash"></i></span></a>
+                        @endcan
+                        @can('project-changeStatus')
                              <a href="project/changeStatus/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-primary  me-2"
                             ><span class="svg-icon svg-icon-1">${ $icon }</span></a>
+                         @endcan
+                            <a href="${ data.pdfFile }" title="Download PDF" download class="btn btn-sm btn-icon btn-hover-scale btn-active-success me-2"
+                            ><span class="svg-icon svg-icon-1" ><i class="fa fa-download"></i></span></a>
+
                             `;
                 },
             },

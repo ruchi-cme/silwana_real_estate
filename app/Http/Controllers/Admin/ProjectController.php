@@ -10,12 +10,17 @@ use App\Models\{Amenities,
     Proj_ameni_mapping,
     Country,
     Project_address_detail,
+    ProjectAssign,
     ProjectImage,
     State};
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Config;
 use DB;
+use File;
+use ZipArchive;
+
+
 
 class ProjectController extends Controller
 {
@@ -30,28 +35,52 @@ class ProjectController extends Controller
         {
             /* Current Login User ID */
             $userID = auth()->user()->id;
+            if(auth()->user()->hasRole('broker'))
+            {
+                $select =  [
+                    DB::raw('group_concat(DISTINCT( project_master.project_id)) as project_id') ,
+                    DB::raw('group_concat(DISTINCT( project_master.project_name)) as project_name') ,
+                    DB::raw('group_concat(DISTINCT( project_master.work_status)) as work_status') ,
+                    DB::raw('group_concat(DISTINCT( project_master.status)) as status') ,
+                    DB::raw('group_concat(DISTINCT( category_master.category_name)) as category_name'),
+                    DB::raw('group_concat(DISTINCT( project_master.created_date)) as created_date')
+                ];
+                $dbData = Project::leftJoin('project_assigns',  DB::raw("find_in_set(project_master.project_id, project_assigns.project_id)"), ">", DB::raw('0')  )
+                    ->leftJoin('category_master', 'category_master.category_id', '=', 'project_master.category_id')
 
-             $select =  [ 'project_master.project_id',
-                            'project_master.project_name',
-                            'project_master.work_status',
-                            'project_master.status',
-                            'project_master.created_date',
-                            'category_master.category_name',
-                        ];
-            $dbData = Project::leftJoin('category_master', 'category_master.category_id', '=', 'project_master.category_id')
-                ->select($select)
-                ->where('project_master.deleted',0)
-                ->orderBy('project_master.project_id', 'desc')
-                ->get();
+                    ->select($select)
+                    ->where('project_master.deleted',0)
+                    ->where('project_assigns.user_id',$userID)
+                    ->groupBy("project_master.project_id")
+                    ->get();
+
+            }else {
+
+                $select =  [ 'project_master.project_id',
+                    'project_master.project_name',
+                    'project_master.work_status',
+                    'project_master.status',
+                    'project_master.created_date',
+                    'category_master.category_name',
+                ];
+
+                $dbData = Project::leftJoin('category_master', 'category_master.category_id', '=', 'project_master.category_id')
+                    ->select($select)
+                    ->where('project_master.deleted',0)
+                    ->orderBy('project_master.project_id', 'desc')
+                    ->get();
+            }
 
             $data = $dbData->map(function ($data){
-
+                $pdf = getProjectPdf($data->project_id);
+                $imagePDFile  =  !empty($pdf['title'] ) ? asset('images/project/pdf/').'/'.$pdf['title'] : '';
                 return [
                     'id'             => $data->project_id,
                     'project_name'   => $data->project_name,
                     'category_name'  => $data->category_name,
                     'work_status'    => !empty($data->work_status) && ($data->work_status == 1) ? 'Upcoming' : 'Ready for sale',
                     'status'         => !empty($data->status) && ($data->status == 1) ? 'Active' : 'Inctive',
+                    'pdfFile'        => $imagePDFile,
                     'created_date'   => $data->created_date
                 ];
             });
@@ -476,4 +505,6 @@ class ProjectController extends Controller
         return redirect()->route('admin.project')->with('inserted','Image uploaded👍');
 
     }
+
+
 }
