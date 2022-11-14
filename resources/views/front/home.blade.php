@@ -1,5 +1,4 @@
 <x-base>
-
     <section class="banner">
         <div class="container">
             <div class="row align-items-center">
@@ -65,7 +64,7 @@
                             <img src="{{ asset('images/aboutUs').'/'. $aboutus['image']}}" alt="about-us" />
                         </div>
                             <div class="about-us-wrapper">
-                                <p>   {{$aboutus['detail'] }} </p>
+                                <p class="comment more" showChar="400">   {{$aboutus['detail'] }} </p>
                                 <div class="about-us-main">
 
                                     @php
@@ -103,8 +102,11 @@
                                 <img src="{{ asset('images/investmentHome/image/').'/'. $investment->image_title }}" alt="" />
                             </div>
                             <div>
-                                <video controls="" src="{{ asset('images/investmentHome/video/').'/'. $investment->video_title }}" width="120" height="120"></video>
-
+                                @if(!empty($investment->video_title) && file_exists(public_path('images/investmentHome/video/').'/'. $investment->video_title) )
+                                <video controls="" src=" {{ !empty($investment->video_title) ? asset('images/investmentHome/video/').'/'. $investment->video_title :'' }}" width="120" height="120"></video>
+                                @else
+                                    <img src="{{ asset('images/front/home/img2.png') }} " alt="">
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -113,7 +115,7 @@
                             <div class="title">
                                 <span class="btn btn-2">{{$investment->title }}</span>
                                 <h2>{{$investment->name }}</h2>
-                                <p>  {{$investment->detail }}  </p>
+                                <p class="comment more" showChar="100">  {{$investment->detail }}  </p>
                                 <div>
                                     @php
                                         $sub_titles = json_decode( $investment->sub_title );
@@ -126,7 +128,7 @@
                                         </div>
                                         <div>
                                             <h6>{{$row->sub_title }}</h6>
-                                            <p> {{$row->sub_title_detail }}  </p>
+                                            <p class="comment more" showChar="100"> {{$row->sub_title_detail }}  </p>
 
                                         </div>
                                     </div>
@@ -400,7 +402,7 @@
                     <div class="title">
                         <span class="btn btn-2">{{ $ourProject['title'] }}</span>
                         <h2>{{ $ourProject['name'] }}</h2>
-                        <p>  {{ $ourProject['detail'] }} </p>
+                        <p class="comment more" showChar="400">  {{ $ourProject['detail'] }} </p>
                     </div>
                     @endif
                 </div>
@@ -674,7 +676,7 @@
                         <div class="title">
                             <span class="btn btn-2">{{ $featureProject['title'] }}</span>
                                 <h2>{{ $featureProject['name'] }}</h2>
-                                <p>  {{ $featureProject['detail'] }} </p>
+                                <p class="comment more" showChar="400">  {{ $featureProject['detail'] }} </p>
                         </div>
                     @endif
                 </div>

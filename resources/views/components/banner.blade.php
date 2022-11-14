@@ -9,7 +9,7 @@
                 <h4>{{!empty($page) && ($page == 'News Feed') ? 'The latest news and press releases' : ''}}</h4>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb justify-content-center">
-                        <li class="breadcrumb-item"><a href="index.php"> <img src="{{asset('images/front')}}/about/home-icon.png" alt=""> Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}"> <img src="{{asset('images/front')}}/about/home-icon.png" alt=""> Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{$page}}</li>
                     </ol>
                 </nav>

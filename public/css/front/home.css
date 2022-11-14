@@ -1,5 +1,5 @@
 .banner {
-    background: url('/images/home/banner.png');
+    background: url('/images/front/home/banner.png');
     background-size: cover;
     display: flex;
     align-items: center;
@@ -1166,6 +1166,6 @@ responsive css
     }
 }
 
-
-
-
+.morecontent span {
+    display: none;
+}

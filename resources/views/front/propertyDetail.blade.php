@@ -1,11 +1,10 @@
 <x-base>
     <x-banner title="Property Details" page="Property Details"></x-banner>
-    @php  $imagePDFile = '';  @endphp
-        @if(!empty($pdf))
-            @php
-       $imagePDFile  =  !empty($pdf['title'] ) ? asset('images/project/pdf/').'/'.$pdf['title'] : ''
-         @endphp
-    @endif
+    @php  $imagePDFile = '';
+        if(!empty($pdf))
+            $imagePDFile  =  !empty($pdf['title'] ) ? asset('images/project/pdf/').'/'.$pdf['title'] : ''
+     @endphp
+
 
     @if (!empty($projectList))
 
@@ -27,7 +26,6 @@
                             <ul>
                                 <li>
                                     <a id="downloadBrochure12"  {{ !empty($imagePDFile) ? 'download' :'' }}  href="{{ $imagePDFile }}" proName="{{ $projectList['project_name'] }}"  class="cmn-btn">DOWNLOAD BROCHURE</a>
-
                                 </li>
                                 <li>
                                     <a href="javascript:void(0)"  user_id="{{ Auth::guard('front')->check() ? Auth::guard('front')->user()->id : '' }}" class="cmn-btn bookNow">BOOK NOW</a>
@@ -40,7 +38,7 @@
                     <div class="row">
                         @if(!empty($selectedImage))
 
-                            @php $files = []; @endphp
+                            @php $files = [];  $j = 0; @endphp
 
                         @for($i=0; count($selectedImage) > $i; $i++)
 
@@ -57,20 +55,26 @@
                                             </div>
                                         </div>
                                     </div>
+                                @elseif ($selectedImage[$i]['type'] == 2 && $i > 2  && $j < 1 )
+                                    @php $j++ @endphp
+                                    <div class="col-lg-4 d-flex flex-column">
+                                        <div class="property-detail-main-wrap-small property-detail-main-wrap">
+                                            <img src="{{ asset('images/project/images/').'/'.$selectedImage[$i]['title'] }}" alt="">
+                                            <div class="property-detail-more-detail"  data-bs-toggle="modal" data-bs-target="#photoModal">
+                                                <a href="javascript:void(0)" class="more-photos">More Photos</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 @elseif($selectedImage[$i]['type'] == 1 )
-
                                     <input type="hidden" id="pdfFile" name="pdfFile" value=" ">
-
                                     <div class="col-lg-8">
                                             <div class="property-detail-main-wrap-big video-wrapper brochure-wrap">
-                                                <iframe src="{{ !empty( $image['title'] ) ? asset('images/project/pdf' ).'/'.$image['title']  : '' }}" width="100%" height="200px"></iframe>
-               
-                                                <img src="{{ asset('images/project/pdf/').'/'.$selectedImage[$i]['title'] }}" alt="architecture" />
+                                                <iframe src="{{ !empty( $selectedImage[$i]['title'] ) ? asset('images/project/pdf' ).'/'.$selectedImage[$i]['title'] : '' }}" width="100%" height="500px"></iframe>
                                                 <input type="hidden"  id="downloadUrl" name="downloadUrl" value="{{ !empty($selectedImage[$i]['title'] ) ? asset('images/project/pdf/').'/'.$selectedImage[$i]['title'] : ''}}">
                                                 <a  id="downloadBrochure12"  download href="{{ $imagePDFile }}" proName="{{ $projectList['project_name'] }}" class="cmn-btn" >DOWNLOAD BROCHURE</a>
                                             </div>
                                         </div>
-
                                 @endif
                             @endfor
 
