@@ -318,6 +318,16 @@
 .mission-vision .row:nth-child(2n) {
     flex-direction: row-reverse;
     margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.mission-vision .row:nth-child(odd) {
+    margin-bottom: 100px;
+}
+
+.mission-vision .row:nth-child(even) {
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
 

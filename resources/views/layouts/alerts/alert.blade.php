@@ -123,7 +123,7 @@
 @endif
 
 @if (Session::has('inserted'))
-<div class="alert alert-dismissible bg-success d-flex flex-column flex-sm-row p-5 mb-10">
+<div class="alert alert-dismissible bg-success d-flex flex-column flex-sm-row p-5 mb-10 bookingSuccessAlert">
     <i class="fas fa-check text-white fs-3x my-auto me-5"></i>
 
     <!--begin::Content-->

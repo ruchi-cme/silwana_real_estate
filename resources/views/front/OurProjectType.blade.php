@@ -39,7 +39,7 @@
                             </div>
                             <div class="portfolio-lists-detail">
                                 <h6>{{  $row['project_name'] }}</h6>
-                                <p> Homes & Shops</p>
+                                <p> {{  $row['category_name'] }}</p>
                             </div>
                         </a>
                     </div>

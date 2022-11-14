@@ -4,6 +4,7 @@
 @if (!empty($myBooking))
     <section class="portfolio-list my-booking">
         @include('layouts.alerts.error')
+
         @include('layouts.alerts.alert')
 
         <div class="container">

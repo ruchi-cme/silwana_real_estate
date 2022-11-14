@@ -89,6 +89,17 @@ video {
     padding: 300px 0 175px !important;
 }
 
+.bookingSuccessAlert{
+position: fixed;
+left: 0;
+right: 0;
+width: 100%;
+max-width: 700px;
+margin: 0 auto;
+top: 50%;
+z-index: 2222;
+padding: 25px !important;
+}
 
 
 
@@ -121,9 +132,7 @@ video {
 
 
 
-
-
-/* 
+/*
 responsive css
 */
 
@@ -141,5 +150,5 @@ responsive css
 
     .title h5 {
         font-size: 23px !important;
-    }    
+    }
 }
