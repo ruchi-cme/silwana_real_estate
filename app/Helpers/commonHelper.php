@@ -198,7 +198,7 @@ if(!function_exists("getBookingImage")) {
 
 if(!function_exists("getProjectList")) {
 
-    function getProjectList($project_id='' ,$work_status ='',$search='') {
+    function getProjectList($project_id='' ,$work_status ='',$search='',$category_id='') {
 
         $select =  [ 'project_master.project_id',
             'project_master.project_name',
@@ -206,6 +206,7 @@ if(!function_exists("getProjectList")) {
             'project_master.work_status',
             'project_master.status',
             'project_master.created_date',
+            'category_master.category_id',
             'category_master.category_name',
             'project_master.project_id',
             'project_master.created_date',
@@ -229,7 +230,22 @@ if(!function_exists("getProjectList")) {
                ->where('project_master.status',1)
                ->orderBy('project_master.project_id', 'desc')
                ->get()->first();
-       } else {
+       } elseif (!empty($category_id)) {
+
+               $data = Project::leftJoin('category_master', 'category_master.category_id', '=', 'project_master.category_id')
+                   //->leftJoin('proj_ameni_mappings', 'proj_ameni_mappings.project_id', '=', 'project_master.project_id')
+                   ->leftJoin('project_address_details','project_address_details.project_id' , '=', 'project_master.project_id')
+                   ->select($select)
+                   ->where('project_master.deleted',0)
+                   ->where('project_master.status',1)
+                   ->where('category_master.category_id',$category_id)
+                   ->where('project_master.project_name', 'like', '%'. $search .'%')
+                   ->orderBy('project_master.project_id', 'desc')
+                   // ->get();
+                   ->paginate(10);
+
+       }
+       else {
            $data = Project::leftJoin('category_master', 'category_master.category_id', '=', 'project_master.category_id')
                //->leftJoin('proj_ameni_mappings', 'proj_ameni_mappings.project_id', '=', 'project_master.project_id')
                ->leftJoin('project_address_details','project_address_details.project_id' , '=', 'project_master.project_id')
@@ -670,4 +686,56 @@ if(!function_exists("getInvestmentHomeCMS")) {
 
         return $data;
     }
+}
+
+if(!function_exists("getProjectListByCategory")) {
+
+    function getProjectListByCategory($category_id=''  ,$search='') {
+
+        $select =  [ 'project_master.project_id',
+            'project_master.project_name',
+            'project_master.project_detail',
+            'project_master.work_status',
+            'project_master.status',
+            'project_master.created_date',
+            'category_master.category_id',
+            'category_master.category_name',
+            'project_master.project_id',
+            'project_master.created_date',
+            'project_address_details.address',
+            'project_address_details.landmark',
+            'project_address_details.country',
+            'project_address_details.state',
+            'project_address_details.city',
+            'project_address_details.zip',
+            'project_address_details.latitude',
+            'project_address_details.longitude'
+        ];
+
+        if (!empty($category_id)) {
+            $data = Project::leftJoin('category_master', 'category_master.category_id', '=', 'project_master.category_id')
+                //->leftJoin('proj_ameni_mappings', 'proj_ameni_mappings.project_id', '=', 'project_master.project_id')
+                ->leftJoin('project_address_details','project_address_details.project_id' , '=', 'project_master.project_id')
+                ->select($select)
+                ->where('project_master.deleted',0)
+                ->where('category_master.category_id', $category_id)
+                ->where('project_master.status',1)
+                ->orderBy('project_master.project_id', 'desc')
+                ->paginate(10);
+        } else {
+            $data = Project::leftJoin('category_master', 'category_master.category_id', '=', 'project_master.category_id')
+                //->leftJoin('proj_ameni_mappings', 'proj_ameni_mappings.project_id', '=', 'project_master.project_id')
+                ->leftJoin('project_address_details','project_address_details.project_id' , '=', 'project_master.project_id')
+                ->select($select)
+                ->where('project_master.deleted',0)
+                ->where('project_master.status',1)
+                ->where('project_master.project_name', 'like', '%'. $search .'%')
+                ->orderBy('project_master.project_id', 'desc')
+                // ->get();
+                ->paginate(10);
+        }
+
+        return $data;
+    }
+
 }

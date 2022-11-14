@@ -172,15 +172,15 @@
             $("#dataForm").validate({
                 ignore: '',
                 rules: {
-                    "name" :"required",
+                    name : {
+                        required: true,
+                        maxlength: 255
+                    },
                     link : {
                         required: true,
                         url: true
                     },
                 },
-                messages: {
-                    "name" : "Please enter name",
-                }
             });
 
             $('#create_button').on('click', function(event) {

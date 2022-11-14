@@ -7,9 +7,9 @@
 <li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->id) ?   'Edit' :  'Create' }}</li>
 @endsection
 <style>
-.error{
-    color: #FF0000;
-}
+    .error , .inputFileError{
+        color: #FF0000;
+    }
 </style>
 @section('content')
 <!--begin::Post-->
@@ -84,229 +84,297 @@
                             </div>
                             <!--end::Row-->
 
+                            @if(!empty( $editData->sub_title))
+                                @php
+                                    $sub_titles = json_decode( $editData->sub_title );
+                                    $i = 1;
+                                @endphp
 
-                            <div class="row">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Icon 1 </div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col--> <div class="col-md-3 mb-3">
-                                    <!--begin::Image input-->
-                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
-                                        <!--begin::Preview existing image-->
-                                        @php
-                                            $path =  !empty($editData->image_video_title) ? asset('images/investmentHome/image').'/'. $editData->image_video_title  : ''  ;
-                                            $test =   "background-image:url('$path')"  ;
-                                           $videoUrl =  !empty($editData->image_video_title) ? asset('images/investmentHome/video').'/'. $editData->image_video_title  : ''  ;
+                                @foreach($sub_titles as $row)
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-xl-3">
+                                            <div class="fs-6 fw-bold mt-2 mb-3 required"> Icon {{ $i }} </div>
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col--> <div class="col-md-3 mb-3">
+                                            <!--begin::Image input-->
+                                            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
+                                                <!--begin::Preview existing image-->
+                                                @php
+                                                    $path =  !empty($row->icon) ? asset('images/investmentHome/icon').'/'. $row->icon  : ''  ;
+                                                    $test =   "background-image:url('$path')"  ;
 
-                                        @endphp
-                                        <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($editData->image_video_title) ? $test :'"background-image : none'}}"></div>
+                                                @endphp
+                                                <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($row->icon) ? $test :'"background-image : none'}}"></div>
 
-                                        <!--end::Preview existing image-->
-                                        <!--begin::Label-->
-                                        <label class="inputFileError errorMsg" for="direction" style="">  </label>
-                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
-                                            <i class="bi bi-pencil-fill fs-7"></i>
-                                            <!--begin::Inputs-->
-                                            <input type="file"  name="icon[]" accept=".png, .jpg, .jpeg" />
-                                            <input type="hidden" name="edit_image_title"  value="{{ !empty($editData->image_video_title) ? $editData->image_video_title : ''  }}" />
-                                            <input type="hidden" name="avatar_remove" />
-                                            <input type="hidden" id="imageType" name="imageType" value="{{ !empty($editData->type) ? $editData->type : ''  }}" />
-                                            <!--end::Inputs-->
-                                        </label>
+                                                <!--end::Preview existing image-->
+                                                <!--begin::Label-->
+                                                <label class="inputFileError errorMsg" for="direction" style="">  </label>
+                                                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
+                                                    <i class="bi bi-pencil-fill fs-7"></i>
+                                                    <!--begin::Inputs-->
+                                                    <input type="file"  name="icon[]" accept=".png, .jpg, .jpeg" />
+                                                    <input type="hidden" name="edit_icon[]"  value="{{ !empty($row->icon) ? $row->icon : ''  }}" />
+                                                    <input type="hidden" name="avatar_remove" />
+                                                      <!--end::Inputs-->
+                                                </label>
 
-                                        <!--end::Label-->
-                                        <!--begin::Cancel-->
-                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
+                                                <!--end::Label-->
+                                                <!--begin::Cancel-->
+                                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
                                                                     <i class="bi bi-x fs-2"></i>
                                                                 </span>
-                                        <!--end::Cancel-->
-                                        <!--begin::Remove-->
-                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
+                                                <!--end::Cancel-->
+                                                <!--begin::Remove-->
+                                                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
                                                                     <i class="bi bi-x fs-2"></i>
                                                                 </span>
-                                        <!--end::Remove-->
+                                                <!--end::Remove-->
+                                            </div>
+                                            <!--end::Image input-->
+                                        </div>
                                     </div>
-                                    <!--end::Image input-->
-                                </div>
-                            </div>
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Sub Title 1</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" required placeholder="Enter Sub Title" class="form-control form-control-solid" name="sub_title[]" value="{{ !empty( $editData->name) ? $editData->name : '' }}" >
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
-
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Sub Title Detail 1</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <textarea placeholder="Enter  Sub Title Detail" required name="sub_title_detail[]" class="form-control form-control-solid h-100px" >{{ !empty( $editData->detail) ? $editData->detail : '' }}</textarea>
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
-
-
-                            <div class="row">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Icon 2 </div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col--> <div class="col-md-3 mb-3">
-                                    <!--begin::Image input-->
-                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
-                                        <!--begin::Preview existing image-->
-                                        @php
-                                            $path =  !empty($editData->image_video_title) ? asset('images/investmentHome/image').'/'. $editData->image_video_title  : ''  ;
-                                            $test =   "background-image:url('$path')"  ;
-                                           $videoUrl =  !empty($editData->image_video_title) ? asset('images/investmentHome/video').'/'. $editData->image_video_title  : ''  ;
-
-                                        @endphp
-                                        <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($editData->image_video_title) ? $test :'"background-image : none'}}"></div>
-
-                                        <!--end::Preview existing image-->
-                                        <!--begin::Label-->
-                                        <label class="inputFileError errorMsg" for="direction" style="">  </label>
-                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
-                                            <i class="bi bi-pencil-fill fs-7"></i>
-                                            <!--begin::Inputs-->
-                                            <input type="file"   name="icon[]" accept=".png, .jpg, .jpeg" />
-                                            <input type="hidden" name="edit_image_title"  value="{{ !empty($editData->image_video_title) ? $editData->image_video_title : ''  }}" />
-                                            <input type="hidden" name="avatar_remove" />
-                                            <input type="hidden" id="imageType" name="imageType" value="{{ !empty($editData->type) ? $editData->type : ''  }}" />
-                                            <!--end::Inputs-->
-                                        </label>
-
-                                        <!--end::Label-->
-                                        <!--begin::Cancel-->
-                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
-                                                                    <i class="bi bi-x fs-2"></i>
-                                                                </span>
-                                        <!--end::Cancel-->
-                                        <!--begin::Remove-->
-                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
-                                                                    <i class="bi bi-x fs-2"></i>
-                                                                </span>
-                                        <!--end::Remove-->
+                                    <!--begin::Row-->
+                                    <div class="row mb-8">
+                                        <!--begin::Col-->
+                                        <div class="col-xl-3">
+                                            <div class="fs-6 fw-bold mt-2 mb-3 required"> Sub Title  {{ $i }}</div>
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                            <input type="text" required placeholder="Enter Sub Title" class="form-control form-control-solid" name="sub_title[]" value="{{ !empty( $row->sub_title) ? $row->sub_title : '' }}" >
+                                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                     </div>
-                                    <!--end::Image input-->
-                                </div>
-                            </div>
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Sub Title 2</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" required placeholder="Enter Sub Title" class="form-control form-control-solid" name="sub_title[]" value="{{ !empty( $editData->name) ? $editData->name : '' }}" >
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
+                                    <!--end::Row-->
 
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Sub Title Detail 2</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <textarea placeholder="Enter  Sub Title Detail" required name="sub_title_detail[]" class="form-control form-control-solid h-100px" >{{ !empty( $editData->detail) ? $editData->detail : '' }}</textarea>
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
-
-                            <div class="row">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Icon 3 </div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col--> <div class="col-md-3 mb-3">
-                                    <!--begin::Image input-->
-                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
-                                        <!--begin::Preview existing image-->
-                                        @php
-                                            $path =  !empty($editData->image_video_title) ? asset('images/investmentHome/image').'/'. $editData->image_video_title  : ''  ;
-                                            $test =   "background-image:url('$path')"  ;
-                                           $videoUrl =  !empty($editData->image_video_title) ? asset('images/investmentHome/video').'/'. $editData->image_video_title  : ''  ;
-
-                                        @endphp
-                                        <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($editData->image_video_title) ? $test :'"background-image : none'}}"></div>
-
-                                        <!--end::Preview existing image-->
-                                        <!--begin::Label-->
-                                        <label class="inputFileError errorMsg" for="direction" style="">  </label>
-                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
-                                            <i class="bi bi-pencil-fill fs-7"></i>
-                                            <!--begin::Inputs-->
-                                            <input type="file"   name="icon[]" accept=".png, .jpg, .jpeg" />
-                                            <input type="hidden" name="edit_image_title"  value="{{ !empty($editData->image_video_title) ? $editData->image_video_title : ''  }}" />
-                                            <input type="hidden" name="avatar_remove" />
-                                            <input type="hidden" id="imageType" name="imageType" value="{{ !empty($editData->type) ? $editData->type : ''  }}" />
-                                            <!--end::Inputs-->
-                                        </label>
-
-                                        <!--end::Label-->
-                                        <!--begin::Cancel-->
-                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
-                                                                    <i class="bi bi-x fs-2"></i>
-                                                                </span>
-                                        <!--end::Cancel-->
-                                        <!--begin::Remove-->
-                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
-                                                                    <i class="bi bi-x fs-2"></i>
-                                                                </span>
-                                        <!--end::Remove-->
+                                    <!--begin::Row-->
+                                    <div class="row mb-8">
+                                        <!--begin::Col-->
+                                        <div class="col-xl-3">
+                                            <div class="fs-6 fw-bold mt-2 mb-3 required"> Sub Title Detail  {{ $i }}</div>
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                            <textarea placeholder="Enter  Sub Title Detail" required name="sub_title_detail[]" class="form-control form-control-solid h-100px" >{{ !empty( $row->sub_title_detail) ? $row->sub_title_detail : '' }}</textarea>
+                                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                     </div>
-                                    <!--end::Image input-->
-                                </div>
-                            </div>
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Sub Title 3</div>
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <input type="text" required placeholder="Enter Sub Title" class="form-control form-control-solid" name="sub_title[]" value="{{ !empty( $editData->name) ? $editData->name : '' }}" >
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
+                                    <!--end::Row-->
+                                    @php $i++ @endphp
+                                @endforeach
 
-                            <!--begin::Row-->
-                            <div class="row mb-8">
-                                <!--begin::Col-->
-                                <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Sub Title Detail 3</div>
+
+                            @else
+                                <div class="row">
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3 required"> Icon 1 </div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col--> <div class="col-md-3 mb-3">
+                                        <!--begin::Image input-->
+                                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
+                                            <!--begin::Preview existing image-->
+
+                                            <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: none"></div>
+
+                                            <!--end::Preview existing image-->
+                                            <!--begin::Label-->
+                                            <label class="inputFileError errorMsg" for="direction" style="">  </label>
+                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Upload image">
+                                                <i class="bi bi-pencil-fill fs-7"></i>
+                                                <!--begin::Inputs-->
+                                                <input type="file"  name="icon[]" accept=".png, .jpg, .jpeg" />
+                                                <input type="hidden" name="edit_image_title"  value=" " />
+                                                <input type="hidden" name="avatar_remove" />
+                                                <input type="hidden" id="imageType" name="imageType" value=" " />
+                                                <!--end::Inputs-->
+                                            </label>
+
+                                            <!--end::Label-->
+                                            <!--begin::Cancel-->
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
+                                                                    <i class="bi bi-x fs-2"></i>
+                                                                </span>
+                                            <!--end::Cancel-->
+                                            <!--begin::Remove-->
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
+                                                                    <i class="bi bi-x fs-2"></i>
+                                                                </span>
+                                            <!--end::Remove-->
+                                        </div>
+                                        <!--end::Image input-->
+                                    </div>
                                 </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <textarea placeholder="Enter  Sub Title Detail" required name="sub_title_detail[]" class="form-control form-control-solid h-100px" >{{ !empty( $editData->detail) ? $editData->detail : '' }}</textarea>
-                                    <div class="fv-plugins-message-container invalid-feedback"></div></div>
-                            </div>
-                            <!--end::Row-->
+                                <!--begin::Row-->
+                                <div class="row mb-8">
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3 required"> Sub Title 1</div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                        <input type="text" required placeholder="Enter Sub Title" class="form-control form-control-solid" name="sub_title[]" value=" " >
+                                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                </div>
+                                <!--end::Row-->
+
+                                <!--begin::Row-->
+                                <div class="row mb-8">
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3 required"> Sub Title Detail 1</div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                        <textarea placeholder="Enter  Sub Title Detail" required name="sub_title_detail[]" class="form-control form-control-solid h-100px" ></textarea>
+                                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                </div>
+                                <!--end::Row-->
+
+                                <div class="row">
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3 required"> Icon 2 </div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col--> <div class="col-md-3 mb-3">
+                                        <!--begin::Image input-->
+                                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
+                                            <!--begin::Preview existing image-->
+
+                                            <div class="imageBgDiv image-input-wrapper w-125px h-125px" style=" background-image : none "></div>
+
+                                            <!--end::Preview existing image-->
+                                            <!--begin::Label-->
+                                            <label class="inputFileError errorMsg" for="direction" style="">  </label>
+                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
+                                                <i class="bi bi-pencil-fill fs-7"></i>
+                                                <!--begin::Inputs-->
+                                                <input type="file"   name="icon[]" accept=".png, .jpg, .jpeg" />
+                                                <input type="hidden" name="edit_image_title"  value=" " />
+                                                <input type="hidden" name="avatar_remove" />
+                                                <input type="hidden" id="imageType" name="imageType" value=" " />
+                                                <!--end::Inputs-->
+                                            </label>
+
+                                            <!--end::Label-->
+                                            <!--begin::Cancel-->
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
+                                                                    <i class="bi bi-x fs-2"></i>
+                                                                </span>
+                                            <!--end::Cancel-->
+                                            <!--begin::Remove-->
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
+                                                                    <i class="bi bi-x fs-2"></i>
+                                                                </span>
+                                            <!--end::Remove-->
+                                        </div>
+                                        <!--end::Image input-->
+                                    </div>
+                                </div>
+                                <!--begin::Row-->
+                                <div class="row mb-8">
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3 required"> Sub Title 2</div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                        <input type="text" required placeholder="Enter Sub Title" class="form-control form-control-solid" name="sub_title[]" value=" " >
+                                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                </div>
+                                <!--end::Row-->
+
+                                <!--begin::Row-->
+                                <div class="row mb-8">
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3 required"> Sub Title Detail 2</div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                        <textarea placeholder="Enter  Sub Title Detail" required name="sub_title_detail[]" class="form-control form-control-solid h-100px" > </textarea>
+                                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                </div>
+                                <!--end::Row-->
+
+                                <div class="row">
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3 required"> Icon 3 </div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col--> <div class="col-md-3 mb-3">
+                                        <!--begin::Image input-->
+                                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
+                                            <!--begin::Preview existing image-->
+
+                                            <div class="imageBgDiv image-input-wrapper w-125px h-125px" style=" background-image : none "></div>
+
+                                            <!--end::Preview existing image-->
+                                            <!--begin::Label-->
+                                            <label class="inputFileError errorMsg" for="direction" style="">  </label>
+                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
+                                                <i class="bi bi-pencil-fill fs-7"></i>
+                                                <!--begin::Inputs-->
+                                                <input type="file"   name="icon[]" accept=".png, .jpg, .jpeg" />
+                                                <input type="hidden" name="edit_image_title"  value="" />
+                                                <input type="hidden" name="avatar_remove" />
+                                                <input type="hidden" id="imageType" name="imageType" value="" />
+                                                <!--end::Inputs-->
+                                            </label>
+
+                                            <!--end::Label-->
+                                            <!--begin::Cancel-->
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
+                                                                    <i class="bi bi-x fs-2"></i>
+                                                                </span>
+                                            <!--end::Cancel-->
+                                            <!--begin::Remove-->
+                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
+                                                                    <i class="bi bi-x fs-2"></i>
+                                                                </span>
+                                            <!--end::Remove-->
+                                        </div>
+                                        <!--end::Image input-->
+                                    </div>
+                                </div>
+                                <!--begin::Row-->
+                                <div class="row mb-8">
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3 required"> Sub Title 3</div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                        <input type="text" required placeholder="Enter Sub Title" class="form-control form-control-solid" name="sub_title[]" value="" >
+                                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                </div>
+                                <!--end::Row-->
+
+                                <!--begin::Row-->
+                                <div class="row mb-8">
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3 required"> Sub Title Detail 3</div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-xl-9 fv-row fv-plugins-icon-container">
+                                        <textarea placeholder="Enter  Sub Title Detail" required name="sub_title_detail[]" class="form-control form-control-solid h-100px" > </textarea>
+                                        <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                </div>
+                                <!--end::Row-->
+                            @endif
+
 
                             <div class="row">
                                 <!--begin::Col-->
@@ -319,12 +387,12 @@
                                     <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
                                         <!--begin::Preview existing image-->
                                         @php
-                                            $path =  !empty($editData->image_video_title) ? asset('images/investmentHome/image').'/'. $editData->image_video_title  : ''  ;
+                                            $path =  !empty($editData->image_title) ? asset('images/investmentHome/image').'/'. $editData->image_title  : ''  ;
                                             $test =   "background-image:url('$path')"  ;
-                                           $videoUrl =  !empty($editData->image_video_title) ? asset('images/investmentHome/video').'/'. $editData->image_video_title  : ''  ;
+                                           $videoUrl =  !empty($editData->video_title) ? asset('images/investmentHome/video').'/'. $editData->video_title  : ''  ;
 
                                         @endphp
-                                        <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($editData->image_video_title) ? $test :'"background-image : none'}}"></div>
+                                        <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($editData->image_title) ? $test :'"background-image : none'}}"></div>
 
                                         <!--end::Preview existing image-->
                                         <!--begin::Label-->
@@ -332,11 +400,10 @@
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
-                                            <input type="file" value="{{ !empty($editData->image_video_title) ? $editData->image_video_title : '' }}" name="image_title" accept=".png, .jpg, .jpeg" />
-                                            <input type="hidden" name="edit_image_title"  value="{{ !empty($editData->image_video_title) ? $editData->image_video_title : ''  }}" />
+                                            <input type="file" value="{{ !empty($editData->image_title) ? $editData->image_title : '' }}" name="image_title" accept=".png, .jpg, .jpeg" />
+                                            <input type="hidden" name="edit_image_title"  value="{{ !empty($editData->image_title) ? $editData->image_title : ''  }}" />
                                             <input type="hidden" name="avatar_remove" />
-                                            <input type="hidden" id="imageType" name="imageType" value="{{ !empty($editData->type) ? $editData->type : ''  }}" />
-                                            <!--end::Inputs-->
+                                             <!--end::Inputs-->
                                         </label>
 
                                         <!--end::Label-->
@@ -368,11 +435,10 @@
                                         <input type="file" accepts="video/*" class="form-control form-control-solid" name="video_title"   id="video_title" >
 
                                         <div class="col-xl-9 fv-row fv-plugins-icon-container video-preview-div">
-                                            <input type="hidden" id="imageType" name="imageType" value="{{  !empty($editData->type) ? $editData->type : ''  }}" />
-                                            <input type="hidden" name="edit_video_title" value="{{ !empty($editData->image_video_title  ) ? $editData->image_video_title   : '' }}" id="edit_video_title">
+                                             <input type="hidden" name="edit_video_title" value="{{ !empty($editData->video_title  ) ? $editData->video_title   : '' }}" id="edit_video_title">
 
                                             <span class="pip editpip">
-                                                        <video controls="" src="{{ !empty($editData->image_video_title) ? asset('images/investmentHome/video').'/'.$editData->image_video_title : '' }}" width="120" height="120"></video>
+                                                        <video controls="" src="{{ !empty($editData->video_title) ? asset('images/investmentHome/video').'/'.$editData->video_title : '' }}" width="120" height="120"></video>
                                                          <br/><span class="removeVideo"><i class="fa fa-trash"></i></span>
                                                      </span>
 
@@ -446,11 +512,25 @@
             });
 
             $('#create_button').on('click', function(event) {
+
+                var err = 1;
+                $(document).find("div.imageBgDiv").each(function() {
+
+                    var bgImg = $(this).css('background-image').trim();
+
+                    if (bgImg == 'url("about:invalid")' || bgImg == 'none'  ) {
+
+                        $(this).next('.inputFileError').html('Required');
+                        err++;
+                    } else {
+                        $(this).next('.inputFileError').html('');
+                    }
+                });
                 // prevent default submit action
                 event.preventDefault();
 
                 // test if form is valid
-                if($('#dataForm').valid()  ) { console.log(2);
+                if($('#dataForm').valid() && err == 1  ) { console.log(2);
                     $( '#dataForm' ).submit();
                 } else { console.log(3);
                     console.log("does not validate");

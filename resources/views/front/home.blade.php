@@ -55,7 +55,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="title text-center">
-                        <span class="btn btn-2">About Us</span>
+                        <a href="{{ route('about') }}"> <span class="btn btn-2">About Us</span> </a>
                         <h2>{{$aboutus['name']}}</h2>
                     </div>
                 </div>
@@ -149,7 +149,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="title text-center">
-                        <span class="btn btn-2">Property</span>
+                        <a href="{{ URL('ourProject') }}"> <span class="btn btn-2">Property</span></a>
+
                         <h2>Property By Categories</h2>
                     </div>
                 </div>
@@ -172,7 +173,7 @@
                         <div class="property-by-categories-detail">
                             <div>
                                 <h3>{{$cat['category_name']}}</h3>
-                                <a href="{{route('ourProject')}}" class="cmn-btn">GREATE DEAL AVAILABLE</a>
+                                <a href="{{ URL('ourProject/category/'.encrypt($cat['category_id'])) }}" class="cmn-btn">GREATE DEAL AVAILABLE</a>
                             </div>
                         </div>
                     </div>
@@ -425,7 +426,7 @@
                                     <p>The perfect silwana residency</p>
                                 </div>
                                 <div class="inquiry-now-wrap">
-                                    <a href="#" class="cmn-btn">INQUIRY Now</a>
+                                    <a href="{{route('contactUs')}}" class="cmn-btn">INQUIRY Now</a>
                                 </div>
                             </div>
                         </div>
@@ -688,7 +689,14 @@
                                                     <h4>upcoming projects</h4>
                                                     <h2> {{ $featurePro['project_name'] }}</h2>
                                                     <h6> {{ $featurePro['address'] }}</h6>
-                                                    <p>   {{ $featurePro['project_detail'] }} </p>
+                                                    @php
+                                                        $string    = $featurePro['project_detail'];
+
+                                                    @endphp
+                                                    <p>   {{ substr($string,0,550) }}
+                                                        @if (strlen(strip_tags($string)) > 550)
+                                                             <a href="{{ URL('projectDetail/'.encrypt($featurePro['project_id'])) }}"  >...</a>
+                                                        @endif</p>
                                                     <div class="upcoming-project-detail-lists property-main-detail">
 
                                                         <div class="position-static">

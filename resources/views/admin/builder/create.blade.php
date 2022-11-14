@@ -6,7 +6,11 @@
 <li class="breadcrumb-item px-3"><a class="text-hover-primary text-muted" href="{{ route('admin.builder') }}">Builder</a></li>
 <li class="breadcrumb-item px-3 text-primary">{{ !empty($editData->builder_id) ? ' Edit' : 'Create' }}</li>
 @endsection
-
+<style>
+    .error{
+        color: #FF0000;
+    }
+</style>
 @section('content')
 <!--begin::Post-->
 <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -163,44 +167,52 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/swal.js') }}" ></script>
 
-    <script type="text/javascript">
-        var button = document.querySelector("#create_button");
-
-        var target = document.querySelector("#blockUI_target");
-        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        // Defination -------------------------------------------------------------------------------------------------------------
-
-        var blockUI = new KTBlockUI(target, {
-            message: '<div class="blockui-message"><span class="spinner-border text-primary"></span> Checking...</div>',
-        }); // Element to block white fetching AJAX data ----------------------------------------------------------------------
-
-
-        button.addEventListener("click", function () {
-            if (!$("#user_form")[0].checkValidity()) {
-                $("#user_form")[0].reportValidity();
-
-                Toast.fire({
-                    icon: 'error',
-                    title: 'Please Fill Required Fields',
-                    text: "Make sure required fields are filled properly before moving on"
-                }); //display error toast
-
-                return 0;
+<script type="text/javascript">
+    $("#user_form").validate({
+        ignore: '',
+        rules: {
+            "company_name" :"required",
+            "owner_name" : "required",
+            "details" :  "required",
+            builder_email: {
+                required: true,
+                email: true
+            },
+            "phone_number" : {
+                required: true,
+                digits: true
             }
-            // Activate indicator
-            button.setAttribute("data-kt-indicator", "on");
-            button.setAttribute("disabled", "true");
+        },
+        messages: {
+            "company_name" : "Please enter company name",
+            "owner_name" :  "Please enter owner name",
+            "details" : "Please select details",
+            builder_email: {
+                required: "Please enter email",
+            },
+            "phone_number" : {
+                required: "Please enter phone number",
+            }
+        }
+    });
 
-            form = document.getElementById(this.getAttribute('data-form'));
-            form.submit();
-        }); // Handle Button Click Event ----------------------------------------------------------------------------
+    $('#create_button').on('click', function(event) {
 
 
-        $(document).on('select2:open', () => {
-            document.querySelector('.select2-search__field').focus();
-        }); // focus on search input in select 2 -------------------------------------------------------------------
-    </script>
+
+        // prevent default submit action
+        event.preventDefault();
+
+        // test if form is valid
+        if($('#user_form').valid()  ) { console.log(2);
+            $( '#user_form' ).submit();
+        } else { console.log(3);
+            console.log("does not validate");
+            return false;
+        }
+    });
+
+</script>
 
 @endpush

@@ -14,6 +14,11 @@
                         <div class="form-group mb-0 position-relative">
                             <input type="text" name="searchProject" class="form-control" placeholder="eg. silwana real estate">
                             <input type="hidden" name="currentURL"  value="{{$currentURL}}">
+                            @if( !empty(request()->id))
+                                <input type="hidden" name="category_id"  value="{{ decrypt(request()->id) }}">
+                            @endif
+
+
 
                         </div>
                         <div class="form-group mb-0">

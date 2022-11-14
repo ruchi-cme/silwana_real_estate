@@ -165,8 +165,9 @@
                                                 @if ($image['type'] == 1)
                                                     <span class="pip">
                                                          <input type="hidden" name="edit_project_pdf[]" value="{{ !empty( $image['title'] ) ? $image['title']  : '' }}" id="edit_project_pdf">
-                                                        <img height='50' width='50' class="imageThumb" src="{{ asset('images/front/pdfThumbnail.png')}}" title="{{ !empty( $image['title'] ) ? $image['title']  : '' }}"/>
-                                                <br/><span class="removePdf"><i class="fa fa-trash"></i></span>
+
+                                                        <iframe src="{{ !empty( $image['title'] ) ? asset('images/project/pdf' ).'/'.$image['title']  : '' }}" width="100%" height="200px"></iframe>
+                                                        <br/><span class="removePdf"><i class="fa fa-trash"></i></span>
                                                 </span>
                                                 @endif
                                             @endforeach
@@ -489,9 +490,9 @@
                          var fileReader = new FileReader();
                          fileReader.onload = (function(e) {
                              var file = e.target;
-
+console.log(files);
                              $("<span class=\"pip\">" +
-                                 "<img height='50' width='50' class=\"imageThumb\" src=\"" + pdfthumb + "\" title=\"" + f.name + "\"/>" +
+                                 "<iframe src='" +  file  + "' width='100%' height='200px'></iframe> "+
                                  "<br/><span class=\"remove\"><i class=\"fa fa-trash\"></i></span>" +
                                  "</span>").insertAfter(".pdf-preview-div");
                              $(".remove").click(function(){

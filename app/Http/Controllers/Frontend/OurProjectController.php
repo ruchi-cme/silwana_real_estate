@@ -71,7 +71,8 @@ class OurProjectController extends Controller
     public function projectSearch(Request $request) {
 
         $searchProject = $request->searchProject;
-        $currentURL    =  $request->currentURL ;
+        $currentURL    = $request->currentURL ;
+        $category_id   = $request->category_id ;
 
         $search = '';
 
@@ -88,6 +89,10 @@ class OurProjectController extends Controller
             //work_status = 2 for ongoing
             $workStatus =  array('2' );
             $projectList  = getProjectList( '' , $workStatus,$search);
+        }
+        elseif (!empty($category_id) ) {
+
+            $projectList  = getProjectList( '' , '' , $search,$category_id);
         }
         else {
             //work_status = 3 for ongoing
@@ -117,6 +122,12 @@ class OurProjectController extends Controller
         return response()->json($data);
     }
 
+    public function getProjectByCategory(Request $request) {
 
+        $cat_id    =   decrypt($request->route('id'));
+        $projectList    = getProjectListByCategory($cat_id);
+        $currentURL    = last(request()->segments());
+        return view('front.OurProjectType',compact('projectList','currentURL' ));
+    }
 
 }

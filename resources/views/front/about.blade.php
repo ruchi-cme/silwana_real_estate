@@ -4,7 +4,6 @@
 
     <!-- investment -->
     <section class="investment management mission-vision">
-        <div class="container">
             <div class="container">
                 @if (!empty($aboutUs))
                     @foreach($aboutUs as $row)
@@ -42,7 +41,6 @@
 
                 @endif
             </div>
-        </div>
     </section>
 
 

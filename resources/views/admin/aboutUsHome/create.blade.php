@@ -7,7 +7,7 @@
 <li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->id) ?   'Edit' :  'Create' }}</li>
 @endsection
 <style>
-.error{
+.error, .errorMsg{
     color: #FF0000;
 }
 </style>
@@ -86,7 +86,8 @@
                                         <!--end::Col-->
                                         <!--begin::Col-->
                                         <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                            <input type="text" required placeholder="Enter Title" class="form-control form-control-solid" name="sub_title[]" value="{{   $row  }}" >
+                                            <input type="text"  placeholder="Enter Title" class="form-control form-control-solid sub_title_class" name="sub_title[]" value="{{   $row  }}" >
+                                            <label class="inputerror errorMsg" for="sub_title" style="">  </label>
                                             <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                     </div>
                                     <!--end::Row-->
@@ -101,7 +102,8 @@
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                        <input type="text" required placeholder="Enter Title" class="form-control form-control-solid" name="sub_title[]" value="{{ !empty( $editData->designation) ? $editData->designation : '' }}" >
+                                        <input type="text"  placeholder="Enter Title" class="form-control form-control-solid sub_title_class"  name="sub_title[]" value="{{ !empty( $editData->designation) ? $editData->designation : '' }}" >
+                                        <label class="inputerror errorMsg" for="sub_title" style="">  </label>
                                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                 </div>
                                 <!--end::Row-->
@@ -115,7 +117,8 @@
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                        <input type="text" required placeholder="Enter Title" class="form-control form-control-solid" name="sub_title[]" value="{{ !empty( $editData->designation) ? $editData->designation : '' }}" >
+                                        <input type="text" placeholder="Enter Title" class="form-control form-control-solid sub_title_class" name="sub_title[]" value="{{ !empty( $editData->designation) ? $editData->designation : '' }}" >
+                                        <label class="inputerror errorMsg" for="sub_title" style="">  </label>
                                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                 </div>
                                 <!--end::Row-->
@@ -129,7 +132,8 @@
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                        <input type="text" required placeholder="Enter Title" class="form-control form-control-solid" name="sub_title[]" value="{{ !empty( $editData->designation) ? $editData->designation : '' }}" >
+                                        <input type="text" placeholder="Enter Title" class="form-control form-control-solid sub_title_class" name="sub_title[]" value="{{ !empty( $editData->designation) ? $editData->designation : '' }}" >
+                                        <label class="inputerror errorMsg" for="sub_title" style="">  </label>
                                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                 </div>
                                 <!--end::Row-->
@@ -143,7 +147,8 @@
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                        <input type="text" required placeholder="Enter Title" class="form-control form-control-solid" name="sub_title[]" value="{{ !empty( $editData->designation) ? $editData->designation : '' }}" >
+                                        <input type="text" placeholder="Enter Title" class="form-control form-control-solid sub_title_class" name="sub_title[]" value="{{ !empty( $editData->designation) ? $editData->designation : '' }}" >
+                                        <label class="inputerror errorMsg" for="sub_title" style="">  </label>
                                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                 </div>
                                 <!--end::Row-->
@@ -240,13 +245,11 @@
                 ignore: '',
                 rules: {
                     "name" :"required",
-                    "detail" : "required",
-                    "sub_title[]" : "required",
+                    "detail" : "required"
                 },
                 messages: {
                     "name" : "Please enter name",
-                    "detail" :  "Please enter detail",
-                    "sub_title[]" : "Please enter title",
+                    "detail" :  "Please enter detail"
                 }
             });
 
@@ -266,11 +269,24 @@
                     }
                 });
 
+                var error = 1;
+                $(".sub_title_class").each(function() {
+
+                    if($(this).val().trim() === '') {
+                        // update time range value already filled
+
+                        $(this).next('.inputerror').html('Please enter title');
+                        error++;
+                    }
+                    else{
+                        $(this).next('.inputerror').html('');
+                    }
+                });
                 // prevent default submit action
                 event.preventDefault();
 
                 // test if form is valid
-                if($('#dataForm').valid()  && err == 1) {
+                if($('#dataForm').valid()  && err == 1  && error == 1) {
                     $( '#dataForm' ).submit();
                 } else { console.log(3);
                     console.log("does not validate");

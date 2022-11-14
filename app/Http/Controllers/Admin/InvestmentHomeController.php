@@ -99,9 +99,10 @@ class InvestmentHomeController extends Controller
      */
     public function update(Request $request)
     {
+
         $userID      = auth()->user()->id;
         /******* Insert PDF *********/
-        $updateData  = Media::find( $request->id);
+        $updateData  = InvestmentHome::find( $request->id);
 
         if($request->hasfile('image_title') || $request->edit_image_title ) {
             $image = $request->file('image_title');
@@ -144,14 +145,30 @@ class InvestmentHomeController extends Controller
         }
 
         $arr = [];
-        if($request->hasfile('icon')) {
+        if($request->hasfile('icon') || $request->edit_icon ) {
 
-            foreach ($request->file('icon') as $key => $file) {
+            foreach ($request->edit_icon as $key => $file) {
 
-                $icon = $request->file('icon')[$key];
+                $editHeadingImage = $file;
+                $headingImage = $request->file('icon');
                 $destinationPath = public_path('images/investmentHome/icon');
-                $iconName = date('YmdHis') . "." . $file->getClientOriginalName();
-                $icon->move($destinationPath, $iconName);
+                if (isset($headingImage)) {
+                    if (array_key_exists($key, $headingImage)) {
+                        $headingImage = $request->file('icon')[$key]; 
+                        $iconName = date('YmdHis') . "." . str_replace(' ', '',$headingImage->getClientOriginalName());
+                        $headingImage->move($destinationPath, $iconName);
+                        if (!empty($editHeadingImage) && file_exists(public_path() . '/images/investmentHome/icon/' . $editHeadingImage)) {
+                            @unlink(public_path('images/investmentHome/icon/') . $editHeadingImage);
+                        }
+                    } else {
+                        $iconName = $editHeadingImage;
+                    }
+
+                } elseif (!empty($editHeadingImage)) {
+                    $iconName = $editHeadingImage;
+                } else {
+                    $iconName = null;
+                }
 
                 $arr[] = [
                     'icon' => $iconName,

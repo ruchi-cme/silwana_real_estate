@@ -71,7 +71,6 @@
         <script src="{{ asset('plugins/global/plugins.bundle.js') }}"></script>
         <script src="{{ asset('js/scripts.bundle.js') }}"></script>
         <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
-        <script src="{{ asset('js/jquery.validate.min.js') }}moment.js"></script>
         <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap-datetimepicker.min.js')}}"></script>
 

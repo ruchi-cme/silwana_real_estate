@@ -24,6 +24,7 @@ Route::name('ourProject/upcoming')->get('/ourProject/upcoming', 'App\Http\Contro
 Route::name('ourProject/completed')->get('/ourProject/completed', 'App\Http\Controllers\Frontend\OurProjectController@projectType');
 
 Route::name('ourProject/projectSearch')->post('/ourProject/projectSearch', 'App\Http\Controllers\Frontend\OurProjectController@projectSearch');
+Route::name('ourProject/category/{id}')->get('/ourProject/category/{id}', 'App\Http\Controllers\Frontend\OurProjectController@getProjectByCategory');
 
 
 

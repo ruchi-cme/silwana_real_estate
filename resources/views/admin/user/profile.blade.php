@@ -4,7 +4,11 @@
 <li class="breadcrumb-item pe-3"><a href="{{ route('user.user') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
 <li class="breadcrumb-item px-3 text-primary">Profile</li>
 @endsection
-
+<style>
+    .error{
+        color: #FF0000;
+    }
+</style>
 @section('content')
 
 <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -89,12 +93,12 @@
                                         <div class="row">
                                             <!--begin::Col-->
                                             <div class="col-lg-6 fv-row">
-                                                <input type="text" name="first_name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="{{!empty($user->firstname) ? $user->firstname : '' }}" />
+                                                <input type="text" required name="first_name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="{{!empty($user->firstname) ? $user->firstname : '' }}" />
                                             </div>
                                             <!--end::Col-->
                                             <!--begin::Col-->
                                             <div class="col-lg-6 fv-row">
-                                                <input type="text" name="last_name" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="{{!empty($user->lastname) ? $user->lastname : ''}}" />
+                                                <input type="text" required name="last_name" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="{{!empty($user->lastname) ? $user->lastname : ''}}" />
                                             </div>
                                             <!--end::Col-->
                                         </div>
@@ -109,7 +113,7 @@
                                     <!--begin::Label-->
                                     <label class="col-lg-4 col-form-label fw-bold fs-6">
                                         <span class="required">Contact Phone</span>
-                                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Phone number must be active"></i>
+                                        <i class="fas fa-exclamation-circle ms-1 fs-7" required data-bs-toggle="tooltip" title="Phone number must be active"></i>
                                     </label>
                                     <!--end::Label-->
                                     <!--begin::Col-->
@@ -384,4 +388,44 @@
 <script src="{{asset('js/scripts.bundle.js')}} "></script>
 <!--end::Global Javascript Bundle-->
 <script src=" {{asset('js/custom/account/settings/signin-methods.js')}}"></script>
+@push('scripts')
+<script type="text/javascript">
 
+    $("#kt_account_profile_details_form").validate({
+        ignore: '',
+        rules: {
+            "first_name" :"required",
+            "last_name" : "required",
+
+            phone: {
+                required: true,
+                digits: true
+            },
+        },
+        messages: {
+            "first_name" : "Please enter first name",
+            "last_name" :  "Please enter last name",
+            "role" : "Please select role",
+            phone: {
+                required: "Please enter Phone",
+            }
+        }
+    });
+    $('#kt_account_profile_details_form').on('click', function(event) {
+
+        // prevent default submit action
+        event.preventDefault();
+
+        // test if form is valid
+        if($('#kt_account_profile_details_form').valid()  ) { console.log(2);
+            $( '#kt_account_profile_details_form' ).submit();
+        } else { console.log(3);
+            console.log("does not validate");
+            return false;
+        }
+    });
+
+
+</script>
+
+@endpush

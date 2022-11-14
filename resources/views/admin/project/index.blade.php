@@ -131,6 +131,11 @@
                 orderable: false,
                 className: 'text-end',
                 render: function (data, type, row) {
+                    var download  = '';  var hrefLink  = 'javascript:void(0)';
+                    if (data.pdfFile != '') {
+                        download  = 'download';
+                        hrefLink =  data.pdfFile;
+                    }
 
                     if (data.status == 'Active') {
                         $icon  = '<i class="fa fa-toggle-off"></i>'
@@ -155,8 +160,7 @@
                              <a href="project/changeStatus/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-primary  me-2"
                             ><span class="svg-icon svg-icon-1">${ $icon }</span></a>
                          @endcan
-                            <a href="${ data.pdfFile }" title="Download PDF" download class="btn btn-sm btn-icon btn-hover-scale btn-active-success me-2"
-                            ><span class="svg-icon svg-icon-1" ><i class="fa fa-download"></i></span></a>
+                            <a href="${ hrefLink }"  title="Download PDF" ${ download }  class="downloadBrochure btn btn-sm btn-icon btn-hover-scale btn-active-success me-2"><span class="svg-icon svg-icon-1" ><i class="fa fa-download"></i></span></a>
 
                             `;
                 },
@@ -184,6 +188,16 @@
             $('#datatable-card').slideDown();
             datatable.columns.adjust();
         }
+    });
+
+    $(document).ready(function(){
+        $('.downloadBrochure').on('click', function () {
+
+            if ($(this).attr('href').length < 1 || $(this).attr('href') == 'javascript:void(0)'){
+                $(this).attr('href','javascript:void(0)');
+                alert('No Pdf of this project!');
+            }
+        });
     });
 
     $('#search').keyup(function () {
