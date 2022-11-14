@@ -1,3 +1,7 @@
+
+.news-event-main .col-lg-4{
+    margin-bottom: 50px;
+}
 .about-banner-text h4 {
     font-size: 32px;
     color: #EBEBEB;
@@ -26,6 +30,7 @@
 
 .news-event-wrap {
     height: 100%;
+    margin-bottom: 50px;
 }
 
 .our-media-gallery .property-wrap .nav {
