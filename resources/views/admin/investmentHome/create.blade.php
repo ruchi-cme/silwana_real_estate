@@ -7,7 +7,7 @@
 <li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->id) ?   'Edit' :  'Create' }}</li>
 @endsection
 <style>
-    .error , .inputFileError{
+    .error , .inputFileError, .errorMsg{
         color: #FF0000;
     }
 </style>
@@ -217,7 +217,8 @@
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                        <input type="text" required placeholder="Enter Sub Title" class="form-control form-control-solid" name="sub_title[]" value=" " >
+                                        <input type="text" required placeholder="Enter Sub Title" class="form-control sub_class form-control-solid" name="sub_title[]" value=" " >
+                                        <label class="inputerror errorMsg" for="sub_title" style="">  </label>
                                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                 </div>
                                 <!--end::Row-->
@@ -230,9 +231,12 @@
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
+
                                     <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                        <textarea placeholder="Enter  Sub Title Detail" required name="sub_title_detail[]" class="form-control form-control-solid h-100px" ></textarea>
+                                        <textarea placeholder="Enter  Sub Title Detail" required name="sub_title_detail[]" class="form-control sub_class form-control-solid h-100px" > </textarea>
+                                        <label class="inputerror errorMsg" for="sub_title_detail" style="">  </label>
                                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
+
                                 </div>
                                 <!--end::Row-->
 
@@ -286,7 +290,8 @@
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                        <input type="text" required placeholder="Enter Sub Title" class="form-control form-control-solid" name="sub_title[]" value=" " >
+                                        <input type="text" required placeholder="Enter Sub Title" class="form-control sub_class form-control-solid" name="sub_title[]" value=" " >
+                                        <label class="inputerror errorMsg" for="sub_title" style="">  </label>
                                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                 </div>
                                 <!--end::Row-->
@@ -300,7 +305,8 @@
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                        <textarea placeholder="Enter  Sub Title Detail" required name="sub_title_detail[]" class="form-control form-control-solid h-100px" > </textarea>
+                                        <textarea placeholder="Enter  Sub Title Detail" required name="sub_title_detail[]" class="form-control sub_class form-control-solid h-100px" > </textarea>
+                                        <label class="inputerror errorMsg" for="sub_title" style="">  </label>
                                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                 </div>
                                 <!--end::Row-->
@@ -355,7 +361,8 @@
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                        <input type="text" required placeholder="Enter Sub Title" class="form-control form-control-solid" name="sub_title[]" value="" >
+                                        <input type="text" required placeholder="Enter Sub Title" class="form-control sub_class form-control-solid" name="sub_title[]" value="" >
+                                        <label class="inputerror errorMsg" for="sub_title" style="">  </label>
                                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                 </div>
                                 <!--end::Row-->
@@ -369,7 +376,8 @@
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                        <textarea placeholder="Enter  Sub Title Detail" required name="sub_title_detail[]" class="form-control form-control-solid h-100px" > </textarea>
+                                        <textarea placeholder="Enter  Sub Title Detail" required name="sub_title_detail[]" class="form-control sub_class form-control-solid h-100px" > </textarea>
+                                        <label class="inputerror errorMsg" for="sub_title" style="">  </label>
                                         <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                 </div>
                                 <!--end::Row-->
@@ -379,7 +387,7 @@
                             <div class="row">
                                 <!--begin::Col-->
                                 <div class="col-xl-3">
-                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Image   </div>
+                                    <div class="fs-6 fw-bold mt-2 mb-3 required"> Image </div>
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col--> <div class="col-md-3 mb-3">
@@ -432,16 +440,17 @@
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
                                     <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                        <input type="file" accepts="video/*" class="form-control form-control-solid" name="video_title"   id="video_title" >
+                                        <input type="file" accepts="video/*"   class="form-control form-control-solid" name="video_title"value="{{ !empty($editData->video_title  ) ? $editData->video_title   : '' }}" id="video_title" >
 
                                         <div class="col-xl-9 fv-row fv-plugins-icon-container video-preview-div">
-                                             <input type="hidden" name="edit_video_title" value="{{ !empty($editData->video_title  ) ? $editData->video_title   : '' }}" id="edit_video_title">
+                                             <input type="hidden"   name="edit_video_title" value="{{ !empty($editData->video_title  ) ? $editData->video_title   : '' }}" id="edit_video_title">
 
                                             <span class="pip editpip">
-                                                        <video controls="" src="{{ !empty($editData->video_title) ? asset('images/investmentHome/video').'/'.$editData->video_title : '' }}" width="120" height="120"></video>
-                                                         <br/><span class="removeVideo"><i class="fa fa-trash"></i></span>
-                                                     </span>
-
+                                            @if(!empty($editData->video_title))
+                                                <video controls="" src="{{ !empty($editData->video_title) ? asset('images/investmentHome/video').'/'.$editData->video_title : '' }}" width="120" height="120"></video>
+                                                 <br/>
+                                             @endif
+                                            </span>
                                             <div class="fv-plugins-message-container invalid-feedback"></div>
                                         </div>
                                         <label>Note : Upload only Video </label>
@@ -513,6 +522,23 @@
 
             $('#create_button').on('click', function(event) {
 
+                var error = 1;
+                $(".sub_class").each(function() {
+
+
+
+
+                    if($(this).val().trim() === '') {
+                        // update time range value already filled
+
+                        $(this).next('.inputerror').html('This field is required');
+                        error++;
+                    }
+                    else{
+                        $(this).next('.inputerror').html('');
+                    }
+                });
+
                 var err = 1;
                 $(document).find("div.imageBgDiv").each(function() {
 
@@ -530,7 +556,7 @@
                 event.preventDefault();
 
                 // test if form is valid
-                if($('#dataForm').valid() && err == 1  ) { console.log(2);
+                if($('#dataForm').valid() && err == 1  && error == 1  ) { console.log(2);
                     $( '#dataForm' ).submit();
                 } else { console.log(3);
                     console.log("does not validate");

@@ -41,13 +41,14 @@
                         @if(!empty($selectedImage))
 
                             @php $files = []; @endphp
+
                         @for($i=0; count($selectedImage) > $i; $i++)
 
                             @if($selectedImage[$i]['type'] == 1)
                                     @php $files[] = $selectedImage[$i]['title']; @endphp
-                                       @endif
+                             @endif
 
-                                @if($i <= 2)
+                                @if($selectedImage[$i]['type'] == 2 && $i <= 2)
                                     <div class="col-xl-4 col-lg-6">
                                         <div class="property-detail-main-wrap">
                                             <img src="{{ asset('images/project/images/').'/'.$selectedImage[$i]['title'] }}" alt="">
@@ -62,26 +63,13 @@
 
                                     <div class="col-lg-8">
                                             <div class="property-detail-main-wrap-big video-wrapper brochure-wrap">
+                                                <iframe src="{{ !empty( $image['title'] ) ? asset('images/project/pdf' ).'/'.$image['title']  : '' }}" width="100%" height="200px"></iframe>
+               
                                                 <img src="{{ asset('images/project/pdf/').'/'.$selectedImage[$i]['title'] }}" alt="architecture" />
                                                 <input type="hidden"  id="downloadUrl" name="downloadUrl" value="{{ !empty($selectedImage[$i]['title'] ) ? asset('images/project/pdf/').'/'.$selectedImage[$i]['title'] : ''}}">
                                                 <a  id="downloadBrochure12"  download href="{{ $imagePDFile }}" proName="{{ $projectList['project_name'] }}" class="cmn-btn" >DOWNLOAD BROCHURE</a>
                                             </div>
                                         </div>
-
-                                 <!--   <div class="col-lg-4 d-flex flex-column">
-                                        <div class="property-detail-main-wrap-small property-detail-main-wrap">
-                                            <img src="{{ asset('images/project/images/').'/'.$selectedImage[$i]['title'] }}" alt="">
-                                            <div class="property-detail-more-detail">
-                                                <a href="#" class="more-photos">More Photos</a>
-                                            </div>
-                                        </div>
-                                        <div class="property-detail-main-wrap-small property-detail-main-wrap">
-                                            <img src="{{ asset('images/project/images/').'/'.$selectedImage[$i]['title'] }}" alt="">
-                                            <div class="property-detail-more-detail">
-                                                <a href="#" class="more-photos">More Photos</a>
-                                            </div>
-                                        </div>
-                                    </div> -->
 
                                 @endif
                             @endfor

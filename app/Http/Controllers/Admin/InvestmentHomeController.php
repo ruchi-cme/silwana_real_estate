@@ -122,6 +122,7 @@ class InvestmentHomeController extends Controller
                 $Image = null;
             }
         }
+        $Video = null;
         if($request->hasfile('video_title') || $request->edit_video_title) {
 
             $video = $request->file('video_title');
@@ -154,7 +155,7 @@ class InvestmentHomeController extends Controller
                 $destinationPath = public_path('images/investmentHome/icon');
                 if (isset($headingImage)) {
                     if (array_key_exists($key, $headingImage)) {
-                        $headingImage = $request->file('icon')[$key]; 
+                        $headingImage = $request->file('icon')[$key];
                         $iconName = date('YmdHis') . "." . str_replace(' ', '',$headingImage->getClientOriginalName());
                         $headingImage->move($destinationPath, $iconName);
                         if (!empty($editHeadingImage) && file_exists(public_path() . '/images/investmentHome/icon/' . $editHeadingImage)) {

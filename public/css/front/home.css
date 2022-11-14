@@ -371,10 +371,6 @@
     box-shadow: 0px 11px 14px rgba(0, 0, 0, 0.17);
 }
 
-.property-wrap .tab-content > div:nth-child(2n) .row {
-    flex-direction: row-reverse;
-}
-
 .property-wrap .tab-content > div:nth-child(2n) .row .property-inner-wrap {
     left: 38px;
 }

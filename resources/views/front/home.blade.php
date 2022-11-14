@@ -100,15 +100,11 @@
                     <div class="col-lg-6">
                         <div class="investment-image">
                             <div>
-                                <img src="{{asset('images/front/home')}}/img1.png" alt="" />
+                                <img src="{{ asset('images/investmentHome/image/').'/'. $investment->image_title }}" alt="" />
                             </div>
                             <div>
-                                <div class="play-btn-wrap">
-                                    <a href="#">
-                                        <img src="{{asset('images/front/home')}}/play.svg" alt="" />
-                                    </a>
-                                </div>
-                                <img src=" {{ asset('images/investmentHome/images/'). $investment->image_title  }} " alt="" />
+                                <video controls="" src="{{ asset('images/investmentHome/video/').'/'. $investment->video_title }}" width="120" height="120"></video>
+
                             </div>
                         </div>
                     </div>
@@ -395,6 +391,7 @@
     </section>
  -->
     <!-- our-projects -->
+
     <section class="our-projects p-100 pb-0 cmn-bg">
         <div class="container">
             <div class="row">
@@ -407,13 +404,18 @@
                     </div>
                     @endif
                 </div>
+
                 @for($i=0; count($ourProjectList) > $i; $i++)
-                    @if($i == 0 || $i == 3)
+                    @php  $proImg =  getProjectImage($ourProjectList[$i]['project_id'],'single');
+
+                    @endphp
+
+                @if($i == 0 || $i == 3)
                         <div class="col-xl-6 col-lg-6">
                             <div class="our-projects-wrap position-relative">
-                                <img src="{{asset('images/front/home')}}/building.png" alt="" />
+                                <img src="{{ !empty($proImg['title']) ? asset("images/project/images/".$proImg['title'])  :  asset("images/front/home/feature1.png" ) }}" alt="">
                                 <div class="our-projects-inner">
-                                    <p>The perfect silwana residency</p>
+                                    <p>{{ $ourProjectList[$i]['project_name'] }}</p>
                                 </div>
                                 <div class="inquiry-now-wrap">
                                     <a href="{{route('contactUs')}}" class="cmn-btn">INQUIRY Now</a>
@@ -425,9 +427,9 @@
                     @else
                         <div class="col-xl-3 col-lg-6">
                             <div class="our-projects-wrap our-projects-wrap-main position-relative">
-                                <img src="{{asset('images/front/home')}}/building3.png" alt="" />
+                                <img src="{{ !empty($proImg['title']) ? asset("images/project/images/".$proImg['title'])  :  asset("images/front/home/feature1.png" ) }}" alt="">
                                 <div class="our-projects-inner">
-                                    <p>The perfect silwana residency</p>
+                                    <p>{{ $ourProjectList[$i]['project_name'] }}</p>
                                 </div>
                                 <div class="inquiry-now-wrap">
                                     <a href="{{route('contactUs')}}" class="cmn-btn">INQUIRY Now</a>
@@ -680,12 +682,14 @@
                     <div class="owl-carousel owl-theme project-feature">
                         @if(!empty($featureProjectList))
                             @foreach($featureProjectList as $featurePro)
+                                @php  $proImg =  getProjectImage($featurePro['project_id'],'single') @endphp
+
                                 <div class="item">
                                     <div class="project-feature-wrap">
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="project-feature-img">
-                                                    <img src="{{asset('images/front/home')}}/feature1.png" alt="">
+                                                    <img src="{{ !empty($proImg['title']) ? asset("images/project/images/".$proImg['title'])  :  asset("images/front/home/feature1.png" ) }}" alt="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">

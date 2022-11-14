@@ -293,6 +293,7 @@ if (!function_exists("getProjectImage")) {
         if (!empty($obj)) {
             $data = ProjectImage::select($select)
                 ->where('project_id' ,  $project_id)
+                ->where('type' , 2)
                 ->get()
                 ->first();
         } else {

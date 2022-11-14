@@ -28,17 +28,26 @@
 
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                 <div class="profile-detail-header">
-                                                    <ul class="p-0 bg-transparent shadow-none">
-                                                        <div class="news-media-wrap p-0">
-                                                            <div class="news-media-img-wrap">
-                                                                <img src="{{ asset('images/front/about') }}/media1.png" alt="">
-                                                            </div>
-                                                            <div class="news-media-text">
-                                                                <p class="m-0">Lorem ipsum dolor sit amet, consectetur adipisicin</p>
-                                                                <a href="#" class="cmn-btn">Read More <img src="{{ asset('images/front/about') }}/arrow.svg" alt=""></a>
-                                                            </div>
-                                                        </div>
-                                                    </ul>
+                                                   @php  $news   = getNews();  @endphp
+                                                    @if(!empty($news))
+                                                        @for ($i= 0; count($news)> $i; $i++ )
+                                                            @if($i == 1)
+                                                                @break;
+                                                            @endif
+                                                            <ul class="p-0 bg-transparent shadow-none">
+                                                                <div class="news-media-wrap p-0">
+                                                                    <div class="news-media-img-wrap">
+                                                                        <img src="{{ asset('images/news/').'/'.$news[$i]['image'] }}" alt="">
+                                                                    </div>
+                                                                    <div class="news-media-text">
+                                                                        <p class="m-0"> {{ $news[$i]['name'] }}</p>
+                                                                        <a href="{{  $news[$i]['link']  }}" class="cmn-btn">Read More <img src="{{ asset('images/front/about') }}/arrow.svg" alt=""></a>
+                                                                    </div>
+                                                                </div>
+                                                            </ul>
+                                                        @endfor
+                                                    @endif
+
 
                                                     <ul>
                                                         <li><a class="dropdown-item" href="{{ route('about') }}">About Us</a></li>
