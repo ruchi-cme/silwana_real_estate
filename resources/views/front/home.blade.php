@@ -108,25 +108,29 @@
                                         <img src="{{asset('images/front/home')}}/play.svg" alt="" />
                                     </a>
                                 </div>
-                                <img src="{{asset('images/front/home')}}/img2.png" alt="" />
+                                <img src=" {{ asset('images/investmentHome/images/'). $investment->image_title  }} " alt="" />
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="investment-wrap">
                             <div class="title">
-                                <span class="btn btn-2">Investment</span>
-                                <h2>{{$investment['page']}}</h2>
-                                <p>  {{$investment['detail']}}  </p>
+                                <span class="btn btn-2">{{$investment->title }}</span>
+                                <h2>{{$investment->name }}</h2>
+                                <p>  {{$investment->detail }}  </p>
                                 <div>
-                                    @foreach ($investment['page_details'] as $row)
+                                    @php
+                                        $sub_titles = json_decode( $investment->sub_title );
+                                        $i = 1;
+                                    @endphp
+                                    @foreach ($sub_titles as $row)
                                     <div class="investment-inner">
                                         <div class="investment-icon-wrap">
-                                            <img src="{{ asset('images/heading').'/'. $row['heading_image']}}" alt="icon5">
+                                            <img src="{{ asset('images/investmentHome/icon/').'/'. $row->icon }}" alt="icon5">
                                         </div>
                                         <div>
-                                            <h6>{{$row['heading']}}</h6>
-                                            <p> {{$row['heading_detail']}}  </p>
+                                            <h6>{{$row->sub_title }}</h6>
+                                            <p> {{$row->sub_title_detail }}  </p>
 
                                         </div>
                                     </div>

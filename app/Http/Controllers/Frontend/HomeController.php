@@ -14,18 +14,16 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $homeBanner = getSilwanaPages('home_banner');
         $aboutus    = getAboutUsHome();
-
         $ourProject = getOurProjectHome();
         $featureProject = getFeatureProjectHome();
-        $investment = getSilwanaPages('investment');
+        $investment = getInvestmentHomeCMS();
         $ourProjectList = getProjectList('' ,array('3'),'');
         $featureProjectList = getProjectList('' ,array('2'),'');
         $amenities  = getAmenities();
         $categories = getCategory();
 
-        return view('front.home',compact('homeBanner','aboutus','investment', 'amenities','categories','ourProject','ourProjectList','featureProject','featureProjectList'));
+        return view('front.home',compact( 'aboutus','investment', 'amenities','categories','ourProject','ourProjectList','featureProject','featureProjectList'));
     }
     public function login(Request $request)
     {
