@@ -74,11 +74,23 @@ class ProjectController extends Controller
             $data = $dbData->map(function ($data){
                 $pdf = getProjectPdf($data->project_id);
                 $imagePDFile  =  !empty($pdf['title'] ) ? asset('images/project/pdf/').'/'.$pdf['title'] : '';
+                switch ($data->work_status) {
+                    case 1:
+                        $work_status = 'Ongoing';
+                break;
+                    case 2:
+                        $work_status = 'Upcoming';
+                break;
+                    case 3:
+                        $work_status = 'Completed';
+                break;
+                }
+
                 return [
                     'id'             => $data->project_id,
                     'project_name'   => $data->project_name,
                     'category_name'  => $data->category_name,
-                    'work_status'    => !empty($data->work_status) && ($data->work_status == 1) ? 'Upcoming' : 'Ready for sale',
+                    'work_status'    => $work_status,
                     'status'         => !empty($data->status) && ($data->status == 1) ? 'Active' : 'Inctive',
                     'pdfFile'        => $imagePDFile,
                     'created_date'   => $data->created_date

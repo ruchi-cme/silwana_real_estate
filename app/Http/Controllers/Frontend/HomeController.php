@@ -18,7 +18,8 @@ class HomeController extends Controller
         $ourProject = getOurProjectHome();
         $featureProject = getFeatureProjectHome();
         $investment = getInvestmentHomeCMS();
-        $ourProjectList = getProjectList('' ,array('3'),'');
+        $ourProjectList = getProjectList('' ,array('1,2,3'),'');
+
         $featureProjectList = getProjectList('' ,array('2'),'');
         $amenities  = getAmenities();
         $categories = getCategory();

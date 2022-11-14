@@ -115,7 +115,7 @@
                             <div class="title">
                                 <span class="btn btn-2">{{$investment->title }}</span>
                                 <h2>{{$investment->name }}</h2>
-                                <p class="comment more" showChar="100">  {{$investment->detail }}  </p>
+                                <p class="comment more" showChar="500">  {{$investment->detail }}  </p>
                                 <div>
                                     @php
                                         $sub_titles = json_decode( $investment->sub_title );
@@ -402,7 +402,7 @@
                     <div class="title">
                         <span class="btn btn-2">{{ $ourProject['title'] }}</span>
                         <h2>{{ $ourProject['name'] }}</h2>
-                        <p class="comment more" showChar="400">  {{ $ourProject['detail'] }} </p>
+                        <p class="comment more" showChar="200">  {{ $ourProject['detail'] }} </p>
                     </div>
                     @endif
                 </div>
