@@ -47,9 +47,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <ul>
+
                         <li><a href="{{ route('home') }}">Home</a></li>
                         <li><a href="{{ route('about') }}">About us</a></li>
                         <li><a href="{{ route('ourProject') }}">Our Project</a></li>
+                        <li> <a href="{{ route('sales') }}">  Sales</a>   </li>
                         @if (Auth::guard('front')->check())
                             <li><a href="{{ route('myBooking') }}">My Booking</a></li>
                         @endif
@@ -60,9 +62,14 @@
                     <div class="footer-title text-center">
                         <h4 class="wtext">Follow Us On</h4>
                         <div class="social-links">
-                            <a href="#"><img src="{{asset('images/front')}}/insta.svg" alt=""></a>
-                            <a href="#"><img src="{{asset('images/front')}}/twiter.svg" alt=""></a>
-                            <a href="#"><img src="{{asset('images/front')}}/fb.svg" alt=""></a>
+                            @if(!empty($footerData))
+                                @php
+                                    $social_media_data = json_decode( $footerData['social_media_data']  );
+                                @endphp
+                                @foreach($social_media_data as $row)
+                                     <a href="{{!empty($row->link) ? $row->link : '#' }}" target="_blank" ><img src="{{asset('images/footer').'/'.$row->icon}} " alt=""></a>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>

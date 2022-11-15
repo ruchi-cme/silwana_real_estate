@@ -1,5 +1,5 @@
 <x-base>
-    <x-banner title="Property Details" page="Property Details"></x-banner>
+    <x-banner title="Our Projects" page="{{$title}}"></x-banner>
 
 
 <!-- property-detail-main -->

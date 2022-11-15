@@ -3,7 +3,9 @@
 use App\Models\{Amenities, Category, Project, Block, Silwana,SilwanaDetailMapping,ContactUs};
 use App\Models\{FloorUnitMapping, ProjectImage, ProjUnitImage, FloorDetail,Proj_ameni_mapping};
 use App\Models\{Block_name_mapping, Booking, Project_address_detail, BlockFloorMapping,Builder};
-use App\Models\{AboutUs, Faq, News ,Media,  ourTeam, FeatureProjectHome , OurProjectHome, AboutUsHome,InvestmentHome, Footer};
+use App\Models\{AboutUs, Faq, News ,Media,  ourTeam, FeatureProjectHome , OurProjectHome, AboutUsHome,InvestmentHome, Footer, InvestService};
+use App\Models\{BuildingService, SalesService, RentalService};
+
 use Illuminate\Support\Facades\DB;
 
 if(!function_exists("getCategory")){
@@ -749,8 +751,44 @@ if(!function_exists("getProjectListByCategory")) {
                 // ->get();
                 ->paginate(10);
         }
+        return $data;
+    }
+}
+
+if(!function_exists("getInvestmentService")) {
+
+    function getInvestmentService()
+    {
+        $data = InvestService::get()->first();
 
         return $data;
     }
-
 }
+if(!function_exists("getBuildingService")) {
+
+    function getBuildingService()
+    {
+        $data = BuildingService::get()->first();
+
+        return $data;
+    }
+}
+
+if(!function_exists("getRentalService")) {
+
+    function getRentalService()
+    {
+        $data = RentalService::get()->first();
+        return $data;
+    }
+}
+
+if(!function_exists("getSalesService")) {
+
+    function getSalesService()
+    {
+        $data = SalesService::get()->first();
+        return $data;
+    }
+}
+

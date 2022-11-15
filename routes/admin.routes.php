@@ -234,5 +234,29 @@ Route::name('projectAssign.update')->post('/projectAssign/update', 'App\Http\Con
 Route::name('projectAssign.delete')->get('/projectAssign/delete/{id}', 'App\Http\Controllers\Admin\ProjectAssignController@destroy')->middleware(['permission:projectAssign-delete']);
 Route::name('projectAssign.delete')->get('/projectAssign/changeStatus/{id}', 'App\Http\Controllers\Admin\ProjectAssignController@changeStatus')->middleware(['permission:projectAssign-changeStatus']);
 
+// invest  cms
+Route::name('investService')->get('/investService', 'App\Http\Controllers\Admin\InvestServiceController@index')->middleware(['permission:investService-view']);
+Route::name('investService.store')->post('/investService/store', 'App\Http\Controllers\Admin\InvestServiceController@store')->middleware(['permission:investService-store']);
+Route::name('investService.update')->post('/investService/update', 'App\Http\Controllers\Admin\InvestServiceController@update')->middleware(['permission:investService-update']);
+
+// Building  cms
+Route::name('buildingService')->get('/buildingService', 'App\Http\Controllers\Admin\BuildingServiceController@index')->middleware(['permission:buildingService-view']);
+Route::name('buildingService.store')->post('/buildingService/store', 'App\Http\Controllers\Admin\BuildingServiceController@store')->middleware(['permission:buildingService-store']);
+Route::name('buildingService.update')->post('/buildingService/update', 'App\Http\Controllers\Admin\BuildingServiceController@update')->middleware(['permission:buildingService-update']);
+
+// Rental  cms
+Route::name('rentalService')->get('/rentalService', 'App\Http\Controllers\Admin\RentalServiceController@index')->middleware(['permission:rentalService-view']);
+Route::name('rentalService.store')->post('/rentalService/store', 'App\Http\Controllers\Admin\RentalServiceController@store')->middleware(['permission:rentalService-store']);
+Route::name('rentalService.update')->post('/rentalService/update', 'App\Http\Controllers\Admin\RentalServiceController@update')->middleware(['permission:rentalService-update']);
+
+// Sales  cms
+Route::name('salesService')->get('/salesService', 'App\Http\Controllers\Admin\SalesServiceController@index')->middleware(['permission:salesService-view']);
+Route::name('salesService.store')->post('/salesService/store', 'App\Http\Controllers\Admin\SalesServiceController@store')->middleware(['permission:salesService-store']);
+Route::name('salesService.update')->post('/salesService/update', 'App\Http\Controllers\Admin\SalesServiceController@update')->middleware(['permission:salesService-update']);
+
+//Booking
+Route::name('inquiry')->get('/inquiry', 'App\Http\Controllers\Admin\InquiryController@index')->middleware(['permission:inquiry-list']);;
+Route::name('inquiry.view')->get('/inquiry/view/{id}', 'App\Http\Controllers\Admin\InquiryController@view')->middleware(['permission:inquiry-view']);;
+
 
 ?>

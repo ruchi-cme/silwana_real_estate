@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Footer extends Model
+class InvestService extends Model
 {
     use HasFactory;
     public $timestamps    = false;
@@ -17,17 +17,12 @@ class Footer extends Model
      */
     protected $fillable = [
         'title',
-        'notes',
+        'sub_title',
         'detail',
         'image',
-        'social_media_data',
-        'status',
         'created_by',
         'created_date',
         'modified_by',
-        'modified_date',
-        'deleted',
-        'deleted_date',
-        'deleted_by'
+        'modified_date'
     ];
 }

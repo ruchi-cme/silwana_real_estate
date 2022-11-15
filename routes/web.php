@@ -49,6 +49,8 @@ Route::name('contactUs')->get('/contact', 'App\Http\Controllers\Frontend\Contact
 Route::name('myProfile')->get('/myProfile', 'App\Http\Controllers\Frontend\MyProfileController@index');
 Route::name('myProfile/update')->post('/myProfile/update', 'App\Http\Controllers\Frontend\MyProfileController@update');
 
+Route::name('sales')->get('/sales', 'App\Http\Controllers\Frontend\BusinessServiceController@index');
+
 Route::get('/dashboard', function () {
 
     if(Auth::guard('web')->check()) {

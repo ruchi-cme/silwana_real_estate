@@ -7,7 +7,7 @@
 <li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->id) ?   'Edit' :  'Create' }}</li>
 @endsection
 <style>
-.error ,  .inputFileError{
+.error ,  .inputFileError, .errorMsg{
     color: #FF0000;
 }
 </style>
@@ -126,7 +126,230 @@
                                     <!--end::Image input-->
                                 </div>
                             </div>
+
+                            <div class="increment">
+                                @if(!empty($editData->social_media_data))
+                                    @php
+                                        $social_media_data = json_decode( $editData->social_media_data );
+
+                                        $i = 1;
+                                    @endphp
+
+                                    @foreach($social_media_data as $row)
+
+                                        <div class=" control-group"  >
+                                            <div class="col-xl-3">
+                                                <div class="fs-6 fw-bold mt-2 mb-3">Image</div>
+                                            </div>
+                                            <!--end::Col-->
+                                            <!--begin::Col-->
+                                            <div class="col-xl-12 fv-row fv-plugins-icon-container ">
+                                                <div class="row">
+                                                    <div class="col-md-4 mb-3">
+                                                        <input  type="text" attrame="Enter Link" placeholder="Enter Link" class="form-control form-control-solid direction" name="link[]" value="{{ $row->link }}" >
+                                                        <label class="inputerror errorMsg" for="link" style="">  </label>
+                                                    </div>
+
+                                                    <!--begin::Col-->
+                                                    <div class="col-md-3 mb-3">
+                                                        <!--begin::Image input-->
+                                                        <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
+                                                            <!--begin::Preview existing image-->
+                                                            @php
+                                                                $path =  !empty($row->icon) ? asset('images/footer').'/'. $row->icon  : ''  ;
+                                                                $test =   "background-image:url('$path')"  ;
+
+                                                            @endphp
+                                                            <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($row->icon) ? $test :'"background-image : none'}}"></div>
+
+                                                            <!--end::Preview existing image-->
+                                                            <!--begin::Label-->
+                                                            <label class="inputFileError errorMsg" for="direction" style="">  </label>
+                                                            <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
+                                                                <i class="bi bi-pencil-fill fs-7"></i>
+                                                                <!--begin::Inputs-->
+                                                                <input type="file"  name="icon[]" accept=".png, .jpg, .jpeg" />
+                                                                <input type="hidden" name="edit_icon[]"  value="{{ !empty($row->icon) ? $row->icon : ''  }}" />
+                                                                <input type="hidden" name="avatar_remove" />
+                                                                <!--end::Inputs-->
+                                                            </label>
+
+                                                            <!--end::Label-->
+                                                            <!--begin::Cancel-->
+                                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
+                                                                    <i class="bi bi-x fs-2"></i>
+                                                                </span>
+                                                            <!--end::Cancel-->
+                                                            <!--begin::Remove-->
+                                                            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
+                                                                    <i class="bi bi-x fs-2"></i>
+                                                                </span>
+                                                            <!--end::Remove-->
+                                                        </div>
+                                                        <!--end::Image input-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+
+
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3">Social Media Data 1</div>
+                                    </div>
+                                    <!--end::Col-->
+
+                                    <!--begin::Col-->
+                                    <div class="col-xl-12 fv-row fv-plugins-icon-container">
+                                        <div class="row">
+                                            <div class="col-md-4 mb-4">
+                                                <input type="text" placeholder="Enter Link" attrame="Enter Link" class="form-control form-control-solid" name="link[]" value="" >
+                                                <label class="inputerror errorMsg" for="direction" style="">  </label>
+                                            </div>
+
+                                            <div class="col-md-3 mb-3">
+                                                <!--begin::Image input-->
+                                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
+                                                    <!--begin::Preview existing image-->
+                                                    @php $img= ''; @endphp
+                                                    <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: none"></div>
+                                                    <!--end::Preview existing image-->
+                                                    <!--begin::Label-->
+                                                    <label class="inputFileError errorMsg" for="direction" style="">  </label>
+                                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Upload Icon">
+                                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                                        <!--begin::Inputs-->
+                                                        <input type="file" name="icon[]" accept=".png, .jpg, .jpeg" />
+                                                        <input type="hidden" name="avatar_remove" />
+                                                        <!--end::Inputs-->
+                                                    </label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Cancel-->
+                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
+                            <i class="bi bi-x fs-2"></i>
+                        </span>
+                                                    <!--end::Cancel-->
+                                                    <!--begin::Remove-->
+                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
+                            <i class="bi bi-x fs-2"></i>
+                        </span>
+                                                    <!--end::Remove-->
+                                                </div>
+                                                <!--end::Image input-->
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!--begin::Col-->
+
+
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3">Social Media Data 2</div>
+                                    </div>
+                                    <!--end::Col-->
+
+                                    <!--begin::Col-->
+                                    <div class="col-xl-12 fv-row fv-plugins-icon-container">
+                                        <div class="row">
+                                            <div class="col-md-4 mb-4">
+                                                <input type="text" placeholder="Enter Link" attrame="Enter Link" class="form-control form-control-solid" name="link[]" value="" >
+                                                <label class="inputerror errorMsg" for="direction" style="">  </label>
+                                            </div>
+
+                                            <div class="col-md-3 mb-3">
+                                                <!--begin::Image input-->
+                                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
+                                                    <!--begin::Preview existing image-->
+                                                    @php $img= ''; @endphp
+                                                    <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: none"></div>
+                                                    <!--end::Preview existing image-->
+                                                    <!--begin::Label-->
+                                                    <label class="inputFileError errorMsg" for="direction" style="">  </label>
+                                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Upload Icon">
+                                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                                        <!--begin::Inputs-->
+                                                        <input type="file" name="icon[]" accept=".png, .jpg, .jpeg" />
+                                                        <input type="hidden" name="avatar_remove" />
+                                                        <!--end::Inputs-->
+                                                    </label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Cancel-->
+                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
+                            <i class="bi bi-x fs-2"></i>
+                        </span>
+                                                    <!--end::Cancel-->
+                                                    <!--begin::Remove-->
+                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
+                            <i class="bi bi-x fs-2"></i>
+                        </span>
+                                                    <!--end::Remove-->
+                                                </div>
+                                                <!--end::Image input-->
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!--begin::Col-->
+
+
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3">
+                                        <div class="fs-6 fw-bold mt-2 mb-3">Social Media Data 3</div>
+                                    </div>
+                                    <!--end::Col-->
+
+                                    <!--begin::Col-->
+                                    <div class="col-xl-12 fv-row fv-plugins-icon-container">
+                                        <div class="row">
+                                            <div class="col-md-4 mb-4">
+                                                <input type="text" placeholder="Enter Link" attrame="Enter Link" class="form-control form-control-solid" name="link[]" value="" >
+                                                <label class="inputerror errorMsg" for="direction" style="">  </label>
+                                            </div>
+
+                                            <div class="col-md-3 mb-3">
+                                                <!--begin::Image input-->
+                                                <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
+                                                    <!--begin::Preview existing image-->
+                                                    @php $img= ''; @endphp
+                                                    <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: none"></div>
+                                                    <!--end::Preview existing image-->
+                                                    <!--begin::Label-->
+                                                    <label class="inputFileError errorMsg" for="direction" style="">  </label>
+                                                    <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Upload Icon">
+                                                        <i class="bi bi-pencil-fill fs-7"></i>
+                                                        <!--begin::Inputs-->
+                                                        <input type="file" name="icon[]" accept=".png, .jpg, .jpeg" />
+                                                        <input type="hidden" name="avatar_remove" />
+                                                        <!--end::Inputs-->
+                                                    </label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Cancel-->
+                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
+                            <i class="bi bi-x fs-2"></i>
+                        </span>
+                                                    <!--end::Cancel-->
+                                                    <!--begin::Remove-->
+                                                    <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
+                            <i class="bi bi-x fs-2"></i>
+                        </span>
+                                                    <!--end::Remove-->
+                                                </div>
+                                                <!--end::Image input-->
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!--begin::Col-->
+
+                                @endif
+                            </div>
                             <!--end::Row-->
+
+
 
                             <!--begin::Row-->
                             <div class="row text-center">
@@ -160,6 +383,8 @@
     <!--end::Container-->
 </div>
 <!--end::Post-->
+
+
 @endsection
 
 @push('scripts')
@@ -168,6 +393,7 @@
     <script type="text/javascript">
 
         $(document).ready(function (e) {
+
 
             $("#dataForm").validate({
                 ignore: '',
@@ -185,12 +411,26 @@
 
             $('#create_button').on('click', function(event) {
 
+                var error = 1;
+                $("#dataForm input[type=text]").each(function() {
+
+                    if($(this).val().trim() === '') {
+                        // update time range value already filled
+
+                        $(this).next('.inputerror').html('Please '+  $(this).attr('attrame') );
+                        error++;
+                    }
+                    else{
+                        $(this).next('.inputerror').html('');
+                    }
+                });
+
                 var err = 1;
                 $(document).find("div.imageBgDiv").each(function() {
 
                     var bgImg = $(this).css('background-image').trim();
 
-                    if (bgImg == 'url("about:invalid")' || bgImg == 'none'  ) {
+                    if (bgImg == 'url("about:invalid")' || bgImg == 'none'   ) {
 
                         $(this).next('.inputFileError').html('Required');
                         err++;

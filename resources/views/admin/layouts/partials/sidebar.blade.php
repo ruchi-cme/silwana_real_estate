@@ -178,8 +178,70 @@
 
                 </div>
 
+                <div data-kt-menu-trigger="click" class="menu-item {{ Route::is('admin.investService*') || Route::is('admin.buildingService*')  || Route::is('admin.rentalService*')  || Route::is('admin.salesService*')  ? 'show' : '' }} menu-accordion mb-1">
+                    <span class="menu-link {{ Route::is('admin.investService*') || Route::is('admin.buildingService*')  || Route::is('admin.rentalService*')  || Route::is('admin.salesService*')   ? 'active' : '' }}">
+                        <span class="menu-icon">
+                            <i class="fa fa-project-diagram"></i>
+                        </span>
+                        <span class="menu-title">Business & Services CMS</span>
+                        <span class="menu-arrow"></span>
+                    </span>
 
-                @can('category-view','amenities-view')
+                    <div class="menu-sub menu-sub-accordion">
+                        @can('investService-view')
+                            <div class="menu-item {{ Route::is('admin.investService*') ? 'show' : '' }}">
+                                <a class="menu-link" href="{{ route('admin.investService') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                    <span class="menu-title">Investment  </span>
+                                </a>
+                            </div>
+                        @endcan
+                    </div>
+
+                    <div class="menu-sub menu-sub-accordion">
+                        @can('buildingService-view')
+                            <div class="menu-item {{ Route::is('admin.buildingService*') ? 'show' : '' }}">
+                                <a class="menu-link" href="{{ route('admin.buildingService') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                    <span class="menu-title">Building Management</span>
+                                </a>
+                            </div>
+                        @endcan
+                    </div>
+
+                    <div class="menu-sub menu-sub-accordion">
+                        @can('rentalService-view')
+                            <div class="menu-item {{ Route::is('admin.rentalService*') ? 'show' : '' }}">
+                                <a class="menu-link" href="{{ route('admin.rentalService') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                    <span class="menu-title">Rental</span>
+                                </a>
+                            </div>
+                        @endcan
+                    </div>
+
+                    <div class="menu-sub menu-sub-accordion">
+                        @can('salesService-view')
+                            <div class="menu-item {{ Route::is('admin.salesService*') ? 'show' : '' }}">
+                                <a class="menu-link" href="{{ route('admin.salesService') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                    <span class="menu-title">Sales</span>
+                                </a>
+                            </div>
+                        @endcan
+                    </div>
+
+                </div>
+
+            @can('category-view','amenities-view')
                 <div data-kt-menu-trigger="click" class="menu-item {{ Route::is('admin.category*') ||  Route::is('admin.amenities*') ? 'show' : '' }} menu-accordion mb-1">
                     <span class="menu-link {{ Route::is('admin.category*') ||  Route::is('admin.amenities*') ? 'active' : '' }}">
                         <span class="menu-icon">
@@ -343,8 +405,8 @@
 
 
 
-                    <div data-kt-menu-trigger="click" class="menu-item {{   Route::is('admin.bookMeeting*')  || Route::is('admin.booking*')? 'show' : '' }} menu-accordion mb-1">
-                    <span class="menu-link {{   Route::is('admin.bookMeeting*')  || Route::is('admin.booking*') ? 'active' : '' }}">
+                    <div data-kt-menu-trigger="click" class="menu-item {{   Route::is('admin.bookMeeting*')  || Route::is('admin.booking*') ||  Route::is('admin.inquiry*')? 'show' : '' }} menu-accordion mb-1">
+                    <span class="menu-link {{   Route::is('admin.bookMeeting*')  || Route::is('admin.booking*') ||  Route::is('admin.inquiry*') ? 'active' : '' }}">
                         <span class="menu-icon">
                             <i class="fa fa-project-diagram"></i>
                         </span>
@@ -377,6 +439,20 @@
                                 </div>
                             @endcan
                         </div>
+
+                        <div class="menu-sub menu-sub-accordion">
+                            @can('inquiry-view')
+                                <div class="menu-item {{ Route::is('admin.inquiry*') ? 'show' : '' }}">
+                                    <a class="menu-link" href="{{ route('admin.inquiry') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                        <span class="menu-title">Inquiry</span>
+                                    </a>
+                                </div>
+                            @endcan
+                        </div>
+
                     </div>
 
 

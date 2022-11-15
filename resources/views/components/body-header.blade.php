@@ -76,6 +76,10 @@
                                             </ul>
                                         </div>
                                     </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('sales') }}"> Sales</a>
+                                    </li>
                                    <!-- <li class="nav-item">
                                         <a class="nav-link" href="{{ route('propertyList') }}">Property on Sale</a>
                                     </li> -->

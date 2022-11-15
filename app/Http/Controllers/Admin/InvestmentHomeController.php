@@ -190,7 +190,7 @@ class InvestmentHomeController extends Controller
             'modified_date' => now()
         ]);
 
-        return redirect()->route('admin.investmentHome')->with('updated','Media Updated 👍');
+        return redirect()->route('admin.investmentHome')->with('updated','Investment Data Updated 👍');
     }
 
 }
