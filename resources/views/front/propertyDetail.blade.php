@@ -163,13 +163,18 @@
                     <div class="top-categories">
                         <ul>
                             <h4>Top Categories</h4>
-                            @foreach($categories as $cat)
-                               @php $countProject = getCountCategoryProject($cat['category_id']); @endphp
-                                <li>
-                                    <p>{{ $cat['category_name'] }}</p>
-                                    <span>({{ $countProject }} Properties)</span>
-                                </li>
-                            @endforeach
+                            @if(!empty($categories))
+                                @foreach($categories as $cat)
+                                   @php $countProject = getCountCategoryProject($cat['category_id']); @endphp
+                                     @if(!empty($countProject))
+                                        <li>
+                                            <p>{{ $cat['category_name'] }}</p>
+                                            <span>({{ $countProject }} Properties)</span>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            @endif
+
                         </ul>
                     </div>
                 </div>
