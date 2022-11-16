@@ -108,7 +108,7 @@ class FooterController extends Controller
         }
 
         $arr = [];
-        if($request->hasfile('icon') || $request->edit_icon ) {
+        if( !empty($request->edit_icon) ) {
 
             foreach ($request->edit_icon as $key => $file) {
 
@@ -119,9 +119,10 @@ class FooterController extends Controller
                     if (array_key_exists($key, $headingImage)) {
                         $headingImage = $request->file('icon')[$key];
                         $iconName = date('YmdHis') . "." . str_replace(' ', '',$headingImage->getClientOriginalName());
-                        $headingImage->move($destinationPath, $iconName);
-                        if (!empty($editHeadingImage) && file_exists(public_path() . '/images/footer' . $editHeadingImage)) {
-                            @unlink(public_path('images/footer') . $editHeadingImage);
+                         $headingImage->move($destinationPath, $iconName);
+
+                        if (!empty($editHeadingImage) && file_exists(public_path() . '/images/footer/' . $editHeadingImage)) {
+                            @unlink(public_path('images/footer') .'/'. $editHeadingImage);
                         }
                     } else {
                         $iconName = $editHeadingImage;
@@ -139,7 +140,23 @@ class FooterController extends Controller
                 ];
             }
         }
+        else {
+            if($request->hasfile('icon')) {
 
+                foreach ($request->file('icon') as $key => $file) {
+
+                    $icon = $request->file('icon')[$key];
+                    $destinationPath = public_path('images/footer');
+                    $iconName = date('YmdHis') . "_" . $file->getClientOriginalName();
+                    $icon->move($destinationPath, $iconName);
+
+                    $arr[] = [
+                        'icon' => $iconName,
+                        'link' => $request->link[$key],
+                    ];
+                }
+            }
+        }
 
         $updateData->update([
             'title'  => $request->title,
