@@ -66,9 +66,11 @@
                                 @php
                                     $social_media_data = json_decode( $footerData['social_media_data']  );
                                 @endphp
-                                @foreach($social_media_data as $row)
-                                     <a href="{{!empty($row->link) ? $row->link : '#' }}" target="_blank" ><img src="{{asset('images/footer').'/'.$row->icon}} " alt=""></a>
-                                @endforeach
+                                @if(!empty($social_media_data))
+                                    @foreach($social_media_data as $row)
+                                         <a href="{{!empty($row->link) ? $row->link : '#' }}" target="_blank" ><img src="{{asset('images/footer').'/'.$row->icon}} " alt=""></a>
+                                    @endforeach
+                                @endif
                             @endif
                         </div>
                     </div>
