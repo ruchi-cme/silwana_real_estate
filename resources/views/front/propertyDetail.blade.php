@@ -323,11 +323,13 @@
                     <div class="owl-carousel owl-theme media-image-slider">
                         @if(!empty($selectedImage))
                             @for($i=0; count($selectedImage) > $i; $i++)
+                                @if($selectedImage[$i]['type'] == 2)
                                 <div class="item">
                                     <div class="media-image-slider-wrap">
                                         <img src="{{ asset('images/project/images/').'/'.$selectedImage[$i]['title'] }}"/>
                                     </div>
                                 </div>
+                                @endif
                             @endfor
                         @endif
 
