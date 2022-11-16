@@ -415,7 +415,9 @@
                 @if($i == 0 || $i == 3)
                         <div class="col-xl-6 col-lg-6">
                             <div class="our-projects-wrap position-relative">
+                                <a href="{{ URL('projectDetail/'.encrypt( $ourProjectList[$i]['project_id'])) }}"  >
                                 <img src="{{ !empty($proImg['title']) ? asset("images/project/images/".$proImg['title'])  :  asset("images/front/home/feature1.png" ) }}" alt="">
+                                </a>
                                 <div class="our-projects-inner">
                                     <p>{{ $ourProjectList[$i]['project_name'] }}</p>
                                 </div>
@@ -429,7 +431,9 @@
                     @else
                         <div class="col-xl-3 col-lg-6">
                             <div class="our-projects-wrap our-projects-wrap-main position-relative">
+                                <a href="{{ URL('projectDetail/'.encrypt( $ourProjectList[$i]['project_id'])) }}"  >
                                 <img src="{{ !empty($proImg['title']) ? asset("images/project/images/".$proImg['title'])  :  asset("images/front/home/feature1.png" ) }}" alt="">
+                                </a>
                                 <div class="our-projects-inner">
                                     <p>{{ $ourProjectList[$i]['project_name'] }}</p>
                                 </div>
@@ -691,13 +695,17 @@
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="project-feature-img">
-                                                    <img src="{{ !empty($proImg['title']) ? asset("images/project/images/".$proImg['title'])  :  asset("images/front/home/feature1.png" ) }}" alt="">
+                                                    <a href="{{ URL('projectDetail/'.encrypt( $featurePro['project_id'])) }}"  >
+                                                        <img src="{{ !empty($proImg['title']) ? asset("images/project/images/".$proImg['title'])  :  asset("images/front/home/feature1.png" ) }}" alt="">
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="upcoming-projects-wrap">
                                                     <h4>upcoming projects</h4>
-                                                    <h2> {{ $featurePro['project_name'] }}</h2>
+                                                    <a href="{{ URL('projectDetail/'.encrypt( $featurePro['project_id'])) }}"  >
+                                                        <h2> {{ $featurePro['project_name'] }}</h2>
+                                                    </a>
                                                     <h6> {{ $featurePro['address'] }}</h6>
                                                     @php
                                                         $string    = $featurePro['project_detail'];

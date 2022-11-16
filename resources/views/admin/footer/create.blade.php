@@ -101,7 +101,7 @@
                                         <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($editData->image) ? $test :'"background-image : none'}}"></div>
                                         <!--end::Preview existing image-->
                                         <!--begin::Label-->
-                                        <label class="inputFileError errorMsg" for="direction" style="">  </label>
+                                        <label class="inputFileError errorMsg" for="image" style="">  </label>
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="{{  !empty($editData->image) ? 'Change' : 'Upload' }} image">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
@@ -146,7 +146,7 @@
                                             <div class="col-xl-12 fv-row fv-plugins-icon-container ">
                                                 <div class="row">
                                                     <div class="col-md-4 mb-3">
-                                                        <input  type="text" attrame="Enter Link" placeholder="Enter Link" class="form-control form-control-solid direction" name="link[]" value="{{ $row->link }}" >
+                                                        <input  type="url" attrame="Enter Link" placeholder="Enter Link" class="form-control form-control-solid" name="link[]" value="{{ $row->link }}" >
                                                         <label class="inputerror errorMsg" for="link" style="">  </label>
                                                     </div>
 
@@ -164,7 +164,7 @@
 
                                                             <!--end::Preview existing image-->
                                                             <!--begin::Label-->
-                                                            <label class="inputFileError errorMsg" for="direction" style="">  </label>
+                                                            <label class="inputFileError errorMsg" for="icon" style="">  </label>
                                                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
                                                                 <i class="bi bi-pencil-fill fs-7"></i>
                                                                 <!--begin::Inputs-->
@@ -192,6 +192,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @php   $i++;  @endphp
+
                                     @endforeach
                                 @else
 
@@ -206,8 +208,8 @@
                                     <div class="col-xl-12 fv-row fv-plugins-icon-container">
                                         <div class="row">
                                             <div class="col-md-4 mb-4">
-                                                <input type="text" placeholder="Enter Link" attrame="Enter Link" class="form-control form-control-solid" name="link[]" value="" >
-                                                <label class="inputerror errorMsg" for="direction" style="">  </label>
+                                                <input type="url" placeholder="Enter Link" attrame="Enter Link" class="form-control form-control-solid" name="link[]" value="" >
+                                                <label class="inputerror errorMsg" for="link" style="">  </label>
                                             </div>
 
                                             <div class="col-md-3 mb-3">
@@ -218,7 +220,7 @@
                                                     <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: none"></div>
                                                     <!--end::Preview existing image-->
                                                     <!--begin::Label-->
-                                                    <label class="inputFileError errorMsg" for="direction" style="">  </label>
+                                                    <label class="inputFileError errorMsg" for="icon" style="">  </label>
                                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Upload Icon">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
@@ -256,8 +258,8 @@
                                     <div class="col-xl-12 fv-row fv-plugins-icon-container">
                                         <div class="row">
                                             <div class="col-md-4 mb-4">
-                                                <input type="text" placeholder="Enter Link" attrame="Enter Link" class="form-control form-control-solid" name="link[]" value="" >
-                                                <label class="inputerror errorMsg" for="direction" style="">  </label>
+                                                <input type="url" placeholder="Enter Link" attrame="Enter Link" class="form-control form-control-solid" name="link[]" value="" >
+                                                <label class="inputerror errorMsg" for="link" style="">  </label>
                                             </div>
 
                                             <div class="col-md-3 mb-3">
@@ -268,7 +270,7 @@
                                                     <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: none"></div>
                                                     <!--end::Preview existing image-->
                                                     <!--begin::Label-->
-                                                    <label class="inputFileError errorMsg" for="direction" style="">  </label>
+                                                    <label class="inputFileError errorMsg" for="icon" style="">  </label>
                                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Upload Icon">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
@@ -306,8 +308,8 @@
                                     <div class="col-xl-12 fv-row fv-plugins-icon-container">
                                         <div class="row">
                                             <div class="col-md-4 mb-4">
-                                                <input type="text" placeholder="Enter Link" attrame="Enter Link" class="form-control form-control-solid" name="link[]" value="" >
-                                                <label class="inputerror errorMsg" for="direction" style="">  </label>
+                                                <input type="url" placeholder="Enter Link" attrame="Enter Link" class="form-control form-control-solid" name="link[]" value="" >
+                                                <label class="inputerror errorMsg" for="link" style="">  </label>
                                             </div>
 
                                             <div class="col-md-3 mb-3">
@@ -318,7 +320,7 @@
                                                     <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: none"></div>
                                                     <!--end::Preview existing image-->
                                                     <!--begin::Label-->
-                                                    <label class="inputFileError errorMsg" for="direction" style="">  </label>
+                                                    <label class="inputFileError errorMsg" for="icon" style="">  </label>
                                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Upload Icon">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
@@ -392,15 +394,35 @@
 
     <script type="text/javascript">
 
+        function isUrlValid(url) {
+            return /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(url);
+        }
         $(document).ready(function (e) {
+            $.validator.addMethod("mytst", function (value, element) {
+                var flag = true;
 
+                $("[name^=link]").each(function (i, j) {
+                    $(this).next('.inputerror').html('');
+                    if ($.trim($(this).val()) == '') {
+                        flag = false;
+                        $(this).next('.inputerror').html(' This field is required. ');
+                    } else if(!isUrlValid($(this).val())) {
+                        flag = false;
+                        $(this).next('.inputerror').html('Please enter a valid URL');
+                    }
+                });
+                return flag;
+            }, "");
 
             $("#dataForm").validate({
                 ignore: '',
                 rules: {
                     "title" :"required",
                     "detail" : "required",
-                    "notes" : "required"
+                    "notes" : "required",
+                    "link[]": {
+                        mytst:true
+                    }
                 },
                 messages: {
                     "title" : "Please enter title",

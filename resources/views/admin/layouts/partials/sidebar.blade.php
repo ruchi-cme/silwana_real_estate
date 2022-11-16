@@ -183,7 +183,7 @@
                         <span class="menu-icon">
                             <i class="fa fa-project-diagram"></i>
                         </span>
-                        <span class="menu-title">Business & Services CMS</span>
+                        <span class="menu-title">Sales</span>
                         <span class="menu-arrow"></span>
                     </span>
 

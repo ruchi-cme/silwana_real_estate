@@ -1,7 +1,17 @@
 <x-base>
     <x-banner title="Our Projects" page="{{$title}}"></x-banner>
 
-
+<style>
+    .loader {
+        width: 120px ;
+        height: 100px ;
+    }
+    .ajax-load{
+        background: #e1e1e1;
+        padding: 10px 0px;
+        width: 100%;
+    }
+</style>
 <!-- property-detail-main -->
 <section class="property-detail-main mt-0">
     <div class="container">
@@ -17,9 +27,6 @@
                             @if( !empty(request()->id))
                                 <input type="hidden" name="category_id"  value="{{ decrypt(request()->id) }}">
                             @endif
-
-
-
                         </div>
                         <div class="form-group mb-0">
                             <button type="submit" class="cmn-btn search-btn"><img src="{{asset("images/front" )}}/search.svg" alt="search" /> search</button>
@@ -28,34 +35,67 @@
                 </div>
             </div>
 
-            @if (!empty($projectList))
-                @foreach($projectList as $row)
-                    @php  $proImg =  getProjectImage($row['project_id'],'single') @endphp
+            <div class="row" id="post-data">
+                @include('front.projectList')
+            </div>
 
-                    <div class="col-lg-4 col-md-6">
-                        <a href="{{ URL('projectDetail/'.encrypt($row['project_id'])) }}" class="portfolio-lists-wrap">
-                            <div class="portfolio-lists-img-wrap">
-                                <img src="{{ !empty($proImg['title']) ? asset("images/project/images/".$proImg['title'])  :  asset("images/front/home/feature1.png" ) }}" alt="">
-                            </div>
-                            <div class="portfolio-lists-detail">
-                                <h6>{{  $row['project_name'] }}</h6>
-                                <p> {{  $row['category_name'] }}</p>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
-                    <!-- <div class="col-lg-12">
-                        <div class="text-center">
-                            <button class="cmn-btn load-more-btn">LOAD MORE</button>
-                        </div>
-                    </div> -->
-            @endif
+            <div class="ajax-load text-center" style="display:none">
 
+                <p><img src="{{ asset('images/front/loading.gif') }}" class="loader" /> Loading More post</p>
 
-
-
+            </div>
         </div>
-    </div>
-</section>
 
+
+    </div>
+
+</section>
+    @section('scripts')
+          <script type="text/javascript">
+            var page = 1;
+
+            $(window).scroll(function() {
+
+               if($(window).scrollTop() + $(window).height() >= 1770) {
+                    page++;
+                    loadMoreData(page);
+                 }
+            });
+
+            function loadMoreData(page){
+
+                $.ajax(
+                    {
+                        url: '?page=' + page,
+                        type: "get",
+                        beforeSend: function()
+                        {
+                            $('.ajax-load').show();
+                        }
+                    })
+
+                    .done(function(data)
+                    {
+                        if(data.html == ""){
+
+                            $('.ajax-load').html("No more records found");
+                            return;
+                        }
+
+                        $('.ajax-load').hide();
+                        $("#post-data").append(data.html);
+
+                    })
+
+                    .fail(function(jqXHR, ajaxOptions, thrownError)
+
+                    {
+
+                        alert('server not responding...');
+
+                    });
+
+            }
+        </script>
+    @endsection
 </x-base>
