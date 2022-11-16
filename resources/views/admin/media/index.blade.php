@@ -148,9 +148,14 @@
                 targets: 1,
                 render: function (data, type, row) {
                     console.log(data    ) ;
-                        return      `
-                        <img src="${data } " width="100" height="100" / >
-                            `;
+                    if (data.indexOf("video") > -1) {
+                        var dataCol = `<video controls="" src="${data }" width="120" height="120"></video>`
+
+                    }else {
+                        var dataCol = `<img src="${data } " width="100" height="100" / >`
+
+                    }
+                        return     dataCol  ;
                     /*    if(data.type == 1 ) {
                         var $returnImg =  `
                                 <img src="${data } " width="100" height="100" / >
