@@ -93,7 +93,7 @@ class BookingController extends Controller
 
     public function cancelBooking(Request $request){
 
-        $data = Booking::find( decrypt($request->booking_id));
+        $data = Booking::find( $request->booking_id);
 
         $unitdata = FloorUnitMapping::find(  ($data->unit_id));
 
@@ -110,11 +110,19 @@ class BookingController extends Controller
                 'modified_by'   => Auth::guard('front')->user()->id,
                 'modified_date' => now()
             ]);
-            $reponse['success'] = 'Booking cancelled successfully.';
+       //     return redirect()->route('myBooking')->with('inserted', 'Booking cancelled successfully.👍');
+
+            $retuenData = ['success' => 'inserted',
+              'message' =>  'Booking cancelled successfully.👍' ];
+            $reponse = $retuenData;'//Booking cancelled successfully.';
         }
         else {
-            $reponse['success'] = 'Something went wrong.';
+        //    return redirect()->route('myBooking')->with('error', 'Something went wrong..👍');
+            $retuenData = ['error' => 'error',
+                'message' =>  'Something went wrong..' ];
+          // $reponse['success'] = 'Something went wrong.';
+            $reponse = $retuenData;
         }
-        return $reponse;
+         return $reponse;
     }
 }

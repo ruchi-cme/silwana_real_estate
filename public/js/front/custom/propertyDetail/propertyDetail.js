@@ -38,13 +38,15 @@ $(document).ready(function() {
 
         if(user_id != '')
         {
-            $(this).attr('data-bs-toggle', 'modal');
-            $(this).attr('data-bs-target', '#myModal');
+            $('#myModal').modal('show');
+           // $(this).attr('data-bs-toggle', 'modal');
+          //  $(this).attr('data-bs-target', '#myModal');
 
         }else{
             //if not logged in
-            $(this).attr('data-bs-toggle', 'modal');
-            $(this).attr('data-bs-target', '#login-modal');
+            $('#login-modal').modal('show');
+           // $(this).attr('data-bs-toggle', 'modal');
+          //  $(this).attr('data-bs-target', '#login-modal');
         }
 
     });
@@ -135,7 +137,9 @@ $(document).ready(function() {
 
         if ($(this).attr('href').length < 1 || $(this).attr('href') == 'javascript:void(0)'){
              $(this).attr('href','javascript:void(0)');
-            alert('No Pdf of this project!');
+            $('#noPDFModal').modal('show');
+
+           // alert('No Pdf of this project!');
         }
     });
 
