@@ -7,12 +7,6 @@
     <li class="breadcrumb-item px-3 text-primary">{{ !empty( $projectData->project_id) ? 'Edit Image Upload': "Image Upload" }}</li>
 @endsection
 
-<style>
-    .errorMsg{
-        color: #FF0000;
-    }
-
-</style>
 @section('content')
     <!--begin::Post-->
     <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -260,7 +254,6 @@
 @endsection
 
 @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 
     <script type="text/javascript">
 

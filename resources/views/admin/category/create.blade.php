@@ -6,11 +6,7 @@
 <li class="breadcrumb-item px-3"><a class="text-hover-primary text-muted" href="{{ route('admin.category') }}">Category</a></li>
 <li class="breadcrumb-item px-3 text-primary">{{ !empty( $editData->category_id) ?   'Edit' :  'Create' }}</li>
 @endsection
-<style>
-    .error ,  .inputFileError{
-        color: #FF0000;
-    }
-</style>
+
 @section('content')
 <!--begin::Post-->
 <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -79,7 +75,7 @@
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="{{  !empty($editData->category_image) ? 'Change' : 'Upload' }} image">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
-                                            <input type="file" value="{{ !empty($editData->category_image) ? $editData->category_image : '' }}" name="category_image" accept=".png, .jpg, .jpeg" />
+                                            <input type="file" value="{{ !empty($editData->category_image) ? $editData->category_image : '' }}" name="category_image"  id="image" accept="image/*" onchange="validateFileType()" />
                                             <input type="hidden" name="edit_category_image" value="{{ !empty( $editData->category_image) ? $editData->category_image : '' }}" id="edit_category_image">
                                             <input type="hidden" name="avatar_remove" />
                                             <!--end::Inputs-->
@@ -97,6 +93,7 @@
                                                                 </span>
                                         <!--end::Remove-->
                                     </div>
+                                    <label class="errorMsg" id="fileErr" for="image" style="">  </label>
                                     <!--end::Image input-->
                                 </div>
                             </div>

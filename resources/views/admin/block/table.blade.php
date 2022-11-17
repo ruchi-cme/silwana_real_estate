@@ -227,8 +227,7 @@
 
 @push('scripts')
     <script src="{{ asset('js/swal.js') }}" ></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <script   src="{{ asset('js/front/custom') }}/general.js"> </script>
+     <script   src="{{ asset('js/front/custom') }}/general.js"> </script>
 
     <script type="text/javascript">
         $(document).ready(function () {
