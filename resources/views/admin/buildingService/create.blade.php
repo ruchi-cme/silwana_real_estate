@@ -6,11 +6,7 @@
 <li class="breadcrumb-item px-3"><a class="text-hover-primary " href="{{ route('admin.buildingService') }}">Building </a></li>
 <li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->id) ?   'Edit' :  'Create' }}</li>
 @endsection
-<style>
-    .error , .inputFileError, .errorMsg{
-        color: #FF0000;
-    }
-</style>
+
 @section('content')
 <!--begin::Post-->
 <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -167,7 +163,7 @@
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
-                                            <input type="file" value="{{ !empty($editData->image_title) ? $editData->image_title : '' }}" name="image_title" accept=".png, .jpg, .jpeg" />
+                                            <input type="file" value="{{ !empty($editData->image_title) ? $editData->image_title : '' }}" name="image_title" id="image" accept="image/*" onchange="validateFileType()"  />
                                             <input type="hidden" name="edit_image_title"  value="{{ !empty($editData->image_title) ? $editData->image_title : ''  }}" />
                                             <input type="hidden" name="avatar_remove" />
                                              <!--end::Inputs-->
@@ -185,6 +181,7 @@
                                                                 </span>
                                         <!--end::Remove-->
                                     </div>
+                                    <label class="errorMsg" id="fileErr" for="image" style="">  </label>
                                     <!--end::Image input-->
                                 </div>
                             </div>
@@ -199,14 +196,14 @@
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
                                     <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                        <input type="file" accepts="video/*"   class="form-control form-control-solid" name="video_title"value="{{ !empty($editData->video_title  ) ? $editData->video_title   : '' }}" id="video_title" >
+                                        <input type="file" accepts="video/*"   class="form-control form-control-solid" name="video_title"value="{{ !empty($editData->video_title  ) ? $editData->video_title   : '' }}" id="video_title" onchange="validateVideoFileType()" >
 
                                         <div class="col-xl-9 fv-row fv-plugins-icon-container video-preview-div">
                                              <input type="hidden"   name="edit_video_title" value="{{ !empty($editData->video_title  ) ? $editData->video_title   : '' }}" id="edit_video_title">
 
                                             <span class="pip editpip">
                                             @if(!empty($editData->video_title))
-                                                <video controls="" src="{{ !empty($editData->video_title) ? asset('images/businessServices/video').'/'.$editData->video_title : '' }}" width="120" height="120"></video>
+                                                <video id="showVideo" controls="" src="{{ !empty($editData->video_title) ? asset('images/businessServices/video').'/'.$editData->video_title : '' }}" width="120" height="120"></video>
                                                  <br/>
                                              @endif
                                             </span>

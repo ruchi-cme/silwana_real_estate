@@ -6,11 +6,7 @@
 <li class="breadcrumb-item px-3"><a class="text-hover-primary " href="{{ route('admin.footer') }}"> Footer</a></li>
 <li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->id) ?   'Edit' :  'Create' }}</li>
 @endsection
-<style>
-.error ,  .inputFileError, .errorMsg{
-    color: #FF0000;
-}
-</style>
+
 @section('content')
 <!--begin::Post-->
 <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -93,19 +89,19 @@
                                 <!--end::Col-->
                                 <!--begin::Col--> <div class="col-md-3 mb-3">
                                     <!--begin::Image input-->
-                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
+                                    <div class="image-input  image-input-outline" data-kt-image-input="true" style="background-image: none">
                                         <!--begin::Preview existing image-->
                                         @php
                                             $path =  !empty($editData->image) ? asset('images/footer' ).'/'.$editData->image : ''  ;
                                             $test =   "background-image:url('$path')"  ;  @endphp
-                                        <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($editData->image) ? $test :'"background-image : none'}}"></div>
+                                        <div class="imageBgDiv img image-input-wrapper w-125px h-125px" style="{{  !empty($editData->image) ? $test :'"background-image : none'}}"></div>
                                         <!--end::Preview existing image-->
                                         <!--begin::Label-->
                                         <label class="inputFileError errorMsg" for="image" style="">  </label>
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="{{  !empty($editData->image) ? 'Change' : 'Upload' }} image">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
-                                            <input type="file" value="{{ !empty($editData->image) ? $editData->image : '' }}" name="image" accept=".png, .jpg, .jpeg" />
+                                            <input type="file" value="{{ !empty($editData->image) ? $editData->image : '' }}" name="image"  id="img" accept="image/*" onchange="validateFileTypes('img')" />
                                             <input type="hidden" name="edit_image"  value="{{ !empty($editData->image) ? $editData->image : ''  }}" />
                                             <input type="hidden" name="avatar_remove" />
                                             <!--end::Inputs-->
@@ -114,15 +110,16 @@
                                         <!--end::Label-->
                                         <!--begin::Cancel-->
                                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
-                                                                    <i class="bi bi-x fs-2"></i>
-                                                                </span>
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
                                         <!--end::Cancel-->
                                         <!--begin::Remove-->
                                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
-                                                                    <i class="bi bi-x fs-2"></i>
-                                                                </span>
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
                                         <!--end::Remove-->
                                     </div>
+                                    <label class="errorMsg" id="fileErrimg" for="image" style="">  </label>
                                     <!--end::Image input-->
                                 </div>
                             </div>
@@ -160,7 +157,7 @@
                                                                 $test =   "background-image:url('$path')"  ;
 
                                                             @endphp
-                                                            <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($row->icon) ? $test :'"background-image : none'}}"></div>
+                                                            <div class="imageBgDiv icon{{ $i }} image-input-wrapper w-125px h-125px" style="{{  !empty($row->icon) ? $test :'"background-image : none'}}"></div>
 
                                                             <!--end::Preview existing image-->
                                                             <!--begin::Label-->
@@ -168,7 +165,7 @@
                                                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
                                                                 <i class="bi bi-pencil-fill fs-7"></i>
                                                                 <!--begin::Inputs-->
-                                                                <input type="file"  name="icon[]" accept=".png, .jpg, .jpeg" />
+                                                                <input type="file"  name="icon[]"  id="icon{{ $i }}" accept="image/*" onchange="validateFileTypes('icon{{ $i }}')" />
                                                                 <input type="hidden" name="edit_icon[]"  value="{{ !empty($row->icon) ? $row->icon : ''  }}" />
                                                                 <input type="hidden" name="avatar_remove" />
                                                                 <!--end::Inputs-->
@@ -186,6 +183,7 @@
                                                                 </span>
                                                             <!--end::Remove-->
                                                         </div>
+                                                        <label class="errorMsg" id="fileErricon{{ $i }}" for="image" style="">  </label>
                                                         <!--end::Image input-->
                                                     </div>
 
@@ -217,14 +215,14 @@
                                                 <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
                                                     <!--begin::Preview existing image-->
                                                     @php $img= ''; @endphp
-                                                    <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: none"></div>
+                                                    <div class="imageBgDiv icon1 image-input-wrapper w-125px h-125px" style="background-image: none"></div>
                                                     <!--end::Preview existing image-->
                                                     <!--begin::Label-->
                                                     <label class="inputFileError errorMsg" for="icon" style="">  </label>
                                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Upload Icon">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
-                                                        <input type="file" name="icon[]" accept=".png, .jpg, .jpeg" />
+                                                        <input type="file" name="icon[]" id="icon1" accept="image/*" onchange="validateFileTypes('icon1')"  />
                                                         <input type="hidden" name="avatar_remove" />
                                                         <!--end::Inputs-->
                                                     </label>
@@ -240,6 +238,7 @@
                         </span>
                                                     <!--end::Remove-->
                                                 </div>
+                                                <label class="errorMsg" id="fileErricon1" for="image" style="">  </label>
                                                 <!--end::Image input-->
                                             </div>
 
@@ -267,14 +266,14 @@
                                                 <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
                                                     <!--begin::Preview existing image-->
                                                     @php $img= ''; @endphp
-                                                    <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: none"></div>
+                                                    <div class="imageBgDiv icon2 image-input-wrapper w-125px h-125px" style="background-image: none"></div>
                                                     <!--end::Preview existing image-->
                                                     <!--begin::Label-->
                                                     <label class="inputFileError errorMsg" for="icon" style="">  </label>
                                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Upload Icon">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
-                                                        <input type="file" name="icon[]" accept=".png, .jpg, .jpeg" />
+                                                        <input type="file" name="icon[]" id="icon2" accept="image/*" onchange="validateFileTypes('icon2')"  />
                                                         <input type="hidden" name="avatar_remove" />
                                                         <!--end::Inputs-->
                                                     </label>
@@ -290,6 +289,7 @@
                         </span>
                                                     <!--end::Remove-->
                                                 </div>
+                                                <label class="errorMsg" id="fileErricon2" for="image" style="">  </label>
                                                 <!--end::Image input-->
                                             </div>
 
@@ -317,14 +317,14 @@
                                                 <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
                                                     <!--begin::Preview existing image-->
                                                     @php $img= ''; @endphp
-                                                    <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: none"></div>
+                                                    <div class="imageBgDiv icon3 image-input-wrapper w-125px h-125px" style="background-image: none"></div>
                                                     <!--end::Preview existing image-->
                                                     <!--begin::Label-->
                                                     <label class="inputFileError errorMsg" for="icon" style="">  </label>
                                                     <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Upload Icon">
                                                         <i class="bi bi-pencil-fill fs-7"></i>
                                                         <!--begin::Inputs-->
-                                                        <input type="file" name="icon[]" accept=".png, .jpg, .jpeg" />
+                                                        <input type="file" name="icon[]" id="icon3" accept="image/*" onchange="validateFileTypes('icon3')"  />
                                                         <input type="hidden" name="avatar_remove" />
                                                         <!--end::Inputs-->
                                                     </label>
@@ -340,6 +340,7 @@
                         </span>
                                                     <!--end::Remove-->
                                                 </div>
+                                                <label class="errorMsg" id="fileErricon3" for="image" style="">  </label>
                                                 <!--end::Image input-->
                                             </div>
 

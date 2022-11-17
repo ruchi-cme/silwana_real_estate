@@ -6,11 +6,7 @@
 <li class="breadcrumb-item px-3"><a class="text-hover-primary " href="{{ route('admin.rentalService') }}">Rental</a></li>
 <li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->id) ?   'Edit' :  'Create' }}</li>
 @endsection
-<style>
-.error, .errorMsg{
-    color: #FF0000;
-}
-</style>
+
 @section('content')
 <!--begin::Post-->
 <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -167,20 +163,6 @@
 @push('scripts')
 
     <script type="text/javascript">
-
-        function validateFileType(){
-            var fileName = $("#image").val();
-            var idxDot = fileName.lastIndexOf(".") + 1;
-            var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
-            console.log(extFile);
-            if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"  || extFile=="svg"){
-                //TO DO
-            }else{
-                $("div.imageBgDiv").css('background-image','none');
-                $("#image").val('');
-                $("#fileErr").html('The image must be a file of type: png, jpeg, gif, svg.');
-            }
-        }
 
         $(document).ready(function (e) {
 

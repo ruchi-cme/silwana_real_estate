@@ -72,8 +72,8 @@
         <script src="{{ asset('js/scripts.bundle.js') }}"></script>
         <script src="{{ asset('js/jquery.validate.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
-        <script src="{{ asset('js/bootstrap-datetimepicker.min.js')}}"></script>
-
+        <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
+        <script src="{{ asset('js/custom/general.js') }}"></script>
         </script>
 		<!--end::Global Javascript Bundle-->
 		@stack('scripts')

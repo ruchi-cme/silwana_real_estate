@@ -1,52 +1,45 @@
-"use strict";
-var KTSigninGeneral = function () {
-    var t, e, i;
-    return {
-        init: function () {
-            t = document.querySelector("#amenitiesFrom"), e = document.querySelector("#create_button"), i = FormValidation.formValidation(t, {
-                fields: {
-                    amenity_name: {
-                        validators: {
-                            notEmpty: {
-                                message: "amenity_name   is required"
-                            },
 
-                        }
-                    },
-                    amenity_detail: {
-                        validators: {
-                            notEmpty: {
-                                message: "The amenity_detail is required"
-                            }
-                        }
-                    }
-                },
-                plugins: {
-                    trigger: new FormValidation.plugins.Trigger,
-                    bootstrap: new FormValidation.plugins.Bootstrap5({
-                        rowSelector: ".fv-row"
-                    })
-                }
-            }), e.addEventListener("click", (function (n) {
-                n.preventDefault(), i.validate().then((function (i) {
-                    "Valid" == i ? (
-                        e.setAttribute("data-kt-indicator", "on"),
-                        e.disabled = !0,
-                        document.querySelector("#amenitiesFrom").submit()
-                        ) : Swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
-                        icon: "error",
-                        buttonsStyling: !1,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-primary"
-                        }
-                    })
-                }))
-            }))
+    function validateFileType()
+    {
+        var fileName = $("#image").val();
+        var idxDot = fileName.lastIndexOf(".") + 1;
+        var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+        console.log(extFile);
+        if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"  || extFile=="svg") {
+        //TO DO
+        } else {
+            $("div.imageBgDiv").css('background-image','none');
+            $("#image").val('');
+            $("#fileErr").html('The image must be a file of type: png, jpeg, gif, svg.');
         }
     }
-}();
-KTUtil.onDOMContentLoaded((function () {
-    KTSigninGeneral.init()
-}));
+
+    function validateFileTypes(data)
+    {
+        var fileName = $("#"+data).val();
+        var idxDot = fileName.lastIndexOf(".") + 1;
+        var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+        console.log(extFile);
+        if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"  || extFile=="svg") {
+            //TO DO
+        } else {
+            $("div."+data).css('background-image','none');
+            $("#"+data).val('');
+            $("#fileErr"+data).html('The image must be a file of type: png, jpeg, gif, svg.');
+        }
+    }
+
+    function validateVideoFileType()
+    {
+        var fileName = $("#video_title").val();
+        var idxDot = fileName.lastIndexOf(".") + 1;
+        var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+        console.log(extFile);
+        if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"  || extFile=="svg") {
+            //TO DO
+        } else {
+            $("#showVideo").attr('src','');
+            $("#video_title").val('');
+            $("#error3").html('The video must be a file of type: mp3, mp4.');
+        }
+    }

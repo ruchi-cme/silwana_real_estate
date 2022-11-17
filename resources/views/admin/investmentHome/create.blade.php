@@ -106,7 +106,7 @@
                                                     $test =   "background-image:url('$path')"  ;
 
                                                 @endphp
-                                                <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($row->icon) ? $test :'"background-image : none'}}"></div>
+                                                <div class="imageBgDiv icon{{ $i }} image-input-wrapper w-125px h-125px" style="{{  !empty($row->icon) ? $test :'"background-image : none'}}"></div>
 
                                                 <!--end::Preview existing image-->
                                                 <!--begin::Label-->
@@ -114,7 +114,7 @@
                                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
                                                     <i class="bi bi-pencil-fill fs-7"></i>
                                                     <!--begin::Inputs-->
-                                                    <input type="file"  name="icon[]" accept=".png, .jpg, .jpeg" />
+                                                    <input type="file"  name="icon[]"  id="icon{{ $i }}" accept="image/*" onchange="validateFileTypes('icon{{ $i }}')" />
                                                     <input type="hidden" name="edit_icon[]"  value="{{ !empty($row->icon) ? $row->icon : ''  }}" />
                                                     <input type="hidden" name="avatar_remove" />
                                                       <!--end::Inputs-->
@@ -132,6 +132,7 @@
                                                                 </span>
                                                 <!--end::Remove-->
                                             </div>
+                                            <label class="errorMsg" id="fileErricon{{ $i }}" for="image" style="">  </label>
                                             <!--end::Image input-->
                                         </div>
                                     </div>
@@ -178,7 +179,7 @@
                                         <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
                                             <!--begin::Preview existing image-->
 
-                                            <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: none"></div>
+                                            <div class="imageBgDiv icon1 image-input-wrapper w-125px h-125px" style="background-image: none"></div>
 
                                             <!--end::Preview existing image-->
                                             <!--begin::Label-->
@@ -186,7 +187,7 @@
                                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Upload image">
                                                 <i class="bi bi-pencil-fill fs-7"></i>
                                                 <!--begin::Inputs-->
-                                                <input type="file"  name="icon[]" accept=".png, .jpg, .jpeg" />
+                                                <input type="file"  name="icon[]"  id="icon1" accept="image/*" onchange="validateFileTypes('icon1')" />
                                                 <input type="hidden" name="edit_image_title"  value=" " />
                                                 <input type="hidden" name="avatar_remove" />
                                                 <input type="hidden" id="imageType" name="imageType" value=" " />
@@ -205,6 +206,7 @@
                                                                 </span>
                                             <!--end::Remove-->
                                         </div>
+                                        <label class="errorMsg" id="fileErricon1" for="image" style="">  </label>
                                         <!--end::Image input-->
                                     </div>
                                 </div>
@@ -251,7 +253,7 @@
                                         <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
                                             <!--begin::Preview existing image-->
 
-                                            <div class="imageBgDiv image-input-wrapper w-125px h-125px" style=" background-image : none "></div>
+                                            <div class="imageBgDiv icon2 image-input-wrapper w-125px h-125px" style=" background-image : none "></div>
 
                                             <!--end::Preview existing image-->
                                             <!--begin::Label-->
@@ -259,7 +261,7 @@
                                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
                                                 <i class="bi bi-pencil-fill fs-7"></i>
                                                 <!--begin::Inputs-->
-                                                <input type="file"   name="icon[]" accept=".png, .jpg, .jpeg" />
+                                                <input type="file"   name="icon[]" id="icon2" accept="image/*" onchange="validateFileTypes('icon2')"  />
                                                 <input type="hidden" name="edit_image_title"  value=" " />
                                                 <input type="hidden" name="avatar_remove" />
                                                 <input type="hidden" id="imageType" name="imageType" value=" " />
@@ -278,6 +280,7 @@
                                                                 </span>
                                             <!--end::Remove-->
                                         </div>
+                                        <label class="errorMsg" id="fileErricon2" for="image" style="">  </label>
                                         <!--end::Image input-->
                                     </div>
                                 </div>
@@ -322,7 +325,7 @@
                                         <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
                                             <!--begin::Preview existing image-->
 
-                                            <div class="imageBgDiv image-input-wrapper w-125px h-125px" style=" background-image : none "></div>
+                                            <div class="imageBgDiv icon3 image-input-wrapper w-125px h-125px" style=" background-image : none "></div>
 
                                             <!--end::Preview existing image-->
                                             <!--begin::Label-->
@@ -330,7 +333,7 @@
                                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
                                                 <i class="bi bi-pencil-fill fs-7"></i>
                                                 <!--begin::Inputs-->
-                                                <input type="file"   name="icon[]" accept=".png, .jpg, .jpeg" />
+                                                <input type="file"   name="icon[]" id="icon3" accept="image/*" onchange="validateFileTypes('icon3')" />
                                                 <input type="hidden" name="edit_image_title"  value="" />
                                                 <input type="hidden" name="avatar_remove" />
                                                 <input type="hidden" id="imageType" name="imageType" value="" />
@@ -349,6 +352,8 @@
                                                                 </span>
                                             <!--end::Remove-->
                                         </div>
+                                        <label class="errorMsg" id="fileErricon3" for="image" style="">  </label>
+
                                         <!--end::Image input-->
                                     </div>
                                 </div>
@@ -400,7 +405,7 @@
                                            $videoUrl =  !empty($editData->video_title) ? asset('images/investmentHome/video').'/'. $editData->video_title  : ''  ;
 
                                         @endphp
-                                        <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($editData->image_title) ? $test :'"background-image : none'}}"></div>
+                                        <div class="imageBgDiv img image-input-wrapper w-125px h-125px" style="{{  !empty($editData->image_title) ? $test :'"background-image : none'}}"></div>
 
                                         <!--end::Preview existing image-->
                                         <!--begin::Label-->
@@ -408,7 +413,7 @@
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
-                                            <input type="file" value="{{ !empty($editData->image_title) ? $editData->image_title : '' }}" name="image_title" accept=".png, .jpg, .jpeg" />
+                                            <input type="file" value="{{ !empty($editData->image_title) ? $editData->image_title : '' }}" name="image_title" id="img" accept="image/*" onchange="validateFileTypes('img')" />
                                             <input type="hidden" name="edit_image_title"  value="{{ !empty($editData->image_title) ? $editData->image_title : ''  }}" />
                                             <input type="hidden" name="avatar_remove" />
                                              <!--end::Inputs-->
@@ -426,6 +431,7 @@
                                                                 </span>
                                         <!--end::Remove-->
                                     </div>
+                                    <label class="errorMsg" id="fileErrimg" for="image" style="">  </label>
                                     <!--end::Image input-->
                                 </div>
                             </div>

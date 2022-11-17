@@ -1,16 +1,12 @@
-@extends('admin.layouts.main',['title' => 'ContactUs'])
+@extends('admin.layouts.main',['title' => 'Contact Us'])
 
 @section('breadcrumb')
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.admin') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
-<li class="breadcrumb-item px-3 text-primary">About Silwana</li>
+<li class="breadcrumb-item px-3 text-primary">CMS</li>
 <li class="breadcrumb-item px-3"><a class="text-hover-primary " href="{{ route('admin.contactus') }}">Contact Us</a></li>
 <li class="breadcrumb-item px-3 text-primary"> {{ !empty( $editData->contactus_id) ?   'Edit' :  'Create' }}</li>
 @endsection
-<style>
-    .error ,  .inputFileError{
-        color: #FF0000;
-    }
-</style>
+
 @section('content')
 <!--begin::Post-->
 <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -107,7 +103,7 @@
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="{{  !empty($editData->image) ? 'Change' : 'Upload' }} image">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
-                                            <input type="file" value="{{ !empty($editData->image) ? $editData->image : '' }}" name="image" accept=".png, .jpg, .jpeg" />
+                                            <input type="file" id="image" accept="image/*" onchange="validateFileType()" value="{{ !empty($editData->image) ? $editData->image : '' }}" name="image" accept=".png, .jpg, .jpeg" />
                                             <input type="hidden" name="edit_image" value="{{ !empty( $editData->image) ? $editData->image : '' }}" id="edit_image">
                                             <input type="hidden" name="avatar_remove" />
                                             <!--end::Inputs-->
@@ -126,6 +122,7 @@
                                         <!--end::Remove-->
                                     </div>
                                     <!--end::Image input-->
+                                    <label class="errorMsg" id="fileErr" for="image" style="">  </label>
                                 </div>
                             </div>
                             <!--end::Row-->
