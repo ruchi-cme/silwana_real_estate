@@ -94,9 +94,10 @@
         searchDelay: 500,
         processing: true,
         serverSide: true,
-        stateSave: true,
+        stateSave: false,
         "scrollY": "50vh",
         "scrollX": true,
+        "order": [],
         "sScrollXInner": "100%",
         ajax: {
             url: "{{ route('admin.projectAssign') }}",

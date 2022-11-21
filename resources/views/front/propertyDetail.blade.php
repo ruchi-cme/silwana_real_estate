@@ -200,9 +200,7 @@
                             <div class="col-lg-12">
                                 <div class="title">
                                     <h2>{{ $projectList['project_name'] }}</h2>
-                                    <p>
-                                        {{ $projectList['project_detail'] }}
-                                    </p>
+
                                 </div>
                             </div>
                             <div class="col-lg-4">

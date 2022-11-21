@@ -15,7 +15,6 @@
             $phone     = Auth::guard('front')->user()->phone;
         @endphp
     @endif
-    {{$email}}
     <x-bodyFooter/>
     <x-footer/>
 
@@ -40,7 +39,7 @@
                 phone: '{{$phone}}' //Visitor phone};
             };
      @else
-        tidioChatApi.setVisitorData({  email: "",  name: "",   phone: "",  distinct_id: ''});
+     //   tidioChatApi.setVisitorData({  email: "",  name: "",   phone: "",  distinct_id: ''});
     @endif
 
     @if (count($errors) > 0)

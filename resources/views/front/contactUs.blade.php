@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="register-inner">
+                    <div class="register-inner wow fadeInUp">
                         <div class="row justify-content-center">
 
                             @if (!empty($contactUs))

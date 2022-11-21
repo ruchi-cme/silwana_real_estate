@@ -12,9 +12,65 @@
                             <a class="navbar-brand" href="{{ route('home') }}">
                                 <img src="{{asset('images/front')}}/logo.svg" alt="">
                             </a>
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-                                <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
-                            </button>
+                            <div class="d-flex align-items-center">
+                                <div class="estimate-wrap mb-0 for-mobile me-3">
+                                    @if (Auth::guard('front')->check())
+                                        @php $image = asset('images/front').'/noProfile.jpeg' ; @endphp
+                                        @if(Auth::guard('front')->user()->image)
+                                            @php $image = asset('images/user') .'/'. Auth::guard('front')->user()->image; @endphp
+                                        @endif
+                                        <div class="dropdown profile-btn">
+                                            <button class="cmn-btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <div class="profile-img-wrap-sml">
+                                                    <img src="{{$image}}" alt="profile" />
+                                                </div>
+                                                <p>{{Auth::guard('front')->user()->name}}</p>
+                                            </button>
+
+                                            <ul class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton1">
+                                                <div class="profile-detail-header">
+                                                    <ul class="text-center">
+                                                        <li>
+                                                            <div class="profile-main-img mx-auto">
+                                                                <img src="{{$image}} " alt="">
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <p>{{Auth::guard('front')->user()->name}}</p>
+                                                        </li>
+                                                        @if(!empty(Auth::guard('front')->user()->phone))
+                                                            <li>
+                                                                <p> <img src="{{asset('images/front')}}/call.svg" alt="call" /> +{{ Auth::guard('front')->user()->phone  }}</p>
+                                                            </li>
+                                                        @endif
+
+                                                        <li>
+                                                            <p> <img src="{{asset('images/front')}}/email.svg" alt="email" /> {{Auth::guard('front')->user()->email}}</p>
+                                                        </li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li><a class="dropdown-item" href="{{ route('myProfile') }}">My Profile</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('myBooking') }}">My Booking</a></li>
+                                                        <li>
+                                                            <form method="POST" id="logout_form" action={{ route('home/logout') }}>
+                                                                @csrf
+                                                                <a href="javascript:{}" class="dropdown-item"  onclick="document.getElementById('logout_form').submit();"  >Sign Out</a>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                    @else
+                                        <x-loginButton />
+                                    @endif
+                                </div>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                                    <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+                                </button>
+                            </div>
+
+
                             <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
                                 <ul class="navbar-nav">
                                     <li class="nav-item">
@@ -22,7 +78,7 @@
                                     </li>
                                     <li class="nav-item estimate-wrap">
                                         <div class="dropdown about-dropdown-menu">
-                                            <a class="dropdown-toggle nav-link" href="{{ route('about') }}" role="button">
+                                            <a class="dropdown-toggle nav-link" href="#" role="button">
                                                 About us
                                             </a>
 
@@ -93,56 +149,56 @@
                                         <a class="nav-link" href="{{ route('contactUs') }}">Contact us</a>
                                     </li>
                                 </ul>
-                                <div class="estimate-wrap">
+                                <div class="estimate-wrap for-desktop">
                                     @if (Auth::guard('front')->check())
                                         @php $image = asset('images/front').'/noProfile.jpeg' ; @endphp
                                         @if(Auth::guard('front')->user()->image)
                                             @php $image = asset('images/user') .'/'. Auth::guard('front')->user()->image; @endphp
                                         @endif
                                         <div class="dropdown">
-                                        <button class="cmn-btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <div class="profile-img-wrap-sml">
-                                                <img src="{{$image}}" alt="profile" />
-                                            </div>
-                                            <p>{{Auth::guard('front')->user()->name}}</p>
-                                        </button>
+                                            <button class="cmn-btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <div class="profile-img-wrap-sml">
+                                                    <img src="{{$image}}" alt="profile" />
+                                                </div>
+                                                <p>{{Auth::guard('front')->user()->name}}</p>
+                                            </button>
 
-                                        <ul class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton1">
-                                            <div class="profile-detail-header">
-                                                <ul class="text-center">
-                                                    <li>
-                                                        <div class="profile-main-img mx-auto">
-                                                            <img src="{{$image}} " alt="">
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <p>{{Auth::guard('front')->user()->name}}</p>
-                                                    </li>
-                                                    @if(!empty(Auth::guard('front')->user()->phone))
+                                            <ul class="dropdown-menu p-0" aria-labelledby="dropdownMenuButton1">
+                                                <div class="profile-detail-header">
+                                                    <ul class="text-center">
                                                         <li>
-                                                            <p> <img src="{{asset('images/front')}}/call.svg" alt="call" /> +{{ Auth::guard('front')->user()->phone  }}</p>
+                                                            <div class="profile-main-img mx-auto">
+                                                                <img src="{{$image}} " alt="">
+                                                            </div>
                                                         </li>
-                                                    @endif
+                                                        <li>
+                                                            <p>{{Auth::guard('front')->user()->name}}</p>
+                                                        </li>
+                                                        @if(!empty(Auth::guard('front')->user()->phone))
+                                                            <li>
+                                                                <p> <img src="{{asset('images/front')}}/call.svg" alt="call" /> +{{ Auth::guard('front')->user()->phone  }}</p>
+                                                            </li>
+                                                        @endif
 
-                                                    <li>
-                                                        <p> <img src="{{asset('images/front')}}/email.svg" alt="email" /> {{Auth::guard('front')->user()->email}}</p>
-                                                    </li>
-                                                </ul>
-                                                <ul>
-                                                    <li><a class="dropdown-item" href="{{ route('myProfile') }}">My Profile</a></li>
-                                                    <li><a class="dropdown-item" href="{{ route('myBooking') }}">My Booking</a></li>
-                                                    <li>
-                                                        <form method="POST" id="logout_form" action={{ route('home/logout') }}>
-                                                            @csrf
-                                                            <a href="javascript:{}" class="dropdown-item"  onclick="document.getElementById('logout_form').submit();"  >Sign Out</a>
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </ul>
-                                    </div>
+                                                        <li>
+                                                            <p> <img src="{{asset('images/front')}}/email.svg" alt="email" /> {{Auth::guard('front')->user()->email}}</p>
+                                                        </li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li><a class="dropdown-item" href="{{ route('myProfile') }}">My Profile</a></li>
+                                                        <li><a class="dropdown-item" href="{{ route('myBooking') }}">My Booking</a></li>
+                                                        <li>
+                                                            <form method="POST" id="logout_form" action={{ route('home/logout') }}>
+                                                                @csrf
+                                                                <a href="javascript:{}" class="dropdown-item"  onclick="document.getElementById('logout_form').submit();"  >Sign Out</a>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </ul>
+                                        </div>
                                     @else
-                                    <x-loginButton />
+                                        <x-loginButton />
                                     @endif
                                 </div>
                             </div>

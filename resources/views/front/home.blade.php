@@ -4,7 +4,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="banner-content">
-                            <h1>FIND YOUR DREAM HOUSE BY US</h1>
+                        <h1 class="wow fadeInLeft">FIND YOUR DREAM HOUSE BY US</h1>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -99,9 +99,9 @@
                     <div class="col-lg-6">
                         <div class="investment-image">
                             <div>
-                                <img src="{{ asset('images/investmentHome/image/').'/'. $investment->image_title }}" alt="" />
+                                <img class="wow fadeInRight" src="{{ asset('images/investmentHome/image/').'/'. $investment->image_title }}" alt="" />
                             </div>
-                            <div>
+                            <div class="wow fadeInLeft" data-wow-delay="0.8s">
                                 @if(!empty($investment->video_title) && file_exists(public_path('images/investmentHome/video/').'/'. $investment->video_title) )
                                 <video controls="" src=" {{ !empty($investment->video_title) ? asset('images/investmentHome/video/').'/'. $investment->video_title :'' }}" width="120" height="120"></video>
                                 @else
@@ -464,7 +464,7 @@
                 @foreach($amenities as $aminity)
                     @php $countProject = getCountAmenityProject($aminity['amenities_id']); @endphp
                 <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="our-amenities-wrap text-center">
+                    <div class="our-amenities-wrap text-center  wow fadeIn">
                         <div class="our-amenities-img">
                             <img src="{{ asset('images/amenities').'/'.$aminity['amenity_image']}}" alt="">
                         </div>

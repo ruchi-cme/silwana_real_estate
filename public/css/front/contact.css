@@ -30,6 +30,14 @@
     margin: 20px 0 10px;
 }
 
+.talk-to-sales {
+    transition: 0.5s;
+}
+
+.talk-to-sales:hover {
+    transform: translateY(-10px);
+}
+
 .talk-to-sales a {
     color: var(--primary-color);
     font-size: 20px;
@@ -154,6 +162,18 @@ responsive css
 @media only screen and (max-width:1400px) {
     .talk-to-sales a {
         font-size: 16px;
+    }
+}
+
+@media only screen and (max-width:1200px) {
+    form h2 {
+        font-size: 35px;
+    }
+}
+
+@media only screen and (max-width:767) {
+    form h2 {
+        font-size: 25px;
     }
 }
 

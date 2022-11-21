@@ -1,5 +1,5 @@
 <x-base>
-<x-banner title="ABOUT SILWANA REAL ESTATE" page="About Us"></x-banner>
+<x-banner title="Sales" page="Sales"></x-banner>
 
 
     @if(!empty($investmentData))
@@ -13,7 +13,7 @@
                                 <img src="{{asset('images/businessServices').'/'.$investmentData->image}}" alt="about-us" />
                             </div>
                             <div class="about-us-wrapper">
-                                <div class="title">
+                                <div class="title wow fadeInLeft">
                                     <h2>{{$investmentData->title}}</h2>
                                     <span class="btn btn-2 border-0">{{$investmentData->sub_title}}</span>
                                 </div>
@@ -41,13 +41,13 @@
                         <div class="investment-image">
                             <div>
 
-                                <img src="{{asset('images/businessServices').'/'.$buildingData->image_title}}" alt="" />
+                                <img src="{{asset('images/businessServices').'/'.$buildingData->image_title}}" class="wow fadeInRight" alt="" />
                             </div>
                             <div>
                                 @if(!empty($buildingData->video_title) && file_exists(public_path('images/businessServices/video/').'/'. $buildingData->video_title) )
-                                    <video controls="" src=" {{ !empty($buildingData->video_title) ? asset('images/businessServices/video/').'/'. $buildingData->video_title :'' }}" width="120" height="120"></video>
+                                    <video class="wow fadeInLeft" controls="" src=" {{ !empty($buildingData->video_title) ? asset('images/businessServices/video/').'/'. $buildingData->video_title :'' }}" width="120" height="120"></video>
                                 @else
-                                    <img src="{{ asset('images/front/home/img2.png') }} " alt="">
+                                    <img src="{{ asset('images/front/home/img2.png') }} "  class="wow fadeInLeft" alt="">
                                 @endif
 
                             </div>
@@ -107,7 +107,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="owner-message-inner owner-image-wrap">
-                                <img src="{{asset('images/businessServices').'/'.$rentalData->image}}" alt="">
+                                <img class="wow fadeInRight" src="{{asset('images/businessServices').'/'.$rentalData->image}}" alt="">
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -137,7 +137,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="owner-message-inner owner-image-wrap">
-                                <img src="{{asset('images/businessServices').'/'.$salesData->image}}" alt="">
+                                <img class="wow fadeInLeft" src="{{asset('images/businessServices').'/'.$salesData->image}}" alt="">
                             </div>
                         </div>
                         <div class="col-lg-6">

@@ -100,6 +100,7 @@ header.scrollUp {
 
 .header-top {
     display: flex;
+    padding: 13px 0;
 }
 
 .header-top a {
@@ -436,7 +437,9 @@ modal css
 
 
 
-
+.for-mobile {
+    display: none;
+}
 
 
 
@@ -513,19 +516,36 @@ responsive css
 @media only screen and (max-width:1200px) {
     .navbar-collapse .navbar-nav .nav-link {
         margin: 10px 0;
+        padding: 5px 0px;
     }
 
     .estimate-wrap {
         margin: 0 0 20px;
     }
 
-    .navbar-collapse .navbar-nav .nav-link {
-        padding: 0;
+    .for-mobile {
+        display: block;
     }
 
-    .estimate-wrap .dropdown .dropdown-menu {
-        left: 0;
-        right: inherit;
+    .for-desktop {
+        display: none;
+    }
+
+    .estimate-wrap .cmn-btn {
+        border-radius: 0;
+        padding: 14px 18px;
+    }
+
+    .profile-btn .cmn-btn {
+        padding: 8px 10px;
+    }
+
+    .profile-btn .cmn-btn p {
+        display: none;
+    }
+
+    .profile-img-wrap-sml {
+        margin-right: 0;
     }
 }
 
@@ -566,7 +586,7 @@ responsive css
     }
 
     .banner {
-        margin-top: 80px !important;
+        margin-top: 95px !important;
     }
 }
 
@@ -579,4 +599,27 @@ responsive css
         padding: 5px 13px;
     }
 
+    .estimate-wrap .cmn-btn {
+        border-radius: 0;
+        padding: 7px 11px;
+    }
+}
+
+@media only screen and (max-width: 455px) {
+    .navbar-brand img {
+        max-width: 150px;
+    }
+
+    .about-dropdown-menu .profile-detail-header .news-media-text {
+        flex-direction: column;
+    }
+
+
+}
+
+
+@media only screen and (max-width: 375px) {
+    .estimate-wrap .dropdown .dropdown-menu {
+        right: -34px;
+    }
 }

@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         if($request->ajax())
         {
-            $user = User::where('is_admin',1)->get(['id','name','email','created_at']);
+            $user = User::where('is_admin',1)->orderBy("id",'DESC')->get(['id','name','email','created_at']);
             $data = $user->map(function ($data){
                 return [
                     'id' => $data->id,
@@ -49,10 +49,15 @@ class UserController extends Controller
 
         $user->is_admin = '1';
         $user->password = Hash::make($request->password);
-        $user->save();
+         $user->save();
         //retrieve intance for role assignment
         $obj = User::where('id',$user->id)->first();
-        $role = Role::findById($request->role);
+        $guard = null;
+        if(!empty($request->role) && $request->role == 4) {
+            $guard = 'front';
+        }
+        $role = Role::findById($request->role,$guard);
+
         $obj->assignRole($role->name);
 
         return redirect()->route('admin.user')->with('inserted','User Created & Role Assigned 👍');

@@ -12,8 +12,8 @@
                 </div>
                 @if(!empty($news))
                    @foreach($news as $new)
-                        <div class="col-lg-4">
-                            <div class="news-event-wrap news-media-wrap">
+                        <div class="col-lg-4 col-md-6  mb-4">
+                            <div class="news-event-wrap news-media-wrap wow fadeInUp">
                                 <div class="news-event-img-wrap">
                                     <img src="{{ asset('images/news/').'/'.$new['image'] }}" alt="" />
                                 </div>
@@ -57,7 +57,7 @@
                                     @if(!empty($media))
                                         @foreach($media as $row)
                                             @if($row['type'] == 1)
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-4 col-md-6">
                                                 <div class="media-image-wrap position-relative">
                                                     <img src="{{ asset('images/media/image').'/'.$row['image_video_title'] }}" alt="social-media-img" />
                                                     <div class="media-wrap-inner position-absolute" data-bs-toggle="modal" data-bs-target="#myModal">
@@ -81,7 +81,7 @@
                                     @if(!empty($media))
                                         @foreach($media as $row)
                                             @if($row['type'] ==2)
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-4 col-md-6">
                                                     <div class="media-image-wrap position-relative">
                                                         <video controls="" src=" {{ asset('images/media/video').'/'.$row['image_video_title'] }}" ></video>
                                                     </div>

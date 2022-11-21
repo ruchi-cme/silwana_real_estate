@@ -55,7 +55,9 @@
                                         <!--begin::Col-->
                                         <div class="increment">
                                             @if(!empty($selectedImage))
-
+                                                @php
+                                                    $i = 1;
+                                                @endphp
                                                 @foreach($selectedImage as $row)
                                                     <div class=" control-group"  >
                                                         <div class="col-xl-3">
@@ -80,14 +82,14 @@
                                                                        @php
                                                                           $path =  !empty($row['title']) ? asset('images/project/images' ).'/'.$row['title'] : ''  ;
                                                                           $test =   "background-image:url('$path')"  ;  @endphp
-                                                                        <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="{{  !empty($row['title']) ? $test :'"background-image : none'}}"></div>
+                                                                        <div class="imageBgDiv icon{{ $i }} image-input-wrapper w-125px h-125px" style="{{  !empty($row['title']) ? $test :'"background-image : none'}}"></div>
                                                                         <!--end::Preview existing image-->
                                                                         <!--begin::Label-->
                                                                         <label class="inputFileError errorMsg" for="direction" style="">  </label>
                                                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
                                                                             <i class="bi bi-pencil-fill fs-7"></i>
                                                                             <!--begin::Inputs-->
-                                                                            <input type="file" value="{{ $row['title'] }}" name="edit_change_image[]" accept=".png, .jpg, .jpeg" />
+                                                                            <input type="file" value="{{ $row['title'] }}" name="edit_change_image[]" id="icon{{ $i }}" accept="image/*" onchange="validateFileTypes('icon{{ $i }}')" />
                                                                             <input type="hidden" name="edit_image[]"  value="{{ $row['title'] }}" />
                                                                             <input type="hidden" name="avatar_remove" />
                                                                             <!--end::Inputs-->
@@ -105,6 +107,7 @@
                                                                 </span>
                                                                         <!--end::Remove-->
                                                                     </div>
+                                                                    <label class="errorMsg" id="fileErricon{{ $i }}" for="image" style="">  </label>
                                                                     <!--end::Image input-->
                                                                 </div>
 
@@ -124,6 +127,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    @php $i++ @endphp
                                                 @endforeach
 
                                             @endif
@@ -207,14 +211,14 @@
                         <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: none">
                             <!--begin::Preview existing image-->
                             @php $img= ''; @endphp
-                            <div class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: none"></div>
+                            <div id="imgclone" class="imageBgDiv image-input-wrapper w-125px h-125px" style="background-image: none"></div>
                             <!--end::Preview existing image-->
                             <!--begin::Label-->
                             <label class="inputFileError errorMsg" for="direction" style="">  </label>
                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
                                 <i class="bi bi-pencil-fill fs-7"></i>
                                 <!--begin::Inputs-->
-                                <input type="file" name="image[]" accept=".png, .jpg, .jpeg" />
+                                <input type="file" class="imgIcon" name="image[]" accept="image/*"   />
                                 <input type="hidden" name="avatar_remove" />
                                 <!--end::Inputs-->
                             </label>
@@ -230,6 +234,8 @@
                         </span>
                             <!--end::Remove-->
                         </div>
+                        <label class="errorMsg dynmcErr" for="image" style="">  </label>
+
                         <!--end::Image input-->
                     </div>
 
@@ -258,10 +264,19 @@
     <script type="text/javascript">
 
         $(document).ready(function() {
-
+            var count = 0;
             $(".btn-success").click(function() {
                 var html = $("#clone").html();
                 $(".increment").append(html);
+                $("#imgclone").addClass( 'img'+count )  ;
+                $(".img"+count).removeAttr( 'id' )  ;
+                $( 'label.dynmcErr' ).attr('id','fileErrimg'+count);
+                $("#fileErrimg"+count).removeClass( 'dynmcErr')  ;
+                $( '.imgIcon' ).attr('id','img'+count);
+                $("#img"+count).removeClass( 'imgIcon' )  ;
+                var id = "img"+count ;
+                $("#img"+count).attr('onchange',"validateFileTypes('"+id+"')");
+                count++;
             });
 
             var test = [];

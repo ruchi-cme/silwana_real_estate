@@ -34,7 +34,7 @@
 
                 @foreach ($myBooking as $row)
 
-                    <div class="project-feature-wrap">
+                    <div class="project-feature-wrap wow fadeInUp">
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="project-feature-img">

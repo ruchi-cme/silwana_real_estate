@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 120px;
+    margin-top: 143px;
     padding: 100px 0;
     position: relative;
 }
@@ -21,6 +21,10 @@
     background: rgba(0, 0, 0, 0.25);
 }
 
+
+.search-property-input {
+    width: 85%;
+}
 .banner .banner-content p {
     color: #fff;
     font-size: 20px;
@@ -90,12 +94,12 @@
 }
 
 .about-us-wrapper {
-    padding: 0 110px;
+    padding: 0 110px 30px;
     text-align: center;
 }
 
 .about-us-wrapper p {
-    padding: 20px 0;
+    padding: 30px 0;
     color: #000;
 }
 
@@ -129,6 +133,13 @@
 .title .btn-2 {
     color: var(--primary-color);
     font-size: 16px;
+    transition: 0.5s;
+}
+
+.title .btn-2:hover {
+    transform: translateY(-5px);
+    background: #b48d4e;
+    color: #fff;
 }
 
 .investment-inner {
@@ -153,6 +164,7 @@
     background: #FAEEDC;
     border-radius: 10px;
     padding: 14px;
+    margin-right: 15px;
 }
 
 .investment-inner div:nth-child(2) {
@@ -200,6 +212,7 @@
 
 .investment {
     padding: 156px 0 145px;
+    overflow: hidden;
 }
 
 .investment-image > div:nth-child(1) {
@@ -240,6 +253,11 @@
     height: 420px;
     position: relative;
     margin-bottom: 25px;
+    transition: 0.5s;
+}
+
+.property-by-categories-wrap:hover {
+    transform: translateY(-10px);
 }
 
 .property-by-categories-wrap img {
@@ -371,6 +389,10 @@
     box-shadow: 0px 11px 14px rgba(0, 0, 0, 0.17);
 }
 
+.property-wrap .tab-content > div:nth-child(2n) .row {
+    flex-direction: row-reverse;
+}
+
 .property-wrap .tab-content > div:nth-child(2n) .row .property-inner-wrap {
     left: 38px;
 }
@@ -391,6 +413,7 @@
     width: 100%;
     height: 340px;
     margin-bottom: 30px;
+    transition: 0.5s;
 }
 
 .our-projects-wrap img {
@@ -407,6 +430,11 @@
     left: 0;
     right: 0;
     margin: 16px 18px;
+    transition: 0.5s;
+}
+
+.our-projects-inner:hover {
+    background: rgba(255, 255, 255, 1);
 }
 
 .our-projects-inner p {
@@ -428,6 +456,10 @@
 
 .our-projects-wrap .cmn-btn {
     box-shadow: 0px 11px 14px rgba(0, 0, 0, 0.17);
+}
+
+.our-projects-wrap:hover {
+    transform: scale(1.02);
 }
 
 .our-amenities-img {
@@ -667,7 +699,7 @@
     border-radius: 20px;
     overflow: hidden;
     width: 100%;
-    height: 567px;
+    height: 100%;
 }
 
 .project-feature-img img {
@@ -734,7 +766,7 @@
 }
 
 .navbar-nav {
-    margin-right: 60px;
+    margin-right: 20px;
 }
 
 .banner-form {
@@ -771,7 +803,7 @@ form .select-title::after {
     content: '';
     width: 15px;
     height: 15px;
-    background: url('/images/front/down-arrow.svg') center center no-repeat;
+    background: url('../images/down-arrow.svg') center center no-repeat;
     background-size: contain;
     display: block;
     position: absolute;
@@ -1056,6 +1088,76 @@ form .select-title::after {
 responsive css
 */
 
+
+/* @media only screen and (max-width: 1600px) {
+    .banner .banner-content h1 {
+        font-size: 54px;
+    }
+
+    .form-control {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    .banner-form h2 {
+        padding: 20px 0;
+    }
+
+    .banner-form form {
+        padding: 25px 35px;
+    }
+}  */
+
+
+
+
+@media only screen and (min-width:1025px) and (max-width:1600px) {
+    .banner-form form {
+        padding: 30px 40px;
+    }
+
+    .investment-image > div:nth-child(1) {
+        height: 516px;
+        max-width: 441px;
+    }
+
+    .banner .banner-content h1 {
+        font-size: 48px;
+    }
+
+    .banner-form h2 {
+        font-size: 18px;
+        padding: 15px 0;
+    }
+
+    .form-control {
+        padding: 12px 10px !important;
+        font-size: 14px !important;
+    }
+
+    form .form-group {
+        margin-bottom: 15px !important;
+    }
+
+    .title h2 {
+        font-size: 32px;
+        margin-top: 15px;
+    }
+
+    .title {
+        margin-bottom: 30px;
+    }
+
+    .about-us-img {
+        height: 350px;
+    }
+
+    .about-us-detail > div {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+}
+
 @media only screen and (max-width: 1400px) {
 
     .navbar-collapse .navbar-nav .nav-link {
@@ -1063,7 +1165,7 @@ responsive css
     }
 
     .banner {
-        margin-top: 100px;
+        margin-top: 125px;
     }
 
     .investment-image > div:nth-child(1) {
@@ -1079,6 +1181,10 @@ responsive css
 
 @media only screen and (max-width: 1200px){
 
+    .search-property-input {
+        width: 100%;
+    }
+
     .investment-image > div:nth-child(1) {
         max-width: 377px;
     }
@@ -1092,7 +1198,11 @@ responsive css
     }
 
     .banner {
-        margin-top: 100px;
+        margin-top: 125px;
+    }
+
+    .upcoming-projects-wrap h2 {
+        font-size: 28px;
     }
 }
 
@@ -1144,19 +1254,180 @@ responsive css
 }
 
 @media only screen and (max-width: 767px) {
+    .features-projects .title p {
+        margin: 0px 0 90px;
+    }
+
+    .property-wrap .nav-item {
+        flex-basis: 50%;
+        text-align: center;
+    }
+
     h1 {
         font-size: 50px;
     }
 
     .banner {
-        padding: 200px 0;
+        padding: 100px 0;
+    }
+
+    .investment-image > div:nth-child(2) {
+        left: 0;
+    }
+
+    .investment {
+        padding: 130px 0 50px;
+    }
+
+    .investment-image > div:nth-child(2) {
+        left: 0;
+    }
+
+    .investment-wrap {
+        margin-top: 274px;
+    }
+
+    .investment-image > div:nth-child(1) {
+        height: 590px;
+    }
+
+    .cmn-banner .container {
+        padding: 200px 0 175px !important;
+    }
+
+    .about-banner-text h2 {
+        font-size: 32px !important;
+    }
+
+    .about-us-img {
+        height: 276px;
+    }
+
+    .about-us-detail > div {
+        padding: 10px !important;
+    }
+
+    .title {
+        margin-bottom: 35px;
+    }
+
+    .about-us-lists {
+        margin-bottom: 10px;
+    }
+
+    .title h2 {
+        font-size: 30px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .investment-inner {
+        padding: 12px;
+        margin-bottom: 15px;
+    }
+
+    .p-100 {
+        padding: 50px 0;
+    }
+
+    .estimate-wrap .dropdown .dropdown-menu .profile-detail-header {
+        flex-direction: column;
+        min-width: 290px;
+    }
+
+    .profile-detail-header ul:first-child li img {
+        max-width: 13px;
+    }
+
+    .estimate-wrap .dropdown .profile-detail-header ul:last-child {
+        padding: 10px;
+    }
+
+    .estimate-wrap .dropdown .profile-detail-header ul:first-child {
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .profile-detail-header ul:first-child li p {
+        font-size: 12px;
+    }
+
+    .investment-image > div:nth-child(1) {
+        max-width: 320px;
+        height: 320px;
+    }
+
+    .investment-image::after {
+        width: 200px;
+        height: 200px;
+        left: 69px;
+    }
+
+    .investment-icon-wrap {
+        margin-right: 10px;
     }
 }
 
 @media only screen and (max-width: 576px) {
+
+    .upcoming-projects-wrap .property-main-detail > div.position-static {
+        width: 50%;
+    }
+
+    .upcoming-projects-wrap .property-main-total-detail {
+        margin-right: 8px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
     .banner {
         margin-top: 97px !important;
-        padding: 150px 0;
+        padding: 100px 0;
+    }
+
+    .project-feature .owl-nav button {
+        width: 55px;
+        height: 55px;
+    }
+
+    h1 {
+        font-size: 45px;
+    }
+
+    .our-projects-wrap,
+    .our-projects-wrap-main {
+        height: 300px;
+    }
+
+    .profile-img-wrap-sml {
+        width: 25px;
+        height: 25px;
+    }
+
+    .profile-btn .cmn-btn {
+        padding: 5px 5px;
+    }
+
+    .our-amenities-plan.img5 {
+        bottom: -150px;
+    }
+
+    .property-by-categories-wrap {
+        height: 320px;
+    }
+
+    .property-by-categories-detail h3 {
+        font-size: 24px;
+    }
+
+    .cmn-btn {
+        font-size: 14px;
+        padding: 10px ;
+    }
+
+    .title h2 {
+        font-size: 26px !important;
     }
 }
 
@@ -1164,8 +1435,58 @@ responsive css
     .banner-form form {
         padding: 25px;
     }
+
+    .property-wrap .nav-item {
+        flex-basis: 100%;
+        text-align: center;
+    }
+
 }
 
-.morecontent span {
-    display: none;
+@media only screen and (max-width: 480px) {
+    .investment-image::after {
+        left: 0;
+    }
+
+    .investment-image > div:nth-child(2) {
+        max-width: 220px;
+        height: 220px;
+    }
+
+    .investment-wrap {
+        margin-top: 175px;
+    }
+}
+
+
+
+@media only screen and (max-width: 455px) {
+    .banner {
+        margin-top: 75px !important;
+    }
+}
+
+
+@media only screen and (max-width: 420px) {
+    .investment-image > div:nth-child(2) {
+        max-width: 180px;
+        height: 180px;
+    }
+
+    .project-feature-img {
+        height: 276px;
+    }
+
+    .upcoming-projects-wrap {
+        padding: 10px;
+    }
+}
+
+
+@media only screen and (max-width: 390px)  {
+    .investment-image > div:nth-child(1) {
+        max-width: 250px;
+        height: 250px;
+    }
+
 }

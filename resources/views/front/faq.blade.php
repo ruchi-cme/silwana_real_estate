@@ -13,7 +13,7 @@
                                     $i = 1
                                 @endphp
                                 @foreach($faq as $row)
-                                    <div class="accordion-item">
+                                    <div class="accordion-item wow fadeInUp">
                                         <h2 class="accordion-header" id="heading{{$i}}">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"  data-bs-target="#collapse{{$i}}"  aria-controls="collapse{{$i}}">
                                                  {{$row['name']}}

@@ -20,7 +20,7 @@ class CategoryController extends Controller
             $userID = auth()->user()->id;
             $category = Category::select([ 'category_id','category_name','status'])
                 ->where('deleted',0)
-                ->orderByDesc("category_id")
+                ->orderBy("category_id",'DESC')
                 ->get();
 
             $data = $category->map(function ($data){

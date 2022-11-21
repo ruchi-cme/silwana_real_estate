@@ -96,10 +96,11 @@
         searchDelay: 500,
         processing: true,
         serverSide: true,
-        stateSave: true,
+        stateSave: false,
         "scrollY": "50vh",
         "scrollX": true,
         "sScrollXInner": "100%",
+        "order": [],
         ajax: {
             url: "{{ route('admin.ourTeam') }}",
             error: function (request, err) {

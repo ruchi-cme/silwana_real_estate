@@ -2,6 +2,8 @@
     height: 670px;
 }
 
+
+
 .portfolio-detail-main .property-detail-main-wrap-small {
     height: 320px;
 }
@@ -56,6 +58,11 @@
     overflow: hidden;
     border: 1px solid var(--primary-color);
     margin-bottom: 30px;
+    transition: 0.5s;
+}
+
+.portfolio-lists-wrap:hover {
+    transform: scale(1.01);
 }
 
 .portfolio-lists-detail {

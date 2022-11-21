@@ -1,7 +1,3 @@
-
-.news-event-main .col-lg-4{
-    margin-bottom: 50px;
-}
 .about-banner-text h4 {
     font-size: 32px;
     color: #EBEBEB;
@@ -30,7 +26,6 @@
 
 .news-event-wrap {
     height: 100%;
-    margin-bottom: 50px;
 }
 
 .our-media-gallery .property-wrap .nav {
@@ -41,6 +36,10 @@
     margin-bottom: 30px;
 }
 
+.our-media-gallery #video .row {
+    flex-direction: row;
+}
+
 .media-image-wrap {
     width: 100%;
     height: 330px;
@@ -48,7 +47,7 @@
     transition: 0.5s;
     border-radius: 20px;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .media-image-wrap:hover .media-wrap-inner {

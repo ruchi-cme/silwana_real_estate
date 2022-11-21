@@ -11,7 +11,7 @@
                     <div class="col-lg-6">
                         <div class="investment-image">
                             <div>
-                                <img src="{{ asset('images/aboutUs')}}/{{$row['image']}}" alt="" />
+                                <img class="wow fadeInLeft" src="{{ asset('images/aboutUs')}}/{{$row['image']}}" alt="" />
                             </div>
                         </div>
                     </div>

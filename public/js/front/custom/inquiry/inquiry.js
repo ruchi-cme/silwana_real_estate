@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     var showChar = 100;
     var ellipsestext = "...";
-    var moretext = "more";
+    var moretext = "Read more";
     var lesstext = "less";
     $('.more').each(function() {
         var content = $(this).html();

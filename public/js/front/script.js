@@ -1,3 +1,4 @@
+new WOW().init();
 $('.sale-property-slider').owlCarousel({
     loop:true,
     margin:20,

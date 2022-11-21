@@ -1,5 +1,5 @@
 .property-detail-main {
-    margin: 50px 0 20px;
+    margin: 50px 0 100px;
 }
 
 .property-detail-main-wrap {
@@ -28,6 +28,15 @@
 
 .property-detail-main-wrap-big > div > a img {
     max-width: 60px;
+}
+
+.modal-header {
+    border: none;
+}
+
+.modal .btn-close i.fas {
+    position: relative;
+    top: -3px;
 }
 
 .property-detail-main-wrap-big > div > a {
@@ -213,6 +222,7 @@ product-lists
     margin-right: 20px;
 }
 
+
 .fact-features-wrap .fact-features-wrap-img img {
     object-fit: contain;
 }
@@ -224,6 +234,11 @@ product-lists
     box-shadow: 0px 11px 22px rgba(0, 0, 0, 0.11);
     border-radius: 10px;
     margin-bottom: 30px;
+    transition: 0.5s;
+}
+
+.fact-features-wrap:hover {
+    transform: scale(1.01);
 }
 
 .fact-features-wrap h6 {
@@ -507,7 +522,7 @@ property-booking-form
 .select-arrow::after {
     content: '';
     position: absolute;
-    background: url('/images/front/down-arrow.svg') center center no-repeat;
+    background: url('../images/down-arrow.svg') center center no-repeat;
     background-size: contain;
     width: 16px;
     height: 16px;
@@ -878,6 +893,10 @@ responsive css
     .map-wrap {
         height: 390px;
     }
+    .profile-main-img {
+        width: 125px;
+        height: 125px;
+    }
 }
 
 @media only screen and (max-width: 992px) {
@@ -892,7 +911,9 @@ responsive css
         padding: 10px 0;
     }
 
-
+    .profile-detail {
+        margin-top: 15px;
+    }
 }
 
 @media only screen and (max-width: 767px) {
@@ -905,6 +926,22 @@ responsive css
     .map-wrap {
         margin-bottom: 50px;
     }
+
+    .property-detail-main {
+        margin: 50px 0 !important;
+    }
+
+    .looking-for-house-text {
+        padding: 20px;
+    }
+
+    .profile-detail-inner {
+        flex-basis: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+        padding: 10px;
+    }
+
 }
 
 
@@ -912,7 +949,13 @@ responsive css
     /* .search-property form .form-group {
         width: 100%;
     } */
+
+    .profile-detail-inner h6 {
+        font-size: 12px;
+    }
 }
 
-
+.search-property .form-group:nth-child(1) {
+    flex-basis: 87%;
+}
 

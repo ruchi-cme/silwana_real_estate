@@ -23,7 +23,7 @@ class BuilderController extends Controller
             $userID = auth()->user()->id;
             $dataList = Builder::select([ 'builder_id','company_name','owner_name','builder_email','phone_number','status'])
                 ->where('deleted',0)
-                ->orderByDesc("builder_id")
+                ->orderBy("builder_id",'DESC')
                 ->get();
 
             $data = $dataList->map(function ($data){
