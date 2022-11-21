@@ -61,7 +61,7 @@
                                     </li>
                                     <li class="nav-item estimate-wrap ">
                                         <div class="dropdown about-dropdown-menu our-project-dropdown-menu">
-                                            <a href="{{ route('ourProject') }}"  class="dropdown-toggle nav-link" role="button">
+                                            <a href="#"  class="dropdown-toggle nav-link" role="button">
                                                 Our Projects
                                             </a>
 
