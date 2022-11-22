@@ -40,13 +40,6 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'category-delete']);
         Permission::create(['name' => 'category-changeStatus']);
 
-        // Silwana
-        Permission::create(['name' => 'silwana-view']);
-        Permission::create(['name' => 'silwana-create']);
-        Permission::create(['name' => 'silwana-update']);
-        Permission::create(['name' => 'silwana-delete']);
-        Permission::create(['name' => 'silwana-changeStatus']);
-
         // Amenities
         Permission::create(['name' => 'amenities-view']);
         Permission::create(['name' => 'amenities-create']);

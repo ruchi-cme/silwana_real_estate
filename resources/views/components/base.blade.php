@@ -15,6 +15,7 @@
             $phone     = Auth::guard('front')->user()->phone;
         @endphp
     @endif
+
     <x-bodyFooter/>
     <x-footer/>
 

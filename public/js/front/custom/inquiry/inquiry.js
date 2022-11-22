@@ -34,6 +34,23 @@ $(document).ready(function() {
 
 
 
+    $("#inquiryForm").validate({
+        ignore: '',
+        rules: {
+            "first_name": "required",
+            "last_name": "required",
+            email_id: {
+                required: true,
+                email: true
+            },
+            "phone_no" : {
+                required: true,
+                digits: true
+            },
+            "message": "required",
+        }
+    });
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -66,21 +83,51 @@ $(document).ready(function() {
                 $('.text-danger').hide();
 
             },
-            error: function(response) {
 
-                $('#fnameErrorMsg').text(response.responseJSON.errors.first_name);
-                $('#lnameErrorMsg').text(response.responseJSON.errors.last_name);
-                $('#emailIdErrorMsg').text(response.responseJSON.errors.email_id);
-                $('#phoneNoErrorMsg').text(response.responseJSON.errors.phone_no);
-                $('#messageErrorMsg').text(response.responseJSON.errors.message);
-            },
         });
     });
 
 
+    $("#inquiryFormFooter").validate({
+        ignore: '',
+        rules: {
+            "first_name": "required",
+            "last_name": "required",
+            email_id: {
+                required: true,
+                email: true,
+            },
+            "phone_no" : {
+                required: true,
+                digits: true
+            },
+            "message": "required",
+        }
+    });
 
+    $('#submitInquiryBtn').on('click', function(event) {
 
+        // prevent default submit action
+        event.preventDefault();
 
+        // test if form is valid
+        if($('#inquiryFormFooter').valid()  ) { console.log(2);
+
+            $.ajax({
+                url: "/home/submitInquiry",
+                type:"POST",
+                data:   $('#inquiryFormFooter').serialize() ,
+                success:function(response){
+                    $('#successInqMsg').show();
+                    $('.inquiryText').val('');
+                },
+
+            });
+        } else { console.log(3);
+            console.log("does not validate");
+            return false;
+        }
+    });
 
 
 });

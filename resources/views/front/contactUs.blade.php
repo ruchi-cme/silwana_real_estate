@@ -10,7 +10,11 @@
                         <div class="row justify-content-center">
 
                             @if (!empty($contactUs))
+                                @php $i=0; @endphp
                                 @foreach($contactUs as $row)
+                                    @if( $i > 2)
+                                        @break
+                                    @endif
                                     <div class="col-xl-4 col-lg-6">
                                         <div class="talk-to-sales text-center">
                                             <div class="talk-to-sale-img">
@@ -21,6 +25,7 @@
                                             <a href="javascript:void(0)">{{ $row['notes'] }}</a>
                                         </div>
                                     </div>
+                                    @php $i++; @endphp
                                 @endforeach
                             @endif
 
@@ -29,13 +34,12 @@
                                     Thank you for getting in touch! We will connect you soon!
                                 </div>
                                 <form id="inquiryForm" >
-                                    <meta name="csrf-token" content="{{ csrf_token() }}">
-
+                                    @csrf
                                     <div class="text-center">
-                                        @if(!empty($page))
-                                        <h2>{{ $page['page'] }}</h2>
-                                        <p>{{ $page['detail'] }}</p>
-                                        @endif
+
+                                        <h2>Register your intrest</h2>
+                                        <p> </p>
+
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6">

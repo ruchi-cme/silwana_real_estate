@@ -62,7 +62,7 @@
                                 <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-xl-9 fv-row fv-plugins-icon-container">
-                                    <textarea required placeholder="Enter Amenity Detail" name="desc" class="form-control form-control-solid h-100px" >{{ !empty( $editData->desc) ? $editData->desc : '' }}</textarea>
+                                    <textarea required placeholder="Enter Description" name="desc" class="form-control form-control-solid h-100px" >{{ !empty( $editData->desc) ? $editData->desc : '' }}</textarea>
                                     <div class="fv-plugins-message-container invalid-feedback"></div></div>
                             </div>
                             <!--end::Row-->

@@ -89,6 +89,9 @@ video {
     padding: 200px 0 100px !important;
 }
 
+.error{
+    color: #FF0000;
+}
 
 
 
@@ -122,8 +125,7 @@ video {
 
 
 
-
-/* 
+/*
 responsive css
 */
 
@@ -141,5 +143,5 @@ responsive css
 
     .title h5 {
         font-size: 23px !important;
-    }    
+    }
 }
