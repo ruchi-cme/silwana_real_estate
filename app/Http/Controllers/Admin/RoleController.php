@@ -62,9 +62,9 @@ class RoleController extends Controller
     public function view($id)
     {
         $guard = null;
-        if(!empty($id) && $id == 4) {
+       /* if(!empty($id) && $id == 4) {
             $guard = 'front';
-        }
+        }*/
         $role = Role::findById($id,$guard);
         $rolePermissions = $role->permissions()->pluck('id')->toArray();
 

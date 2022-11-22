@@ -3,8 +3,10 @@
             <div class="row">
                 <div class="col-lg-12 header-top">
                     @php $builderDetail =  getBuilderDetail() @endphp
-                    <a href="#"> <img src="{{asset('images/front')}}/call.svg" alt="call" /> <p>+{{ $builderDetail['phone_number'] }}</p> </a>
-                    <a href="#"> <img src="{{asset('images/front')}}/mail.svg" alt="email" /> <p>{{ $builderDetail['builder_email']  }}</p> </a>
+                    @if(!empty($builderDetail))
+                        <a href="#"> <img src="{{asset('images/front')}}/call.svg" alt="call" /> <p>+{{ $builderDetail['phone_number'] }}</p> </a>
+                        <a href="#"> <img src="{{asset('images/front')}}/mail.svg" alt="email" /> <p>{{ $builderDetail['builder_email']  }}</p> </a>
+                    @endif
                 </div>
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-xl p-0">

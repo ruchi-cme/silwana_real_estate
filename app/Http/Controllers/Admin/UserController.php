@@ -48,14 +48,16 @@ class UserController extends Controller
         $user->fill($request->all());
 
         $user->is_admin = '1';
+         if(!empty($request->role) && $request->role == 4) {
+             $user->is_admin = '0';
+         }
+
         $user->password = Hash::make($request->password);
          $user->save();
         //retrieve intance for role assignment
         $obj = User::where('id',$user->id)->first();
         $guard = null;
-        if(!empty($request->role) && $request->role == 4) {
-            $guard = 'front';
-        }
+
         $role = Role::findById($request->role,$guard);
 
         $obj->assignRole($role->name);

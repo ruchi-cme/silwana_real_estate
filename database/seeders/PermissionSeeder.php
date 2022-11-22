@@ -109,5 +109,128 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'contactus-delete']);
         Permission::create(['name' => 'contactus-changeStatus']);
         Permission::create(['name' => 'contactus-edit']);
+
+        // Project Image Upload
+        Permission::create(['name' => 'project-imageUpload']);
+        Permission::create(['name' => 'project-imageUpdate']);
+        Permission::create(['name' => 'project-imageStore']);
+
+        // FAQ
+        Permission::create(['name' => 'faq-view']);
+        Permission::create(['name' => 'faq-create']);
+        Permission::create(['name' => 'faq-update']);
+        Permission::create(['name' => 'faq-delete']);
+        Permission::create(['name' => 'faq-changeStatus']);
+        Permission::create(['name' => 'faq-edit']);
+
+        // Our Team
+        Permission::create(['name' => 'ourTeam-view']);
+        Permission::create(['name' => 'ourTeam-create']);
+        Permission::create(['name' => 'ourTeam-update']);
+        Permission::create(['name' => 'ourTeam-delete']);
+        Permission::create(['name' => 'ourTeam-changeStatus']);
+        Permission::create(['name' => 'ourTeam-edit']);
+
+        // aboutus
+        Permission::create(['name' => 'aboutus-view']);
+        Permission::create(['name' => 'aboutus-create']);
+        Permission::create(['name' => 'aboutus-update']);
+        Permission::create(['name' => 'aboutus-delete']);
+        Permission::create(['name' => 'aboutus-changeStatus']);
+        Permission::create(['name' => 'aboutus-edit']);
+
+        // News
+        Permission::create(['name' => 'news-view']);
+        Permission::create(['name' => 'news-create']);
+        Permission::create(['name' => 'news-update']);
+        Permission::create(['name' => 'news-delete']);
+        Permission::create(['name' => 'news-changeStatus']);
+        Permission::create(['name' => 'news-edit']);
+
+        // media
+        Permission::create(['name' => 'media-view']);
+        Permission::create(['name' => 'media-create']);
+        Permission::create(['name' => 'media-update']);
+        Permission::create(['name' => 'media-delete']);
+        Permission::create(['name' => 'media-changeStatus']);
+        Permission::create(['name' => 'media-edit']);
+
+        // aboutUsHome
+        Permission::create(['name' => 'aboutUsHome-view']);
+        Permission::create(['name' => 'aboutUsHome-update']);
+        Permission::create(['name' => 'aboutUsHome-create']);
+
+        // investmentHome
+        Permission::create(['name' => 'investmentHome-view']);
+        Permission::create(['name' => 'investmentHome-create']);
+        Permission::create(['name' => 'investmentHome-update']);
+        Permission::create(['name' => 'investmentHome-edit']);
+
+        // ourProjectHome
+        Permission::create(['name' => 'ourProjectHome-view']);
+        Permission::create(['name' => 'ourProjectHome-create']);
+        Permission::create(['name' => 'ourProjectHome-update']);
+        Permission::create(['name' => 'ourProjectHome-delete']);
+        Permission::create(['name' => 'ourProjectHome-changeStatus']);
+        Permission::create(['name' => 'ourProjectHome-edit']);
+
+        // featureProjectHome
+        Permission::create(['name' => 'featureProjectHome-view']);
+        Permission::create(['name' => 'featureProjectHome-create']);
+        Permission::create(['name' => 'featureProjectHome-update']);
+        Permission::create(['name' => 'featureProjectHome-delete']);
+        Permission::create(['name' => 'featureProjectHome-changeStatus']);
+        Permission::create(['name' => 'featureProjectHome-edit']);
+
+        // projectAssign
+        Permission::create(['name' => 'projectAssign-view']);
+        Permission::create(['name' => 'projectAssign-create']);
+        Permission::create(['name' => 'projectAssign-update']);
+        Permission::create(['name' => 'projectAssign-delete']);
+        Permission::create(['name' => 'projectAssign-changeStatus']);
+        Permission::create(['name' => 'projectAssign-edit']);
+
+        // bookMeeting
+        Permission::create(['name' => 'bookMeeting-view']);
+        Permission::create(['name' => 'bookMeeting-create']);
+        Permission::create(['name' => 'bookMeeting-update']);
+        Permission::create(['name' => 'bookMeeting-delete']);
+        Permission::create(['name' => 'bookMeeting-changeStatus']);
+        Permission::create(['name' => 'bookMeeting-edit']);
+
+        // propertyBooking
+        Permission::create(['name' => 'propertyBooking-list']);
+        Permission::create(['name' => 'propertyBooking-view']);
+        Permission::create(['name' => 'propertyBooking-update']);
+
+        //footer
+        Permission::create(['name' => 'footer-view']);
+        Permission::create(['name' => 'footer-store']);
+        Permission::create(['name' => 'footer-update']);
+
+        //investService
+        Permission::create(['name' => 'investService-view']);
+        Permission::create(['name' => 'investService-store']);
+        Permission::create(['name' => 'investService-update']);
+
+        //buildingService
+        Permission::create(['name' => 'buildingService-view']);
+        Permission::create(['name' => 'buildingService-store']);
+        Permission::create(['name' => 'buildingService-update']);
+
+        //rentalService
+        Permission::create(['name' => 'rentalService-view']);
+        Permission::create(['name' => 'rentalService-store']);
+        Permission::create(['name' => 'rentalService-update']);
+
+        //salesService
+        Permission::create(['name' => 'salesService-view']);
+        Permission::create(['name' => 'salesService-store']);
+        Permission::create(['name' => 'salesService-update']);
+
+        //salesService
+        Permission::create(['name' => 'inquiry-list']);
+        Permission::create(['name' => 'inquiry-view']);
+
     }
 }

@@ -482,14 +482,17 @@
 
              if (window.File && window.FileList && window.FileReader) {
                  $("#project_pdf").on("change", function(e) {
+
+
+
                      var files = e.target.files,
                          filesLength = files.length;
                      for (var i = 0; i < filesLength; i++) {
                          var f = files[i]
                          var fileReader = new FileReader();
                          fileReader.onload = (function(e) {
-                             var file = e.target;
-console.log(files);
+                             var file =  e.target.result;
+
                              $("<span class=\"pip\">" +
                                  "<iframe src='" +  file  + "' width='100%' height='200px'></iframe> "+
                                  "<br/><span class=\"remove\"><i class=\"fa fa-trash\"></i></span>" +

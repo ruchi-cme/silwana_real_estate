@@ -16,3 +16,12 @@ resources/views/front/about.blade (copy).php
 public/images
 resources/views/admin/project/imageUpload.blade (copy).php
 public/css.zip
+public/images/amenities
+public/images/block
+public/images/category
+public/images/contactus
+public/images/floor
+public/images/heading
+public/images/page
+public/images/unit
+public/images/user

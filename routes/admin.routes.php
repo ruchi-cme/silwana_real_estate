@@ -27,19 +27,19 @@ Route::name('user.updatePassword')->post('/user/updatePassword', 'App\Http\Contr
 Route::name('user.userEdit')->get('/user/userEdit/{id}', 'App\Http\Controllers\Admin\UserController@userEdit')->middleware(['permission:user-editProfile']);;
 
 //Roles
-Route::name('role')->get('/role', 'App\Http\Controllers\Admin\RoleController@index');
-Route::name('role.create')->get('/role/create', 'App\Http\Controllers\Admin\RoleController@create');
-Route::name('role.store')->post('/role/store', 'App\Http\Controllers\Admin\RoleController@store');
-Route::name('role.edit')->get('/role/edit/{id}', 'App\Http\Controllers\Admin\RoleController@edit');
-Route::name('role.view')->get('/role/view/{id}', 'App\Http\Controllers\Admin\RoleController@view');
-Route::name('role.update')->post('/role/update', 'App\Http\Controllers\Admin\RoleController@update');
-Route::name('role.delete')->get('/role/delete/{id}', 'App\Http\Controllers\Admin\RoleController@delete');
+Route::name('role')->get('/role', 'App\Http\Controllers\Admin\RoleController@index')->middleware(['permission:role-view']);;
+Route::name('role.create')->get('/role/create', 'App\Http\Controllers\Admin\RoleController@create')->middleware(['permission:role-view']);;
+Route::name('role.store')->post('/role/store', 'App\Http\Controllers\Admin\RoleController@store')->middleware(['permission:role-create']);;
+Route::name('role.edit')->get('/role/edit/{id}', 'App\Http\Controllers\Admin\RoleController@edit')->middleware(['permission:role-create']);;
+Route::name('role.view')->get('/role/view/{id}', 'App\Http\Controllers\Admin\RoleController@view')->middleware(['permission:role-view']);;
+Route::name('role.update')->post('/role/update', 'App\Http\Controllers\Admin\RoleController@update')->middleware(['permission:role-update']);;
+Route::name('role.delete')->get('/role/delete/{id}', 'App\Http\Controllers\Admin\RoleController@delete')->middleware(['permission:role-delete']);;
 
 //Permission
-Route::name('permission')->get('/permission', 'App\Http\Controllers\Admin\PermissionController@index');
-Route::name('permission.check')->get('/permission/check', 'App\Http\Controllers\Admin\PermissionController@check');
-Route::name('permission.store')->post('/permission/store', 'App\Http\Controllers\Admin\PermissionController@store');
-Route::name('permission.delete')->get('/permission/store/delete/{id}', 'App\Http\Controllers\Admin\PermissionController@delete');
+Route::name('permission')->get('/permission', 'App\Http\Controllers\Admin\PermissionController@index')->middleware(['permission:permission-view']);;
+Route::name('permission.check')->get('/permission/check', 'App\Http\Controllers\Admin\PermissionController@check')->middleware(['permission:permission-view']);;
+Route::name('permission.store')->post('/permission/store', 'App\Http\Controllers\Admin\PermissionController@store')->middleware(['permission:permission-view']);;
+Route::name('permission.delete')->get('/permission/store/delete/{id}', 'App\Http\Controllers\Admin\PermissionController@delete')->middleware(['permission:permission-view']);;
 
 // Property/Category Type
 Route::name('category')->get('/category', 'App\Http\Controllers\Admin\CategoryController@index')->middleware(['permission:category-view']);
