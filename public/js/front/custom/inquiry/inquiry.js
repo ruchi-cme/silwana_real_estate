@@ -2,8 +2,8 @@ $(document).ready(function() {
 
     var showChar = 100;
     var ellipsestext = "...";
-    var moretext = "Read more";
-    var lesstext = "less";
+    var moretext = "less";
+    var lesstext = "Read more";
     $('.more').each(function() {
         var content = $(this).html();
         var showChar = $(this).attr('showChar');
@@ -56,6 +56,7 @@ $(document).ready(function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    /*
     $('#inquiryForm').on('submit',function(e){
         e.preventDefault();
 
@@ -86,6 +87,30 @@ $(document).ready(function() {
 
         });
     });
+
+*/
+    $('.submitInquiry').on('click', function(event) {
+        // prevent default submit action
+        event.preventDefault();
+
+        // test if form is valid
+            if($('#inquiryForm').valid()  ) { console.log(2);
+
+                $.ajax({
+                    url: "/home/submitInquiry",
+                    type:"POST",
+                    data:   $('#inquiryForm').serialize() ,
+                    success:function(response){
+                        $('#successInqMsg').show();
+                        $('.inquiryText').val('');
+                    },
+
+                });
+            } else { console.log(3);
+                console.log("does not validate");
+                return false;
+            }
+     });
 
 
     $("#inquiryFormFooter").validate({

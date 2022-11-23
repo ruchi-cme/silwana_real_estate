@@ -51,7 +51,7 @@
                                         <!--begin::Image input-->
                                         <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url(assets/media/avatars/blank.png)">
                                             <!--begin::Preview existing avatar-->
-                                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{asset('images/user/'.$user->image)}})"></div>
+                                            <div class="image-input-wrapper w-125px h-125px" style="background-image: url( {{ !empty($user->image)  ? asset('images/user/'.$user->image) : asset('images/front/noProfile.jpeg')}}  )"></div>
                                             <!--end::Preview existing avatar-->
                                             <!--begin::Label-->
                                             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
@@ -265,7 +265,7 @@
                         <!--begin: Pic-->
                         <div class="me-7 mb-4">
                             <div class="symbol symbol-125px symbol-lg-125px symbol-fixed position-relative">
-                                <img class="img img-fluid" src="{{asset('images/user/'.$user->image)}}" alt="image">
+                                <img class="img img-fluid" src="{{ !empty($user->image)  ? asset('images/user/'.$user->image) : asset('images/front/noProfile.jpeg')}}" alt="image">
                             </div>
                         </div>
                         <!--end::Pic-->
