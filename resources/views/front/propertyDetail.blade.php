@@ -97,17 +97,21 @@
                         <h4>Property Detail</h4>
                         <div class="property-detail-list-wrap">
                             <div class="row">
-                                <div class="col-xl-5 col-lg-6">
+                                <div class="col-xl-8 col-lg-8">
                                     <div class="property-detail-list-inner">
                                         @php  $detail =  getpropertyDetailsByProject( $projectList['project_id']) @endphp
                                         <ul>
                                             <li>
                                                 <p>Home Area</p>
-                                                <span>120 sqft</span>
+                                                <span> {{ !empty($detail) ? $detail['min_area'].' sqft'  : '' }} -  {{ !empty($detail) ? $detail['max_area'].' sqft' :'' }}</span>
                                             </li>
                                             <li>
                                                 <p>Property Type</p>
                                                 <span> {{ $projectList['category_name'] }}</span>
+                                            </li>
+                                            <li>
+                                                <p>Blocks</p>
+                                                <span> {{ !empty($detail) ? $detail['block_name']  : '' }}</span>
                                             </li>
                                             <li>
                                                 <p>Price</p>

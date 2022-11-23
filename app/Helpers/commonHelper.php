@@ -529,8 +529,13 @@ if(!function_exists("getpropertyDetailsByProject")){
 
     function getpropertyDetailsByProject($project_id) {
 
-        $select = [ DB::raw('max(floor_unit_mapping.total_price) as max,   min(floor_unit_mapping.total_price) as min')];
+        $select = [ DB::raw('max(floor_unit_mapping.total_price) as max,
+          min(floor_unit_mapping.total_price) as min,
+          max(floor_unit_mapping.area_in_sq_feet) as max_area,
+          min(floor_unit_mapping.area_in_sq_feet) as min_area,
+          group_concat(DISTINCT(block_name_mappings.block_name))  as block_name')];
         $projectData  = FloorDetail::leftJoin('floor_unit_mapping', 'floor_unit_mapping.floor_detail_id', '=', 'floor_details.floor_detail_id')
+            ->leftjoin('block_name_mappings', 'block_name_mappings.project_id','=','floor_details.project_id')
             ->select($select)
             ->where('floor_details.project_id',$project_id)
             ->get()->first();
