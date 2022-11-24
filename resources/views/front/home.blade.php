@@ -757,7 +757,7 @@
 
             if ($(this).attr('href').length < 1 || $(this).attr('href') == 'javascript:void(0)'){
                 $(this).attr('href','javascript:void(0)');
-                 alert('No Pdf of this project!');
+                $('#noPDFModal').modal('show');
             }
         });
     </script>

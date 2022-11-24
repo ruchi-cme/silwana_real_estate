@@ -199,6 +199,27 @@
             </div>
         </div>
     </section>
+
+    <div class="modal fade edit-profile-modal" id="noPDFModal" tabindex="-1" aria-labelledby="noPDFModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header border-0 text-center">
+                    <div class=" mx-auto">
+                        <h5 class="modal-title text-center" id="noPDFModalLabel">No Pdf of this project!</h5>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div class="form-group mb-0 text-center">
+                            <button type="button" class="cmn-btn " data-bs-dismiss="modal">OK</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @section('scripts')
     <script   src="{{ asset('js/front/custom/inquiry') }}/inquiry.js"> </script>
