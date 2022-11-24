@@ -94,41 +94,9 @@ video {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 responsive css
 */
-
 
 
 @media only screen and (max-width:992px) {
@@ -143,5 +111,159 @@ responsive css
 
     .title h5 {
         font-size: 23px !important;
+    }
+}
+
+
+
+.talk-to-sales {
+    background: #FFFFFF;
+    border: 1px solid #B48D4E;
+    border-radius: 20px;
+    padding: 30px;
+    height: 100%;
+}
+
+.talk-to-sale-img {
+    background: #FFFFFF;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 75px;
+    height: 75px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.register-inner {
+    background: #FFFFFF;
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    padding: 30px;
+}
+
+.register-inner h4 {
+    font-size: 20px;
+    font-family: var(--semibold);
+    color: var(--secondary-color);
+    margin: 20px 0 10px;
+}
+
+.talk-to-sales {
+    transition: 0.5s;
+}
+
+.talk-to-sales:hover {
+    transform: translateY(-10px);
+}
+
+.talk-to-sales a {
+    color: var(--primary-color);
+    font-size: 20px;
+    font-family: var(--semibold);
+    display: block;
+    margin-top: 10px;
+}
+
+.customer-support a.cmn-btn {
+    display: inline-block;
+    box-shadow: 0px 11px 14px rgba(0, 0, 0, 0.17);
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fff;
+}
+
+.customer-support a.cmn-btn:hover {
+    color: var(--primary-color);
+}
+
+.register-form {
+    margin-top: 60px;
+}
+
+form h2 {
+    font-size: 48px;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+}
+
+form p {
+    max-width: 1000px;
+    margin: 10px auto 30px;
+}
+
+.form-control {
+    background: #FFFFFF;
+    border: 1px solid #B48D4E;
+    border-radius: 10px;
+    color: #8B8B8C;
+    font-size: 16px;
+    font-family: var(--medium);
+    padding: 16px 25px;
+}
+
+form .form-group {
+    margin-bottom: 30px;
+}
+
+form .form-control:focus {
+    box-shadow: none;
+    border: 1px solid var(--primary-color);
+}
+
+input ,
+textarea {
+    color: #8B8B8C;
+    font-size: 16px;
+    font-family: var(--medium);
+}
+
+.register-form .cmn-btn {
+    box-shadow: 0px 11px 14px rgba(0, 0, 0, 0.17);
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.register-wrap {
+    margin-top: -60px;
+    position: relative;
+    z-index: 5;
+    margin-bottom: 100px;
+}
+
+.register-inner .row .col-xl-4.col-lg-6 {
+    margin-bottom: 25px;
+}
+
+
+/*
+responsive css
+*/
+
+@media only screen and (max-width:1400px) {
+    .talk-to-sales a {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width:1200px) {
+    form h2 {
+        font-size: 35px;
+    }
+}
+
+@media only screen and (max-width:767) {
+    form h2 {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width:476px) {
+    .talk-to-sales a {
+        font-size: 12px;
+    }
+
+    .talk-to-sales {
+        padding: 15px;
     }
 }
