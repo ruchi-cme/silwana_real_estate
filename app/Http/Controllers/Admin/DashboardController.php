@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\{ Booking};
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -31,6 +31,13 @@ class DashboardController extends Controller
             ->get();
         $cancelBooking = $bookings->count();
 
+        $select = [ DB::raw('count(bookings.booking_id) as y,project_master.project_name as label')];
+        $chartData = Booking::select($select)
+            ->join('project_master' , 'project_master.project_id','=','bookings.project_id')
+            ->groupBy('project_master.project_id' )
+            ->get()->toArray();
+
+
         switch (auth()->user()->roles->first()->id) {
             case 1:   //admin
                 $view ='admin.blank.admin';
@@ -51,14 +58,8 @@ class DashboardController extends Controller
               $view ='admin.blank.default';
               break;
         }
-        return view($view, compact('totalProject','ongoing','upcoming','completed','totalBooking','cancelBooking'));
+        return view($view, compact('totalProject','ongoing','upcoming','completed','totalBooking','cancelBooking','chartData'));
     }
 
-    public function getDailyBooking()
-    {
-        $booking  = Booking::select([ 'project_id'])
-            ->whereIn('status' , array('1','2'))
-            ->where('canceled',0)
-            ->get();
-    }
+
 }

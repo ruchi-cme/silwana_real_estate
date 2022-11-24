@@ -16,10 +16,10 @@ header {
 
 @keyframes pulse-animation {
     0% {
-      box-shadow: 0 0 0 0px rgb(43,169,225,0.5);
+        box-shadow: 0 0 0 0px rgb(43,169,225,0.5);
     }
     100% {
-      box-shadow: 0 0 0 15px rgb(43,169,225,0);
+        box-shadow: 0 0 0 15px rgb(43,169,225,0);
     }
 }
 
@@ -100,7 +100,7 @@ header.scrollUp {
 
 .header-top {
     display: flex;
-    padding: 13px 0;
+    padding: 12px 0;
 }
 
 .header-top a {
@@ -240,7 +240,7 @@ modal css
 }
 
 .dropdown-toggle::after {
-    background: url('/images/front/down-arrow-white.svg') center center no-repeat;
+    background: url('../images/down-arrow-white.svg') center center no-repeat;
     background-size: contain;
     border: none;
     width: 15px;
@@ -270,7 +270,7 @@ modal css
 .estimate-wrap .dropdown .dropdown-menu .profile-detail-header {
     display: flex;
     background: #FDF7EE;
-    min-width: 650px;
+    min-width: 500px;
     border: 1px solid #B48D4E;
     box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
@@ -282,7 +282,7 @@ modal css
 .estimate-wrap .dropdown .profile-detail-header ul:first-child {
     padding: 30px;
     background: #fff;
-    margin: 30px;
+    margin: 13px;
     box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
     flex-basis: 60%;
@@ -396,14 +396,15 @@ modal css
 
 .about-dropdown-menu .profile-detail-header .news-media-text {
     display: flex;
-    padding: 20px;
+    justify-content: space-between;
+    padding: 12px;
 }
 
 .about-dropdown-menu .profile-detail-header .news-media-text p {
     color: #000000;
-    font-size: 14px;
+    font-size: 12px;
     font-family: var(--medium);
-    flex-basis: 69%;
+    flex-basis: 60%;
 }
 
 .about-dropdown-menu .profile-detail-header .news-media-text .cmn-btn {
@@ -413,12 +414,13 @@ modal css
     box-shadow: none;
     text-transform: capitalize;
     border: none;
-    font-size: 14px;
+    font-size: 12px;
     font-family: var(--medium);
 }
 
 .about-dropdown-menu .profile-detail-header .news-media-text .cmn-btn img {
     filter: none;
+    max-width: 14px;
 }
 
 .about-dropdown-menu .profile-detail-header .news-media-wrap {
@@ -490,6 +492,18 @@ responsive css
 */
 
 
+@media only screen and (max-width:1550px) {
+    .estimate-wrap .dropdown .dropdown-menu .profile-detail-header {
+        min-width: 605px;
+    }
+}
+
+@media only screen and (max-width:1450px) {
+    .estimate-wrap .dropdown .dropdown-menu .profile-detail-header {
+        min-width: 500px;
+    }
+}
+
 
 @media only screen and (max-width:1400px) {
     .navbar-collapse .navbar-nav .nav-link {
@@ -547,6 +561,10 @@ responsive css
     .profile-img-wrap-sml {
         margin-right: 0;
     }
+
+    .estimate-wrap .dropdown .profile-detail-header ul:last-child {
+        flex-basis: 35%;
+    }
 }
 
 
@@ -603,6 +621,7 @@ responsive css
         border-radius: 0;
         padding: 7px 11px;
     }
+
 }
 
 @media only screen and (max-width: 455px) {

@@ -44,26 +44,26 @@
                         </a>
                         <!--end::Statistics Widget 5-->
                     </div>
-                    <div class="col-xl-4">
-                        <!--begin::Statistics Widget 5-->
+                    <!--<div class="col-xl-4">
+                      begin::Statistics Widget 5--
                         <a href="#" class="card bg-success hoverable card-xl-stretch mb-5 mb-xl-8">
-                            <!--begin::Body-->
+                            < --begin::Body--
                             <div class="card-body">
-                                <!--begin::Svg Icon | path: icons/duotune/graphs/gra005.svg-->
+                                <! --begin::Svg Icon | path: icons/duotune/graphs/gra005.svg--
                                 <span class="svg-icon svg-icon-white svg-icon-3x ms-n1">
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 													<path opacity="0.3" d="M14 12V21H10V12C10 11.4 10.4 11 11 11H13C13.6 11 14 11.4 14 12ZM7 2H5C4.4 2 4 2.4 4 3V21H8V3C8 2.4 7.6 2 7 2Z" fill="black" />
 													<path d="M21 20H20V16C20 15.4 19.6 15 19 15H17C16.4 15 16 15.4 16 16V20H3C2.4 20 2 20.4 2 21C2 21.6 2.4 22 3 22H21C21.6 22 22 21.6 22 21C22 20.4 21.6 20 21 20Z" fill="black" />
 												</svg>
 											</span>
-                                <!--end::Svg Icon-->
-                                <div class="text-white fw-bolder fs-2 mb-2 mt-5">Sales Stats</div>
+                                <! -end::Svg Icon--
+                                <div class="text-white fw-bolder fs-2 mb-2 mt-5">Active Project</div>
                                 <div class="fw-bold text-white">50% Increased for FY20</div>
                             </div>
-                            <!--end::Body-->
+                            <!- end::Body-
                         </a>
-                        <!--end::Statistics Widget 5-->
-                    </div>
+                        < --end::Statistics Widget 5
+                    </div>-->
                 </div>
                 <div class="row g-5 g-xl-8">
                     <div id="chartContainer" style="height: 300px; width: 100%;"></div>
@@ -80,7 +80,7 @@
                             <!--begin::Body-->
                             <div class="card-body p-0">
                                 <!--begin::Chart-->
-                                <div class="mixed-widget-2-chart card-rounded-bottom bg-danger" data-kt-color="danger" style="height: 200px"></div>
+                                <div class="mixed-widget-2-chart card-rounded-bottom bg-danger" data-kt-color="danger" style="height: 50px"></div>
                                 <!--end::Chart-->
                                 <!--begin::Stats-->
                                 <div class="card-p mt-n20 position-relative">
@@ -150,47 +150,39 @@
     <!--end::Container-->
 </div>
 <!--end::Post-->
+@php
 
+ $dataPoints = !empty($chartData) ? $chartData : '0'  ;  @endphp
 @endsection
+<style>
+    .canvasjs-chart-credit
+    {
+        display: none !important;
+    }
+</style>
 @push('scripts')
-<script src=""></script> //  asset('js/custom/widgets.js')
 <script>
     window.onload = function() {
-
-        var dataPoints = [];
 
         var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
             theme: "light2",
-            title: {
-                text: "Daily Booking Data"
+            title:{
+                text: "Booking Data"
             },
             axisY: {
-                title: "No. of Booking",
-                titleFontSize: 24,
-                includeZero: true
+                title: "Total Booking Count"
             },
             data: [{
                 type: "column",
-                yValueFormatString: "#,### Units",
-                dataPoints: dataPoints
+                yValueFormatString: "#,##0.## Booking",
+                dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
             }]
         });
-
-        function addData(data) {
-            for (var i = 0; i < data.length; i++) {
-                dataPoints.push({
-                    x: new Date(data[i].date),
-                    y: data[i].units
-                });
-            }
-            chart.render();
-
-        }
-
-        $.getJSON("https://canvasjs.com/data/gallery/javascript/daily-sales-data.json", addData);
+        chart.render();
 
     }
+
 </script>
 <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
