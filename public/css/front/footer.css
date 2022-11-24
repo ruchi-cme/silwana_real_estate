@@ -197,6 +197,7 @@ footer
 
 footer {
   background: #181819;
+  margin-top: 100px;
 }
 
 .footer-info form .form-control {
@@ -286,10 +287,20 @@ footer {
 .support-wrap li > div:first-child {
   width: 32px;
   height: 32px;
+  background: #181819;
+  border: 1px solid #B48D4E;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+.support-wrap li:last-child > div:first-child {
+  border: none;
 }
 
 .support-wrap li > div img {
   object-fit: contain;
+  position: relative;
+  top: -6px;
 }
 
 .support-wrap li a {
@@ -307,6 +318,9 @@ footer {
   margin-bottom: 0;
 }
 
+.social-links img {
+  top: 0 !important;
+}
 
 
 .social-links {
@@ -388,3 +402,12 @@ responsive css
   margin-bottom: 50px;
 }
 } 
+
+
+
+@media only screen and (max-width: 992px) {
+  footer {
+    margin-top: 50px;
+  }
+
+}
