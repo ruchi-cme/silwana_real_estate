@@ -52,7 +52,11 @@
                                     <a href="{{ URL('/projectDetail/'.encrypt($row['project_id'] )) }}">
                                         <h2> {{ $row['project_name'] }}  </h2>
                                     </a>
-                                    <h6>{{ $row['unit_name'].' '.$row['address'].' '.$row['state'].' '.$row['city'] }} </h6>
+                                    @php   $address = getProjectAddress($row['project_id'] );
+                                           $addressData = !empty($address['address']) ? $address['address'] : '' ;
+                                    @endphp
+
+                                    <h6>{{ $row['block_name'].' '.$row['unit_name'].' '.$addressData }} </h6>
                                     <p>  {{ $row['project_detail'] }} </p>
 
                                     <h3>AMD {{ $row['total_price'] }}</h3>
