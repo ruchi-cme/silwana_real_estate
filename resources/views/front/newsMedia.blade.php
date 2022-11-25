@@ -57,7 +57,7 @@
                                     @if(!empty($media))
                                         @foreach($media as $row)
                                             @if($row['type'] == 1)
-                                            <div class="col-lg-4 col-md-6">
+                                            <div class="col-lg-4 col-md-6 mb-4">
                                                 <div class="media-image-wrap position-relative">
                                                     <img src="{{ asset('images/media/image').'/'.$row['image_video_title'] }}" alt="social-media-img" />
                                                     <div class="media-wrap-inner position-absolute" data-bs-toggle="modal" data-bs-target="#myModal">
@@ -81,7 +81,7 @@
                                     @if(!empty($media))
                                         @foreach($media as $row)
                                             @if($row['type'] ==2)
-                                                <div class="col-lg-4 col-md-6">
+                                                <div class="col-lg-4 col-md-6 mb-4">
                                                     <div class="media-image-wrap position-relative">
                                                         <video controls="" src=" {{ asset('images/media/video').'/'.$row['image_video_title'] }}" ></video>
                                                     </div>
@@ -99,13 +99,13 @@
     </section>
 
     <!-- The Modal -->
-    <div class="modal media-image-slider-main" id="myModal">
+    <div class="modal media-image-slider-main media-gallery-main-modal" id="myModal">
         <div class="modal-dialog">
 
             <div class="modal-content bg-transparent">
                 <div class="modal-header">
                     <!-- <h4 class="modal-title">Modal Heading</h4> -->
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"><i class="fas fa-times"></i></button>
                 </div>
                 <div class="bg-transparent">
                     <div class="owl-carousel owl-theme media-image-slider">

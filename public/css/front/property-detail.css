@@ -522,7 +522,7 @@ property-booking-form
 .select-arrow::after {
     content: '';
     position: absolute;
-    background: url('../images/down-arrow.svg') center center no-repeat;
+    background: url('/images/front/down-arrow.svg') center center no-repeat;
     background-size: contain;
     width: 16px;
     height: 16px;
@@ -802,7 +802,7 @@ form label {
     content: '';
     width: 15px;
     height: 15px;
-    background: url('../images/down-arrow.svg') center center no-repeat;
+    background: url('/images/front/down-arrow.svg') center center no-repeat;
     background-size: contain;
     position: absolute;
     right: 20px;
@@ -893,9 +893,14 @@ responsive css
     .map-wrap {
         height: 390px;
     }
+
     .profile-main-img {
         width: 125px;
         height: 125px;
+    }
+
+    .edit-profile-modal .modal-content {
+        padding: 20px 30px;
     }
 }
 
@@ -911,9 +916,11 @@ responsive css
         padding: 10px 0;
     }
 
+
     .profile-detail {
         margin-top: 15px;
     }
+
 }
 
 @media only screen and (max-width: 767px) {
@@ -923,16 +930,25 @@ responsive css
         margin-top: 0;
     }
 
-    .map-wrap {
-        margin-bottom: 50px;
+    .form-control {
+        padding: 10px 15px !important;
     }
 
-    .property-detail-main {
-        margin: 50px 0 !important;
+    .edit-profile-modal .modal-dialog {
+        max-width: 545px;
     }
 
-    .looking-for-house-text {
-        padding: 20px;
+    form.edit-profile-form .form-group {
+        margin-bottom: 15px !important;
+    }
+
+    form.edit-profile-form .form-group.d-flex {
+        flex-direction: column !important;
+    }
+
+    form.edit-profile-form .form-group.d-flex  button {
+        width: 100%;
+        margin: 5px 0;
     }
 
     .profile-detail-inner {
@@ -942,6 +958,18 @@ responsive css
         padding: 10px;
     }
 
+    .map-wrap {
+        margin-bottom: 50px;
+    }
+
+
+    .property-detail-main {
+        margin: 50px 0 !important;
+    }
+
+    .looking-for-house-text {
+        padding: 20px;
+    }
 }
 
 
@@ -953,9 +981,8 @@ responsive css
     .profile-detail-inner h6 {
         font-size: 12px;
     }
+
 }
 
-.search-property .form-group:nth-child(1) {
-    flex-basis: 87%;
-}
+
 

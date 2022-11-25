@@ -16,10 +16,10 @@ header {
 
 @keyframes pulse-animation {
     0% {
-        box-shadow: 0 0 0 0px rgb(43,169,225,0.5);
+      box-shadow: 0 0 0 0px rgb(43,169,225,0.5);
     }
     100% {
-        box-shadow: 0 0 0 15px rgb(43,169,225,0);
+      box-shadow: 0 0 0 15px rgb(43,169,225,0);
     }
 }
 
@@ -566,14 +566,30 @@ responsive css
     .estimate-wrap .dropdown .profile-detail-header ul:last-child {
         flex-basis: 35%;
     }
+
+    #login-modal .modal-dialog ,
+    #signup-modal .modal-dialog {
+        max-width: 455px;
+    }
+
+    .login-form-img-wrap {
+        height: 405px;
+    }
+
+    .login-form-img-wrap2 {
+        height: 90px;
+    }
+    .login-form-img-wrap {
+        display: none;
+    }
 }
 
 
 @media only screen and (max-width:992px) {
-    #login-modal .modal-dialog,
-    #signup-modal .modal-dialog  {
-        max-width: 580px;
-    }
+    /*#login-modal .modal-dialog,*/
+    /*#signup-modal .modal-dialog  {*/
+    /*    max-width: 580px;*/
+    /*}*/
 
     .login-form-img-wrap {
         height: 300px;
@@ -604,9 +620,9 @@ responsive css
         padding: 10px 0;
     }
 
-    .banner {
+    /* .banner {
         margin-top: 95px !important;
-    }
+    } */
 }
 
 @media only screen and (max-width: 576px){
@@ -621,6 +637,17 @@ responsive css
     .estimate-wrap .cmn-btn {
         border-radius: 0;
         padding: 7px 11px;
+    }
+
+
+
+
+    /*#login-modal .modal-dialog, #signup-modal .modal-dialog {*/
+    /*    max-width: 380px;*/
+    /*}*/
+
+    #login-modal .sign-up-form, #signup-modal .sign-up-form {
+        margin-top: 0px;
     }
 
 }

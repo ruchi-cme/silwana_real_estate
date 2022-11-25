@@ -2,8 +2,8 @@ $(document).ready(function() {
 
     var showChar = 100;
     var ellipsestext = "...";
-    var moretext = "less";
-    var lesstext = "Read more";
+    var moretext = "Read more";
+    var lesstext = "less";
     $('.more').each(function() {
         var content = $(this).html();
         var showChar = $(this).attr('showChar');
@@ -11,9 +11,7 @@ $(document).ready(function() {
 
             var c = content.substr(0, showChar);
             var h = content.substr(showChar-1, content.length - showChar);
-
             var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
-
             $(this).html(html);
         }
 
@@ -31,8 +29,6 @@ $(document).ready(function() {
         $(this).prev().toggle();
         return false;
     });
-
-
 
     $("#inquiryForm").validate({
         ignore: '',
@@ -56,6 +52,7 @@ $(document).ready(function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
     /*
     $('#inquiryForm').on('submit',function(e){
         e.preventDefault();
@@ -89,6 +86,7 @@ $(document).ready(function() {
     });
 
 */
+
     $('.submitInquiry').on('click', function(event) {
         // prevent default submit action
         event.preventDefault();
