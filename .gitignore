@@ -13,7 +13,8 @@ yarn-error.log
 /.idea
 /.vscode
 resources/views/front/about.blade (copy).php
-public/images
+public/images/*
+!public/images/front
 resources/views/admin/project/imageUpload.blade (copy).php
 public/css.zip
 public/images/amenities
@@ -25,3 +26,4 @@ public/images/heading
 public/images/page
 public/images/unit
 public/images/user
+public/css1.zip

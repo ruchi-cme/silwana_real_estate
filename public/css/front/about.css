@@ -103,7 +103,7 @@
 
 .about-silwana-detail {
     margin: 30px 0 0;
-    background: url('../images/about/dubai.svg') center center no-repeat;
+    background: url('/images/front/about/dubai.svg') center center no-repeat;
     background-size: cover;
 }
 
@@ -126,6 +126,7 @@
     height: 100%;
     position: relative;
     z-index: 5;
+    /* margin-bottom: 30px; */
 }
 
 .news-media .row .col-lg-8,
@@ -457,7 +458,7 @@ responsive css
     }
 
     .mission-vision .investment-wrap {
-        margin-top: 90px;
+        margin-top: 90px !important;
     }
 }
 
@@ -469,13 +470,25 @@ responsive css
     }
 
     .investment-wrap {
-        margin-top: 74px;
+        margin-top: 274px;
     }
 
     .owner-message-wrap {
         padding: 15px;
     }
 }
+
+@media only screen and (max-width: 576px) {
+    .mission-vision .investment-wrap {
+        margin-top: 50px !important;
+    }
+
+    .mission-vision .investment-image > div:nth-child(1) {
+        top: 0;
+    }
+}
+
+
 
 @media only screen and (max-width: 540px) {
     .mission-vision .investment-image > div:nth-child(1) {
@@ -503,16 +516,15 @@ responsive css
 }
 
 @media only screen and (max-width: 500px) {
-    /*.owner-message-wrap {*/
-    /*    padding: 20px;*/
-    /*    height: 378px;*/
-    /*}*/
+    /* .owner-message-wrap {
+        padding: 20px;
+        height: 378px;
+    } */
 
     .about-us-img {
         height: 250px;
     }
 }
-
 
 
 

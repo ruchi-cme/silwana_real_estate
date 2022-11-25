@@ -219,12 +219,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-body">
                     <div class="row align-items-center">
-                        <div class="col-lg-7">
+                        <div class="col-xl-7">
                             <div class="login-form-img-wrap">
                                 <img src="{{asset('images/front')}}/login-form-imh.png" alt="">
                             </div>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-xl-5">
                             <form   class="sign-up-form" method="post">
                                 @csrf
                                 <div>
@@ -237,25 +237,21 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <input type="text" placeholder="Name" name="name" id="name" class="form-control">
-                                            <span class="alert text-danger  mt-1 mb-1" id="signupname" ></span>
-                                         </div>
+                                        </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <input type="text" placeholder="Mobile Number"  id="phone" name="phone" class="form-control">
-                                            <span class="alert text-danger  mt-1 mb-1" id="signupphone" ></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <input type="text" placeholder="Email" name="email" id="semail" class="form-control">
-                                            <span class="alert text-danger  mt-1 mb-1" id="signupemail" ></span>
                                          </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <input type="password" placeholder="Password"  id="spassword"  name="password" class="form-control">
-                                            <span class="alert text-danger  mt-1 mb-1" id="signuppass" ></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-left">
@@ -280,12 +276,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-body">
                     <div class="row align-items-center">
-                        <div class="col-lg-7">
+                        <div class="col-xl-7">
                             <div class="login-form-img-wrap">
                                 <img src="{{asset('images/front')}}/login-form-imh.png" alt="">
                             </div>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-xl-5">
                             <form method="post"  id="loginForm"  class="sign-up-form"  >
 
                                <div>
@@ -298,13 +294,11 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <input type="text" name="email" id="email" placeholder="Email" class="form-control">
-                                              <span class="alert text-danger  mt-1 mb-1" id="loginemail" ></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <input type="password" name="password" id="password" placeholder="Password" class="form-control">
-                                            <span class="alert text-danger  mt-1 mb-1" id="loginpassword" ></span>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 text-left">

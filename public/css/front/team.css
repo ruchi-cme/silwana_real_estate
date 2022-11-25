@@ -182,7 +182,31 @@ responsive css
         flex-basis: inherit;
     }
 
-    /* .our-team-inner{
-        flex-wrap: nowrap;
-    } */
+    .owner-message .title h2 {
+        font-size: 26px !important;
+    }
+
+    .owner-image-wrap {
+        height: 515px;
+    }
+}
+
+
+@media only screen and (max-width: 576px) {
+    .owner-image-wrap {
+        height: 415px;
+    }
+    .owner-message-wrap p {
+        font-size: 14px;
+        line-height: 24px !important;
+    }
+
+    .owner-message-inner .quotes-img {
+        max-width: 50px;
+    }
+
+    .owner-message-inner > div {
+        top: 0px;
+    }
+    
 }

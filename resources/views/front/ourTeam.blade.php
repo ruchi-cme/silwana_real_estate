@@ -4,12 +4,14 @@
     <!-- owner-message -->
     @if (!empty($ourTeam))
         @foreach($ourTeam as $owner)
-            @if($owner['designation'] == 'group chairman' )
+            @php $check =  strcasecmp($owner['designation'],"group chairman") @endphp
+
+            @if ($check == 0)
                 <section class="owner-message features-projects p-100 our-projects overflow-hidden">
                     <div class="container position-relative">
-                    <img src="{{ asset('images/front/home/plan3.svg') }} " class="our-amenities-plan img3" alt="">
-                    <img src="{{ asset('images/front/home/plan4.svg') }}" class="our-amenities-plan img4" alt="">
-                    <div class="row">
+                        <img src="{{ asset('images/front/home/plan3.svg') }} " class="our-amenities-plan img3" alt="">
+                        <img src="{{ asset('images/front/home/plan4.svg') }}" class="our-amenities-plan img4" alt="">
+                        <div class="row">
                         <div class="col-lg-6"></div>
                         <div class="col-lg-6">
                             <div class="title">
@@ -27,7 +29,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="owner-message-inner">
-                                        <p> {{   $owner['detail']}}  </p>
+                                        <p class="more" showChar="495"> {{   $owner['detail']}}  </p>
                                         <div>
                                             <img src="{{ asset('images/front/about/quotes.svg') }}" class="quotes-img" alt="">
                                         </div>
@@ -36,7 +38,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                    </div>
                 </section>
             @endif
         @endforeach
@@ -59,7 +61,8 @@
                         @if (!empty($ourTeam))
                             @php $i=0; @endphp
                             @foreach($ourTeam as $row)
-                                @if($row['designation'] != 'group chairman' )
+                                 @php $check1 =  strcasecmp($row['designation'],"group chairman");   @endphp
+                                 @if ($check1 != 0)
                                     <div class="our-team-inner">
                                         @if($i <= 2)
                                         <div class="our-team-image-wrap">
@@ -69,7 +72,7 @@
                                         <div class="our-team-content">
                                             <h4>{{ $row['name']}}</h4>
                                             <h6>{{ $row['designation']}}</h6>
-                                            <p>
+                                            <p class="more" showChar="200">
                                                 {{ $row['detail'] }}
                                             </p>
                                             <div class="our-team-quotes text-center">
@@ -80,7 +83,7 @@
                                             <div class="our-team-content">
                                                 <h4>{{ $row['name']}}</h4>
                                                 <h6>{{ $row['designation']}}</h6>
-                                                <p>
+                                                <p class="more" showChar="200">
                                                     {{ $row['detail'] }}
                                                 </p>
                                                 <div class="our-team-quotes text-center">
@@ -92,7 +95,6 @@
                                             </div>
                                         @endif
                                     </div>
-
                                 @endif
                                     @php $i++;
                                        if( $i >  4)
@@ -106,6 +108,7 @@
             </div>
         </div>
     </section>
-
-
+    @section('scripts')
+        <script   src="{{ asset('js/front/custom/inquiry') }}/inquiry.js"> </script>
+    @endsection
 </x-base>

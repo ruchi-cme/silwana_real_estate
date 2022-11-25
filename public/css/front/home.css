@@ -4,8 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 143px;
-    padding: 100px 0;
+    padding: 250px 0 100px;
     position: relative;
 }
 
@@ -17,14 +16,14 @@
     content: '';
     position: absolute;
     width: 100%;
+    top: 0;
     height: 100%;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.5);
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
-
-.search-property-input {
-    width: 85%;
-}
 .banner .banner-content p {
     color: #fff;
     font-size: 20px;
@@ -218,7 +217,7 @@
 .investment-image > div:nth-child(1) {
     width: 100%;
     max-width: 532px;
-    height: 674px;
+    height: 674px !important;
     position: relative;
     z-index: 2;
     margin-left: auto;
@@ -470,6 +469,7 @@
     border-radius: 10px;
     margin: 0 auto 20px;
     padding: 35px;
+    transition: 0.5s;
 }
 
 .our-amenities-img img {
@@ -484,12 +484,22 @@
     position: relative;
     z-index: 3;
     background: #FDF7EE;
+    transition: 0.5s;
+}
+
+.our-amenities-wrap:hover .our-amenities-img {
+    transform: translateY(-10px);
+}
+
+.our-amenities-wrap:hover h6 {
+    transform: scale(1.01);
 }
 
 .our-amenities-wrap h6 {
     font-size: 24px;
     font-family: var(--semibold);
     color: var(--primary-color);
+    transition: 0.5s;
 }
 
 .our-amenities-wrap p {
@@ -795,6 +805,14 @@
     box-shadow: 0px 11px 14px rgba(0, 0, 0, 0.17);
 }
 
+.banner-form form .form-control {
+    background: #FFFFFF;
+    border: 1px solid #B48D4E;
+    border-radius: 10px;
+    color: rgba(24, 24, 26, 0.5);
+    font-family: var(--medium);
+}
+
 form .select-title {
     position: relative;
 }
@@ -803,7 +821,7 @@ form .select-title::after {
     content: '';
     width: 15px;
     height: 15px;
-    background: url('../images/down-arrow.svg') center center no-repeat;
+    background: url('/images/front/down-arrow.svg') center center no-repeat;
     background-size: contain;
     display: block;
     position: absolute;
@@ -815,9 +833,13 @@ form .select-title::after {
 
 
 
+.search-property-input {
+    width: 87%;
+}
 
-
-
+.search-property-input input.form-control {
+    padding: 12px 25px !important;
+}
 
 
 
@@ -1110,14 +1132,13 @@ responsive css
 
 
 
-
 @media only screen and (min-width:1025px) and (max-width:1600px) {
     .banner-form form {
         padding: 30px 40px;
     }
 
     .investment-image > div:nth-child(1) {
-        height: 516px;
+        height: 516px !important;
         max-width: 441px;
     }
 
@@ -1158,15 +1179,40 @@ responsive css
     }
 }
 
+@media only screen and (max-width: 1600px) {
+    .rentals-sales .container .owner-message-wrap .row .owner-image-wrap {
+        height: 700px;
+    }
+
+    .rentals-sales .container .row:nth-child(3) {
+        margin: 20px 0 220px !important;
+    }
+}
+
+
+
+
 @media only screen and (max-width: 1400px) {
+
+    .rentals-sales .container .row:nth-child(3) {
+        margin: 20px 0 120px !important;
+    }
+
+    .rentals-sales .container .owner-message-wrap .row .owner-image-wrap {
+        height: 600px !important;
+    }
+
+    .search-property-input {
+        width: 85%;
+    }
 
     .navbar-collapse .navbar-nav .nav-link {
         font-size: 14px;
     }
 
-    .banner {
+    /* .banner {
         margin-top: 125px;
-    }
+    } */
 
     .investment-image > div:nth-child(1) {
         max-width: 441px;
@@ -1182,8 +1228,9 @@ responsive css
 @media only screen and (max-width: 1200px){
 
     .search-property-input {
-        width: 100%;
+        width: 81%;
     }
+
 
     .investment-image > div:nth-child(1) {
         max-width: 377px;
@@ -1197,16 +1244,36 @@ responsive css
         top: 0;
     }
 
-    .banner {
+    /* .banner {
         margin-top: 125px;
-    }
+    } */
 
     .upcoming-projects-wrap h2 {
         font-size: 28px;
     }
 }
 
+@media only screen and (max-width: 1025px) {
+    h1 {
+        font-size: 44px;
+    }
+
+    .title h2 {
+        font-size: 38px;
+    }
+
+    .rentals-sales.owner-message .title h2 {
+        font-size: 38px !important;
+    }
+}
+
 @media only screen and (max-width: 992px) {
+    .search-property-input {
+        width: 75%;
+    }
+    .rentals-sales.owner-message .title h2 {
+        font-size: 28px !important;
+    }
 
     .about-us-wrapper {
         padding: 0 25px;
@@ -1254,6 +1321,23 @@ responsive css
 }
 
 @media only screen and (max-width: 767px) {
+
+    .search-property-input {
+        width: 69%;
+    }
+
+    .rentals-sales.owner-message .title h2 {
+        font-size: 22px !important;
+    }
+
+    .rentals-sales {
+        margin-top: 50px !important;
+    }
+
+    .rentals-sales .owner-message-inner.owner-image-wrap {
+        height: 400px;
+    }
+
     .features-projects .title p {
         margin: 0px 0 90px;
     }
@@ -1264,11 +1348,11 @@ responsive css
     }
 
     h1 {
-        font-size: 50px;
+        font-size: 40px;
     }
 
     .banner {
-        padding: 100px 0;
+        padding: 170px 0 100px;
     }
 
     .investment-image > div:nth-child(2) {
@@ -1288,11 +1372,11 @@ responsive css
     }
 
     .investment-image > div:nth-child(1) {
-        height: 590px;
+        height: 590px !important;
     }
 
     .cmn-banner .container {
-        padding: 200px 0 175px !important;
+        padding: 150px 0 105px !important;
     }
 
     .about-banner-text h2 {
@@ -1356,7 +1440,7 @@ responsive css
 
     .investment-image > div:nth-child(1) {
         max-width: 320px;
-        height: 320px;
+        height: 320px !important;
     }
 
     .investment-image::after {
@@ -1371,6 +1455,31 @@ responsive css
 }
 
 @media only screen and (max-width: 576px) {
+    .looking-for-house-inner {
+        padding: 15px 20px;
+    }
+
+    .looking-for-house-inner h2 {
+        font-size: 21px !important;
+    }
+
+
+    .looking-for-house-img {
+        height: 210px;
+    }
+
+
+    form .form-group {
+        margin-bottom: 15px !important;
+    }
+
+    .search-property-input {
+        width: 100%;
+    }
+
+    /*.search-property .form-group {*/
+    /*    margin: 0 auto;*/
+    /*}*/
 
     .upcoming-projects-wrap .property-main-detail > div.position-static {
         width: 50%;
@@ -1381,14 +1490,33 @@ responsive css
         margin-bottom: 15px;
         width: 100%;
     }
-    .banner {
-        margin-top: 97px !important;
-        padding: 100px 0;
-    }
+
 
     .project-feature .owl-nav button {
         width: 55px;
         height: 55px;
+    }
+
+    .about-dropdown-menu .profile-detail-header .news-media-wrap {
+        display: none;
+    }
+
+    .estimate-wrap .dropdown .profile-detail-header ul:last-child {
+        padding: 20px;
+        margin-top: 5px;
+    }
+
+    .estimate-wrap .dropdown .dropdown-menu .profile-detail-header {
+        /* flex-direction: column; */
+        min-width: auto;
+    }
+
+    .estimate-wrap .dropdown .profile-detail-header ul:last-child li a {
+        margin-bottom: 9px;
+    }
+
+    .estimate-wrap .dropdown .profile-detail-header ul:first-child {
+        margin: 0;
     }
 
     h1 {
@@ -1441,6 +1569,9 @@ responsive css
         text-align: center;
     }
 
+    .rentals-sales .owner-message-inner.owner-image-wrap {
+        height: 302px;
+    }
 }
 
 @media only screen and (max-width: 480px) {
@@ -1454,17 +1585,17 @@ responsive css
     }
 
     .investment-wrap {
-        margin-top: 175px;
+        margin-top: 175px !important;
     }
 }
 
 
 
-@media only screen and (max-width: 455px) {
+/* @media only screen and (max-width: 455px) {
     .banner {
         margin-top: 75px !important;
     }
-}
+} */
 
 
 @media only screen and (max-width: 420px) {
@@ -1480,13 +1611,17 @@ responsive css
     .upcoming-projects-wrap {
         padding: 10px;
     }
+
+    .rentals-sales .owner-message-inner.owner-image-wrap {
+        height: 252px;
+    }
 }
 
 
 @media only screen and (max-width: 390px)  {
     .investment-image > div:nth-child(1) {
         max-width: 250px;
-        height: 250px;
+        height: 250px !important;
     }
 
 }
