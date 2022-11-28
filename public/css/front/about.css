@@ -419,6 +419,13 @@
 responsive css
 */
 
+
+
+
+/*
+responsive css
+*/
+
 @media only screen and (max-width:1600px) {
     .mission-vision .investment-image > div:nth-child(1) {
         max-width: 85%;
@@ -449,7 +456,7 @@ responsive css
 
     .mission-vision .investment-image > div:nth-child(1) {
         max-width: 390px;
-        height: 390px;
+        height: 390px !important;
         margin:  0 auto;
     }
 
@@ -517,7 +524,7 @@ responsive css
 @media only screen and (max-width: 540px) {
     .mission-vision .investment-image > div:nth-child(1) {
         max-width: 320px;
-        height: 320px;
+        height: 320px !important;
     }
 
     .mission-vision .investment-image::after {
@@ -549,7 +556,6 @@ responsive css
         height: 250px;
     }
 }
-
 
 
 

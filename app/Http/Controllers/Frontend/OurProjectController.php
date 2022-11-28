@@ -84,7 +84,12 @@ class OurProjectController extends Controller
             $workStatus =  array('1','2','3' );
             $projectList  = getProjectList( '' , $workStatus );
         }
+        if ($request->ajax()) {
 
+            $view = view('front.projectList',compact('projectList'))->render();
+            return response()->json(['html'=>$view]);
+
+        }
         return view('front.OurProjectType',compact('projectList','currentURL','title' ));
     }
 
