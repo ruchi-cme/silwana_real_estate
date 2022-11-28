@@ -460,6 +460,14 @@ responsive css
     .mission-vision .investment-wrap {
         margin-top: 90px !important;
     }
+
+    .rentals-sales .container .row:nth-child(3) .owner-message-wrap .row .owner-image-wrap {
+        height: 450px !important;
+    }
+
+    .rentals-sales .container .row:nth-child(4) .owner-message-wrap .row .owner-image-wrap {
+        height: 450px !important;
+    }
 }
 
 
@@ -476,6 +484,14 @@ responsive css
     .owner-message-wrap {
         padding: 15px;
     }
+
+    .rentals-sales .container .row:nth-child(3) .owner-message-wrap .row .owner-image-wrap {
+        height: 350px !important;
+    }
+
+    .rentals-sales .container .row:nth-child(4) .owner-message-wrap .row .owner-image-wrap {
+        height: 350px !important;
+    }
 }
 
 @media only screen and (max-width: 576px) {
@@ -485,6 +501,14 @@ responsive css
 
     .mission-vision .investment-image > div:nth-child(1) {
         top: 0;
+    }
+
+    .rentals-sales .container .row:nth-child(3) .owner-message-wrap .row .owner-image-wrap {
+        height: 250px !important;
+    }
+
+    .rentals-sales .container .row:nth-child(4) .owner-message-wrap .row .owner-image-wrap {
+        height: 250px !important;
     }
 }
 
@@ -498,7 +522,7 @@ responsive css
 
     .mission-vision .investment-image::after {
         width: 150px;
-         height: 150px;
+        height: 150px;
     }
 
     .mission-vision .row:nth-child(even) {
@@ -525,7 +549,6 @@ responsive css
         height: 250px;
     }
 }
-
 
 
 
