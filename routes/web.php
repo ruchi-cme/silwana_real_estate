@@ -51,6 +51,15 @@ Route::name('myProfile/update')->post('/myProfile/update', 'App\Http\Controllers
 
 Route::name('sales')->get('/sales', 'App\Http\Controllers\Frontend\BusinessServiceController@index');
 
+Route::name('forget-password')->get('/forget-password', 'App\Http\Controllers\Auth\ForgotPasswordController@index');
+Route::name('forget-password')->post('/forget-password', 'App\Http\Controllers\Auth\ForgotPasswordController@submitForgetPasswordForm');
+Route::name('reset-password/{token}')->get('/reset-password/{token}', 'App\Http\Controllers\Auth\ForgotPasswordController@showResetPasswordForm');
+Route::name('reset-password')->post('/reset-password', 'App\Http\Controllers\Auth\ForgotPasswordController@submitResetPasswordForm');
+Route::name('forget-password-front')->post('/forget-password-front', 'App\Http\Controllers\Auth\ForgotPasswordController@submitForgetPasswordFormFront');
+Route::name('reset-password-front/{token}')->get('/reset-password-front/{token}', 'App\Http\Controllers\Auth\ForgotPasswordController@showResetPasswordForm');
+
+
+
 Route::get('/dashboard', function () {
 
     if(Auth::guard('web')->check()) {

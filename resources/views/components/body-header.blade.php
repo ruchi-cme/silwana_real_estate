@@ -209,6 +209,54 @@
                 </div>
             </div>
         </div>
+
+         @if (Session::has('success'))
+             <div class="alert alert-dismissible bg-primary d-flex flex-column flex-sm-row p-5 mb-10 bookingSuccessAlert"  >
+                 <!--begin::Icon-->
+                 <i class="fa fa-thumbs-up fa-beat-fade fs-2hx text-white me-5"></i>
+                 <!--end::Icon-->
+                 <!--begin::Content-->
+                 <div class="d-flex flex-column text-light pe-0 pe-sm-10">
+                     <h4 class="mb-2 text-light">Success</h4>
+                     <span>{!! Session::get('success') !!}</span>
+                 </div>
+                 <!--end::Content-->
+                 <!--begin::Close-->
+                 <button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">
+                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                     <span class="svg-icon svg-icon-2x svg-icon-light">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black"></rect>
+                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black"></rect>
+            </svg>
+        </span>
+                     <!--end::Svg Icon-->
+                 </button>
+                 <!--end::Close-->
+             </div>
+         @endif
+             <div style="display: none" class="alert bg-success bookingSuccessAlert" id="successAlertBox">
+
+
+                 <!--begin::Content-->
+                 <div class="d-flex flex-column text-light pe-0 pe-sm-10">
+                     <h4 class="mb-2 text-light">Success</h4>
+                     <span id="succMsg">  👍</span>
+                 </div>
+                 <!--end::Content-->
+                 <!--begin::Close-->
+                 <button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">
+                     <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                     <span class="svg-icon svg-icon-2x svg-icon-light">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black"></rect>
+                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black"></rect>
+            </svg>
+        </span>
+                     <!--end::Svg Icon-->
+                 </button>
+                 <!--end::Close-->
+             </div>
     </header>
 
 
@@ -306,6 +354,7 @@
                                     </div>
                                     <div class="col-lg-12 text-center already-acc">
                                         <p class="m-0">Have you already account? <button type="button" data-bs-toggle="modal" data-bs-target="#signup-modal">Signup</button> </p>
+                                        <p class="m-0">  <button type="button" data-bs-toggle="modal" data-bs-target="#forgotPass-modal">Forgot Password ?</button> </p>
                                         <div class="login-form-img-wrap2">
                                             <img src="{{asset('images/front')}}/dubai.svg" alt="">
                                         </div>
@@ -319,3 +368,48 @@
         </div>
     </div>
 
+     <!--forgot Pass  Modal -->
+     <div class="modal fade" id="forgotPass-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+             <div class="modal-content">
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                 <div class="modal-body">
+                     <div class="row align-items-center">
+                         <div class="col-xl-7">
+                             <div class="login-form-img-wrap">
+                                 <img src="{{asset('images/front')}}/login-form-imh.png" alt="">
+                             </div>
+                         </div>
+                         <div class="col-xl-5">
+                                 <form id="fogotPassform" method="POST" >
+                                 <div>
+                                     <h2>Reset Password</h2>
+                                     <p>Please enter email and click on button. you will receive link of reset password in you mail.</p>
+                                     <div class="alert alert-danger  mt-1 mb-1" id="forgotPassError"  style="display: none"></div>
+
+                                 </div>
+                                 <div class="row">
+                                     <div class="col-lg-12">
+                                         <div class="form-group">
+                                             <input id="fpemail" type="email" placeholder="Email" class="form-control error @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                         </div>
+                                     </div>
+
+                                     <div class="col-lg-12 text-left">
+                                         <button type="submit" class="cmn-btn w-100 forget-pass">Send Password Reset Link</button>
+                                     </div>
+                                     <div class="col-lg-12 text-center already-acc">
+                                         <p class="m-0">Have you already account? <button type="button" data-bs-toggle="modal" data-bs-target="#login-modal">Login</button> </p>
+                                         <div class="login-form-img-wrap2">
+                                             <img src="{{asset('images/front')}}/dubai.svg" alt="">
+                                         </div>
+                                     </div>
+                                 </div>
+                             </form>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>

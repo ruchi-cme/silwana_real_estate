@@ -111,6 +111,49 @@ $(document).ready(function() {
 
     });
 
+    $(".forget-pass").click(function(e){
+
+        e.preventDefault();
+
+        var email = $("#fpemail").val();
+
+        $.ajax({
+            type:'POST',
+            url:"/forget-password-front",
+            data:{email:email},
+
+            success:function(result){
+                console.log(result);
+                if(result.success){
+                    $('#forgotPass-modal').modal('hide');
+                    $('#successAlertBox').show();
+                    $('#succMsg').html(result.success);
+                }
+                else if(result.error){
+                    $('#forgotPassError').show();
+                    $('#forgotPassError').html(result.error);
+                }
+                else if(result.errors) {
+                    $('#forgotPassError').html('');
+                    jQuery.each(result.errors, function(key, value){
+                        $('#forgotPassError').show();
+                        $('#forgotPassError').append('<li>'+value+'</li>');
+                    });
+                }
+            }  ,
+            error: function(response) {
+                $('#signupError').html('');
+                jQuery.each(response.errors, function(key, value){
+                    $('#forgotPassError').show();
+                    $('#forgotPassError').append('<li>'+value+'</li>');
+                });
+
+
+            },
+
+        });
+
+    });
 
 });
 

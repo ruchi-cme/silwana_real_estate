@@ -152,5 +152,21 @@ $(document).ready(function() {
         }
     });
 
+    $("#resetPasswordForm").validate({
+        ignore: '',
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                minlength: 6,
+            },
+            password_confirm: {
+                minlength: 6,
+                equalTo: "#password"
+            }
+        },
 
+    });
 });
