@@ -88,6 +88,7 @@ class RoleSeeder extends Seeder
                 'propertyBooking-update',
                 'inquiry-list',
                  'inquiry-view',
+                'projectDetail-view'
         ]);
 
 
@@ -96,6 +97,7 @@ class RoleSeeder extends Seeder
         $role = Role::create(['name' => 'broker']);
         $role->givePermissionTo([
             'project-view',
+            'projectDetail-view',
             'projectDetail-view'
         ]);
 
