@@ -398,7 +398,7 @@
                             </div>
                         @endcan
 
-                        @can('role-view')
+                     <!--    @can('role-view')
                        <div class="menu-item {{ Route::is('admin.role*') ? 'show' : '' }}">
                            <a class="menu-link" href="{{ route('admin.role') }}">
                                <span class="menu-bullet">
@@ -418,7 +418,7 @@
                                <span class="menu-title">Permissions</span>
                            </a>
                        </div>
-                       @endcan
+                       @endcan -->
                    </div>
                 </div>
                 @endif
