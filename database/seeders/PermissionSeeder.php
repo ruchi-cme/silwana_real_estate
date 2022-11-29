@@ -48,14 +48,6 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'amenities-changeStatus']);
         Permission::create(['name' => 'amenities-edit']);
 
-        // Builder
-        Permission::create(['name' => 'builder-view']);
-        Permission::create(['name' => 'builder-create']);
-        Permission::create(['name' => 'builder-update']);
-        Permission::create(['name' => 'builder-delete']);
-        Permission::create(['name' => 'builder-changeStatus']);
-        Permission::create(['name' => 'builder-edit']);
-
         // Project
         Permission::create(['name' => 'project-view']);
         Permission::create(['name' => 'project-create']);
@@ -63,6 +55,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'project-delete']);
         Permission::create(['name' => 'project-changeStatus']);
         Permission::create(['name' => 'project-edit']);
+        Permission::create(['name' => 'projectDetail-view']);
 
         // Block
         Permission::create(['name' => 'block-view']);

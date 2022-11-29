@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Permission;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -32,7 +33,7 @@ class UserController extends Controller
 
     public function create(Request $request)
     {
-        $roles = Role::all();
+        $roles = Role::whereIn('name', array('employee','broker','user'))->get();
         return view('admin.user.create',compact('roles'));
     }
 

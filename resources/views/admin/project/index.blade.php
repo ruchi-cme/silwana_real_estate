@@ -161,8 +161,11 @@
                              <a href="project/changeStatus/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-primary  me-2"
                             ><span class="svg-icon svg-icon-1">${ $icon }</span></a>
                          @endcan
+                        @can('projectDetail-view')
+                            <a href="project/view/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-success me-2"
+                            ><span class="svg-icon svg-icon-1"><i class="fa fa-eye"></i></span></a>
+                        @endcan
                             <a href="${ hrefLink }"  title="Download PDF" ${ download }  class="downloadBrochure btn btn-sm btn-icon btn-hover-scale btn-active-success me-2"><span class="svg-icon svg-icon-1" ><i class="fa fa-download"></i></span></a>
-
                             `;
                 },
             },

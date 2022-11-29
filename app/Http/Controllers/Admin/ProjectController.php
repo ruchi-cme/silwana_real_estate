@@ -518,5 +518,14 @@ class ProjectController extends Controller
 
     }
 
+    public function view(Request $request)
+    {
+        $projectData   = getProjectList($request->id);
+        $address       = getProjectAddress($request->id);
+        $amenities     = getAmenitiesByProject($request->id);
+        $selectedImage = getProjectPdf($request->id);
+
+        return view('admin.project.view',compact('projectData','address','amenities','selectedImage'));
+    }
 
 }

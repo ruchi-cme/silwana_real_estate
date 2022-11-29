@@ -27,13 +27,13 @@ Route::name('user.updatePassword')->post('/user/updatePassword', 'App\Http\Contr
 Route::name('user.userEdit')->get('/user/userEdit/{id}', 'App\Http\Controllers\Admin\UserController@userEdit')->middleware(['permission:user-editProfile']);;
 
 //Roles
-Route::name('role')->get('/role', 'App\Http\Controllers\Admin\RoleController@index')->middleware(['permission:role-view']);;
-Route::name('role.create')->get('/role/create', 'App\Http\Controllers\Admin\RoleController@create')->middleware(['permission:role-view']);;
-Route::name('role.store')->post('/role/store', 'App\Http\Controllers\Admin\RoleController@store')->middleware(['permission:role-create']);;
-Route::name('role.edit')->get('/role/edit/{id}', 'App\Http\Controllers\Admin\RoleController@edit')->middleware(['permission:role-create']);;
-Route::name('role.view')->get('/role/view/{id}', 'App\Http\Controllers\Admin\RoleController@view')->middleware(['permission:role-view']);;
-Route::name('role.update')->post('/role/update', 'App\Http\Controllers\Admin\RoleController@update')->middleware(['permission:role-update']);;
-Route::name('role.delete')->get('/role/delete/{id}', 'App\Http\Controllers\Admin\RoleController@delete')->middleware(['permission:role-delete']);;
+Route::name('role')->get('/role', 'App\Http\Controllers\Admin\RoleController@index');
+Route::name('role.create')->get('/role/create', 'App\Http\Controllers\Admin\RoleController@create');
+Route::name('role.store')->post('/role/store', 'App\Http\Controllers\Admin\RoleController@store');
+Route::name('role.edit')->get('/role/edit/{id}', 'App\Http\Controllers\Admin\RoleController@edit');
+Route::name('role.view')->get('/role/view/{id}', 'App\Http\Controllers\Admin\RoleController@view');
+Route::name('role.update')->post('/role/update', 'App\Http\Controllers\Admin\RoleController@update');
+Route::name('role.delete')->get('/role/delete/{id}', 'App\Http\Controllers\Admin\RoleController@delete');
 
 //Permission
 Route::name('permission')->get('/permission', 'App\Http\Controllers\Admin\PermissionController@index')->middleware(['permission:permission-view']);;
@@ -90,6 +90,7 @@ Route::name('project.delete')->get('/project/changeStatus/{id}', 'App\Http\Contr
 Route::name('project.imageUpload/{id}')->get('/project/imageUpload/{id}', 'App\Http\Controllers\Admin\ProjectController@imageUpload')->middleware(['permission:project-imageUpload']);
 Route::name('project.imageUpdate')->post('/project/imageUpdate', 'App\Http\Controllers\Admin\ProjectController@imageUpdate')->middleware(['permission:project-imageUpdate']);
 Route::name('project.imageStore')->post('/project/imageStore', 'App\Http\Controllers\Admin\ProjectController@imageStore')->middleware(['permission:project-imageStore']);
+Route::name('project.view/{id}')->get('/project/view/{id}', 'App\Http\Controllers\Admin\ProjectController@view')->middleware(['permission:projectDetail-view']);
 
 // Block Details
 Route::name('block')->get('/block', 'App\Http\Controllers\Admin\BlockController@index')->middleware(['permission:block-view']);

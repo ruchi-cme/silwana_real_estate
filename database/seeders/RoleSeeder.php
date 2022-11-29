@@ -19,22 +19,94 @@ class RoleSeeder extends Seeder
         $superRole = Role::create(['name' => 'admin']);
         $superRole->givePermissionTo(Permission::all());
 
-        // Create Admin Role Without Delete Permission
+        // Create employee Without Delete Permission
         $role = Role::create(['name' => 'employee']);
+        //$per =  ['user-view','role-view','role-create','role-update','role-delete','permission-view'];
+        //$permission  = Permission::whereNotIn('name',$per)->get();
+      //  $role->givePermissionTo($permission);
+
         $role->givePermissionTo([
-            'user-view',
+                'user-create',
+                'user-delete',
+                'user-profile',
+                'user-update',
+               'category-view',
+                'category-create',
+                'category-update',
+                'category-delete',
+                'category-changeStatus',
+                'amenities-view',
+                'amenities-create',
+                'amenities-update',
+                'amenities-delete',
+                'amenities-changeStatus',
+                'amenities-edit',
+                'project-view',
+                'project-create',
+                'project-update',
+                'project-delete',
+                'project-changeStatus',
+                'project-edit',
+                'block-view',
+                'block-create',
+                'block-update',
+                'block-delete',
+                'block-changeStatus',
+                'block-edit',
+                'unit-view',
+                'unit-create',
+                'unit-update',
+                'unit-delete',
+                'unit-changeStatus',
+                'unit-edit',
+                'floor-view',
+                'floor-create',
+                'floor-update',
+                'floor-delete',
+                'floor-changeStatus',
+                'floor-edit',
+                'user-editProfile',
+                'user-updatePassword',
+                'user-updateProfile',
+                'project-imageUpload',
+                'project-imageUpdate',
+                'project-imageStore',
+                'projectAssign-view',
+                'projectAssign-create',
+                'projectAssign-update',
+                'projectAssign-delete',
+                'projectAssign-changeStatus',
+                'projectAssign-edit',
+                'bookMeeting-view',
+                'bookMeeting-create',
+                'bookMeeting-update',
+                'bookMeeting-delete',
+                'bookMeeting-changeStatus',
+                'bookMeeting-edit',
+                'propertyBooking-list',
+                'propertyBooking-view',
+                'propertyBooking-update',
+                'inquiry-list',
+                 'inquiry-view',
         ]);
 
-        // Create Admin Role Without Delete Permission
+
+
+        // Create [ Without Delete Permission
         $role = Role::create(['name' => 'broker']);
         $role->givePermissionTo([
-            'user-view',
+            'project-view',
+            'projectDetail-view'
         ]);
 
-        // Create Admin Role Without Delete Permission
+        // Create user Without Delete Permission
         $role = Role::create(['name' => 'user']);
         $role->givePermissionTo([
-            'user-view',
+            'user-profile',
+            'user-update',
+            'user-editProfile',
+            'user-updatePassword',
+            'user-updateProfile'
         ]);
 
     }

@@ -10,15 +10,37 @@
                         <div class="row justify-content-center">
 
                             <div class="col-lg-12">
-                                <div class="alert alert-success" role="alert" id="successMsg" style="display: none" >
-                                    Thank you for getting in touch! We will connect you soon!
-                                </div>
+
                                 <form method="POST" action="{{ route('reset-password') }}" id="resetPasswordForm">
                                     @csrf
                                     <div class="text-center">
 
                                         <h2>Reset Password</h2>
                                         <p> </p>
+                                        @if (Session::has('error'))
+                                            <div class="alert alert-dismissible bg-danger d-flex flex-column flex-sm-row mb-10">
+                                                <!--begin::Icon-->
+
+                                                <!--end::Icon-->
+                                                <!--begin::Content-->
+                                                <div class="d-flex flex-column text-light pe-0 pe-sm-10">
+                                                    <span>{!! Session::get('error') !!}</span>
+                                                </div>
+                                                <!--end::Content-->
+                                                <!--begin::Close-->
+                                                <button type="button" class="position-absolute position-sm-relative m-2 m-sm-0 top-0 end-0 btn btn-icon ms-sm-auto" data-bs-dismiss="alert">
+                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                                    <span class="svg-icon svg-icon-2x svg-icon-light">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black"></rect>
+                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black"></rect>
+            </svg>
+        </span>
+                                                    <!--end::Svg Icon-->
+                                                </button>
+                                                <!--end::Close-->
+                                            </div>
+                                        @endif
                                         <input type="hidden" name="token" value="{{ $token }}">
                                         <input type="hidden" name="flag" value="front">
                                     </div>

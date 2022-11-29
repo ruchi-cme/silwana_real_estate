@@ -36,8 +36,8 @@ class DashboardController extends Controller
             ->join('project_master' , 'project_master.project_id','=','bookings.project_id')
             ->groupBy('project_master.project_id' )
             ->get()->toArray();
-
-
+        $view ='admin.blank.default';
+    if(!empty(auth()->user()->roles->first()->id)){
         switch (auth()->user()->roles->first()->id) {
             case 1:   //admin
                 $view ='admin.blank.admin';
@@ -55,9 +55,11 @@ class DashboardController extends Controller
                 $view ='admin.blank.default';
                 break;
             default:
-              $view ='admin.blank.default';
-              break;
+                $view ='admin.blank.default';
+                break;
         }
+    }
+
         return view($view, compact('totalProject','ongoing','upcoming','completed','totalBooking','cancelBooking','chartData'));
     }
 

@@ -37,25 +37,43 @@ class AdminSeeder extends Seeder
         $superAdmin = User::where('id',$superId)->first();
         $superAdmin->assignRole('admin');
 
-        //create sub admin
+        //create employee
        // $id = Str::uuid()->toString(); // Re-use for role assignment
         DB::table('users')->insert([
           //  'id' => $id,
-            'name' => 'admin',
-            'email' => 'admin@mail.com',
-            'firstname' => 'admin',
+            'name' => 'employee',
+            'email' => 'employee@mail.com',
+            'firstname' => 'employee',
             'lastname' => '',
             'is_admin' => '1',
             'password' => Hash::make('1234567890'),
             'created_at' => now(),
             'updated_at' => now()
         ]);
-
-
         $id =  DB::getPdo()->lastInsertId();
-        // Assign super-admin Role
+        // Assign employee Role
         $admin = User::where('id',$id)->first();
         $admin->assignRole('employee');
+
+        //create broker
+        // $id = Str::uuid()->toString(); // Re-use for role assignment
+        DB::table('users')->insert([
+            //  'id' => $id,
+            'name' => 'broker',
+            'email' => 'broker@mail.com',
+            'firstname' => 'broker',
+            'lastname' => '',
+            'is_admin' => '1',
+            'password' => Hash::make('1234567890'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        $id =  DB::getPdo()->lastInsertId();
+        // Assign broker Role
+        $admin = User::where('id',$id)->first();
+        $admin->assignRole('broker');
+
+
 
     }
 }

@@ -14,7 +14,8 @@ class ProfileController extends Controller
     public function profile()
     {
         $countries = Country::get(["name", "id"]);
-        return view('user.profile.profile',compact('countries'));
+        $user = User::find(auth()->user()->id);
+        return view('user.profile.profile',compact('countries','user'));
     }
 
     public function profileUpdate(Request $request)
@@ -54,9 +55,9 @@ class ProfileController extends Controller
             'new_password' => ['required'],
             'confirm_password' => ['same:new_password'],
         ]);
-        
+
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-   
+
         auth()->logout();
         return redirect()->route('login')->with('success','Pasword Changed, You may login now');
     }

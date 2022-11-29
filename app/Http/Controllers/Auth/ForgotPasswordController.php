@@ -97,6 +97,7 @@ class ForgotPasswordController extends Controller
             ->first();
 
         if(!$updatePassword){
+
             return back()->withInput()->with('error', 'Invalid token!');
         }
 
@@ -105,7 +106,7 @@ class ForgotPasswordController extends Controller
         DB::table('password_resets')->where(['email'=> $request->email])->delete();
 
         if(isset($flag) && !empty($flag)){
-            return redirect()->route('home')->with('updated','Your password has been changed! 👍');
+            return redirect()->route('home')->with('success','Your password has been changed! 👍');
 
         } else {
             return redirect('/login')->with('updated', 'Your password has been changed!');
