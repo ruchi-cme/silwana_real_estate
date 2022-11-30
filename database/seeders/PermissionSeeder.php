@@ -218,5 +218,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'inquiry-list']);
         Permission::create(['name' => 'inquiry-view']);
 
+        Permission::create(['name' => 'frontUser-view']);
+
     }
 }

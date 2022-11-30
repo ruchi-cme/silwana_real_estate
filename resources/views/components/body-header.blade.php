@@ -2,10 +2,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 header-top">
-                    @php $builderDetail =  getBuilderDetail() @endphp
-                    @if(!empty($builderDetail))
-                        <a href="#"> <img src="{{asset('images/front')}}/call.svg" alt="call" /> <p>+{{ $builderDetail['phone_number'] }}</p> </a>
-                        <a href="#"> <img src="{{asset('images/front')}}/mail.svg" alt="email" /> <p>{{ $builderDetail['builder_email']  }}</p> </a>
+                    @php $phpneNo = ''; $emailid = ''; $contactUs =  getContactUsDetail() @endphp
+
+                    @if(!empty($contactUs))
+                        @foreach($contactUs as $row)
+                            @if (preg_match('~[0-9]+~', $row['notes']))
+                                @php $phpneNo = $row['notes'] @endphp
+                            @endif
+                                @if(filter_var( $row['notes'], FILTER_VALIDATE_EMAIL))
+                                    @php $emailid = $row['notes'] @endphp
+                                @endif
+                       @endforeach
+                            <a href="#"> <img src="{{asset('images/front')}}/call.svg" alt="call" /> <p> {{ !empty($phpneNo) ? $phpneNo : ''  }}</p> </a>
+                            <a href="#"> <img src="{{asset('images/front')}}/mail.svg" alt="email" /> <p>{{ !empty($emailid) ? $emailid : ''  }}</p> </a>
+
                     @endif
                 </div>
                 <div class="col-lg-12">

@@ -26,6 +26,9 @@ Route::name('user.updateProfile')->post('/user/updateProfile', 'App\Http\Control
 Route::name('user.updatePassword')->post('/user/updatePassword', 'App\Http\Controllers\Admin\UserController@updatePassword')->middleware(['permission:user-updatePassword']);;
 Route::name('user.userEdit')->get('/user/userEdit/{id}', 'App\Http\Controllers\Admin\UserController@userEdit')->middleware(['permission:user-editProfile']);;
 
+Route::name('users')->get('/users', 'App\Http\Controllers\Admin\UserController@frontUser')->middleware(['permission:frontUser-view']);
+
+
 //Roles
 Route::name('role')->get('/role', 'App\Http\Controllers\Admin\RoleController@index');
 Route::name('role.create')->get('/role/create', 'App\Http\Controllers\Admin\RoleController@create');

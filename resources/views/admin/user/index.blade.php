@@ -63,6 +63,7 @@
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Role</th>
                                 <th>Created At</th>
                                 <th></th>
                             </tr>
@@ -113,6 +114,9 @@
             },
             {
                 data: 'email'
+            },
+            {
+                data: 'role'
             },
             {
                 data: 'created'

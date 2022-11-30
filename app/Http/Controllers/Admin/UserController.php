@@ -17,12 +17,19 @@ class UserController extends Controller
     {
         if($request->ajax())
         {
-            $user = User::where('is_admin',1)->orderBy("id",'DESC')->get(['id','name','email','created_at']);
+            $user = User::orderBy("id",'DESC')->get(['id','name','email','created_at']);
+
+
+
+
             $data = $user->map(function ($data){
+                $role = Role::findById($data->id);
+
                 return [
                     'id' => $data->id,
                     'name' => $data->name,
                     'email' => $data->email,
+                    'role' =>    $role->name,
                     'created' => $data->created_at->diffForHumans(),
                 ];
             });
@@ -113,7 +120,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         $editUser = 1;
-        return view('admin.user.profile',compact('user', 'editUser'));
+        return view('admin.user.editProfile',compact('user', 'editUser'));
     }
     public function userEdit(  $id)
     {
@@ -181,5 +188,23 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->back()->with('success','Password Updated Successsfully 👍');
+    }
+
+    public function frontUser(Request $request)
+    {
+        if($request->ajax())
+        {
+            $user = User::where('is_admin',0)->orderBy("id",'DESC')->get(['id','name','email','created_at']);
+            $data = $user->map(function ($data){
+                return [
+                    'id' => $data->id,
+                    'name' => $data->name,
+                    'email' => $data->email,
+                    'created' => $data->created_at->diffForHumans(),
+                ];
+            });
+            return DataTables::of($data)->toJson();
+        }
+        return view('admin.user.frontUser');
     }
 }
