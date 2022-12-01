@@ -17,7 +17,7 @@
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet"/>
-
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <!-- Pagewise Stylesheet -->
         @stack('stylesheet')
 	</head>

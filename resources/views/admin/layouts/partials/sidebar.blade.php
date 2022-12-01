@@ -11,7 +11,7 @@
                 <div class="menu-item">
                     <a class="menu-link {{ Route::is('admin.admin') ? 'active' : '' }}" href="{{ route('admin.admin') }}">
                         <span class="menu-icon">
-                            <i class="fa fa-chart-pie me-2"></i>
+                            <img src="{{ asset('images/front/dashboard.svg') }}" />
                         </span>
                         <span class="menu-title">Dashboard</span>
                     </a>
@@ -23,7 +23,7 @@
                     <div data-kt-menu-trigger="click" class="menu-item {{ Route::is('admin.faq*') || Route::is('admin.ourTeam*') || Route::is('admin.aboutUs*') || Route::is('admin.news*') || Route::is('admin.media*') ||  Route::is('admin.contactus*')  || Route::is('admin.footer')  ? 'show' : '' }} menu-accordion mb-1">
                         <span class="menu-link {{ Route::is('admin.faq*') || Route::is('admin.ourTeam*') || Route::is('admin.aboutUs*') || Route::is('admin.news*') || Route::is('admin.media*') ||  Route::is('admin.contactus*')  || Route::is('admin.footer') ? 'active' : '' }}">
                             <span class="menu-icon">
-                                <i class="fa fa-project-diagram"></i>
+                                 <img src="{{ asset('images/front/homeCMS.svg') }}" />
                             </span>
                             <span class="menu-title">CMS</span>
                             <span class="menu-arrow"></span>
@@ -128,7 +128,7 @@
                    <div data-kt-menu-trigger="click" class="menu-item {{ Route::is('admin.aboutUsHome*') || Route::is('admin.investmentHome*')  || Route::is('admin.ourProjectHome*')  || Route::is('admin.featureProjectHome*')  ? 'show' : '' }} menu-accordion mb-1">
                        <span class="menu-link {{ Route::is('admin.aboutUsHome*') || Route::is('admin.investmentHome*')  || Route::is('admin.ourProjectHome*')  || Route::is('admin.featureProjectHome*')   ? 'active' : '' }}">
                        <span class="menu-icon">
-                           <i class="fa fa-project-diagram"></i>
+                            <img src="{{ asset('images/front/homeCMS.svg') }}" />
                        </span>
                        <span class="menu-title">Home CMS</span>
                        <span class="menu-arrow"></span>
@@ -195,7 +195,7 @@
                     <div data-kt-menu-trigger="click" class="menu-item {{ Route::is('admin.investService*') || Route::is('admin.buildingService*')  || Route::is('admin.rentalService*')  || Route::is('admin.salesService*')  ? 'show' : '' }} menu-accordion mb-1">
                         <span class="menu-link {{ Route::is('admin.investService*') || Route::is('admin.buildingService*')  || Route::is('admin.rentalService*')  || Route::is('admin.salesService*')   ? 'active' : '' }}">
                            <span class="menu-icon">
-                               <i class="fa fa-project-diagram"></i>
+                                <img src="{{ asset('images/front/homeCMS.svg') }}" />
                            </span>
                            <span class="menu-title">Sales CMS</span>
                            <span class="menu-arrow"></span>
@@ -261,7 +261,7 @@
                 <div data-kt-menu-trigger="click" class="menu-item {{ Route::is('admin.category*') ||  Route::is('admin.amenities*') ? 'show' : '' }} menu-accordion mb-1">
                    <span class="menu-link {{ Route::is('admin.category*') ||  Route::is('admin.amenities*') ? 'active' : '' }}">
                        <span class="menu-icon">
-                           <i class="fa fa-table"></i>
+                           <img src="{{ asset('images/front/masters (1).svg') }}" />
                        </span>
                        <span class="menu-title">Masters</span>
                        <span class="menu-arrow"></span>
@@ -299,7 +299,7 @@
                     <div data-kt-menu-trigger="click" class="menu-item {{   Route::is('admin.project*') || Route::is('admin.block*') || Route::is('admin.floor*') ||Route::is('admin.unit*') ||  Route::is('admin.projectAssign*') ? 'show' : '' }} menu-accordion mb-1">
                         <span class="menu-link {{   Route::is('admin.project*') || Route::is('admin.block*') || Route::is('admin.floor*') ||Route::is('admin.unit*') ||  Route::is('admin.projectAssign*') ? 'active' : '' }}">
                        <span class="menu-icon">
-                           <i class="fa fa-project-diagram"></i>
+                           <img src="{{ asset('images/front/project.svg') }}" />
                        </span>
                        <span class="menu-title">Projects</span>
                        <span class="menu-arrow"></span>
@@ -380,7 +380,7 @@
 
                         <span class="menu-link {{  Route::is('admin.user*') || Route::is('admin.permission*') || Route::is('admin.role*') ? 'active' : '' }}">
                            <span class="menu-icon">
-                               <i class="fa fa-user-alt"></i>
+                             <img src="{{ asset('images/front/user managment.svg') }}" />
                            </span>
                            <span class="menu-title">User Management</span>
                            <span class="menu-arrow"></span>
@@ -430,7 +430,7 @@
 
                        <span class="menu-link {{ Route::is('admin.bookMeeting*') || Route::is('admin.booking*')  ? 'active' : '' }}">
                            <span class="menu-icon">
-                               <i class="fa fa-project-diagram"></i>
+                               <img src="{{ asset('images/front/bookings.svg') }}" />
                            </span>
                            <span class="menu-title">Bookings</span>
                            <span class="menu-arrow"></span>
@@ -470,7 +470,7 @@
                    <div class="menu-item {{ Route::is('admin.inquiry*') ? 'show' : '' }}">
                        <a class="menu-link" href="{{ route('admin.inquiry') }}">
                               <span class="menu-icon">
-                           <i class="fa fa-info-circle me-2"></i>
+                            <img src="{{ asset('images/front/inquiry.svg') }}" />
                        </span>
                            <span class="menu-title">Inquiry</span>
                        </a>
