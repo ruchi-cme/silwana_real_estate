@@ -94,7 +94,7 @@
 </div>
 <!--end::Post-->
 
-@php $dataPoints = !empty($chartData)?  $chartData : '' ; @endphp
+@php $dataPoints = !empty($chart_data)?  $chart_data : '' ; @endphp
 @endsection
 @push('scripts')
     <script>
@@ -121,7 +121,7 @@
                         type: "line",
                         markerSize: 12,
                         xValueFormatString: "MMM, YYYY",
-                        yValueFormatString: "$###.#",
+                        yValueFormatString: "AED###.#",
                         dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
         }]
         });
