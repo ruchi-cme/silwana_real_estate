@@ -8625,6 +8625,13 @@ fieldset:disabled .btn {
 .h-25px {
     height: 25px !important
 }
+@media  (max-width: 900px) {
+    .header-brand a img{
+        height: 40px !important;
+    }
+}
+
+
 
 .h-30px {
     height: 30px !important
@@ -20542,7 +20549,7 @@ fieldset:disabled .btn {
     }
 
     .h-lg-25px {
-        height: 25px !important
+        height: 50px !important
     }
 
     .h-lg-30px {
@@ -39459,23 +39466,91 @@ a:hover {
     display: none
 }
 
-.btn {
-    outline: 0 !important
+.card-toolbar .btn {
+    outline: 0 !important;
+    background: #B48D4E !important;
+
 }
 
 .btn:not(.btn-shadow):not(.shadow):not(.shadow-sm):not(.shadow-lg) {
     box-shadow: none !important
+
 }
 
 .btn:not(.btn-outline):not(.btn-dashed):not(.border-hover):not(.border-active):not(.btn-flush):not(.btn-icon) {
     border: 0;
     padding: calc(.75rem + 1px) calc(1.5rem + 1px)
 }
+#create_button{
+    background: #B48D4E !important;
+    transition: 0.3s ease;
+}
+#create_button:hover{
+    transform: scale(1.1);
+    /*box-shadow: 0px 0px 10px rgba(180, 141, 78, 0.5);*/
+}
+#add_more{
+    background: #B48D4E;
+    border: 1px solid #B48D4E;
+    transition: 0.3s ease;
+}
+#add_more:hover{
+    background: transparent;
+    border: 1px solid #B48D4E;
+    transition: 0.3s ease;
+    color: #B48D4E;
+}
+#submitbtn{
+    background: #B48D4E;
+    transition: 0.3s ease;
+}
+#submitbtn:hover{
+    background: #B48D4E !important;
+    transform: scale(1.1);
+}
+#kt_profile_details_view .btn{
+     background: #B48D4E !important;
+    border: 1px solid #B48D4E;
+    transition: 0.3s ease;
+ }
+#kt_profile_details_view .btn:hover{
+    background: transparent !important;
+    border: 1px solid #B48D4E;
+    transition: 0.3s ease;
+    color: #B48D4E;
+}
+#kt_signin_submit{
+    background: #B48D4E !important;
+    border: 1px solid #B48D4E;
+    transition: 0.3s ease;
+}
+#kt_signin_submit:hover{
+    transform: scale(1.1);
+}
+#kt_password_submit{
+background: #B48D4E !important;
+border: 1px solid #B48D4E;
+transition: 0.3s ease;
+}
+#kt_password_submit:hover{
+    transform: scale(1.1);
+}
 
 .btn-group-lg>.btn:not(.btn-outline):not(.btn-dashed):not(.border-hover):not(.border-active):not(.btn-flush):not(.btn-icon),
 .btn:not(.btn-outline):not(.btn-dashed):not(.border-hover):not(.border-active):not(.btn-flush):not(.btn-icon).btn-lg {
     padding: calc(.825rem + 1px) calc(1.75rem + 1px)
 }
+
+.breadcrumb-item{
+    color: #B48D4E !important;
+}
+.breadcrumb-item a{
+    color: #B48D4E !important;
+}
+.breadcrumb-item a .fa{
+    color: #B48D4E !important;
+}
+
 
 .btn-group-sm>.btn:not(.btn-outline):not(.btn-dashed):not(.border-hover):not(.border-active):not(.btn-flush):not(.btn-icon),
 .btn:not(.btn-outline):not(.btn-dashed):not(.border-hover):not(.border-active):not(.btn-flush):not(.btn-icon).btn-sm {
@@ -40344,29 +40419,29 @@ a:hover {
     color: #fff
 }
 
-.btn-check:active+.btn.btn-success,
-.btn-check:checked+.btn.btn-success,
-.btn.btn-success.active,
-.btn.btn-success.show,
-.btn.btn-success:active:not(.btn-active),
-.btn.btn-success:focus:not(.btn-active),
-.btn.btn-success:hover:not(.btn-active),
-.show>.btn.btn-success {
-    color: #fff;
-    border-color: #47be7d;
-    background-color: #47be7d !important
-}
+/*.btn-check:active+.btn.btn-success,*/
+/*.btn-check:checked+.btn.btn-success,*/
+/*.btn.btn-success.active,*/
+/*.btn.btn-success.show,*/
+/*.btn.btn-success:active:not(.btn-active),*/
+/*.btn.btn-success:focus:not(.btn-active),*/
+/*.btn.btn-success:hover:not(.btn-active),*/
+/*.show>.btn.btn-success {*/
+/*    color: #B48D4E;*/
+/*    border:1px solid #B48D4E !important;*/
+/*    background-color: #FFF !important*/
+/*}*/
 
-.btn-check:active+.btn.btn-success i,
-.btn-check:checked+.btn.btn-success i,
-.btn.btn-success.active i,
-.btn.btn-success.show i,
-.btn.btn-success:active:not(.btn-active) i,
-.btn.btn-success:focus:not(.btn-active) i,
-.btn.btn-success:hover:not(.btn-active) i,
-.show>.btn.btn-success i {
-    color: #fff
-}
+/*.btn-check:active+.btn.btn-success i,*/
+/*.btn-check:checked+.btn.btn-success i,*/
+/*.btn.btn-success.active i,*/
+/*.btn.btn-success.show i,*/
+/*.btn.btn-success:active:not(.btn-active) i,*/
+/*.btn.btn-success:focus:not(.btn-active) i,*/
+/*.btn.btn-success:hover:not(.btn-active) i,*/
+/*.show>.btn.btn-success i {*/
+/*    color: #B48D4E;*/
+/*}*/
 
 .btn-check:active+.btn.btn-success .svg-icon svg [fill]:not(.permanent):not(g),
 .btn-check:checked+.btn.btn-success .svg-icon svg [fill]:not(.permanent):not(g),
@@ -54058,7 +54133,7 @@ code:not([class*=language-]) {
 
 .badge-primary {
     color: #fff;
-    background-color: #009ef7
+    background-color: #B48D4E;
 }
 
 .badge-light-primary {

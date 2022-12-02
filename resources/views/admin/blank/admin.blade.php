@@ -16,130 +16,73 @@
         <div id="kt_content_container" class="container-fluid">
             @include('layouts.alerts.error')
             <!--begin::Card-->
-                <!--begin::Row-->
-                <div class="row g-5 g-xl-8">
-                    <div class="col-xl-4">
-                        <!--begin::Statistics Widget 5-->
-                        <a href="#" class="card bg-danger hoverable card-xl-stretch mb-xl-8">
-                            <!--begin::Body-->
-                            <div class="card-body text-center">
-                                <!--end::Svg Icon-->
-                                <div class="text-white fw-bolder fs-2 mb-2 mt-5">Total Booking  </div>
-                                <div class="fw-bold text-white"><h3>{{ !empty($totalBooking) ? $totalBooking : '0' }}</h3> </div>
-                            </div>
-                            <!--end::Body-->
-                        </a>
-                        <!--end::Statistics Widget 5-->
-                    </div>
-                    <div class="col-xl-4">
-                        <!--begin::Statistics Widget 5-->
-                        <a href="#" class="card bg-primary hoverable card-xl-stretch mb-xl-8">
-                            <!--begin::Body-->
-                            <div class="card-body text-center">
+            <div class="row">
 
-                                <div class="text-white fw-bolder fs-2 mb-2 mt-5">Cancel Booking</div>
-                                <div class="fw-bold text-white"><h3>{{ !empty($cancelBooking) ? $cancelBooking : '0' }}</h3> </div>
-                            </div>
-                            <!--end::Body-->
-                        </a>
-                        <!--end::Statistics Widget 5-->
-                    </div>
-                    <!--<div class="col-xl-4">
-                      begin::Statistics Widget 5--
-                        <a href="#" class="card bg-success hoverable card-xl-stretch mb-5 mb-xl-8">
-                            < --begin::Body--
-                            <div class="card-body">
-                                <! --begin::Svg Icon | path: icons/duotune/graphs/gra005.svg--
-                                <span class="svg-icon svg-icon-white svg-icon-3x ms-n1">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-													<path opacity="0.3" d="M14 12V21H10V12C10 11.4 10.4 11 11 11H13C13.6 11 14 11.4 14 12ZM7 2H5C4.4 2 4 2.4 4 3V21H8V3C8 2.4 7.6 2 7 2Z" fill="black" />
-													<path d="M21 20H20V16C20 15.4 19.6 15 19 15H17C16.4 15 16 15.4 16 16V20H3C2.4 20 2 20.4 2 21C2 21.6 2.4 22 3 22H21C21.6 22 22 21.6 22 21C22 20.4 21.6 20 21 20Z" fill="black" />
-												</svg>
-											</span>
-                                <! -end::Svg Icon--
-                                <div class="text-white fw-bolder fs-2 mb-2 mt-5">Active Project</div>
-                                <div class="fw-bold text-white">50% Increased for FY20</div>
-                            </div>
-                            <!- end::Body-
-                        </a>
-                        < --end::Statistics Widget 5
-                    </div>-->
-                </div>
-                <div class="row g-5 g-xl-8">
-                    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
-                </div>
-                <div class="row g-5 g-xl-8">
-                    <div class="col-xxl-4">
-                        <!--begin::Mixed Widget 2-->
-                        <div class="card card-xxl-stretch">
-                            <!--begin::Header-->
-                            <div class="card-header border-0 bg-danger py-5">
-                                <h3 class="card-title fw-bolder text-white">Projects</h3>
-                            </div>
-                            <!--end::Header-->
-                            <!--begin::Body-->
-                            <div class="card-body p-0">
-                                <!--begin::Chart-->
-                                <div class="mixed-widget-2-chart card-rounded-bottom bg-danger" data-kt-color="danger" style="height: 50px"></div>
-                                <!--end::Chart-->
-                                <!--begin::Stats-->
-                                <div class="card-p mt-n20 position-relative">
-                                    <!--begin::Row-->
-                                    <div class="row g-0">
-                                        <!--begin::Col-->
-
-                                        <div class="col bg-light-warning px-6 py-8 rounded-2 me-7 mb-7 text-center">
-                                            <!--end::Svg Icon-->
-                                            <a href="#" class="text-warning fw-bold fs-6">Total Project </a>
-                                            <span class="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
-												 <h3>{{ !empty($totalProject) ? $totalProject : '0' }}</h3>
-											 </span>
-                                        </div>
-                                        <!--end::Col-->
-                                        <!--begin::Col-->
-                                        <div class="col bg-light-primary px-6 py-8 rounded-2 mb-7 text-center">
-                                            <!--end::Svg Icon-->
-                                            <a href="#" class="text-primary fw-bold fs-6">Upcoming </a>
-                                            <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
-												 <h3>{{ !empty($upcoming) ? $upcoming : '0' }}</h3>
-											 </span>
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Row-->
-                                    <!--begin::Row-->
-                                    <div class="row g-0">
-                                        <!--begin::Col-->
-                                        <div class="col bg-light-danger px-6 py-8 rounded-2 me-7 text-center">
-                                            <!--end::Svg Icon-->
-                                            <a href="#" class="text-danger fw-bold fs-6 mt-2">Ongoing</a>
-                                            <span class="svg-icon svg-icon-3x svg-icon-danger d-block my-2">
-												 <h3>{{ !empty($ongoing) ? $ongoing : '0' }}</h3>
-											 </span>
-                                        </div>
-
-                                        <!--end::Col-->
-                                        <!--begin::Col-->
-                                        <div class="col bg-light-success px-6 py-8 rounded-2 text-center">
-                                            <!--end::Svg Icon-->
-                                            <a href="#" class="text-success fw-bold fs-6 mt-2">Completed </a>
-                                            <span class="svg-icon svg-icon-3x svg-icon-success d-block my-2">
-												 <h3>{{ !empty($completed) ? $completed : '0' }}</h3>
-											 </span>
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Row-->
-                                </div>
-                                <!--end::Stats-->
-                            </div>
-                            <!--end::Body-->
+                <!-- -------total-data-------- -->
+                <div class="col-xxl-4 col-xl-4 col-lg-12 col-md-12 mb-4">
+                    <a href="" class="data-wrapper data-wrapper-1">
+                        <div class="left-img">
+                            <img src="{{ asset('images/front/totel-project-img.svg') }}" alt="totel-project">
                         </div>
-                        <!--end::Mixed Widget 2-->
-                    </div>
-
+                        <div class="right-content">
+                            <h3>{{ !empty($totalProject) ? $totalProject : ''  }}</h3>
+                            <h5>Total Projects</h5>
+                        </div>
+                    </a>
                 </div>
-                <!--end::Row-->
+                <div class="col-xxl-4 col-xl-4 col-lg-12 col-md-12 mb-4">
+                    <a href="" class="data-wrapper data-wrapper-2">
+                        <div class="left-img">
+                            <img src="{{ asset('images/front/totel-bookin-img.svg') }}" alt="totel-project">
+                        </div>
+                        <div class="right-content">
+                            <h3>{{ !empty($totalBooking['total_booking']) ? $totalBooking['total_booking'] : ''  }}</h3>
+                            <h5>Total Bookings</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xxl-4 col-xl-4 col-lg-12 col-md-12 mb-4">
+                    <a href="" class="data-wrapper data-wrapper-3">
+                        <div class="left-img">
+                            <img src="{{ asset('images/front/totel-revenue-img.svg') }}" alt="totel-project">
+                        </div>
+                        <div class="right-content">
+                            <h3>{{ !empty($totalBooking['revenue']) ? $totalBooking['revenue'] : ''  }}</h3>
+                            <h5>Total Revenue (AED)</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- ------------- -->
+
+            <!-- -----bookin-data-part--- -->
+            <div class="booking-data-part">
+                <div class="row">
+                    <div class="col-xxl-8 col-xl-8 col-lg-12 col-md-12">
+                        <div class="booking-data-wrapper" id="chartContainer">
+
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-xl-4 col-lg-12 col-md-12">
+                        <div class="top-bookings-wrapper">
+                            <h3 class="top-bookings-title">Top 5 Bookings</h3>
+                            @if(!empty($topProBooking))
+                                @foreach($topProBooking as $row)
+                                    <div class="our-top-bookings-wrapper">
+                                        <div class="top-bookings-left">
+                                            <h4><a href="">{{$row['project_name']}}</a></h4>
+                                            <p>United Arab Emirates</p>
+                                        </div>
+                                        <div class="top-bookings-right">
+                                            <h3>{{$row['booking_count']}}</h3>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!--end::Card-->
         </div>
@@ -150,41 +93,44 @@
     <!--end::Container-->
 </div>
 <!--end::Post-->
-@php
 
- $dataPoints = !empty($chartData) ? $chartData : '0'  ;  @endphp
+@php $dataPoints = !empty($chartData)?  $chartData : '' ; @endphp
 @endsection
-<style>
-    .canvasjs-chart-credit
-    {
-        display: none !important;
-    }
-</style>
 @push('scripts')
-<script>
-    window.onload = function() {
+    <script>
+        window.onload = function() {
 
-        var chart = new CanvasJS.Chart("chartContainer", {
-            animationEnabled: true,
-            theme: "light2",
-            title:{
-                text: "Booking Data"
-            },
-            axisY: {
-                title: "Total Booking Count"
-            },
-            data: [{
-                type: "column",
-                yValueFormatString: "#,##0.## Booking",
-                dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-            }]
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                    theme: "light2", // "light1", "light2", "dark1", "dark2"
+                    animationEnabled: true,
+                    title:{
+                        text: "Share Value - 2016"
+                    },
+                    axisX: {
+                        interval: 1,
+                        intervalType: "month",
+                        valueFormatString: "MMM"
+                    },
+                    axisY:{
+                        title: "Price (in AED)",
+                        includeZero: true,
+                        valueFormatString: "AED#0"
+                    },
+                    data: [{
+                        type: "line",
+                        markerSize: 12,
+                        xValueFormatString: "MMM, YYYY",
+                        yValueFormatString: "$###.#",
+                        dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+        }]
         });
-        chart.render();
+            chart.render();
 
-    }
 
-</script>
-<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        }
+
+    </script>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 @endpush
-

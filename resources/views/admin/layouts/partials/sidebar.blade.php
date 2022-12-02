@@ -380,7 +380,7 @@
 
                         <span class="menu-link {{  Route::is('admin.user*') || Route::is('admin.permission*') || Route::is('admin.role*') ? 'active' : '' }}">
                            <span class="menu-icon">
-                             <img src="{{ asset('images/front/user managment.svg') }}" />
+                             <img src="{{ asset('images/front/user_managment.svg') }}" />
                            </span>
                            <span class="menu-title">User Management</span>
                            <span class="menu-arrow"></span>
