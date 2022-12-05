@@ -261,7 +261,7 @@
                 <div data-kt-menu-trigger="click" class="menu-item {{ Route::is('admin.category*') ||  Route::is('admin.amenities*') ? 'show' : '' }} menu-accordion mb-1">
                    <span class="menu-link {{ Route::is('admin.category*') ||  Route::is('admin.amenities*') ? 'active' : '' }}">
                        <span class="menu-icon">
-                           <img src="{{ asset('images/front/masters (1).svg') }}" />
+                           <img src="{{ asset('images/front/masters.svg') }}" />
                        </span>
                        <span class="menu-title">Masters</span>
                        <span class="menu-arrow"></span>
