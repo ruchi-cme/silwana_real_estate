@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Role;
 use App\Models\{User,Inquiry};
 use Illuminate\Http\Request;
 use Auth;
@@ -124,6 +125,10 @@ class HomeController extends Controller
                 $list->email = strtolower(trim($request->email));
                 $list->password = Hash::make($request->password);
                 $list->save();
+
+                $obj = User::where('id',$list->id)->first();
+                $role = Role::findById('4'); //user Role
+                $obj->assignRole($role->name);
 
                 if ($list->id) {
 

@@ -55409,7 +55409,14 @@ label.rating-label:hover~.rating-label>.svg-icon svg:hover [fill]:not(.permanent
 body[data-kt-sticky-landing-header=on] {
     padding-top: 100px
 }
-
+body{
+    overflow: hidden;
+    overflow-y: scroll;
+}
+html{
+    overflow: hidden;
+    overflow-y: scroll;
+}
 @media (max-width:991.98px) {
     .landing-header {
         height: 70px

@@ -17,19 +17,23 @@ class UserController extends Controller
     {
         if($request->ajax())
         {
-            $user = User::orderBy("id",'DESC')->get(['id','name','email','created_at']);
-
-
-
+            $user = User::orderBy("id",'DESC')->get(['id','name','email', 'is_admin','created_at']);
 
             $data = $user->map(function ($data){
-                $role = Role::findById($data->id);
+
+               if($data->is_admin == 1) {
+                   $role = Role::findById($data->id) ;
+                   $rolename = $role->name;
+               }
+               else {
+                   $rolename = 'user';
+               }
 
                 return [
                     'id' => $data->id,
                     'name' => $data->name,
                     'email' => $data->email,
-                    'role' =>    $role->name,
+                    'role' =>   $rolename,
                     'created' => $data->created_at->diffForHumans(),
                 ];
             });
