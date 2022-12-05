@@ -29,7 +29,8 @@ class BlockController extends Controller
                 'proj_block_mappings.total_block',
                 'proj_block_mappings.status',
                 'proj_block_mappings.created_date',
-                'project_master.project_name'
+                'project_master.project_name',
+                'project_master.project_id'
             ];
             $dbData = Block::leftJoin('project_master', 'project_master.project_id', '=', 'proj_block_mappings.project_id')
                 ->select($select)
@@ -41,7 +42,8 @@ class BlockController extends Controller
 
                 return [
                     'id'              => $data->proj_block_map_id,
-                    'total_block'      => $data->total_block,
+                    'project_id'      =>  $data->project_id,
+                    'total_block'     => $data->total_block,
                     'project_name'    => $data->project_name,
                     'status'          => !empty($data->status) && ($data->status == 1) ? 'Active' : 'Inctive',
                     'created_date'    => $data->created_date

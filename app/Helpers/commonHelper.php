@@ -799,3 +799,34 @@ if(!function_exists("getSalesService")) {
     }
 }
 
+if(!function_exists("getProjectBlockFloorUnitDetail")) {
+
+    function getProjectBlockFloorUnitDetail($project_id)
+    {
+        $select =  [
+            'floor_unit_mapping.floor_unit_id',
+            'floor_unit_mapping.unit_name',
+            'floor_unit_mapping.area_in_sq_feet',
+            'floor_unit_mapping.total_price',
+            'floor_unit_mapping.booking_price',
+            'floor_unit_mapping.total_price',
+            'floor_unit_mapping.booking_type',
+            'floor_unit_mapping.status',
+            'category_master.category_name',
+            'block_name_mappings.block_name',
+            'project_master.project_name',
+            'block_floor_mappings.block_floor_map_id as floorId'
+        ];
+        $dbData = FloorUnitMapping::leftJoin('floor_details', 'floor_details.floor_detail_id', '=', 'floor_unit_mapping.floor_detail_id')
+            ->leftJoin('block_floor_mappings', 'block_floor_mappings.block_floor_map_id', '=', 'floor_details.block_floor_map_id')
+            ->leftJoin('block_name_mappings', 'block_name_mappings.block_name_map_id', '=', 'block_floor_mappings.block_name_map_id')
+            ->leftJoin('project_master', 'project_master.project_id', '=', 'floor_details.project_id')
+            ->leftJoin('category_master', 'category_master.category_id', '=', 'floor_details.category_id')
+            ->select($select)
+            ->orderBy('floor_unit_mapping.floor_unit_id', 'desc')
+            ->where('project_master.project_id',$project_id)
+            ->where('floor_unit_mapping.deleted',0)
+            ->get();
+        return $dbData;
+    }
+}

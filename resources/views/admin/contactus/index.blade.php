@@ -159,7 +159,7 @@
                     console.log(data  )
 
                     return `
-                                <img src="${data } " width="100" height="100" / >
+                                <img src="${data } " width="50" height="50" / >
                             `;
                 },
             },

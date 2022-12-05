@@ -28,6 +28,7 @@ class BlockFloorMappingController extends Controller
                 'block_name_mappings.block_name',
                 'block_floor_mappings.status',
                 'block_floor_mappings.created_date',
+                'block_floor_mappings.project_id'
             ];
             $dbData = BlockFloorMapping::leftJoin('project_master', 'project_master.project_id', '=', 'block_floor_mappings.project_id')
                 ->leftJoin('block_name_mappings', 'block_name_mappings.block_name_map_id', '=', 'block_floor_mappings.block_name_map_id')
@@ -39,6 +40,7 @@ class BlockFloorMappingController extends Controller
             $data = $dbData->map(function ($data){
 
                 return [
+                    'project_id'       => $data->project_id,
                     'id'              => $data->block_floor_map_id,
                     'project_name'    => $data->project_name,
                     'block_name'      => $data->block_name,
@@ -288,4 +290,10 @@ class BlockFloorMappingController extends Controller
         return redirect()->route('admin.floor')->with('success','Floor Status Changed');
     }
 
+    public function getProBlockUnitData(Request $request) {
+
+        $project_id = $request->project_id;
+        $data['blockData'] = getProjectBlockFloorUnitDetail($project_id);;
+        return response()->json($data);
+    }
 }

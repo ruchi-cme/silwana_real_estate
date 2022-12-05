@@ -91,6 +91,7 @@ Route::name('state.fetch')->get('/state/fetch', 'App\Http\Controllers\CountrySta
 Route::name('city.fetch')->get('/city/fetch', 'App\Http\Controllers\CountryStateCityController@fetchCity');
 Route::name('block.fetch')->get('/block/fetch', 'App\Http\Controllers\CountryStateCityController@fetchBlock');
 Route::name('user.fetch')->get('/user/fetch', 'App\Http\Controllers\Admin\BookMeetingController@fetchUser');
+Route::name('getProBlockUnitData.fetch')->get('/getProBlockUnitData', 'App\Http\Controllers\Admin\BlockFloorMappingController@getProBlockUnitData');
 
 // Config Routes
 Route::get('/permission/create', function () {

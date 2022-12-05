@@ -137,7 +137,7 @@
                     return `
                             <a href="block/edit/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-success me-2"
                             ><span class="svg-icon svg-icon-1"><i class="fa fa-edit"></i></span></a>
-                            <a href="block/delete/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2"
+                            <a project_id="${data.project_id}" onclick="delete_fun()" class="deleteButton btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2"
                             ><span class="svg-icon svg-icon-1"><i class="fa fa-trash"></i></span></a>
                              <a href="block/changeStatus/${data.id}" class="btn btn-sm btn-icon btn-hover-scale btn-active-primary  me-2"
                             ><span class="svg-icon svg-icon-1">${ $icon }</span></a>
@@ -171,27 +171,34 @@
         datatable.search($(this).val()).draw();
     })
 
-    $('.deleteButton').click(function () { alert(d);
-        var id = $(this).data('id');
-        swal({
-                title: "Are you sure!",
-                type: "error",
-                confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes!",
-                showCancelButton: true,
-            },
-            function() {
+
+
+        $(document).ready( function() { console.log(2);
+            function delete_fun(    ){
+                alert(1);
+            }
+            $('.deleteButton1').click(function () {   // href="block/delete/${data.id}"
+
+                var project_id = $(this).attr('project_id');
+
                 $.ajax({
-                    type: "POST",
-                    url: "{{url('/delete')}}",
-                    data: {id:id},
-                    success: function (data) {
-                        //
-                        alert(3);
+                    url: "{{ route('getProBlockUnitData.fetch') }}",
+                    type: "GET",
+                    data: {
+                        project_id: project_id,
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        console.log(result.blockData);
+                        if(result.blockData != ''){
+                            alert('Block deletion not allowed')
+                        } else {
+                             alert('delete')
+                        }
                     }
                 });
-            });
-    })
+            })
+        });
 
 </script>
 @endpush
