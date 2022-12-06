@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\{ Booking};
+use App\Models\{ Booking, Project};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,8 +11,13 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $totalProject =  (getProjectList('',array('1','2','3')));;
-dd($totalProject);
+        $projectData  = Project::select([ 'project_id'])
+            ->where('status' , 1)
+            ->where('deleted',0)
+            ->get();
+        $countProject = $projectData->count();
+ 
+        $totalProject =  $countProject;
         $totalBooking = Booking::select([ DB::raw('count(bookings.booking_id) as total_booking ,sum(bookings.booking_price)  as revenue')])
                         ->whereIn('status' , array('1','2'))
                         ->where('canceled',0)
