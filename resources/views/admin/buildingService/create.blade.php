@@ -92,15 +92,15 @@
                                             <div class="col-xl-3">
                                                 <div class="fs-6 fw-bold mt-2 mb-3 required">Detail</div>
                                             </div>
-                                            <div class="col-md-7 mb-7">
+                                            <div class="col-md-7 col-10 mb-7">
                                                 <input type="text" placeholder="Enter Detail" attrame="Enter Detail" class="form-control form-control-solid" name="detail[]" value=" {{$row }}" >
                                                 <label class="inputerror errorMsg" for="detail" style="">  </label>
                                             </div>
 
-                                            <div class="col-md-1 mb-3">
+                                            <div class="col-md-1 col-2 mb-3">
 
                                                 <!--begin::Actions-->
-                                                <div class="mb-0">
+                                                <div class="mb-0 ">
                                                     <button type="button"  class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2 button btn-remove" id=" ">
                                                         <span class="svg-icon svg-icon-1"><i class="fa fa-trash"></i></span>
                                                     </button>
@@ -258,12 +258,12 @@
         <div class="col-xl-3">
             <div class="fs-6 fw-bold mt-2 mb-3 required">Detail</div>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4 col-10 mb-3">
             <input type="text" placeholder="Enter Detail" attrame="Enter Detail" class="form-control form-control-solid" name="detail[]" value="" >
             <label class="inputerror errorMsg" for="detail" style="">  </label>
         </div>
 
-        <div class="col-md-2 mb-2">
+        <div class="col-md-2 col-2 mb-2">
 
             <!--begin::Actions-->
             <div class="mb-0">

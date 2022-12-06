@@ -11,8 +11,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $totalProject = count(getProjectList('',array('1','2','3')));;
-
+        $totalProject =  (getProjectList('',array('1','2','3')));;
+dd($totalProject);
         $totalBooking = Booking::select([ DB::raw('count(bookings.booking_id) as total_booking ,sum(bookings.booking_price)  as revenue')])
                         ->whereIn('status' , array('1','2'))
                         ->where('canceled',0)

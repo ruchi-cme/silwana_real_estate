@@ -78,7 +78,7 @@
                  style="width: 500px;height: auto;top: 145px;left: 65px;border-radius: 10px;background-color: #fff;position: absolute;z-index: 10;">
                 <div class="top-icon" style="position: relative;margin-top: 30px;margin-bottom: 30px;">
                     <img src="{{ asset('images/front/lock-icon-img.svg') }}" alt=""
-                         style="border-radius: 50%;width: 98pxpx;height: 98px;display: flex;align-items: center;justify-content: center;display: block;margin: 0px auto;margin-top: 20px!important;">
+                         style="border-radius: 50%;width: 98px;height: 98px;display: flex;align-items: center;justify-content: center;display: block;margin: 0px auto;margin-top: 20px!important;">
 
                     <h3 style="font-family: Poppins;font-size: 24px;font-weight: 600;line-height: 36px;letter-spacing: 0px;text-align: center;margin-top: 19px;margin-bottom: 10px;color: #010211;">Hello,</h3>
                     <h4 style="font-family: Poppins;font-size: 14px;font-weight: 400;line-height: 21px;letter-spacing: 0px;text-align: center;padding-left: 75px;padding-right: 45px;margin: 0px; color: #010211;">If you’ve lost your password or wish to reset it,
@@ -90,7 +90,7 @@
                     </div>
                 </div>
 
-                <div class="extra-text" style="width: 500pxpx;height: auto;padding: 20px 50px 20px 50px; background-color: #B48D4E;border-radius: 0px 0px 10px 10px;">
+                <div class="extra-text" style="width: 500px;height: auto;padding: 20px 50px 20px 50px; background-color: #B48D4E;border-radius: 0px 0px 10px 10px;">
                     <h4 style="font-family: Poppins;font-size: 14px;font-weight: 400;line-height: 21px;letter-spacing: 0px;text-align: center;color: #fff;">If you did not request a password reset, you can safely ignore this email.</h4>
                 </div>
             </div>

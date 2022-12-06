@@ -100,12 +100,11 @@
     <script>
         window.onload = function() {
 
-
             var chart = new CanvasJS.Chart("chartContainer", {
                     theme: "light2", // "light1", "light2", "dark1", "dark2"
                     animationEnabled: true,
                     title:{
-                        text: "Share Value - 2016"
+                        text: "Share Value - {{date('Y')}}"
                     },
                     axisX: {
                         interval: 1,
@@ -123,11 +122,9 @@
                         xValueFormatString: "MMM, YYYY",
                         yValueFormatString: "AED###.#",
                         dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-        }]
-        });
+                    }]
+            });
             chart.render();
-
-
         }
 
     </script>

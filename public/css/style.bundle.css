@@ -56260,3 +56260,124 @@ body {
     background-color: #fff;
     border: 0
 }
+.canvasjs-chart-canvas{
+    width: 100% !important;
+}
+
+
+
+
+/*------our-media-quary*/
+
+
+
+
+
+
+@media (max-width: 540px){
+    #kt_content_container{
+        width: 100%;
+        max-width: 530px !important;
+    }
+    .copyright-text{
+        margin-top: 50px;
+        margin-bottom: 10px;
+    }
+    #search{
+        width: 230px !important;
+    }
+    .card-toolbar .btn{
+        font-size: 12px !important;
+        padding: calc(.75rem + 1px) calc(0.80rem + 1px) !important;
+    }
+    .increment > input{
+        width: 150px !important;
+    }
+}
+/*==========================*/
+
+@media (max-width: 414px){
+    #kt_content_container{
+        width: 100%;
+        max-width: 400px;
+    }
+    .copyright-text{
+        margin-top: 50px;
+        margin-bottom: 10px;
+    }
+    #search{
+        width: 185px !important;
+    }
+    .card-toolbar .btn{
+        font-size: 12px !important;
+        padding: calc(.75rem + 1px) calc(0.80rem + 1px) !important;
+    }
+    .increment > input{
+        width: 150px !important;
+    }
+}
+/*==========================*/
+
+@media (max-width: 393px){
+    #kt_content_container{
+        width: 100%;
+        max-width: 375px;
+    }
+    .copyright-text{
+        margin-top: 50px;
+        margin-bottom: 10px;
+    }
+    #search{
+        width: 175px !important;
+    }
+    .card-toolbar .btn{
+        font-size: 12px !important;
+        padding: calc(.75rem + 1px) calc(0.80rem + 1px) !important;
+    }
+    .increment > input{
+        width: 150px !important;
+    }
+}
+/*==========================*/
+
+@media (max-width: 390px){
+    #kt_content_container{
+        width: 100%;
+        max-width: 375px;
+    }
+    .copyright-text{
+        margin-top: 50px;
+        margin-bottom: 10px;
+    }
+    #search{
+        width: 175px !important;
+    }
+    .card-toolbar .btn{
+        font-size: 12px !important;
+        padding: calc(.75rem + 1px) calc(0.80rem + 1px) !important;
+    }
+    .increment > input{
+        width: 150px !important;
+    }
+}
+/*==========================*/
+@media (max-width: 375px){
+    #kt_content_container{
+        width: 100%;
+        max-width: 375px;
+    }
+    .copyright-text{
+        margin-top: 50px;
+        margin-bottom: 10px;
+    }
+    #search{
+        width: 175px !important;
+    }
+    .card-toolbar .btn{
+        font-size: 12px !important;
+        padding: calc(.75rem + 1px) calc(0.80rem + 1px) !important;
+    }
+    .increment > input{
+        width: 150px !important;
+    }
+}
