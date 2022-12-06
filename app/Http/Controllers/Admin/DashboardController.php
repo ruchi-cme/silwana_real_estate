@@ -16,7 +16,7 @@ class DashboardController extends Controller
             ->where('deleted',0)
             ->get();
         $countProject = $projectData->count();
- 
+
         $totalProject =  $countProject;
         $totalBooking = Booking::select([ DB::raw('count(bookings.booking_id) as total_booking ,sum(bookings.booking_price)  as revenue')])
                         ->whereIn('status' , array('1','2'))
