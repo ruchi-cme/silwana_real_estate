@@ -4,7 +4,7 @@
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.admin') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
 <li class="breadcrumb-item px-3 text-primary">Projects</li>
 <li class="breadcrumb-item px-3"><a class="text-hover-primary text-muted" href="{{ route('admin.floor') }}">Floor</a></li>
-<li class="breadcrumb-item px-3 text-primary">{{ !empty( $editData->proj_block_floor_id) ? 'Edit': "Create" }}</li>
+<li class="breadcrumb-item px-3 text-primary">{{ !empty( $editData->block_floor_map_id) ? 'Edit': "Create" }}</li>
 @endsection
 <style>
     .errorMsg {
@@ -29,14 +29,73 @@
         border: none;
     }
 
+    .tablee tr td {
+        width: 25%;
+    }
+
+    .tablee tr td:last-child {
+        width: 100%;
+        max-width: 100% !important;
+    }
+
+    .floor-wrap .form-group {
+        width: 19%;
+    }
+
+    .floor-wrap {
+        justify-content: space-between;
+    }
+
     .unit-wrapper input {
-        background:none;
-        border:1px solid #c6c6c6;
-        border-radius: 5px;
-        font-size: 14px;
-        padding: 7px 10px;
-        color: #000;
-        margin: 0 0 5px;
+        margin: 0 0 0px;
+        width: 100%;
+        color: #5e6278;
+        background-color: #f5f8fa;
+        border-color: #f5f8fa;
+        padding-top: .825rem;
+        padding-bottom: .825rem;
+        padding-left: 1.5rem;
+        font-size: 1.15rem;
+        border-radius: .475rem;
+        border: none !important;
+
+    }
+
+    select {
+        margin: 0 0 0px;
+        width: 100%;
+        color: #5e6278;
+        background-color: #f5f8fa;
+        padding-top: .825rem;
+        padding-bottom: .825rem;
+        padding-left: 1.5rem;
+        font-size: 1.15rem;
+        border-radius: .475rem;
+        border: none !important;
+    }
+
+    .form-group input{
+        background-color: #f5f8fa;
+        border-color: #f5f8fa;
+        border: none !important;
+        padding-top: .825rem;
+        padding-bottom: .825rem;
+        padding-left: 1.5rem;
+        font-size: 1.15rem;
+        border-radius: .475rem;
+    }
+
+    :focus {
+        border-color: #f5f8fa;
+        outline: none;
+    }
+
+    .svg-icon i {
+        color: #fff;
+    }
+
+    .form-select.form-select-solid {
+
     }
 
     .unit-wrapper label {
@@ -60,7 +119,7 @@
     }
 
     .unit-wrapper .cmn-box {
-        padding: 20px 25px;
+        padding: 20px 0px;
         border-radius: 10px;
     }
 
@@ -112,21 +171,21 @@
 
                                 <section class="unit-wrapper">
 
-                                    <div class="form-group">
-                                    <label for="">Project</label>
-                                    <select class="form-select form-select-solid form-select-lg" name="project_name" id="project_id" data-placeholder="Select Project" data-control="select2" >
-                                        <option ></option>
-                                        @php $projectData = getProject() @endphp
-                                        @if (!empty($projectData))
-                                            @foreach ($projectData as $pro)
-                                                <option value="{{ $pro->project_id }}" {{ !empty( $editData->project_id)  && ($editData->project_id ==  $pro->project_id) ? 'selected' : '' }}>{{ $pro->project_name }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                    <label class="inputerror errorMsg" for="block_name" style="">  </label>
-                                </div>
 
-                                    <div class="d-flex floor-wrap cmn-box">
+                                    <div class="d-flex floor-wrap cmn-box align-items-end justify-content-between">
+                                        <div class="form-group">
+                                            <label for="">Project</label>
+                                            <select class="form-select form-select-solid form-select-lg" name="project_name" id="project_id" data-placeholder="Select Project" data-control="select2" >
+                                                <option ></option>
+                                                @php $projectData = getProject() @endphp
+                                                @if (!empty($projectData))
+                                                    @foreach ($projectData as $pro)
+                                                        <option value="{{ $pro->project_id }}" {{ !empty( $editData->project_id)  && ($editData->project_id ==  $pro->project_id) ? 'selected' : '' }}>{{ $pro->project_name }}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                            <label class="inputerror errorMsg" for="block_name" style="">  </label>
+                                        </div>
                                         <div class="form-group">
                                             <label for="">Block</label>
                                             <input type="hidden" id="edit_block_name" value="{{ !empty( $editData->block_name_map_id)  ? $editData->block_name_map_id : ''}}">
@@ -137,7 +196,14 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="">Floor</label>
-                                            <input type="text" id="floor_no" name="total_floor" value="{{ !empty( $editData->total_floor)  ?  $editData->total_floor : '' }}" placeholder="Enter Floor">
+                                            @php
+                                            $floorNoKeyUp = '';
+                                            if(!empty($editData->total_floor)){
+                                                $floorNoKeyUp = "onchange=floorNoKeyUp('".$editData->total_floor. "')";
+                                            }
+
+                                            @endphp
+                                            <input type="text" id="floor_no" {{$floorNoKeyUp}} name="total_floor" value="{{ !empty( $editData->total_floor)  ?  $editData->total_floor : '' }}" placeholder="Enter Floor">
                                             <label class="inputerror errorMsg" for="total_floor" style="">  </label>
                                         </div>
                                         <div class="form-group">
@@ -158,7 +224,7 @@
                                                 @if(!empty($editData))
 
                                                     @foreach($floorData as $row)
-                                                    <tr id="tr_clone" >
+                                                    <tr id="tr_clone" class="trClone" >
                                                         <td>
                                                             <div class="d-flex from-to-wrap">
                                                                 <div>
@@ -168,16 +234,18 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <label for="">categories</label>
-                                                            <select name="category_id" disabled  >
-                                                                <option>Select Category</option>
-                                                                @php $categoryData = getCategory() @endphp
-                                                                @if (!empty($categoryData))
-                                                                    @foreach ($categoryData as $cat)
-                                                                        <option value="{{ $cat->category_id }}" {{ !empty( $row['category_id'])  && ($row['category_id'] ==  $cat->category_id) ? 'selected' : '' }}>{{ $cat->category_name }}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </select>
+                                                            <div class="d-flex from-to-wrap align-items-center">
+                                                                <label for="">categories</label>
+                                                                <select name="category_id" disabled class="form-select form-select-solid form-select-lg" >
+                                                                    <option>Select Category</option>
+                                                                    @php $categoryData = getCategory() @endphp
+                                                                    @if (!empty($categoryData))
+                                                                        @foreach ($categoryData as $cat)
+                                                                            <option value="{{ $cat->category_id }}" {{ !empty( $row['category_id'])  && ($row['category_id'] ==  $cat->category_id) ? 'selected' : '' }}>{{ $cat->category_name }}</option>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </select>
+                                                            </div>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex from-to-wrap">
@@ -193,22 +261,30 @@
                                                                 <input type="text" name="unit" class="unitNo" value="{{ $row['unit_count'] }}" disabled>
                                                             </div>
                                                         </td>
-
+                                                    </tr>
                                                         @php
                                                            $getUnit =  getUnit($row['floor_detail_id']);
                                                         @endphp
                                                         @if(!empty($getUnit))
                                                             @foreach($getUnit as $unit)
+                                                                <tr>
                                                                 <td id="unitTdClone"  >
                                                                     <input type="text" value="{{ $unit['unit_name'] }}" disabled  >
+                                                                </td>
+                                                                <td>
                                                                     <input type="text" value="{{ $unit['area_in_sq_feet'] }}" placeholder="Sq. Ft." disabled>
+                                                                </td>
+                                                                <td>
                                                                     <input type="text" value="{{ $unit['booking_price'] }}" placeholder="Booking price" disabled>
+                                                                </td>
+                                                                <td>
                                                                     <input type="text" value="{{ $unit['total_price'] }}" placeholder="Total price" disabled>
                                                                 </td>
+                                                                </tr>
                                                             @endforeach
                                                         @endif
 
-                                                    </tr>
+
                                                     @endforeach
                                                 @endif
                                                 </tbody>
@@ -252,7 +328,16 @@
 @push('scripts')
 
     <script type="text/javascript">
+        function floorNoKeyUp(totalFloor){
+            if(totalFloor > $('#floor_no').val()){
+                alert('you can not descree the floor.')
+                $('#floor_no').val(totalFloor);
+                return false;
+            }
+        }
         $(document).ready(function () {
+
+
 
            var project_id =  $('#project_id').val();
             if(project_id != '') {
@@ -307,18 +392,27 @@
                     }
 
 
-                var rowCount = $('.appendHtml tr').length;
+                var rowCount = $('.appendHtml').find('.trClone').length;
+
                 if(rowCount == 0) {
                     var tdCount = floor_no;
                 }
                 else if(floor_no > rowCount ) {
-                    var tdCount = floor_no - rowCount;
+                    var tdCount =   floor_no - rowCount ;
                 }
-                else if(floor_no < rowCount ) { alert(rowCount); alert(floor_no);
+                else if(floor_no < rowCount ) {
                     var removeTr = rowCount - floor_no ;
-                    for($i = rowCount; $i >= floor_no; $i--) {
-                        remove_btn($i);
+                    for($i = rowCount; $i >  floor_no; $i--) {
+                       var lastid =  $('.trClone:last').attr('id');
+
+                        $('.trClone:last').remove();
+                        $('.'+lastid).remove();
+                        var floorVal =  $('.appendHtml').find('.trClone').length;
+                        $('#floor_no').val(floorVal);
                     }
+                        $('.floor_number').each(function($i){
+                            $(this).val($i+1) ;
+                        });
                 }
 
                 var n = 0;
@@ -329,7 +423,7 @@
 
                 for (var i = rowCount; i < floor_no ; i++) {
 
-                    $('.appendHtml').append(`<tr id="tr_clone_${n}" >
+                    $('.appendHtml').append(`<tr class="trClone" id="tr_clone_${n}" >
                     <td>
                          <div class="d-flex from-to-wrap">
                            <div>
@@ -344,16 +438,18 @@
                         </div>
                     </td>
                     <td>
-                        <label for="">categories</label>
-                        <select name="category_id[]" id="category_id${n}" placeholder="Select Category">
-                           @php $categoryData = getCategory() @endphp
-                              @if (!empty($categoryData))
-                                @foreach ($categoryData as $cat)
-                                     <option value="{{ $cat->category_id }}" >{{ $cat->category_name }}</option>
-                                 @endforeach
-                              @endif
-                        </select>
-                        <label class="inputerror errorMsg"  for="category_id" style=""></label>
+                        <div class="d-flex from-to-wrap align-items-center">
+                            <label for="">categories</label>
+                            <select class="form-select form-select-solid form-select-lg" name="category_id[]" id="category_id${n}" placeholder="Select Category">
+                               @php $categoryData = getCategory() @endphp
+                                  @if (!empty($categoryData))
+                                    @foreach ($categoryData as $cat)
+                                         <option value="{{ $cat->category_id }}" >{{ $cat->category_name }}</option>
+                                     @endforeach
+                                  @endif
+                            </select>
+                            <label class="inputerror errorMsg"  for="category_id" style=""></label>
+                         </div>
                     </td>
                     <td>
                         <div class="d-flex from-to-wrap">
@@ -407,22 +503,29 @@
 
             var initial_name = $('#initial_name').val();
             var from = $("#from"+i).val();
-
+                var from1 = 0;
                 for (var j = rowCount; j < totalUnit ; j++) {
-
+                    from1++;
                     /*      set logic for units name   */
-                   var unit_name =  initial_name +'-'+ from;
+                   var unit_name =  initial_name +'-'+ from1 ;
 
-                    $('#unitWrap_'+i).after(`<td class="unitTd${i}${j} unitsWrap${i}  units${j}">
-
+$('#tr_clone_'+i).after(`<tr class=" unitTd${i}${j} unitsWrap${i}  units${j} tr_clone_${i}" >
+                        <td>
                             <input type="text" name="unit_name[${i}][]" placeholder="Unit Name" readonly value="${unit_name}">
+                        </td>
+                        <td>
                             <input type="text" placeholder="Enter Sq. Ft." name="sq_ft[${i}][]">
                             <label class="inputerror errorMsg" for="sq_ft" style=""> </label>
+                        </td>
+                        <td>
                             <input type="text" placeholder="Enter Booking Price" name="booking_price[${i}][]">
                             <label class="inputerror errorMsg" for="booking_price" style=""> </label>
+                        </td>
+                        <td>
                             <input type="text" placeholder="Enter Price" name="total_price[${i}][]">
                             <label class="inputerror errorMsg" for="total_price" style=""> </label>
                         </td>
+                        </tr>
                     `);
                     from++;
                 }
@@ -432,8 +535,10 @@
 
             function remove_btn(i) {
                 $('#tr_clone_'+i).remove();
-                var floorVal =   $('#floor_no').val();
-                $('#floor_no').val(parseInt(floorVal) - 1);
+                $('.tr_clone_'+i).remove();
+               // var floorVal =   $('#floor_no').val();
+                var floorVal =  $('.appendHtml').find('.trClone').length;
+               $('#floor_no').val(floorVal);
 
                 $('.floor_number').each(function($i){
                      $(this).val($i+1) ;
@@ -472,16 +577,16 @@
             });
         });
 
-        const scrollContainer = document.getElementById("main");
+        // const scrollContainer = document.getElementById("main");
+        //
+        // scrollContainer.addEventListener("wheel", (evt) => {
+        //     evt.preventDefault();
+        //     scrollContainer.scrollLeft += evt.deltaY;
+        // });
 
-        scrollContainer.addEventListener("wheel", (evt) => {
-            evt.preventDefault();
-            scrollContainer.scrollLeft += evt.deltaY;
-        });
-
-        $(document).on('select2:open', () => {
-            document.querySelector('.select2-search__field').focus();
-        }); // focus on search input in select 2 -------------------------------------------------------------------
+      /*  $(document).on('select2:open', () => {
+             document.querySelector('.select2-search__field').focus();
+        });*/ // focus on search input in select 2 -------------------------------------------------------------------
     </script>
 
 @endpush

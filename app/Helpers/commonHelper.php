@@ -485,11 +485,11 @@ if(!function_exists("getUnit")) {
     {
 
         if(!empty($booking_type)){
-            $data = FloorUnitMapping::where("floor_detail_id", $floor_id)->where('booking_type',$booking_type)
+            $data = FloorUnitMapping::where("floor_detail_id", $floor_id)->where('booking_type',$booking_type)->where("deleted", 0)->where("status", 1)
                 ->get(["floor_unit_id", "floor_detail_id", "unit_name","area_in_sq_feet" , "total_price", "booking_price"])
                 ->toArray();
         } else {
-            $data = FloorUnitMapping::where("floor_detail_id", $floor_id)
+            $data = FloorUnitMapping::where("floor_detail_id", $floor_id)->where("deleted", 0)
                 ->get(["floor_unit_id", "floor_detail_id", "unit_name","area_in_sq_feet" , "total_price", "booking_price"])
                 ->toArray();
         }
