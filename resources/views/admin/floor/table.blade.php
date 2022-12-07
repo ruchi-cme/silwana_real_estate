@@ -203,7 +203,7 @@
                                             }
 
                                             @endphp
-                                            <input type="text" id="floor_no" {{$floorNoKeyUp}} name="total_floor" value="{{ !empty( $editData->total_floor)  ?  $editData->total_floor : '' }}" placeholder="Enter Floor">
+                                            <input type="text" id="floor_no" {{$floorNoKeyUp}} name="total_floor" value="{{ !empty( $editData->total_floor)  ?  $editData->total_floor : '' }}" totlflrattr="{ !empty( $editData->total_floor)  ?  $editData->total_floor : '' }}" placeholder="Enter Floor">
                                             <label class="inputerror errorMsg" for="total_floor" style="">  </label>
                                         </div>
                                         <div class="form-group">
@@ -329,15 +329,14 @@
 
     <script type="text/javascript">
         function floorNoKeyUp(totalFloor){
-            if(totalFloor > $('#floor_no').val()){
-                alert('you can not descree the floor.')
+            var floorCount =   $('#floor_no').val();
+            if(totalFloor > floorCount){
+                alert('you can not enter floor less than '+totalFloor)
                 $('#floor_no').val(totalFloor);
                 return false;
             }
         }
         $(document).ready(function () {
-
-
 
            var project_id =  $('#project_id').val();
             if(project_id != '') {
