@@ -63,7 +63,7 @@
     style="background: #F5F5F5;position: relative;width: 640px;max-width: 100%px; height: 757px;display: block;margin: 0px auto;background-size: 100% 100%;min-width: 280px !important;">
     <th>
         <div class="logo">
-            <img src="{{ asset('images/front/logo.svg') }}" alt=""
+            <img src="{{ asset('images/front/logo.png') }}" alt=""
                  style="width: 219px;height: 68px !important;position: absolute;z-index: 99;left: 212px;top: 36px;">
         </div>
         <div class="header-img">
@@ -77,7 +77,7 @@
             <div class="main-div"
                  style="width: 500px;height: auto;top: 145px;left: 65px;border-radius: 10px;background-color: #fff;position: absolute;z-index: 10;">
                 <div class="top-icon" style="position: relative;margin-top: 30px;margin-bottom: 30px;">
-                    <img src="{{ asset('images/front/header-bg-img.png') }}" alt=""
+                    <img src="{{ asset('images/front/lock-icon-img.png') }}" alt=""
                          style="border-radius: 50%;width: 98px;height: 98px;display: flex;align-items: center;justify-content: center;display: block;margin: 0px auto;margin-top: 20px!important;">
 
                     <h3 style="font-family: Poppins;font-size: 24px;font-weight: 600;line-height: 36px;letter-spacing: 0px;text-align: center;margin-top: 19px;margin-bottom: 10px;color: #010211;">Hello,</h3>

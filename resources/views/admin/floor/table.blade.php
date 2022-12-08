@@ -417,21 +417,20 @@
                 }
 
                 var n = 0;
-
+                var k = 0;
                 if(floor_count != '') {
                     n =  parseInt(floor_count) + 1 ;
                 }
 
                 for (var i = rowCount; i < floor_no ; i++) {
-
-                    $('.appendHtml').append(`<tr class="trClone border-top-tr mt-5 mb-5" id="tr_clone_${n}" >
+                    k++;
+                    var cls = '';
+                    if(k == floor_no){
+                        var cls = 'border-bottom-tr';
+                    }
+                    $('.appendHtml').append(`<tr class="trClone mt-5 mb-5 border-top-tr border-bottom-tr border-left ${cls}" id="tr_clone_${n}" >
                     <td>
                          <div class="d-flex from-to-wrap">
-                           <div>
-                                <button type="button" class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2 button btn-remove" onclick="remove_btn(${n})" id="create_button">
-                                     <span class="svg-icon svg-icon-1"><i class="fa fa-trash"></i></span>
-                                </button>
-                            </div>
                             <div>
                                 <label for="">Floor</label>
                                 <input class="floor_number" type="text" readonly name="floor_number[]" value="${i+1}">
@@ -468,7 +467,17 @@
                                 <label class="inputerror errorMsg"  for="unit" style=""></label>
                         </div>
                     </td>
-                </tr> `);
+                    <td>
+                         <div class="d-flex from-to-wrap">
+                           <div>
+                                <button type="button" class="btn btn-sm btn-icon btn-hover-scale btn-active-danger me-2 button btn-remove" onclick="remove_btn(${n})" id="create_button">
+                                     <span class="svg-icon svg-icon-1"><i class="fa fa-trash"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr><td></td><td></td><td></td><td></td><td></td></tr> `);
 
                     $('#floor_count').val(n);
                     n++;
@@ -510,13 +519,25 @@
                     /*      set logic for units name   */
                    var unit_name =  initial_name +'-'+ from1 ;
 
-$('#tr_clone_'+i).after(`<tr   id=${j} === 0 && "bottom"     class=" unitTd${i}${j}  unitsWrap${i}   units${j} tr_clone_${i} floorUnitCmnClass" >
+                    var lastTr = '';
+                   if( j == 0 ){
+                       var dycls = 'border-bottom-tr border-left';
+                     //  var lastTr = '<tr><td></td><td></td><td></td><td></td></tr>'
+                   }
+                   else if( from1 == totalUnit ){
+                       var dycls = 'border-top-tr border-left';
+
+                   }
+                   else {
+                       var dycls = 'border-left';
+                   }
+                    $('#tr_clone_'+i).after(`<tr class="${dycls} unitTd${i}${j}  unitsWrap${i}   units${j} tr_clone_${i} floorUnitCmnClass" >
                         <td>
                             <input type="text" name="unit_name[${i}][]" placeholder="Unit Name" readonly value="${unit_name}">
                         </td>
                         <td>
                             <input type="text" placeholder="Enter Sq. Ft." name="sq_ft[${i}][]">
-                            <label class="inputerror errorMsg" for="sq_ft" style=""> </label>
+                            <label class="in)puterror errorMsg" for="sq_ft" style=""> </label>
                         </td>
                         <td>
                             <input type="text" placeholder="Enter Booking Price" name="booking_price[${i}][]">
