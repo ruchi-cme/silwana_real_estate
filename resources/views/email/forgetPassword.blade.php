@@ -77,7 +77,7 @@
             <div class="main-div"
                  style="width: 500px;height: auto;top: 145px;left: 65px;border-radius: 10px;background-color: #fff;position: absolute;z-index: 10;">
                 <div class="top-icon" style="position: relative;margin-top: 30px;margin-bottom: 30px;">
-                    <img src="{{ asset('images/front/lock-icon-img.svg') }}" alt=""
+                    <img src="{{ asset('images/front/header-bg-img.png') }}" alt=""
                          style="border-radius: 50%;width: 98px;height: 98px;display: flex;align-items: center;justify-content: center;display: block;margin: 0px auto;margin-top: 20px!important;">
 
                     <h3 style="font-family: Poppins;font-size: 24px;font-weight: 600;line-height: 36px;letter-spacing: 0px;text-align: center;margin-top: 19px;margin-bottom: 10px;color: #010211;">Hello,</h3>

@@ -56264,7 +56264,41 @@ body {
     width: 100% !important;
 }
 
+.border-top-tr{
+    border:1px solid black !important;
+    background: #e3e3e3;
+}
 
+.border-bottom-tr{
+    border-bottom:1px solid black;
+}
+
+.border-left{
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.border-right{
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+}
+
+.units9.tr_clone_21 {
+
+}
+
+
+.foor-unit-wrapper tr{
+
+}
+.foor-unit-wrapper .tablee{
+    border-collapse: separate;
+    border-spacing: 0px 15px !important;
+}
+
+.foor-unit-wrapper table td {
+    padding: 10px 10px !important;
+}
 
 
 /*------our-media-quary*/

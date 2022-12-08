@@ -135,6 +135,8 @@
     .block-table-main .card {
         overflow-x: auto;
     }
+
+
     /* body {
         background-color: #f5f8fa;
     } */
@@ -169,7 +171,7 @@
                             <!--begin::Card body-->
                             <div class="card-body pt-0">
 
-                                <section class="unit-wrapper">
+                                <section class="unit-wrapper foor-unit-wrapper">
 
 
                                     <div class="d-flex floor-wrap cmn-box align-items-end justify-content-between">
@@ -422,7 +424,7 @@
 
                 for (var i = rowCount; i < floor_no ; i++) {
 
-                    $('.appendHtml').append(`<tr class="trClone" id="tr_clone_${n}" >
+                    $('.appendHtml').append(`<tr class="trClone border-top-tr mt-5 mb-5" id="tr_clone_${n}" >
                     <td>
                          <div class="d-flex from-to-wrap">
                            <div>
@@ -508,7 +510,7 @@
                     /*      set logic for units name   */
                    var unit_name =  initial_name +'-'+ from1 ;
 
-$('#tr_clone_'+i).after(`<tr class=" unitTd${i}${j} unitsWrap${i}  units${j} tr_clone_${i}" >
+$('#tr_clone_'+i).after(`<tr   id=${j} === 0 && "bottom"     class=" unitTd${i}${j}  unitsWrap${i}   units${j} tr_clone_${i} floorUnitCmnClass" >
                         <td>
                             <input type="text" name="unit_name[${i}][]" placeholder="Unit Name" readonly value="${unit_name}">
                         </td>
