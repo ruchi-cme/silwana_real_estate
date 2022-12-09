@@ -63,7 +63,6 @@ $(document).ready(function() {
         let email_id = $('#email_id').val();
         let message = $('#message').val();
 
-
         $.ajax({
             url: "/home/submitInquiry",
             type:"POST",
@@ -79,12 +78,9 @@ $(document).ready(function() {
                 $('#successMsg').show();
                 $('.inquiryText').val('');
                 $('.text-danger').hide();
-
             },
-
         });
     });
-
 */
 
     $('.submitInquiry').on('click', function(event) {
@@ -99,7 +95,7 @@ $(document).ready(function() {
                     type:"POST",
                     data:   $('#inquiryForm').serialize() ,
                     success:function(response){
-                        $('#successInqMsg').show();
+                        $('#successMsg').show();
                         $('.inquiryText').val('');
                     },
 
@@ -140,7 +136,7 @@ $(document).ready(function() {
                 url: "/home/submitInquiry",
                 type:"POST",
                 data:   $('#inquiryFormFooter').serialize() ,
-                success:function(response){
+                success:function(response){  console.log(response.errors);
                     $('#successInqMsg').show();
                     $('.inquiryText').val('');
                 },

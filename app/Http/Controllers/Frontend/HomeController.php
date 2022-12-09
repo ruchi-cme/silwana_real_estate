@@ -10,6 +10,7 @@ use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Validator;
+use Mail;
 
 class HomeController extends Controller
 {
@@ -219,8 +220,21 @@ class HomeController extends Controller
                 'status'    => 1, //Booking Price Paid
 
             ];
-
             $bookingId = Inquiry::create($insertData);
+
+        $token = '';
+
+        Mail::send('email.inquiry',
+            [
+             'name'  => $request->first_name.' '.$request->last_name,
+             'phone' => $request->phone_no,
+             'email' => $request->email_id,
+             'message' => $request->message
+            ]
+            , function($message) use($request){
+            $message->to('ruchi.cmexpertise@gmail.com');
+            $message->subject('Inquiry');
+        });
 
         return response()->json(['success'=>'Successfully']);
 
