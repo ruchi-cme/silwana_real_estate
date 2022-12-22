@@ -1,9 +1,9 @@
-@extends('admin.layouts.main',['title' => 'Broker Inquiry'])
+@extends('admin.layouts.main',['title' => 'Broker Details'])
 
 @section('breadcrumb')
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.brokerInquiry') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
-<li class="breadcrumb-item px-3 text-primary"><a href="{{ route('admin.brokerInquiry') }}" class="pe-3">Broker Inquiry</a> </li>
-<li class="breadcrumb-item px-3 text-primary">Broker Inquiry View</li>
+<li class="breadcrumb-item px-3 text-primary"><a href="{{ route('admin.brokerInquiry') }}" class="pe-3">Broker Details</a> </li>
+<li class="breadcrumb-item px-3 text-primary">Broker Details View</li>
 @endsection
 
 @section('content')
@@ -25,7 +25,7 @@
                         <div class="card-header cursor-pointer">
                             <!--begin::Card title-->
                             <div class="card-title m-0">
-                                <h3 class="fw-bolder m-0">Broker Inquiry Detail</h3>
+                                <h3 class="fw-bolder m-0">Broker Agency Details</h3>
                             </div>
                             <!--end::Card title-->
                         </div>
