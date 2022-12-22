@@ -259,8 +259,11 @@ Route::name('salesService.store')->post('/salesService/store', 'App\Http\Control
 Route::name('salesService.update')->post('/salesService/update', 'App\Http\Controllers\Admin\SalesServiceController@update')->middleware(['permission:salesService-update']);
 
 //Booking
-Route::name('inquiry')->get('/inquiry', 'App\Http\Controllers\Admin\InquiryController@index')->middleware(['permission:inquiry-list']);;
-Route::name('inquiry.view')->get('/inquiry/view/{id}', 'App\Http\Controllers\Admin\InquiryController@view')->middleware(['permission:inquiry-view']);;
+Route::name('inquiry')->get('/inquiry', 'App\Http\Controllers\Admin\InquiryController@index')->middleware(['permission:inquiry-list']);
+Route::name('inquiry.view')->get('/inquiry/view/{id}', 'App\Http\Controllers\Admin\InquiryController@view')->middleware(['permission:inquiry-view']);
 
+//Broker Inquiry
+Route::name('brokerInquiry')->get('/brokerInquiry', 'App\Http\Controllers\Admin\BrokerInquiryController@index')->middleware(['permission:inquiry-list']);
+Route::name('brokerInquiry.view')->get('/brokerInquiry/view/{id}', 'App\Http\Controllers\Admin\BrokerInquiryController@view')->middleware(['permission:inquiry-view']);
 
 ?>

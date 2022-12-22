@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{asset('css/front')}}/owl.theme.default.css">
     <link rel="stylesheet" href="{{asset('css/front')}}/slick.css">
     <link rel="stylesheet" href="{{asset('css/front')}}/style.css">
+    
 
 </head>
 

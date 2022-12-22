@@ -84,6 +84,18 @@
             </div>
         </div>
     </section>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="looking-for-house-inner agent-wrap">
+                        <h2>IF YOU'RE BROKER OF REAL ESTATE ? </h2>
+                        <a href="{{url('/brokercontatctUs')}}" class="cmn-btn rounded-0">REGISTER HERE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     @section('scripts')
         <script   src="{{ asset('js/front/custom/inquiry') }}/inquiry.js"> </script>
     @endsection

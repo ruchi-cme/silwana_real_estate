@@ -8,6 +8,15 @@ use App\Models\{BuildingService, SalesService, RentalService};
 
 use Illuminate\Support\Facades\DB;
 
+function flashMessage($status,$message)
+{
+    $message = '<div class="alert alert-'.$status.' alert-dismissible">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>'.$message.'</strong>
+                </div>';
+    return $message;
+}
+
 if(!function_exists("getCategory")){
 
     function getCategory() {

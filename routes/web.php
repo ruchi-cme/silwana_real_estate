@@ -46,6 +46,9 @@ Route::name('myBooking')->get('/myBooking', 'App\Http\Controllers\Frontend\MyBoo
 Route::name('booking/cancel')->post('/booking/cancel', 'App\Http\Controllers\Frontend\BookingController@cancelBooking');
 
 Route::name('contactUs')->get('/contact', 'App\Http\Controllers\Frontend\ContactUsController@index');
+Route::get('/brokercontatctUs', [App\Http\Controllers\Frontend\ContactUsController::class, 'brokercontatctUs']);
+Route::post('/brokercontatctUs', [App\Http\Controllers\Frontend\ContactUsController::class, 'brokercontatctUs']);
+
 Route::name('myProfile')->get('/myProfile', 'App\Http\Controllers\Frontend\MyProfileController@index');
 Route::name('myProfile/update')->post('/myProfile/update', 'App\Http\Controllers\Frontend\MyProfileController@update');
 

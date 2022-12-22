@@ -466,7 +466,7 @@
                 <!-- Booking END -->
 
                 <!--Inquiry Start -->
-                @can('inquiry-view')
+                <!-- @can('inquiry-view')
                    <div class="menu-item {{ Route::is('admin.inquiry*') ? 'show' : '' }}">
                        <a class="menu-link" href="{{ route('admin.inquiry') }}">
                               <span class="menu-icon">
@@ -475,7 +475,50 @@
                            <span class="menu-title">Inquiry</span>
                        </a>
                    </div>
-                @endcan
+                   <div class="menu-item {{ Route::is('admin.brokerInquiry*') ? 'show' : '' }}">
+                       <a class="menu-link" href="{{ route('admin.brokerInquiry') }}">
+                              <span class="menu-icon">
+                            <img src="{{ asset('images/front/inquiry.svg') }}" />
+                       </span>
+                           <span class="menu-title">Broker Inquiry</span>
+                       </a>
+                   </div>
+                @endcan -->
+                @can('inquiry-view')
+                  <div data-kt-menu-trigger="click" class="menu-item {{   Route::is('admin.inquiry*') || Route::is('admin.brokerInquiry') ? 'show' : '' }} menu-accordion mb-1">
+
+                       <span class="menu-link {{   Route::is('admin.inquiry.view') || Route::is('admin.brokerInquiry.view')   ? 'active' : '' }}">
+                           <span class="menu-icon">
+                               <img src="{{ asset('images/front/inquiry.svg') }}" />
+                           </span>
+                           <span class="menu-title">Inquirys</span>
+                           <span class="menu-arrow"></span>
+                       </span>
+                    
+                       <div class="menu-sub menu-sub-accordion">
+                            <div class="menu-item {{ Route::is('admin.inquiry*') ? 'show' : '' }}">
+                                <a class="menu-link" href="{{ route('admin.inquiry') }}">
+                                <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                </span>
+                                 <span class="menu-title">Inquiry</span>
+                                </a>
+                            </div>
+                       </div>
+
+                       <div class="menu-sub menu-sub-accordion">
+                           <div class="menu-item {{ Route::is('admin.brokerInquiry*') ? 'show' : '' }}">
+                                <a class="menu-link" href="{{ route('admin.brokerInquiry') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Broker Inquiry</span>
+                                </a>
+                            </div>
+                       </div>
+                   </div> 
+                   @endcan
+                
                 <!-- Inquiry END -->
 
             </div>
