@@ -22,7 +22,7 @@
                     <nav class="navbar navbar-expand-xl p-0">
                         <div class="container p-0">
                             <a class="navbar-brand" href="{{ route('home') }}">
-                                <img src="{{asset('images/front')}}/logo.svg" alt="">
+                                <img src="{{asset('images/front')}}/logo.png" alt="">
                             </a>
                             <div class="d-flex align-items-center">
                                 <div class="estimate-wrap mb-0 for-mobile me-3">
