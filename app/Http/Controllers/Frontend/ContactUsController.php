@@ -10,7 +10,6 @@ class ContactUsController extends Controller
 {
     public function index() {
         // echo "1";die;
-        return redirect('/brokercontatctUs')->with('Mymessage', flashMessage('danger','Somthing Went Wrong'));
         $contactUs   = getContactUsDetail();
         $page        = getSilwanaPages('contactus_intrest');
         return view('front.contactUs',compact('contactUs','page'));
