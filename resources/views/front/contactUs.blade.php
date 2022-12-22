@@ -33,6 +33,7 @@
                                 <div class="alert alert-success" role="alert" id="successMsg" style="display: none" >
                                     Thank you for getting in touch! We will connect you soon!
                                 </div>
+                                
                                 <form id="inquiryForm" >
                                     @csrf
                                     <div class="text-center">

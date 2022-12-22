@@ -512,7 +512,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Broker Inquiry</span>
+                                    <span class="menu-title">Broker Details</span>
                                 </a>
                             </div>
                        </div>

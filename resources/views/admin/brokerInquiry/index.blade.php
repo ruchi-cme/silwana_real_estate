@@ -1,4 +1,4 @@
-@extends('admin.layouts.main',['title' => 'Broker Inquiry'])
+@extends('admin.layouts.main',['title' => 'Broker Details'])
 
 @push('stylesheet')
 <link href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css"/>
@@ -6,7 +6,7 @@
 
 @section('breadcrumb')
 <li class="breadcrumb-item pe-3"><a href="{{ route('admin.inquiry') }}" class="pe-3"><i class="fa fa-home text-hover-primary"></i></a></li>
-<li class="breadcrumb-item px-3 text-primary">Broker Inquiry</li>
+<li class="breadcrumb-item px-3 text-primary">Broker Details</li>
 @endsection
 
 @section('content')
